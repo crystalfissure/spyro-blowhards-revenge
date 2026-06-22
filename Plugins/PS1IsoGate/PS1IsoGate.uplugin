@@ -1,0 +1,18 @@
+{
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "1.0.0",
+  "FriendlyName": "PS1 Ownership Gate",
+  "Description": "Verifies a local PS1 disc image before enabling access to your Unreal game.",
+  "Category": "Media",
+  "CreatedBy": "Codex",
+  "EnabledByDefault": false,
+  "CanContainContent": false,
+  "Modules": [
+    {
+      "Name": "PS1IsoGate",
+      "Type": "Runtime",
+      "LoadingPhase": "Default"
+    }
+  ]
+}
