@@ -1,0 +1,24 @@
+{
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "1.0.0",
+  "FriendlyName": "MMA Editor Tools",
+  "Description": "Editor utilities and small runtime helpers for Muppet Monster Adventure imports.",
+  "Category": "Editor",
+  "CreatedBy": "MMA Model Extractor",
+  "EnabledByDefault": true,
+  "CanContainContent": false,
+  "Installed": false,
+  "Modules": [
+    {
+      "Name": "MMAGameplay",
+      "Type": "Runtime",
+      "LoadingPhase": "Default"
+    },
+    {
+      "Name": "MMAEditorTools",
+      "Type": "Editor",
+      "LoadingPhase": "Default"
+    }
+  ]
+}
