@@ -6,7 +6,7 @@ public class MMAGameplay : ModuleRules
     {
         PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
         PublicDependencyModuleNames.AddRange(new[] {
-            "Core", "CoreUObject", "Engine"
+            "Core", "CoreUObject", "Engine", "AIModule"
         });
     }
 }
