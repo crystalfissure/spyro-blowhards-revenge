@@ -106,6 +106,14 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Combat", meta = (ClampMin = "0.0"))
     float AttackCooldownSeconds = 1.0f;
 
+    /** Horizontal launch speed applied away from Hedge_Trimmer after a successful hit. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Combat|Recoil", meta = (ClampMin = "0.0"))
+    float RecoilHorizontalSpeed = 260.0f;
+
+    /** Small upward launch speed paired with the horizontal hit recoil. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Combat|Recoil", meta = (ClampMin = "0.0"))
+    float RecoilVerticalSpeed = 140.0f;
+
     /** Populates the inherited Drops_Items component only when its list is empty. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Drop")
     TSubclassOf<AActor> DefaultDropClass;
@@ -146,7 +154,8 @@ private:
     uint8 ReadInheritedAIState() const;
     bool SetInheritedAIState(uint8 Value) const;
     uint8 ReadNativeDamageType() const;
-    bool DealNativeDamageToTarget(AActor* Target) const;
+    bool DealNativeDamageToTarget(AActor* Target, bool& bOutDamageApplied) const;
+    void ApplyHitRecoil(AActor* Target) const;
     static UActorComponent* FindDamageableComponent(AActor* Actor);
     static UPrimitiveComponent* FindDamageableHitbox(AActor* Actor);
     static void SetInheritedBool(AActor* Owner, FName PropertyName, bool Value);

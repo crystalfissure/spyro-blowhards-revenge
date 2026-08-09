@@ -60,6 +60,43 @@ FString NormalizePropertyName(FString Name)
     Name.ReplaceInline(TEXT("'"), TEXT(""));
     return Name.ToLower();
 }
+
+bool TryReadHitPoints(UObject* Object, double& OutValue)
+{
+    if (!Object)
+    {
+        return false;
+    }
+    for (TFieldIterator<FProperty> It(Object->GetClass()); It; ++It)
+    {
+        FProperty* Property = *It;
+        if (!Property || NormalizePropertyName(Property->GetName()) != TEXT("hitpoints"))
+        {
+            continue;
+        }
+        if (FIntProperty* IntProperty = CastField<FIntProperty>(Property))
+        {
+            OutValue = static_cast<double>(IntProperty->GetPropertyValue_InContainer(Object));
+            return true;
+        }
+        if (FFloatProperty* FloatProperty = CastField<FFloatProperty>(Property))
+        {
+            OutValue = static_cast<double>(FloatProperty->GetPropertyValue_InContainer(Object));
+            return true;
+        }
+        if (FDoubleProperty* DoubleProperty = CastField<FDoubleProperty>(Property))
+        {
+            OutValue = DoubleProperty->GetPropertyValue_InContainer(Object);
+            return true;
+        }
+        if (FByteProperty* ByteProperty = CastField<FByteProperty>(Property))
+        {
+            OutValue = static_cast<double>(ByteProperty->GetPropertyValue_InContainer(Object));
+            return true;
+        }
+    }
+    return false;
+}
 }
 
 UMMAHedgeTrimmerBehaviorComponent::UMMAHedgeTrimmerBehaviorComponent()
@@ -376,7 +413,7 @@ uint8 UMMAHedgeTrimmerBehaviorComponent::ReadNativeDamageType() const
     AActor* Owner = GetOwner();
     if (!Owner)
     {
-        return 3;
+        return 1;
     }
     for (TFieldIterator<FProperty> It(Owner->GetClass()); It; ++It)
     {
@@ -395,11 +432,14 @@ uint8 UMMAHedgeTrimmerBehaviorComponent::ReadNativeDamageType() const
             return ByteProperty->GetPropertyValue_InContainer(Owner);
         }
     }
-    return 3;
+    return 1;
 }
 
-bool UMMAHedgeTrimmerBehaviorComponent::DealNativeDamageToTarget(AActor* Target) const
+bool UMMAHedgeTrimmerBehaviorComponent::DealNativeDamageToTarget(
+    AActor* Target,
+    bool& bOutDamageApplied) const
 {
+    bOutDamageApplied = false;
     UActorComponent* Damageable = FindDamageableComponent(Target);
     AActor* Owner = GetOwner();
     if (!Damageable || !Owner)
@@ -465,9 +505,35 @@ bool UMMAHedgeTrimmerBehaviorComponent::DealNativeDamageToTarget(AActor* Target)
             }
         }
     }
+    double HitPointsBefore = 0.0;
+    const bool bHadHitPointsBefore = TryReadHitPoints(Damageable, HitPointsBefore);
     Damageable->ProcessEvent(Function, Parameters.GetData());
     Function->DestroyStruct(Parameters.GetData());
+    double HitPointsAfter = 0.0;
+    const bool bHasHitPointsAfter = TryReadHitPoints(Damageable, HitPointsAfter);
+    bOutDamageApplied = !bHadHitPointsBefore || !bHasHitPointsAfter || HitPointsAfter < HitPointsBefore;
     return true;
+}
+
+void UMMAHedgeTrimmerBehaviorComponent::ApplyHitRecoil(AActor* Target) const
+{
+    const AActor* Owner = GetOwner();
+    ACharacter* TargetCharacter = Cast<ACharacter>(Target);
+    if (!Owner || !TargetCharacter)
+    {
+        return;
+    }
+    FVector Away = Target->GetActorLocation() - Owner->GetActorLocation();
+    Away.Z = 0.0f;
+    if (!Away.Normalize())
+    {
+        Away = Owner->GetActorForwardVector();
+        Away.Z = 0.0f;
+        Away.Normalize();
+    }
+    FVector LaunchVelocity = Away * RecoilHorizontalSpeed;
+    LaunchVelocity.Z = RecoilVerticalSpeed;
+    TargetCharacter->LaunchCharacter(LaunchVelocity, true, true);
 }
 
 APawn* UMMAHedgeTrimmerBehaviorComponent::FindNearestPlayer(float Radius) const
@@ -695,12 +761,21 @@ void UMMAHedgeTrimmerBehaviorComponent::ApplyAttackHit()
         return;
     }
 
-    if (!DealNativeDamageToTarget(Target))
+    bool bDamageApplied = false;
+    if (!DealNativeDamageToTarget(Target, bDamageApplied))
     {
         ShowDebugMessage(TEXT("Hedge_Trimmer attack ERROR (Spyro Damageable/Deal Damage missing)"), FColor::Red);
         return;
     }
-    ShowDebugMessage(TEXT("Hedge_Trimmer attack: dealt 1 native hit to Spyro"), FColor::Green);
+    if (bDamageApplied)
+    {
+        ApplyHitRecoil(Target);
+        ShowDebugMessage(TEXT("Hedge_Trimmer attack: 1 hit + recoil"), FColor::Green);
+    }
+    else
+    {
+        ShowDebugMessage(TEXT("Hedge_Trimmer attack resisted: no recoil"), FColor::Yellow);
+    }
 }
 
 void UMMAHedgeTrimmerBehaviorComponent::ForceReturnHome()

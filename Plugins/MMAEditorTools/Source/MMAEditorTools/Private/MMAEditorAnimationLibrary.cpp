@@ -319,6 +319,8 @@ bool UMMAEditorAnimationLibrary::ConfigureMMAHedgeTrimmerBehavior(
         Behavior->AttackRange = 135.0f;
         Behavior->AttackHitRange = 170.0f;
         Behavior->AttackContactSeconds = 0.105f;
+        Behavior->RecoilHorizontalSpeed = 260.0f;
+        Behavior->RecoilVerticalSpeed = 140.0f;
         Behavior->DeathPoofPaddingSeconds = 0.25f;
         Behavior->bEnableDebugMessages = true;
         bFoundBehavior = true;
@@ -421,6 +423,8 @@ FString UMMAEditorAnimationLibrary::DescribeMMAHedgeTrimmerBlueprint(UBlueprint*
                     Contract->SetNumberField(TEXT("attack_hit_range"), Behavior->AttackHitRange);
                     Contract->SetNumberField(TEXT("attack_contact_seconds"), Behavior->AttackContactSeconds);
                     Contract->SetNumberField(TEXT("attack_cooldown_seconds"), Behavior->AttackCooldownSeconds);
+                    Contract->SetNumberField(TEXT("recoil_horizontal_speed"), Behavior->RecoilHorizontalSpeed);
+                    Contract->SetNumberField(TEXT("recoil_vertical_speed"), Behavior->RecoilVerticalSpeed);
                     Contract->SetNumberField(TEXT("death_poof_padding_seconds"), Behavior->DeathPoofPaddingSeconds);
                     Contract->SetBoolField(TEXT("debug_messages"), Behavior->bEnableDebugMessages);
                     NodeObject->SetObjectField(TEXT("behavior_contract"), Contract);
