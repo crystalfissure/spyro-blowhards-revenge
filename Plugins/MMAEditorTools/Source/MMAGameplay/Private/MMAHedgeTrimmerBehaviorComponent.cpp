@@ -1,6 +1,7 @@
 #include "MMAHedgeTrimmerBehaviorComponent.h"
 
 #include "AIController.h"
+#include "Animation/AnimSingleNodeInstance.h"
 #include "Animation/AnimSequence.h"
 #include "Components/PrimitiveComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -10,6 +11,9 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Pawn.h"
 #include "Kismet/GameplayStatics.h"
+#include "Particles/ParticleSystem.h"
+#include "Sound/SoundBase.h"
+#include "UObject/ConstructorHelpers.h"
 #include "UObject/UnrealType.h"
 
 namespace
@@ -97,12 +101,64 @@ bool TryReadHitPoints(UObject* Object, double& OutValue)
     }
     return false;
 }
+
+bool TryWriteHitPoints(UObject* Object, double Value)
+{
+    if (!Object)
+    {
+        return false;
+    }
+    for (TFieldIterator<FProperty> It(Object->GetClass()); It; ++It)
+    {
+        FProperty* Property = *It;
+        if (!Property || NormalizePropertyName(Property->GetName()) != TEXT("hitpoints"))
+        {
+            continue;
+        }
+        if (FIntProperty* IntProperty = CastField<FIntProperty>(Property))
+        {
+            IntProperty->SetPropertyValue_InContainer(Object, FMath::RoundToInt(Value));
+            return true;
+        }
+        if (FFloatProperty* FloatProperty = CastField<FFloatProperty>(Property))
+        {
+            FloatProperty->SetPropertyValue_InContainer(Object, static_cast<float>(Value));
+            return true;
+        }
+        if (FDoubleProperty* DoubleProperty = CastField<FDoubleProperty>(Property))
+        {
+            DoubleProperty->SetPropertyValue_InContainer(Object, Value);
+            return true;
+        }
+        if (FByteProperty* ByteProperty = CastField<FByteProperty>(Property))
+        {
+            ByteProperty->SetPropertyValue_InContainer(
+                Object, static_cast<uint8>(FMath::Clamp(FMath::RoundToInt(Value), 0, 255)));
+            return true;
+        }
+    }
+    return false;
+}
 }
 
 UMMAHedgeTrimmerBehaviorComponent::UMMAHedgeTrimmerBehaviorComponent()
 {
     PrimaryComponentTick.bCanEverTick = true;
     PrimaryComponentTick.TickGroup = TG_PrePhysics;
+
+    static ConstructorHelpers::FObjectFinder<UParticleSystem> PoofParticle(
+        TEXT("/Game/SpyroContent/Global_Assets/Global_Particles/dust_ring.dust_ring"));
+    if (PoofParticle.Succeeded())
+    {
+        DeathPoofParticle = PoofParticle.Object;
+    }
+    static ConstructorHelpers::FObjectFinder<USoundBase> PoofSound(
+        TEXT("/Game/SpyroContent/Global_Assets/Global_Characters/AI_Characters/"
+             "death_poof_s1.death_poof_s1"));
+    if (PoofSound.Succeeded())
+    {
+        DeathPoofSound = PoofSound.Object;
+    }
 }
 
 void UMMAHedgeTrimmerBehaviorComponent::BeginPlay()
@@ -112,6 +168,7 @@ void UMMAHedgeTrimmerBehaviorComponent::BeginPlay()
     CharacterOwner = Character;
     MeshComponent = Character ? Character->GetMesh() : nullptr;
     HomeLocation = GetOwner() ? GetOwner()->GetActorLocation() : FVector::ZeroVector;
+    HomeRotation = GetOwner() ? GetOwner()->GetActorRotation() : FRotator::ZeroRotator;
     ConfigureNativeEnemyContract();
     ConfigureIncomingDamageContract();
     ConfigureDefaultDrop();
@@ -202,7 +259,11 @@ void UMMAHedgeTrimmerBehaviorComponent::ConfigureNativeEnemyContract()
     }
     if (DeathAnimation)
     {
-        const float PoofDelay = DeathAnimation->GetPlayLength() + DeathPoofPaddingSeconds;
+        const float TerminalDuration = DeathTerminalAnimation
+            ? DeathTerminalDurationSeconds
+            : 0.0f;
+        const float PoofDelay = GetDeathAnimationDuration() +
+            TerminalDuration + DeathPoofPaddingSeconds;
         if (!SetInheritedFloat(Owner, TEXT("Corpse_Poof_Delay"), PoofDelay))
         {
             ShowDebugMessage(TEXT("Hedge_Trimmer: could not set corpse poof delay"), FColor::Yellow);
@@ -282,6 +343,10 @@ void UMMAHedgeTrimmerBehaviorComponent::ConfigureIncomingDamageContract()
                     }
                 }
             }
+        }
+        if (!TryWriteHitPoints(Component, InitialHitPoints))
+        {
+            ShowDebugMessage(TEXT("Hedge_Trimmer: could not set one-hit health"), FColor::Yellow);
         }
         ShowDebugMessage(TEXT("Hedge_Trimmer: charge + flame vulnerability enabled"), FColor::Green);
         return;
@@ -410,6 +475,10 @@ UActorComponent* UMMAHedgeTrimmerBehaviorComponent::FindDamageableComponent(AAct
 
 uint8 UMMAHedgeTrimmerBehaviorComponent::ReadNativeDamageType() const
 {
+    if (bOverrideOutgoingDamageType)
+    {
+        return OutgoingDamageType;
+    }
     AActor* Owner = GetOwner();
     if (!Owner)
     {
@@ -662,10 +731,31 @@ float UMMAHedgeTrimmerBehaviorComponent::GetStateDuration() const
     {
     case EMMAHedgeTrimmerState::Notice: Animation = NoticeAnimation; break;
     case EMMAHedgeTrimmerState::Attack: Animation = AttackAnimation; break;
-    case EMMAHedgeTrimmerState::Dead: Animation = DeathAnimation; break;
+    case EMMAHedgeTrimmerState::Dead: return GetDeathAnimationDuration();
     default: break;
     }
     return Animation ? FMath::Max(Animation->GetPlayLength(), MinimumOneShotDuration) : MinimumOneShotDuration;
+}
+
+float UMMAHedgeTrimmerBehaviorComponent::GetDeathAnimationDuration() const
+{
+    if (!DeathAnimation)
+    {
+        return MinimumOneShotDuration;
+    }
+    const float SafePlaybackRate = FMath::Max(DeathPlaybackRate, KINDA_SMALL_NUMBER);
+    return FMath::Max(DeathAnimation->GetPlayLength() / SafePlaybackRate, MinimumOneShotDuration);
+}
+
+bool UMMAHedgeTrimmerBehaviorComponent::IsOwnerDefeated() const
+{
+    if (ReadInheritedAIState() == DeadAIState)
+    {
+        return true;
+    }
+    UActorComponent* Damageable = FindDamageableComponent(GetOwner());
+    double HitPoints = 0.0;
+    return Damageable && TryReadHitPoints(Damageable, HitPoints) && HitPoints <= 0.0;
 }
 
 void UMMAHedgeTrimmerBehaviorComponent::PlayStateAnimation()
@@ -689,6 +779,131 @@ void UMMAHedgeTrimmerBehaviorComponent::PlayStateAnimation()
     if (Animation)
     {
         Mesh->PlayAnimation(Animation, bLoop);
+        if (CurrentState == EMMAHedgeTrimmerState::Dead)
+        {
+            if (UAnimSingleNodeInstance* SingleNode = Mesh->GetSingleNodeInstance())
+            {
+                SingleNode->SetPlayRate(FMath::Max(DeathPlaybackRate, KINDA_SMALL_NUMBER));
+            }
+        }
+    }
+}
+
+void UMMAHedgeTrimmerBehaviorComponent::MaintainDeathAnimation(
+    UAnimSequence* ExpectedAnimation)
+{
+    USkeletalMeshComponent* Mesh = MeshComponent.Get();
+    if (!Mesh || !ExpectedAnimation)
+    {
+        return;
+    }
+
+    // The duplicated template has its own death graph.  If it writes an
+    // inherited animation after this component enters Dead, restore the
+    // expected phase without restarting it on every tick.
+    UAnimSingleNodeInstance* SingleNode = Mesh->GetSingleNodeInstance();
+    if (Mesh->GetAnimationMode() != EAnimationMode::AnimationSingleNode ||
+        !SingleNode || SingleNode->GetAnimationAsset() != ExpectedAnimation)
+    {
+        Mesh->PlayAnimation(ExpectedAnimation, false);
+        SingleNode = Mesh->GetSingleNodeInstance();
+    }
+    if (SingleNode && ExpectedAnimation == DeathAnimation)
+    {
+        SingleNode->SetPlayRate(FMath::Max(DeathPlaybackRate, KINDA_SMALL_NUMBER));
+    }
+}
+
+void UMMAHedgeTrimmerBehaviorComponent::StartDeathTerminalPhase()
+{
+    USkeletalMeshComponent* Mesh = MeshComponent.Get();
+    if (!Mesh || !DeathTerminalAnimation)
+    {
+        return;
+    }
+    bDeathTerminalStarted = true;
+    StateElapsedSeconds = 0.0f;
+    DeathTerminalStartWorldLocation = Mesh->GetComponentLocation();
+    DeathTerminalStartRelativeScale = Mesh->GetRelativeScale3D();
+    Mesh->PlayAnimation(DeathTerminalAnimation, false);
+}
+
+void UMMAHedgeTrimmerBehaviorComponent::SpawnDeathPoof() const
+{
+    AActor* Owner = GetOwner();
+    if (!Owner)
+    {
+        return;
+    }
+    const FVector Location = MeshComponent.IsValid()
+        ? MeshComponent->GetComponentLocation()
+        : Owner->GetActorLocation();
+    if (DeathPoofParticle)
+    {
+        UGameplayStatics::SpawnEmitterAtLocation(
+            Owner->GetWorld(), DeathPoofParticle, Location, FRotator::ZeroRotator,
+            FVector::OneVector, true);
+    }
+    if (DeathPoofSound)
+    {
+        UGameplayStatics::PlaySoundAtLocation(Owner, DeathPoofSound, Location);
+    }
+}
+
+void UMMAHedgeTrimmerBehaviorComponent::TickDeathSequence(float DeltaTime)
+{
+    if (bDeathSequenceFinished)
+    {
+        return;
+    }
+    USkeletalMeshComponent* Mesh = MeshComponent.Get();
+    AActor* Owner = GetOwner();
+    if (!Mesh || !Owner)
+    {
+        return;
+    }
+
+    StateElapsedSeconds += DeltaTime;
+    if (!DeathTerminalAnimation)
+    {
+        MaintainDeathAnimation(DeathAnimation);
+        if (StateElapsedSeconds >= GetDeathAnimationDuration() + DeathPoofPaddingSeconds)
+        {
+            bDeathSequenceFinished = true;
+            SpawnDeathPoof();
+            Mesh->SetVisibility(false, true);
+            Owner->Destroy();
+        }
+        return;
+    }
+    if (!bDeathTerminalStarted)
+    {
+        MaintainDeathAnimation(DeathAnimation);
+        const float KnockbackDuration = GetDeathAnimationDuration();
+        if (StateElapsedSeconds >= KnockbackDuration)
+        {
+            StartDeathTerminalPhase();
+        }
+        return;
+    }
+
+    MaintainDeathAnimation(DeathTerminalAnimation);
+    const float Duration = FMath::Max(DeathTerminalDurationSeconds, KINDA_SMALL_NUMBER);
+    const float Alpha = FMath::Clamp(StateElapsedSeconds / Duration, 0.0f, 1.0f);
+    const float SmoothedAlpha = FMath::SmoothStep(0.0f, 1.0f, Alpha);
+    const FVector TerminalOffset =
+        (-Owner->GetActorForwardVector() * DeathTerminalBackwardDistance) +
+        (FVector::UpVector * DeathTerminalUpwardDistance);
+    Mesh->SetWorldLocation(DeathTerminalStartWorldLocation + TerminalOffset * SmoothedAlpha);
+    const float ScaleMultiplier = FMath::Lerp(1.0f, DeathTerminalEndScale, SmoothedAlpha);
+    Mesh->SetRelativeScale3D(DeathTerminalStartRelativeScale * ScaleMultiplier);
+
+    if (Alpha >= 1.0f)
+    {
+        bDeathSequenceFinished = true;
+        SpawnDeathPoof();
+        Mesh->SetVisibility(false, true);
+        Owner->Destroy();
     }
 }
 
@@ -698,6 +913,7 @@ void UMMAHedgeTrimmerBehaviorComponent::EnterState(EMMAHedgeTrimmerState NewStat
     CurrentState = NewState;
     StateElapsedSeconds = 0.0f;
     bAttackHitApplied = false;
+    bAttackHitSucceeded = false;
 
     // Keep the generic club AI dormant for every living bespoke state. Its
     // state-2 graph assumes Get Nearest Player I'm Alert To is valid.
@@ -716,6 +932,20 @@ void UMMAHedgeTrimmerBehaviorComponent::EnterState(EMMAHedgeTrimmerState NewStat
         break;
     case EMMAHedgeTrimmerState::Dead:
         SetInheritedBool(GetOwner(), TEXT("WeaponHitboxActive"), false);
+        TargetPawn.Reset();
+        bDeathTerminalStarted = false;
+        bDeathSequenceFinished = false;
+        if (ACharacter* Character = CharacterOwner.Get())
+        {
+            if (UCharacterMovementComponent* Movement = Character->GetCharacterMovement())
+            {
+                Movement->DisableMovement();
+            }
+            if (UCapsuleComponent* Capsule = Character->GetCapsuleComponent())
+            {
+                Capsule->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+            }
+        }
         break;
     }
     if (NewState == EMMAHedgeTrimmerState::Idle ||
@@ -769,6 +999,7 @@ void UMMAHedgeTrimmerBehaviorComponent::ApplyAttackHit()
     }
     if (bDamageApplied)
     {
+        bAttackHitSucceeded = true;
         ApplyHitRecoil(Target);
         ShowDebugMessage(TEXT("Hedge_Trimmer attack: 1 hit + recoil"), FColor::Green);
     }
@@ -798,12 +1029,13 @@ void UMMAHedgeTrimmerBehaviorComponent::TickComponent(
     {
         return;
     }
-    if (ReadInheritedAIState() == DeadAIState)
+    if (IsOwnerDefeated())
     {
         if (CurrentState != EMMAHedgeTrimmerState::Dead)
         {
             EnterState(EMMAHedgeTrimmerState::Dead);
         }
+        TickDeathSequence(DeltaTime);
         return;
     }
 
@@ -863,6 +1095,15 @@ void UMMAHedgeTrimmerBehaviorComponent::TickComponent(
         if (!bAttackHitApplied && StateElapsedSeconds >= AttackContactSeconds)
         {
             ApplyAttackHit();
+            if (bAttackHitSucceeded)
+            {
+                // Retail Hedge Trimmer disengages immediately after landing a
+                // hit, even while Robin remains inside its detection radius.
+                AttackCooldownRemaining = AttackCooldownSeconds;
+                TargetPawn.Reset();
+                EnterState(EMMAHedgeTrimmerState::ReturnHome);
+                break;
+            }
         }
         if (StateElapsedSeconds >= GetStateDuration())
         {
@@ -879,6 +1120,7 @@ void UMMAHedgeTrimmerBehaviorComponent::TickComponent(
             StopMovement();
             Owner->SetActorLocation(FVector(
                 HomeLocation.X, HomeLocation.Y, Owner->GetActorLocation().Z));
+            Owner->SetActorRotation(HomeRotation);
             EnterState(EMMAHedgeTrimmerState::Idle);
         }
         else

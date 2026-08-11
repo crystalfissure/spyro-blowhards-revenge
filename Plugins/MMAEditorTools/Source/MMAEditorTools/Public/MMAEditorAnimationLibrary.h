@@ -41,6 +41,11 @@ public:
         FName ComponentVariableName = TEXT("Hedge Trimmer Behavior"));
 
     UFUNCTION(BlueprintCallable, Category = "MMA|Blueprint")
+    static bool AddMMAShieldGuardBehaviorComponent(
+        UBlueprint* Blueprint,
+        FName ComponentVariableName = TEXT("MMA Shield Guard State Machine"));
+
+    UFUNCTION(BlueprintCallable, Category = "MMA|Blueprint")
     static bool CompileBlueprint(UBlueprint* Blueprint);
 
     UFUNCTION(BlueprintCallable, Category = "MMA|Blueprint")
@@ -53,6 +58,33 @@ public:
         UAnimSequence* ReturnHomeAnimation,
         UAnimSequence* DeathAnimation,
         TSubclassOf<AActor> DefaultDropClass);
+
+    /** Assigns the optional one-frame MMA terminal-death pose. */
+    UFUNCTION(BlueprintCallable, Category = "MMA|Blueprint")
+    static bool ConfigureMMAEnemyDeathTerminalAnimation(
+        UBlueprint* Blueprint,
+        UAnimSequence* DeathTerminalAnimation);
+
+    /** Applies data-driven close-melee defaults to the serialized SCS component template. */
+    UFUNCTION(BlueprintCallable, Category = "MMA|Blueprint")
+    static bool ConfigureMMAEnemyStateMachineSettings(
+        UBlueprint* Blueprint,
+        const FString& SettingsJson);
+
+    UFUNCTION(BlueprintCallable, Category = "MMA|Blueprint")
+    static bool ConfigureMMAShieldGuardBehavior(
+        UBlueprint* Blueprint,
+        UAnimSequence* IdleAnimation,
+        UAnimSequence* PatrolAnimation,
+        UAnimSequence* EnGardeAnimation,
+        UAnimSequence* AttackAnimation,
+        UAnimSequence* DeathAnimation,
+        TSubclassOf<AActor> DefaultDropClass);
+
+    UFUNCTION(BlueprintCallable, Category = "MMA|Blueprint")
+    static bool ConfigureMMAShieldGuardSettings(
+        UBlueprint* Blueprint,
+        const FString& SettingsJson);
 
     UFUNCTION(BlueprintCallable, Category = "MMA|Blueprint")
     static bool ConfigureMMAHedgeTrimmerMesh(

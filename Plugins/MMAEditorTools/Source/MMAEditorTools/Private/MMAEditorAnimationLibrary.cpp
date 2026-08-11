@@ -2,6 +2,7 @@
 
 #include "MMAChaseLeashComponent.h"
 #include "MMAHedgeTrimmerBehaviorComponent.h"
+#include "MMAShieldGuardBehaviorComponent.h"
 
 #include "Animation/AnimSequence.h"
 #include "Animation/AnimTypes.h"
@@ -13,6 +14,8 @@
 #include "Engine/Blueprint.h"
 #include "Engine/SkeletalMesh.h"
 #include "GameFramework/Character.h"
+#include "Particles/ParticleSystem.h"
+#include "Sound/SoundBase.h"
 #include "Engine/SCS_Node.h"
 #include "Engine/SimpleConstructionScript.h"
 #include "Kismet2/BlueprintEditorUtils.h"
@@ -262,6 +265,37 @@ bool UMMAEditorAnimationLibrary::AddMMAHedgeTrimmerBehaviorComponent(
     return true;
 }
 
+bool UMMAEditorAnimationLibrary::AddMMAShieldGuardBehaviorComponent(
+    UBlueprint* Blueprint,
+    FName ComponentVariableName)
+{
+    if (!Blueprint || !Blueprint->SimpleConstructionScript)
+    {
+        return false;
+    }
+    for (USCS_Node* ExistingNode : Blueprint->SimpleConstructionScript->GetAllNodes())
+    {
+        if (ExistingNode &&
+            (ExistingNode->GetVariableName() == ComponentVariableName ||
+             ExistingNode->ComponentClass == UMMAShieldGuardBehaviorComponent::StaticClass()))
+        {
+            return true;
+        }
+    }
+    Blueprint->Modify();
+    USCS_Node* NewNode = Blueprint->SimpleConstructionScript->CreateNode(
+        UMMAShieldGuardBehaviorComponent::StaticClass(),
+        ComponentVariableName);
+    if (!NewNode)
+    {
+        return false;
+    }
+    Blueprint->SimpleConstructionScript->AddNode(NewNode);
+    FBlueprintEditorUtils::MarkBlueprintAsStructurallyModified(Blueprint);
+    Blueprint->MarkPackageDirty();
+    return true;
+}
+
 bool UMMAEditorAnimationLibrary::CompileBlueprint(UBlueprint* Blueprint)
 {
     if (!Blueprint)
@@ -333,6 +367,280 @@ bool UMMAEditorAnimationLibrary::ConfigureMMAHedgeTrimmerBehavior(
     return bFoundBehavior;
 }
 
+bool UMMAEditorAnimationLibrary::ConfigureMMAEnemyDeathTerminalAnimation(
+    UBlueprint* Blueprint,
+    UAnimSequence* DeathTerminalAnimation)
+{
+    if (!Blueprint || !Blueprint->SimpleConstructionScript)
+    {
+        return false;
+    }
+    bool bFoundBehavior = false;
+    Blueprint->Modify();
+    for (USCS_Node* Node : Blueprint->SimpleConstructionScript->GetAllNodes())
+    {
+        UMMAHedgeTrimmerBehaviorComponent* Behavior = Node
+            ? Cast<UMMAHedgeTrimmerBehaviorComponent>(Node->ComponentTemplate)
+            : nullptr;
+        if (!Behavior)
+        {
+            continue;
+        }
+        Node->Modify();
+        Behavior->Modify();
+        Behavior->DeathTerminalAnimation = DeathTerminalAnimation;
+        bFoundBehavior = true;
+    }
+    if (bFoundBehavior)
+    {
+        FBlueprintEditorUtils::MarkBlueprintAsModified(Blueprint);
+        Blueprint->MarkPackageDirty();
+    }
+    return bFoundBehavior;
+}
+
+bool UMMAEditorAnimationLibrary::ConfigureMMAEnemyStateMachineSettings(
+    UBlueprint* Blueprint,
+    const FString& SettingsJson)
+{
+    if (!Blueprint || !Blueprint->SimpleConstructionScript)
+    {
+        return false;
+    }
+    TSharedPtr<FJsonObject> Settings;
+    TSharedRef<TJsonReader<>> Reader = TJsonReaderFactory<>::Create(SettingsJson);
+    if (!FJsonSerializer::Deserialize(Reader, Settings) || !Settings.IsValid())
+    {
+        return false;
+    }
+
+    bool bConfigured = false;
+    Blueprint->Modify();
+    for (USCS_Node* Node : Blueprint->SimpleConstructionScript->GetAllNodes())
+    {
+        UMMAHedgeTrimmerBehaviorComponent* Behavior = Node
+            ? Cast<UMMAHedgeTrimmerBehaviorComponent>(Node->ComponentTemplate)
+            : nullptr;
+        if (!Behavior)
+        {
+            continue;
+        }
+        Node->Modify();
+        Behavior->Modify();
+        auto SetNumber = [&Settings](const TCHAR* Key, float& Target)
+        {
+            double Value = 0.0;
+            if (Settings->TryGetNumberField(Key, Value))
+            {
+                Target = static_cast<float>(Value);
+            }
+        };
+        auto SetBool = [&Settings](const TCHAR* Key, bool& Target)
+        {
+            bool Value = false;
+            if (Settings->TryGetBoolField(Key, Value))
+            {
+                Target = Value;
+            }
+        };
+        SetNumber(TEXT("detection_radius"), Behavior->DetectionRadius);
+        SetNumber(TEXT("lose_interest_radius"), Behavior->LoseInterestRadius);
+        SetBool(TEXT("require_line_of_sight"), Behavior->bRequireLineOfSight);
+        SetNumber(TEXT("chase_speed"), Behavior->ChaseSpeed);
+        SetNumber(TEXT("return_home_speed"), Behavior->ReturnHomeSpeed);
+        SetNumber(TEXT("maximum_distance_from_home"), Behavior->MaximumDistanceFromHome);
+        SetNumber(TEXT("home_acceptance_radius"), Behavior->HomeAcceptanceRadius);
+        SetNumber(TEXT("rotation_speed_degrees"), Behavior->RotationSpeedDegrees);
+        SetNumber(TEXT("attack_range"), Behavior->AttackRange);
+        SetNumber(TEXT("attack_hit_range"), Behavior->AttackHitRange);
+        SetNumber(TEXT("attack_half_angle_degrees"), Behavior->AttackHalfAngleDegrees);
+        SetNumber(TEXT("attack_contact_seconds"), Behavior->AttackContactSeconds);
+        SetNumber(TEXT("attack_cooldown_seconds"), Behavior->AttackCooldownSeconds);
+        SetNumber(TEXT("hit_points"), Behavior->InitialHitPoints);
+        SetNumber(TEXT("recoil_horizontal_speed"), Behavior->RecoilHorizontalSpeed);
+        SetNumber(TEXT("recoil_vertical_speed"), Behavior->RecoilVerticalSpeed);
+        SetNumber(TEXT("death_poof_padding_seconds"), Behavior->DeathPoofPaddingSeconds);
+        SetNumber(TEXT("death_playback_rate"), Behavior->DeathPlaybackRate);
+        SetNumber(TEXT("death_terminal_duration_seconds"), Behavior->DeathTerminalDurationSeconds);
+        SetNumber(TEXT("death_terminal_backward_distance"), Behavior->DeathTerminalBackwardDistance);
+        SetNumber(TEXT("death_terminal_upward_distance"), Behavior->DeathTerminalUpwardDistance);
+        SetNumber(TEXT("death_terminal_end_scale"), Behavior->DeathTerminalEndScale);
+        SetBool(TEXT("debug_messages"), Behavior->bEnableDebugMessages);
+        FString DamageType;
+        if (Settings->TryGetStringField(TEXT("damage_type"), DamageType) &&
+            DamageType == TEXT("NORMAL_DAMAGE"))
+        {
+            Behavior->bOverrideOutgoingDamageType = true;
+            Behavior->OutgoingDamageType = 1;
+        }
+        bConfigured = true;
+    }
+    if (bConfigured)
+    {
+        FBlueprintEditorUtils::MarkBlueprintAsModified(Blueprint);
+        Blueprint->MarkPackageDirty();
+    }
+    return bConfigured;
+}
+
+bool UMMAEditorAnimationLibrary::ConfigureMMAShieldGuardBehavior(
+    UBlueprint* Blueprint,
+    UAnimSequence* IdleAnimation,
+    UAnimSequence* PatrolAnimation,
+    UAnimSequence* EnGardeAnimation,
+    UAnimSequence* AttackAnimation,
+    UAnimSequence* DeathAnimation,
+    TSubclassOf<AActor> DefaultDropClass)
+{
+    if (!Blueprint || !Blueprint->SimpleConstructionScript)
+    {
+        return false;
+    }
+    bool bFoundBehavior = false;
+    Blueprint->Modify();
+    for (USCS_Node* Node : Blueprint->SimpleConstructionScript->GetAllNodes())
+    {
+        if (!Node)
+        {
+            continue;
+        }
+        FString VariableName = Node->GetVariableName().ToString().ToLower();
+        VariableName.ReplaceInline(TEXT("_"), TEXT(""));
+        VariableName.ReplaceInline(TEXT(" "), TEXT(""));
+        if (VariableName.Contains(TEXT("weaponhitbox")))
+        {
+            if (UPrimitiveComponent* Hitbox = Cast<UPrimitiveComponent>(Node->ComponentTemplate))
+            {
+                Node->Modify();
+                Hitbox->Modify();
+                Hitbox->SetGenerateOverlapEvents(false);
+                Hitbox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+            }
+        }
+        else if (VariableName.Contains(TEXT("shieldhitbox")))
+        {
+            if (UPrimitiveComponent* Hitbox = Cast<UPrimitiveComponent>(Node->ComponentTemplate))
+            {
+                Node->Modify();
+                Hitbox->Modify();
+                Hitbox->SetCollisionObjectType(ECC_WorldStatic);
+                Hitbox->SetCollisionResponseToAllChannels(ECR_Ignore);
+                Hitbox->SetCollisionResponseToChannel(ECC_Pawn, ECR_Block);
+                Hitbox->SetGenerateOverlapEvents(true);
+                Hitbox->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+            }
+        }
+        UMMAShieldGuardBehaviorComponent* Behavior =
+            Cast<UMMAShieldGuardBehaviorComponent>(Node->ComponentTemplate);
+        if (!Behavior)
+        {
+            continue;
+        }
+        Node->Modify();
+        Behavior->Modify();
+        Behavior->IdleAnimation = IdleAnimation;
+        Behavior->PatrolAnimation = PatrolAnimation;
+        Behavior->EnGardeAnimation = EnGardeAnimation;
+        Behavior->AttackAnimation = AttackAnimation;
+        Behavior->DeathAnimation = DeathAnimation;
+        Behavior->DefaultDropClass = DefaultDropClass;
+        bFoundBehavior = true;
+    }
+    if (bFoundBehavior)
+    {
+        FBlueprintEditorUtils::MarkBlueprintAsModified(Blueprint);
+        Blueprint->MarkPackageDirty();
+    }
+    return bFoundBehavior;
+}
+
+bool UMMAEditorAnimationLibrary::ConfigureMMAShieldGuardSettings(
+    UBlueprint* Blueprint,
+    const FString& SettingsJson)
+{
+    if (!Blueprint || !Blueprint->SimpleConstructionScript)
+    {
+        return false;
+    }
+    TSharedPtr<FJsonObject> Settings;
+    TSharedRef<TJsonReader<>> Reader = TJsonReaderFactory<>::Create(SettingsJson);
+    if (!FJsonSerializer::Deserialize(Reader, Settings) || !Settings.IsValid())
+    {
+        return false;
+    }
+    bool bConfigured = false;
+    Blueprint->Modify();
+    for (USCS_Node* Node : Blueprint->SimpleConstructionScript->GetAllNodes())
+    {
+        UMMAShieldGuardBehaviorComponent* Behavior = Node
+            ? Cast<UMMAShieldGuardBehaviorComponent>(Node->ComponentTemplate)
+            : nullptr;
+        if (!Behavior)
+        {
+            continue;
+        }
+        Node->Modify();
+        Behavior->Modify();
+        auto SetNumber = [&Settings](const TCHAR* Key, float& Target)
+        {
+            double Value = 0.0;
+            if (Settings->TryGetNumberField(Key, Value))
+            {
+                Target = static_cast<float>(Value);
+            }
+        };
+        auto SetBool = [&Settings](const TCHAR* Key, bool& Target)
+        {
+            bool Value = false;
+            if (Settings->TryGetBoolField(Key, Value))
+            {
+                Target = Value;
+            }
+        };
+        SetNumber(TEXT("idle_wait_minimum"), Behavior->IdleWaitMinimum);
+        SetNumber(TEXT("idle_wait_maximum"), Behavior->IdleWaitMaximum);
+        SetNumber(TEXT("patrol_radius"), Behavior->PatrolRadius);
+        SetNumber(TEXT("patrol_speed"), Behavior->PatrolSpeed);
+        SetNumber(TEXT("patrol_acceptance_radius"), Behavior->PatrolAcceptanceRadius);
+        SetNumber(TEXT("patrol_pause_minimum"), Behavior->PatrolPauseMinimum);
+        SetNumber(TEXT("patrol_pause_maximum"), Behavior->PatrolPauseMaximum);
+        SetNumber(TEXT("patrol_target_timeout"), Behavior->PatrolTargetTimeout);
+        SetNumber(TEXT("guard_radius"), Behavior->GuardRadius);
+        SetNumber(TEXT("lose_interest_radius"), Behavior->LoseInterestRadius);
+        SetBool(TEXT("require_line_of_sight"), Behavior->bRequireLineOfSight);
+        SetNumber(TEXT("rotation_speed_degrees"), Behavior->RotationSpeedDegrees);
+        SetNumber(TEXT("attack_range"), Behavior->AttackRange);
+        SetNumber(TEXT("attack_hit_range"), Behavior->AttackHitRange);
+        SetNumber(TEXT("attack_half_angle_degrees"), Behavior->AttackHalfAngleDegrees);
+        SetNumber(TEXT("attack_contact_fraction"), Behavior->AttackContactFraction);
+        SetNumber(TEXT("attack_cooldown_seconds"), Behavior->AttackCooldownSeconds);
+        SetNumber(TEXT("hit_points"), Behavior->InitialHitPoints);
+        SetNumber(TEXT("recoil_horizontal_speed"), Behavior->RecoilHorizontalSpeed);
+        SetNumber(TEXT("recoil_vertical_speed"), Behavior->RecoilVerticalSpeed);
+        SetNumber(TEXT("charge_knockback_horizontal_speed"), Behavior->ChargeKnockbackHorizontalSpeed);
+        SetNumber(TEXT("charge_knockback_vertical_speed"), Behavior->ChargeKnockbackVerticalSpeed);
+        SetNumber(TEXT("charge_collision_radius_scale"), Behavior->ChargeCollisionRadiusScale);
+        SetNumber(TEXT("charge_collision_half_height_scale"), Behavior->ChargeCollisionHalfHeightScale);
+        SetNumber(TEXT("death_poof_padding_seconds"), Behavior->DeathPoofPaddingSeconds);
+        SetBool(TEXT("immune_to_burn"), Behavior->bImmuneToFlame);
+        SetBool(TEXT("immune_to_flame"), Behavior->bImmuneToFlame);
+        SetBool(TEXT("debug_messages"), Behavior->bEnableDebugMessages);
+        FString DamageType;
+        if (Settings->TryGetStringField(TEXT("damage_type"), DamageType) &&
+            DamageType == TEXT("NORMAL_DAMAGE"))
+        {
+            Behavior->OutgoingDamageType = 1;
+        }
+        bConfigured = true;
+    }
+    if (bConfigured)
+    {
+        FBlueprintEditorUtils::MarkBlueprintAsModified(Blueprint);
+        Blueprint->MarkPackageDirty();
+    }
+    return bConfigured;
+}
+
 bool UMMAEditorAnimationLibrary::ConfigureMMAHedgeTrimmerMesh(
     UBlueprint* Blueprint,
     USkeletalMesh* SkeletalMesh,
@@ -401,6 +709,20 @@ FString UMMAEditorAnimationLibrary::DescribeMMAHedgeTrimmerBlueprint(UBlueprint*
                 NodeObject->SetStringField(TEXT("name"), Node->GetVariableName().ToString());
                 NodeObject->SetStringField(
                     TEXT("class"), Node->ComponentClass ? Node->ComponentClass->GetName() : TEXT(""));
+                if (UPrimitiveComponent* Primitive = Cast<UPrimitiveComponent>(Node->ComponentTemplate))
+                {
+                    NodeObject->SetStringField(
+                        TEXT("collision_profile"), Primitive->GetCollisionProfileName().ToString());
+                    NodeObject->SetStringField(
+                        TEXT("collision_enabled"), UEnum::GetValueAsString(Primitive->GetCollisionEnabled()));
+                    NodeObject->SetStringField(
+                        TEXT("collision_object_type"), UEnum::GetValueAsString(Primitive->GetCollisionObjectType()));
+                    NodeObject->SetStringField(
+                        TEXT("pawn_response"),
+                        UEnum::GetValueAsString(Primitive->GetCollisionResponseToChannel(ECC_Pawn)));
+                    NodeObject->SetBoolField(
+                        TEXT("generate_overlap_events"), Primitive->GetGenerateOverlapEvents());
+                }
                 if (UMMAHedgeTrimmerBehaviorComponent* Behavior =
                         Cast<UMMAHedgeTrimmerBehaviorComponent>(Node->ComponentTemplate))
                 {
@@ -415,18 +737,75 @@ FString UMMAEditorAnimationLibrary::DescribeMMAHedgeTrimmerBlueprint(UBlueprint*
                     Contract->SetStringField(TEXT("attack"), AssetPath(Behavior->AttackAnimation));
                     Contract->SetStringField(TEXT("return_home"), AssetPath(Behavior->ReturnHomeAnimation));
                     Contract->SetStringField(TEXT("death"), AssetPath(Behavior->DeathAnimation));
+                    Contract->SetStringField(
+                        TEXT("death_terminal"), AssetPath(Behavior->DeathTerminalAnimation));
+                    Contract->SetStringField(
+                        TEXT("death_poof_particle"), AssetPath(Behavior->DeathPoofParticle));
+                    Contract->SetStringField(
+                        TEXT("death_poof_sound"), AssetPath(Behavior->DeathPoofSound));
                     Contract->SetStringField(TEXT("default_drop"), AssetPath(Behavior->DefaultDropClass.Get()));
                     Contract->SetNumberField(TEXT("detection_radius"), Behavior->DetectionRadius);
                     Contract->SetNumberField(TEXT("lose_interest_radius"), Behavior->LoseInterestRadius);
+                    Contract->SetNumberField(TEXT("chase_speed"), Behavior->ChaseSpeed);
+                    Contract->SetNumberField(TEXT("return_home_speed"), Behavior->ReturnHomeSpeed);
                     Contract->SetNumberField(TEXT("maximum_distance_from_home"), Behavior->MaximumDistanceFromHome);
                     Contract->SetNumberField(TEXT("attack_range"), Behavior->AttackRange);
                     Contract->SetNumberField(TEXT("attack_hit_range"), Behavior->AttackHitRange);
                     Contract->SetNumberField(TEXT("attack_contact_seconds"), Behavior->AttackContactSeconds);
                     Contract->SetNumberField(TEXT("attack_cooldown_seconds"), Behavior->AttackCooldownSeconds);
+                    Contract->SetNumberField(TEXT("hit_points"), Behavior->InitialHitPoints);
+                    Contract->SetBoolField(TEXT("override_outgoing_damage_type"), Behavior->bOverrideOutgoingDamageType);
+                    Contract->SetNumberField(TEXT("outgoing_damage_type"), Behavior->OutgoingDamageType);
                     Contract->SetNumberField(TEXT("recoil_horizontal_speed"), Behavior->RecoilHorizontalSpeed);
                     Contract->SetNumberField(TEXT("recoil_vertical_speed"), Behavior->RecoilVerticalSpeed);
                     Contract->SetNumberField(TEXT("death_poof_padding_seconds"), Behavior->DeathPoofPaddingSeconds);
+                    Contract->SetNumberField(TEXT("death_playback_rate"), Behavior->DeathPlaybackRate);
+                    Contract->SetNumberField(
+                        TEXT("death_terminal_duration_seconds"), Behavior->DeathTerminalDurationSeconds);
+                    Contract->SetNumberField(
+                        TEXT("death_terminal_backward_distance"), Behavior->DeathTerminalBackwardDistance);
+                    Contract->SetNumberField(
+                        TEXT("death_terminal_upward_distance"), Behavior->DeathTerminalUpwardDistance);
+                    Contract->SetNumberField(
+                        TEXT("death_terminal_end_scale"), Behavior->DeathTerminalEndScale);
                     Contract->SetBoolField(TEXT("debug_messages"), Behavior->bEnableDebugMessages);
+                    NodeObject->SetObjectField(TEXT("behavior_contract"), Contract);
+                }
+                else if (UMMAShieldGuardBehaviorComponent* ShieldBehavior =
+                             Cast<UMMAShieldGuardBehaviorComponent>(Node->ComponentTemplate))
+                {
+                    TSharedRef<FJsonObject> Contract = MakeShared<FJsonObject>();
+                    auto AssetPath = [](const UObject* Asset)
+                    {
+                        return Asset ? Asset->GetPathName() : FString();
+                    };
+                    Contract->SetStringField(TEXT("idle"), AssetPath(ShieldBehavior->IdleAnimation));
+                    Contract->SetStringField(TEXT("patrol"), AssetPath(ShieldBehavior->PatrolAnimation));
+                    Contract->SetStringField(TEXT("en_garde"), AssetPath(ShieldBehavior->EnGardeAnimation));
+                    Contract->SetStringField(TEXT("attack"), AssetPath(ShieldBehavior->AttackAnimation));
+                    Contract->SetStringField(TEXT("death"), AssetPath(ShieldBehavior->DeathAnimation));
+                    Contract->SetStringField(TEXT("default_drop"), AssetPath(ShieldBehavior->DefaultDropClass.Get()));
+                    Contract->SetNumberField(TEXT("idle_wait_minimum"), ShieldBehavior->IdleWaitMinimum);
+                    Contract->SetNumberField(TEXT("idle_wait_maximum"), ShieldBehavior->IdleWaitMaximum);
+                    Contract->SetNumberField(TEXT("patrol_radius"), ShieldBehavior->PatrolRadius);
+                    Contract->SetNumberField(TEXT("patrol_speed"), ShieldBehavior->PatrolSpeed);
+                    Contract->SetNumberField(TEXT("guard_radius"), ShieldBehavior->GuardRadius);
+                    Contract->SetNumberField(TEXT("lose_interest_radius"), ShieldBehavior->LoseInterestRadius);
+                    Contract->SetNumberField(TEXT("attack_range"), ShieldBehavior->AttackRange);
+                    Contract->SetNumberField(TEXT("attack_hit_range"), ShieldBehavior->AttackHitRange);
+                    Contract->SetNumberField(TEXT("attack_contact_fraction"), ShieldBehavior->AttackContactFraction);
+                    Contract->SetNumberField(TEXT("attack_cooldown_seconds"), ShieldBehavior->AttackCooldownSeconds);
+                    Contract->SetNumberField(TEXT("outgoing_damage_type"), ShieldBehavior->OutgoingDamageType);
+                    Contract->SetBoolField(TEXT("immune_to_burn"), ShieldBehavior->bImmuneToFlame);
+                    Contract->SetBoolField(TEXT("immune_to_flame"), ShieldBehavior->bImmuneToFlame);
+                    Contract->SetNumberField(TEXT("charge_knockback_horizontal_speed"), ShieldBehavior->ChargeKnockbackHorizontalSpeed);
+                    Contract->SetNumberField(TEXT("charge_knockback_vertical_speed"), ShieldBehavior->ChargeKnockbackVerticalSpeed);
+                    Contract->SetNumberField(TEXT("charge_collision_radius_scale"), ShieldBehavior->ChargeCollisionRadiusScale);
+                    Contract->SetNumberField(TEXT("charge_collision_half_height_scale"), ShieldBehavior->ChargeCollisionHalfHeightScale);
+                    Contract->SetNumberField(TEXT("recoil_horizontal_speed"), ShieldBehavior->RecoilHorizontalSpeed);
+                    Contract->SetNumberField(TEXT("recoil_vertical_speed"), ShieldBehavior->RecoilVerticalSpeed);
+                    Contract->SetNumberField(TEXT("death_poof_padding_seconds"), ShieldBehavior->DeathPoofPaddingSeconds);
+                    Contract->SetBoolField(TEXT("debug_messages"), ShieldBehavior->bEnableDebugMessages);
                     NodeObject->SetObjectField(TEXT("behavior_contract"), Contract);
                 }
                 Nodes.Add(MakeShared<FJsonValueObject>(NodeObject));
