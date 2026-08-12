@@ -15,6 +15,8 @@
 #include "Engine/SkeletalMesh.h"
 #include "GameFramework/Character.h"
 #include "Particles/ParticleSystem.h"
+#include "Rendering/SkeletalMeshLODModel.h"
+#include "Rendering/SkeletalMeshModel.h"
 #include "Sound/SoundBase.h"
 #include "Engine/SCS_Node.h"
 #include "Engine/SimpleConstructionScript.h"
@@ -446,6 +448,9 @@ bool UMMAEditorAnimationLibrary::ConfigureMMAEnemyStateMachineSettings(
         SetNumber(TEXT("detection_radius"), Behavior->DetectionRadius);
         SetNumber(TEXT("lose_interest_radius"), Behavior->LoseInterestRadius);
         SetBool(TEXT("require_line_of_sight"), Behavior->bRequireLineOfSight);
+        SetBool(TEXT("require_target_reentry_after_hit"), Behavior->bRequireTargetReentryAfterHit);
+        SetNumber(TEXT("target_rearm_radius"), Behavior->TargetRearmRadius);
+        SetNumber(TEXT("attack_target_clearance"), Behavior->AttackTargetClearance);
         SetNumber(TEXT("chase_speed"), Behavior->ChaseSpeed);
         SetNumber(TEXT("return_home_speed"), Behavior->ReturnHomeSpeed);
         SetNumber(TEXT("maximum_distance_from_home"), Behavior->MaximumDistanceFromHome);
@@ -461,6 +466,7 @@ bool UMMAEditorAnimationLibrary::ConfigureMMAEnemyStateMachineSettings(
         SetNumber(TEXT("recoil_vertical_speed"), Behavior->RecoilVerticalSpeed);
         SetNumber(TEXT("death_poof_padding_seconds"), Behavior->DeathPoofPaddingSeconds);
         SetNumber(TEXT("death_playback_rate"), Behavior->DeathPlaybackRate);
+        SetNumber(TEXT("death_animation_end_fraction"), Behavior->DeathAnimationEndFraction);
         SetNumber(TEXT("death_terminal_duration_seconds"), Behavior->DeathTerminalDurationSeconds);
         SetNumber(TEXT("death_terminal_backward_distance"), Behavior->DeathTerminalBackwardDistance);
         SetNumber(TEXT("death_terminal_upward_distance"), Behavior->DeathTerminalUpwardDistance);
@@ -746,6 +752,11 @@ FString UMMAEditorAnimationLibrary::DescribeMMAHedgeTrimmerBlueprint(UBlueprint*
                     Contract->SetStringField(TEXT("default_drop"), AssetPath(Behavior->DefaultDropClass.Get()));
                     Contract->SetNumberField(TEXT("detection_radius"), Behavior->DetectionRadius);
                     Contract->SetNumberField(TEXT("lose_interest_radius"), Behavior->LoseInterestRadius);
+                    Contract->SetBoolField(
+                        TEXT("require_target_reentry_after_hit"),
+                        Behavior->bRequireTargetReentryAfterHit);
+                    Contract->SetNumberField(TEXT("target_rearm_radius"), Behavior->TargetRearmRadius);
+                    Contract->SetNumberField(TEXT("attack_target_clearance"), Behavior->AttackTargetClearance);
                     Contract->SetNumberField(TEXT("chase_speed"), Behavior->ChaseSpeed);
                     Contract->SetNumberField(TEXT("return_home_speed"), Behavior->ReturnHomeSpeed);
                     Contract->SetNumberField(TEXT("maximum_distance_from_home"), Behavior->MaximumDistanceFromHome);
@@ -760,6 +771,8 @@ FString UMMAEditorAnimationLibrary::DescribeMMAHedgeTrimmerBlueprint(UBlueprint*
                     Contract->SetNumberField(TEXT("recoil_vertical_speed"), Behavior->RecoilVerticalSpeed);
                     Contract->SetNumberField(TEXT("death_poof_padding_seconds"), Behavior->DeathPoofPaddingSeconds);
                     Contract->SetNumberField(TEXT("death_playback_rate"), Behavior->DeathPlaybackRate);
+                    Contract->SetNumberField(
+                        TEXT("death_animation_end_fraction"), Behavior->DeathAnimationEndFraction);
                     Contract->SetNumberField(
                         TEXT("death_terminal_duration_seconds"), Behavior->DeathTerminalDurationSeconds);
                     Contract->SetNumberField(
@@ -853,7 +866,8 @@ FString UMMAEditorAnimationLibrary::DescribeMMAHedgeTrimmerBlueprint(UBlueprint*
                     MeshObject->SetNumberField(TEXT("override_material_count"), Mesh->OverrideMaterials.Num());
                     if (Mesh->SkeletalMesh)
                     {
-                        const FBoxSphereBounds Bounds = Mesh->SkeletalMesh->GetBounds();
+                        USkeletalMesh* SkeletalMesh = Mesh->SkeletalMesh;
+                        const FBoxSphereBounds Bounds = SkeletalMesh->GetBounds();
                         MeshObject->SetStringField(TEXT("unscaled_bounds_origin"), Bounds.Origin.ToString());
                         MeshObject->SetStringField(TEXT("unscaled_bounds_extent"), Bounds.BoxExtent.ToString());
                         MeshObject->SetNumberField(TEXT("unscaled_height"), Bounds.BoxExtent.Z * 2.0f);
@@ -861,7 +875,7 @@ FString UMMAEditorAnimationLibrary::DescribeMMAHedgeTrimmerBlueprint(UBlueprint*
                             TEXT("scaled_height"),
                             Bounds.BoxExtent.Z * 2.0f * Mesh->GetRelativeScale3D().Z);
                         TArray<TSharedPtr<FJsonValue>> Materials;
-                        for (const FSkeletalMaterial& Material : Mesh->SkeletalMesh->Materials)
+                        for (const FSkeletalMaterial& Material : SkeletalMesh->Materials)
                         {
                             Materials.Add(MakeShared<FJsonValueString>(
                                 Material.MaterialInterface
@@ -869,6 +883,103 @@ FString UMMAEditorAnimationLibrary::DescribeMMAHedgeTrimmerBlueprint(UBlueprint*
                                     : TEXT("")));
                         }
                         MeshObject->SetArrayField(TEXT("skeletal_mesh_materials"), Materials);
+                        MeshObject->SetBoolField(
+                            TEXT("has_vertex_colors"), SkeletalMesh->GetHasVertexColors());
+
+                        TArray<TSharedPtr<FJsonValue>> MaterialSections;
+                        bool bMaterialSectionIndicesValid = true;
+                        FSkeletalMeshModel* ImportedModel = SkeletalMesh->GetImportedModel();
+                        if (ImportedModel && ImportedModel->LODModels.IsValidIndex(0))
+                        {
+                            const FSkeletalMeshLODModel& LODModel = ImportedModel->LODModels[0];
+                            const FSkeletalMeshLODInfo* LODInfo = SkeletalMesh->GetLODInfo(0);
+                            for (int32 SectionIndex = 0;
+                                 SectionIndex < LODModel.Sections.Num();
+                                 ++SectionIndex)
+                            {
+                                const FSkelMeshSection& Section = LODModel.Sections[SectionIndex];
+                                int32 ResolvedMaterialIndex = Section.MaterialIndex;
+                                if (LODInfo &&
+                                    LODInfo->LODMaterialMap.IsValidIndex(SectionIndex) &&
+                                    LODInfo->LODMaterialMap[SectionIndex] != INDEX_NONE)
+                                {
+                                    ResolvedMaterialIndex = LODInfo->LODMaterialMap[SectionIndex];
+                                }
+                                const bool bIndexValid =
+                                    SkeletalMesh->Materials.IsValidIndex(ResolvedMaterialIndex);
+                                bMaterialSectionIndicesValid &= bIndexValid;
+
+                                TSharedRef<FJsonObject> SectionObject = MakeShared<FJsonObject>();
+                                SectionObject->SetNumberField(TEXT("section"), SectionIndex);
+                                SectionObject->SetNumberField(
+                                    TEXT("raw_material_index"), Section.MaterialIndex);
+                                SectionObject->SetNumberField(
+                                    TEXT("resolved_material_index"), ResolvedMaterialIndex);
+                                SectionObject->SetBoolField(
+                                    TEXT("material_index_valid"), bIndexValid);
+                                SectionObject->SetNumberField(
+                                    TEXT("triangles"), Section.NumTriangles);
+                                SectionObject->SetNumberField(
+                                    TEXT("vertices"), Section.NumVertices);
+                                MaterialSections.Add(
+                                    MakeShared<FJsonValueObject>(SectionObject));
+                            }
+
+                            TArray<FSoftSkinVertex> Vertices;
+                            LODModel.GetVertices(Vertices);
+                            TSet<FColor> UniqueColours;
+                            FColor MinimumColour(255, 255, 255, 255);
+                            FColor MaximumColour(0, 0, 0, 0);
+                            for (const FSoftSkinVertex& Vertex : Vertices)
+                            {
+                                const FColor Colour = Vertex.Color;
+                                UniqueColours.Add(Colour);
+                                MinimumColour.R = FMath::Min(MinimumColour.R, Colour.R);
+                                MinimumColour.G = FMath::Min(MinimumColour.G, Colour.G);
+                                MinimumColour.B = FMath::Min(MinimumColour.B, Colour.B);
+                                MinimumColour.A = FMath::Min(MinimumColour.A, Colour.A);
+                                MaximumColour.R = FMath::Max(MaximumColour.R, Colour.R);
+                                MaximumColour.G = FMath::Max(MaximumColour.G, Colour.G);
+                                MaximumColour.B = FMath::Max(MaximumColour.B, Colour.B);
+                                MaximumColour.A = FMath::Max(MaximumColour.A, Colour.A);
+                            }
+
+                            TSharedRef<FJsonObject> VertexColours = MakeShared<FJsonObject>();
+                            VertexColours->SetNumberField(TEXT("count"), Vertices.Num());
+                            VertexColours->SetNumberField(
+                                TEXT("unique_rgba"), UniqueColours.Num());
+                            TArray<TSharedPtr<FJsonValue>> MinimumValues;
+                            TArray<TSharedPtr<FJsonValue>> MaximumValues;
+                            const uint8 MinimumChannels[] = {
+                                MinimumColour.R,
+                                MinimumColour.G,
+                                MinimumColour.B,
+                                MinimumColour.A};
+                            const uint8 MaximumChannels[] = {
+                                MaximumColour.R,
+                                MaximumColour.G,
+                                MaximumColour.B,
+                                MaximumColour.A};
+                            for (uint8 Value : MinimumChannels)
+                            {
+                                MinimumValues.Add(MakeShared<FJsonValueNumber>(Value));
+                            }
+                            for (uint8 Value : MaximumChannels)
+                            {
+                                MaximumValues.Add(MakeShared<FJsonValueNumber>(Value));
+                            }
+                            VertexColours->SetArrayField(
+                                TEXT("minimum_rgba"), MinimumValues);
+                            VertexColours->SetArrayField(
+                                TEXT("maximum_rgba"), MaximumValues);
+                            MeshObject->SetObjectField(
+                                TEXT("vertex_colours"), VertexColours);
+                        }
+                        MeshObject->SetArrayField(
+                            TEXT("material_sections"), MaterialSections);
+                        MeshObject->SetBoolField(
+                            TEXT("material_section_indices_valid"),
+                            bMaterialSectionIndicesValid && MaterialSections.Num() > 0);
                     }
                     Root->SetObjectField(TEXT("mesh"), MeshObject);
                 }

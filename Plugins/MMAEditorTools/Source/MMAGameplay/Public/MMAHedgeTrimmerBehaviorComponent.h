@@ -86,6 +86,14 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Awareness")
     bool bRequireLineOfSight = false;
 
+    /** After a landed hit, do not reacquire that player until they leave TargetRearmRadius. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Awareness")
+    bool bRequireTargetReentryAfterHit = false;
+
+    /** Player distance that rearms proximity detection after a successful hit. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Awareness", meta = (ClampMin = "0.0"))
+    float TargetRearmRadius = 750.0f;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Movement", meta = (ClampMin = "0.0"))
     float ChaseSpeed = 220.0f;
 
@@ -106,6 +114,10 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Combat", meta = (ClampMin = "0.0"))
     float AttackHitRange = 170.0f;
+
+    /** Player-capsule clearance added to attack entry and hit-validation distances. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Combat", meta = (ClampMin = "0.0"))
+    float AttackTargetClearance = 0.0f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Combat", meta = (ClampMin = "0.0", ClampMax = "180.0"))
     float AttackHalfAngleDegrees = 70.0f;
@@ -144,9 +156,13 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Death", meta = (ClampMin = "0.0"))
     float DeathPoofPaddingSeconds = 0.25f;
 
-    /** Playback multiplier for the defeat animation; Hedge Trimmer uses 0.5 to match retail. */
+    /** Playback multiplier for the defeat animation. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Death", meta = (ClampMin = "0.01"))
     float DeathPlaybackRate = 1.0f;
+
+    /** Fraction of the defeat clip played before the poof/terminal phase begins. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Death", meta = (ClampMin = "0.01", ClampMax = "1.0"))
+    float DeathAnimationEndFraction = 1.0f;
 
     /** Duration of the one-frame terminal pose's transform-driven shrink-away. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Death", meta = (ClampMin = "0.01"))
@@ -187,6 +203,7 @@ private:
     float AttackCooldownRemaining = 0.0f;
     bool bAttackHitApplied = false;
     bool bAttackHitSucceeded = false;
+    bool bWaitingForTargetReentry = false;
     bool bDeathTerminalStarted = false;
     bool bDeathSequenceFinished = false;
     FVector DeathTerminalStartWorldLocation = FVector::ZeroVector;
@@ -216,6 +233,7 @@ private:
     uint8 ReadNativeDamageType() const;
     bool DealNativeDamageToTarget(AActor* Target, bool& bOutDamageApplied) const;
     void ApplyHitRecoil(AActor* Target) const;
+    float GetAttackDistanceThreshold(const AActor* Target, float BaseDistance) const;
     static UActorComponent* FindDamageableComponent(AActor* Actor);
     static UPrimitiveComponent* FindDamageableHitbox(AActor* Actor);
     static void SetInheritedBool(AActor* Owner, FName PropertyName, bool Value);

@@ -605,6 +605,22 @@ void UMMAHedgeTrimmerBehaviorComponent::ApplyHitRecoil(AActor* Target) const
     TargetCharacter->LaunchCharacter(LaunchVelocity, true, true);
 }
 
+float UMMAHedgeTrimmerBehaviorComponent::GetAttackDistanceThreshold(
+    const AActor* Target,
+    float BaseDistance) const
+{
+    float TargetRadius = 0.0f;
+    if (const ACharacter* TargetCharacter = Cast<ACharacter>(Target))
+    {
+        if (const UCapsuleComponent* Capsule = TargetCharacter->GetCapsuleComponent())
+        {
+            TargetRadius = Capsule->GetScaledCapsuleRadius();
+        }
+    }
+    return FMath::Max(0.0f, BaseDistance) + TargetRadius +
+        FMath::Max(0.0f, AttackTargetClearance);
+}
+
 APawn* UMMAHedgeTrimmerBehaviorComponent::FindNearestPlayer(float Radius) const
 {
     const AActor* Owner = GetOwner();
@@ -744,7 +760,10 @@ float UMMAHedgeTrimmerBehaviorComponent::GetDeathAnimationDuration() const
         return MinimumOneShotDuration;
     }
     const float SafePlaybackRate = FMath::Max(DeathPlaybackRate, KINDA_SMALL_NUMBER);
-    return FMath::Max(DeathAnimation->GetPlayLength() / SafePlaybackRate, MinimumOneShotDuration);
+    const float EndFraction = FMath::Clamp(DeathAnimationEndFraction, 0.01f, 1.0f);
+    return FMath::Max(
+        DeathAnimation->GetPlayLength() * EndFraction / SafePlaybackRate,
+        MinimumOneShotDuration);
 }
 
 bool UMMAHedgeTrimmerBehaviorComponent::IsOwnerDefeated() const
@@ -977,11 +996,12 @@ void UMMAHedgeTrimmerBehaviorComponent::ApplyAttackHit()
     }
     FVector ToTarget = Target->GetActorLocation() - Owner->GetActorLocation();
     ToTarget.Z = 0.0f;
-    if (ToTarget.SizeSquared() > FMath::Square(AttackHitRange))
+    const float HitDistance = GetAttackDistanceThreshold(Target, AttackHitRange);
+    if (ToTarget.SizeSquared() > FMath::Square(HitDistance))
     {
         ShowDebugMessage(FString::Printf(
             TEXT("Hedge_Trimmer attack MISS (range %.0f / %.0f)"),
-            ToTarget.Size(), AttackHitRange), FColor::Yellow);
+            ToTarget.Size(), HitDistance), FColor::Yellow);
         return;
     }
     const float MinimumDot = FMath::Cos(FMath::DegreesToRadians(AttackHalfAngleDegrees));
@@ -1045,6 +1065,18 @@ void UMMAHedgeTrimmerBehaviorComponent::TickComponent(
     switch (CurrentState)
     {
     case EMMAHedgeTrimmerState::Idle:
+        if (bWaitingForTargetReentry)
+        {
+            // Use a larger reset radius than the notice radius so a player who
+            // remains near the hedge cannot make the enemy turn around again on
+            // the first idle tick. Once every player has withdrawn, the normal
+            // proximity scan is rearmed for a fresh approach.
+            if (FindNearestPlayer(FMath::Max(TargetRearmRadius, DetectionRadius)))
+            {
+                break;
+            }
+            bWaitingForTargetReentry = false;
+        }
         TargetPawn = FindNearestPlayer(DetectionRadius);
         if (TargetPawn.IsValid())
         {
@@ -1076,7 +1108,8 @@ void UMMAHedgeTrimmerBehaviorComponent::TickComponent(
         }
         const float TargetDistance = FVector::Dist2D(
             Owner->GetActorLocation(), TargetPawn->GetActorLocation());
-        if (TargetDistance <= AttackRange && AttackCooldownRemaining <= 0.0f)
+        const float AttackDistance = GetAttackDistanceThreshold(TargetPawn.Get(), AttackRange);
+        if (TargetDistance <= AttackDistance && AttackCooldownRemaining <= 0.0f)
         {
             EnterState(EMMAHedgeTrimmerState::Attack);
         }
@@ -1100,6 +1133,7 @@ void UMMAHedgeTrimmerBehaviorComponent::TickComponent(
                 // Retail Hedge Trimmer disengages immediately after landing a
                 // hit, even while Robin remains inside its detection radius.
                 AttackCooldownRemaining = AttackCooldownSeconds;
+                bWaitingForTargetReentry = bRequireTargetReentryAfterHit;
                 TargetPawn.Reset();
                 EnterState(EMMAHedgeTrimmerState::ReturnHome);
                 break;
