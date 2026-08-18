@@ -1,0 +1,2635 @@
+{
+  "format": "spyro64.sm64_actor",
+  "format_version": 1,
+  "actor": "butterfly",
+  "source_actor": "butterfly",
+  "geo_layout": "butterfly_geo",
+  "coordinate_system": {
+    "source": "SM64 x/y/z centimetres, Y up",
+    "blender": "x/-z/y metres, Z up",
+    "formula": "(x, -z, y) * 0.01"
+  },
+  "source_files": [
+    {
+      "path": "actors/butterfly/model.inc.c",
+      "sha256": "d67c1eae8ec51fb0b41603672582ab8f952e2b7678b5204a1cbfef721808dbf6"
+    },
+    {
+      "path": "actors/butterfly/geo.inc.c",
+      "sha256": "213bd2225873e8af4b581ebf103ec6520c7348f0e75fa4d62e3b00513fd3d800"
+    },
+    {
+      "path": "actors/butterfly/anims/anim_030055B0.inc.c",
+      "sha256": "9a5acbff623bd3bb8bd4bc893e7507da43ff2df46070a507c63190b20021b73b"
+    },
+    {
+      "path": "actors/butterfly/anims/anim_03005698.inc.c",
+      "sha256": "fb406c2213e3d54182d14b88ad94ad68bf4abb7c163866b8db0dc8ffb199a9b3"
+    },
+    {
+      "path": "actors/butterfly/anims/data.inc.c",
+      "sha256": "508593a11cbcc220dba25d3e32ff4a0c229d39d846e21a67fad86e3f4802b2c0"
+    },
+    {
+      "path": "actors/butterfly/anims/table.inc.c",
+      "sha256": "672e36a01b7fcea19ae7015ac289ccf79f4dc8dee7bd12c44c3c308578883929"
+    }
+  ],
+  "textures": {
+    "butterfly_seg3_texture_030043A8": {
+      "asset": "actors/butterfly/butterfly_wing.rgba16.png",
+      "width": 32,
+      "height": 64,
+      "format": "rgba16",
+      "rom_mio0_offset": 2102288,
+      "source_offset": 17320,
+      "source_size": 4096,
+      "png": "butterfly_wing.rgba16.png",
+      "sha256": "39c93421b3a9b1b928345edc9d3ef3f0b0cecaa658a5971a52a34b653f22b682",
+      "relative_path": "textures/butterfly_wing.rgba16.png"
+    }
+  },
+  "vertex_arrays": {
+    "butterfly_seg3_vertex_03004348": [
+      {
+        "source_position": [
+          0,
+          0,
+          -78
+        ],
+        "blender_position": [
+          0.0,
+          0.78,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          2004,
+          -48
+        ],
+        "rgba_bytes": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "normal_s8": [
+          -1,
+          -1,
+          -1
+        ],
+        "blender_normal": [
+          -0.5773502691896257,
+          0.5773502691896257,
+          -0.5773502691896257
+        ]
+      },
+      {
+        "source_position": [
+          79,
+          0,
+          39
+        ],
+        "blender_position": [
+          0.79,
+          -0.39,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          -60,
+          4056
+        ],
+        "rgba_bytes": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "normal_s8": [
+          -1,
+          -1,
+          -1
+        ],
+        "blender_normal": [
+          -0.5773502691896257,
+          0.5773502691896257,
+          -0.5773502691896257
+        ]
+      },
+      {
+        "source_position": [
+          79,
+          0,
+          -78
+        ],
+        "blender_position": [
+          0.79,
+          0.78,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          -56,
+          -48
+        ],
+        "rgba_bytes": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "normal_s8": [
+          -1,
+          -1,
+          -1
+        ],
+        "blender_normal": [
+          -0.5773502691896257,
+          0.5773502691896257,
+          -0.5773502691896257
+        ]
+      },
+      {
+        "source_position": [
+          0,
+          0,
+          -78
+        ],
+        "blender_position": [
+          0.0,
+          0.78,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          2004,
+          -48
+        ],
+        "rgba_bytes": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "normal_s8": [
+          -1,
+          -1,
+          -1
+        ],
+        "blender_normal": [
+          -0.5773502691896257,
+          0.5773502691896257,
+          -0.5773502691896257
+        ]
+      },
+      {
+        "source_position": [
+          0,
+          0,
+          39
+        ],
+        "blender_position": [
+          0.0,
+          -0.39,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          2004,
+          4056
+        ],
+        "rgba_bytes": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "normal_s8": [
+          -1,
+          -1,
+          -1
+        ],
+        "blender_normal": [
+          -0.5773502691896257,
+          0.5773502691896257,
+          -0.5773502691896257
+        ]
+      },
+      {
+        "source_position": [
+          79,
+          0,
+          39
+        ],
+        "blender_position": [
+          0.79,
+          -0.39,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          -60,
+          4056
+        ],
+        "rgba_bytes": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "normal_s8": [
+          -1,
+          -1,
+          -1
+        ],
+        "blender_normal": [
+          -0.5773502691896257,
+          0.5773502691896257,
+          -0.5773502691896257
+        ]
+      }
+    ],
+    "butterfly_seg3_vertex_030053A8": [
+      {
+        "source_position": [
+          79,
+          0,
+          -78
+        ],
+        "blender_position": [
+          0.79,
+          0.78,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          -56,
+          0
+        ],
+        "rgba_bytes": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "normal_s8": [
+          -1,
+          -1,
+          -1
+        ],
+        "blender_normal": [
+          -0.5773502691896257,
+          0.5773502691896257,
+          -0.5773502691896257
+        ]
+      },
+      {
+        "source_position": [
+          0,
+          0,
+          39
+        ],
+        "blender_position": [
+          0.0,
+          -0.39,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          1972,
+          4024
+        ],
+        "rgba_bytes": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "normal_s8": [
+          -1,
+          -1,
+          -1
+        ],
+        "blender_normal": [
+          -0.5773502691896257,
+          0.5773502691896257,
+          -0.5773502691896257
+        ]
+      },
+      {
+        "source_position": [
+          0,
+          0,
+          -78
+        ],
+        "blender_position": [
+          0.0,
+          0.78,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          2000,
+          0
+        ],
+        "rgba_bytes": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "normal_s8": [
+          -1,
+          -1,
+          -1
+        ],
+        "blender_normal": [
+          -0.5773502691896257,
+          0.5773502691896257,
+          -0.5773502691896257
+        ]
+      },
+      {
+        "source_position": [
+          79,
+          0,
+          -78
+        ],
+        "blender_position": [
+          0.79,
+          0.78,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          -56,
+          0
+        ],
+        "rgba_bytes": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "normal_s8": [
+          -1,
+          -1,
+          -1
+        ],
+        "blender_normal": [
+          -0.5773502691896257,
+          0.5773502691896257,
+          -0.5773502691896257
+        ]
+      },
+      {
+        "source_position": [
+          79,
+          0,
+          39
+        ],
+        "blender_position": [
+          0.79,
+          -0.39,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          -80,
+          4032
+        ],
+        "rgba_bytes": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "normal_s8": [
+          -1,
+          -1,
+          -1
+        ],
+        "blender_normal": [
+          -0.5773502691896257,
+          0.5773502691896257,
+          -0.5773502691896257
+        ]
+      },
+      {
+        "source_position": [
+          0,
+          0,
+          39
+        ],
+        "blender_position": [
+          0.0,
+          -0.39,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          1972,
+          4024
+        ],
+        "rgba_bytes": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "normal_s8": [
+          -1,
+          -1,
+          -1
+        ],
+        "blender_normal": [
+          -0.5773502691896257,
+          0.5773502691896257,
+          -0.5773502691896257
+        ]
+      }
+    ]
+  },
+  "display_lists": {
+    "butterfly_seg3_dl_03005408": [
+      {
+        "macro": "gsDPPipeSync",
+        "args": [],
+        "raw": "gsDPPipeSync()"
+      },
+      {
+        "macro": "gsDPSetCombineMode",
+        "args": [
+          "G_CC_DECALRGBA",
+          "G_CC_DECALRGBA"
+        ],
+        "raw": "gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA)"
+      },
+      {
+        "macro": "gsSPClearGeometryMode",
+        "args": [
+          "G_LIGHTING | G_CULL_BACK"
+        ],
+        "raw": "gsSPClearGeometryMode(G_LIGHTING | G_CULL_BACK)"
+      },
+      {
+        "macro": "gsSPTexture",
+        "args": [
+          "0x8000",
+          "0x8000",
+          "0",
+          "G_TX_RENDERTILE",
+          "G_ON"
+        ],
+        "raw": "gsSPTexture(0x8000, 0x8000, 0, G_TX_RENDERTILE, G_ON)"
+      },
+      {
+        "macro": "gsDPLoadTextureBlock",
+        "args": [
+          "butterfly_seg3_texture_030043A8",
+          "G_IM_FMT_RGBA",
+          "G_IM_SIZ_16b",
+          "32",
+          "64",
+          "0",
+          "G_TX_CLAMP",
+          "G_TX_CLAMP",
+          "5",
+          "6",
+          "G_TX_NOLOD",
+          "G_TX_NOLOD"
+        ],
+        "raw": "gsDPLoadTextureBlock(butterfly_seg3_texture_030043A8, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_CLAMP, G_TX_CLAMP, 5, 6, G_TX_NOLOD, G_TX_NOLOD)"
+      },
+      {
+        "macro": "gsSPVertex",
+        "args": [
+          "butterfly_seg3_vertex_03004348",
+          "6",
+          "0"
+        ],
+        "raw": "gsSPVertex(butterfly_seg3_vertex_03004348, 6, 0)"
+      },
+      {
+        "macro": "gsSP2Triangles",
+        "args": [
+          "0",
+          "1",
+          "2",
+          "0x0",
+          "3",
+          "4",
+          "5",
+          "0x0"
+        ],
+        "raw": "gsSP2Triangles( 0,  1,  2, 0x0,  3,  4,  5, 0x0)"
+      },
+      {
+        "macro": "gsSPTexture",
+        "args": [
+          "0x8000",
+          "0x8000",
+          "1",
+          "G_TX_RENDERTILE + 1",
+          "G_OFF"
+        ],
+        "raw": "gsSPTexture(0x8000, 0x8000, 1, G_TX_RENDERTILE + 1, G_OFF)"
+      },
+      {
+        "macro": "gsDPPipeSync",
+        "args": [],
+        "raw": "gsDPPipeSync()"
+      },
+      {
+        "macro": "gsDPSetCombineMode",
+        "args": [
+          "G_CC_SHADE",
+          "G_CC_SHADE"
+        ],
+        "raw": "gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE)"
+      },
+      {
+        "macro": "gsSPSetGeometryMode",
+        "args": [
+          "G_LIGHTING | G_CULL_BACK"
+        ],
+        "raw": "gsSPSetGeometryMode(G_LIGHTING | G_CULL_BACK)"
+      },
+      {
+        "macro": "gsSPEndDisplayList",
+        "args": [],
+        "raw": "gsSPEndDisplayList()"
+      }
+    ],
+    "butterfly_seg3_dl_030054A0": [
+      {
+        "macro": "gsDPPipeSync",
+        "args": [],
+        "raw": "gsDPPipeSync()"
+      },
+      {
+        "macro": "gsDPSetCombineMode",
+        "args": [
+          "G_CC_DECALRGBA",
+          "G_CC_DECALRGBA"
+        ],
+        "raw": "gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA)"
+      },
+      {
+        "macro": "gsSPClearGeometryMode",
+        "args": [
+          "G_LIGHTING | G_CULL_BACK"
+        ],
+        "raw": "gsSPClearGeometryMode(G_LIGHTING | G_CULL_BACK)"
+      },
+      {
+        "macro": "gsSPTexture",
+        "args": [
+          "0x8000",
+          "0x8000",
+          "0",
+          "G_TX_RENDERTILE",
+          "G_ON"
+        ],
+        "raw": "gsSPTexture(0x8000, 0x8000, 0, G_TX_RENDERTILE, G_ON)"
+      },
+      {
+        "macro": "gsDPLoadTextureBlock",
+        "args": [
+          "butterfly_seg3_texture_030043A8",
+          "G_IM_FMT_RGBA",
+          "G_IM_SIZ_16b",
+          "32",
+          "64",
+          "0",
+          "G_TX_CLAMP",
+          "G_TX_CLAMP",
+          "5",
+          "6",
+          "G_TX_NOLOD",
+          "G_TX_NOLOD"
+        ],
+        "raw": "gsDPLoadTextureBlock(butterfly_seg3_texture_030043A8, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_CLAMP, G_TX_CLAMP, 5, 6, G_TX_NOLOD, G_TX_NOLOD)"
+      },
+      {
+        "macro": "gsSPVertex",
+        "args": [
+          "butterfly_seg3_vertex_030053A8",
+          "6",
+          "0"
+        ],
+        "raw": "gsSPVertex(butterfly_seg3_vertex_030053A8, 6, 0)"
+      },
+      {
+        "macro": "gsSP2Triangles",
+        "args": [
+          "0",
+          "1",
+          "2",
+          "0x0",
+          "3",
+          "4",
+          "5",
+          "0x0"
+        ],
+        "raw": "gsSP2Triangles( 0,  1,  2, 0x0,  3,  4,  5, 0x0)"
+      },
+      {
+        "macro": "gsSPTexture",
+        "args": [
+          "0x8000",
+          "0x8000",
+          "1",
+          "G_TX_RENDERTILE + 1",
+          "G_OFF"
+        ],
+        "raw": "gsSPTexture(0x8000, 0x8000, 1, G_TX_RENDERTILE + 1, G_OFF)"
+      },
+      {
+        "macro": "gsDPPipeSync",
+        "args": [],
+        "raw": "gsDPPipeSync()"
+      },
+      {
+        "macro": "gsDPSetCombineMode",
+        "args": [
+          "G_CC_SHADE",
+          "G_CC_SHADE"
+        ],
+        "raw": "gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE)"
+      },
+      {
+        "macro": "gsSPSetGeometryMode",
+        "args": [
+          "G_LIGHTING | G_CULL_BACK"
+        ],
+        "raw": "gsSPSetGeometryMode(G_LIGHTING | G_CULL_BACK)"
+      },
+      {
+        "macro": "gsSPEndDisplayList",
+        "args": [],
+        "raw": "gsSPEndDisplayList()"
+      }
+    ]
+  },
+  "geo": {
+    "type": "root",
+    "name": "butterfly_geo",
+    "children": [
+      {
+        "type": "shadow",
+        "args": [
+          "SHADOW_CIRCLE_4_VERTS",
+          "0xB4",
+          "25"
+        ],
+        "children": [
+          {
+            "type": "scale",
+            "raw_scale": 16384,
+            "scale": 0.25,
+            "children": [
+              {
+                "type": "animated_part",
+                "layer": "LAYER_OPAQUE",
+                "source_translation": [
+                  0,
+                  0,
+                  0
+                ],
+                "blender_translation": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "display_list": null,
+                "children": [
+                  {
+                    "type": "animated_part",
+                    "layer": "LAYER_ALPHA",
+                    "source_translation": [
+                      0,
+                      0,
+                      0
+                    ],
+                    "blender_translation": [
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    "display_list": "butterfly_seg3_dl_03005408",
+                    "children": [
+                      {
+                        "type": "animated_part",
+                        "layer": "LAYER_OPAQUE",
+                        "source_translation": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "blender_translation": [
+                          0.0,
+                          0.0,
+                          0.0
+                        ],
+                        "display_list": null,
+                        "children": [
+                          {
+                            "type": "animated_part",
+                            "layer": "LAYER_OPAQUE",
+                            "source_translation": [
+                              0,
+                              0,
+                              0
+                            ],
+                            "blender_translation": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "display_list": null,
+                            "children": [
+                              {
+                                "type": "animated_part",
+                                "layer": "LAYER_ALPHA",
+                                "source_translation": [
+                                  0,
+                                  0,
+                                  0
+                                ],
+                                "blender_translation": [
+                                  0.0,
+                                  0.0,
+                                  0.0
+                                ],
+                                "display_list": "butterfly_seg3_dl_030054A0",
+                                "children": [
+                                  {
+                                    "type": "animated_part",
+                                    "layer": "LAYER_OPAQUE",
+                                    "source_translation": [
+                                      0,
+                                      0,
+                                      0
+                                    ],
+                                    "blender_translation": [
+                                      0.0,
+                                      0.0,
+                                      0.0
+                                    ],
+                                    "display_list": null,
+                                    "children": [],
+                                    "joint_index": 5,
+                                    "joint_name": "joint_05"
+                                  }
+                                ],
+                                "joint_index": 4,
+                                "joint_name": "joint_04"
+                              }
+                            ],
+                            "joint_index": 3,
+                            "joint_name": "joint_03"
+                          }
+                        ],
+                        "joint_index": 2,
+                        "joint_name": "joint_02"
+                      }
+                    ],
+                    "joint_index": 1,
+                    "joint_name": "joint_01"
+                  }
+                ],
+                "joint_index": 0,
+                "joint_name": "joint_00"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "joint_count": 6,
+    "unsupported_macros": [],
+    "excess_close_nodes": 0
+  },
+  "geo_flat": [
+    {
+      "path": "/root[0]/shadow[0]",
+      "type": "shadow",
+      "args": [
+        "SHADOW_CIRCLE_4_VERTS",
+        "0xB4",
+        "25"
+      ]
+    },
+    {
+      "path": "/root[0]/shadow[0]/scale[0]",
+      "type": "scale",
+      "raw_scale": 16384,
+      "scale": 0.25
+    },
+    {
+      "path": "/root[0]/shadow[0]/scale[0]/animated_part[0]",
+      "type": "animated_part",
+      "layer": "LAYER_OPAQUE",
+      "source_translation": [
+        0,
+        0,
+        0
+      ],
+      "blender_translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "display_list": null,
+      "joint_index": 0,
+      "joint_name": "joint_00"
+    },
+    {
+      "path": "/root[0]/shadow[0]/scale[0]/animated_part[0]/animated_part[0]",
+      "type": "animated_part",
+      "layer": "LAYER_ALPHA",
+      "source_translation": [
+        0,
+        0,
+        0
+      ],
+      "blender_translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "display_list": "butterfly_seg3_dl_03005408",
+      "joint_index": 1,
+      "joint_name": "joint_01"
+    },
+    {
+      "path": "/root[0]/shadow[0]/scale[0]/animated_part[0]/animated_part[0]/animated_part[0]",
+      "type": "animated_part",
+      "layer": "LAYER_OPAQUE",
+      "source_translation": [
+        0,
+        0,
+        0
+      ],
+      "blender_translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "display_list": null,
+      "joint_index": 2,
+      "joint_name": "joint_02"
+    },
+    {
+      "path": "/root[0]/shadow[0]/scale[0]/animated_part[0]/animated_part[0]/animated_part[0]/animated_part[0]",
+      "type": "animated_part",
+      "layer": "LAYER_OPAQUE",
+      "source_translation": [
+        0,
+        0,
+        0
+      ],
+      "blender_translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "display_list": null,
+      "joint_index": 3,
+      "joint_name": "joint_03"
+    },
+    {
+      "path": "/root[0]/shadow[0]/scale[0]/animated_part[0]/animated_part[0]/animated_part[0]/animated_part[0]/animated_part[0]",
+      "type": "animated_part",
+      "layer": "LAYER_ALPHA",
+      "source_translation": [
+        0,
+        0,
+        0
+      ],
+      "blender_translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "display_list": "butterfly_seg3_dl_030054A0",
+      "joint_index": 4,
+      "joint_name": "joint_04"
+    },
+    {
+      "path": "/root[0]/shadow[0]/scale[0]/animated_part[0]/animated_part[0]/animated_part[0]/animated_part[0]/animated_part[0]/animated_part[0]",
+      "type": "animated_part",
+      "layer": "LAYER_OPAQUE",
+      "source_translation": [
+        0,
+        0,
+        0
+      ],
+      "blender_translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "display_list": null,
+      "joint_index": 5,
+      "joint_name": "joint_05"
+    }
+  ],
+  "render_meshes": {
+    "LAYER_ALPHA|butterfly_seg3_dl_03005408": {
+      "root_display_list": "butterfly_seg3_dl_03005408",
+      "layer": "LAYER_ALPHA",
+      "draw_calls": [
+        {
+          "material": {
+            "texture_symbol": "butterfly_seg3_texture_030043A8",
+            "texture_asset": "actors/butterfly/butterfly_wing.rgba16.png",
+            "texture_size": [
+              32,
+              64
+            ],
+            "texture_enabled": true,
+            "lighting": false,
+            "texture_gen": false,
+            "combine_mode": "G_CC_DECALRGBA, G_CC_DECALRGBA",
+            "wrap_s": "clamp",
+            "wrap_t": "clamp",
+            "env_color": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "layer": "LAYER_ALPHA"
+          },
+          "vertices": [
+            {
+              "source_position": [
+                0,
+                0,
+                -78
+              ],
+              "blender_position": [
+                0.0,
+                0.78,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                2004,
+                -48
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                255,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                -1
+              ],
+              "blender_normal": [
+                -0.5773502691896257,
+                0.5773502691896257,
+                -0.5773502691896257
+              ],
+              "source_array": "butterfly_seg3_vertex_03004348",
+              "source_index": 0,
+              "uv": [
+                1.95703125,
+                1.0234375
+              ]
+            },
+            {
+              "source_position": [
+                79,
+                0,
+                39
+              ],
+              "blender_position": [
+                0.79,
+                -0.39,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                -60,
+                4056
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                255,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                -1
+              ],
+              "blender_normal": [
+                -0.5773502691896257,
+                0.5773502691896257,
+                -0.5773502691896257
+              ],
+              "source_array": "butterfly_seg3_vertex_03004348",
+              "source_index": 1,
+              "uv": [
+                -0.05859375,
+                -0.98046875
+              ]
+            },
+            {
+              "source_position": [
+                79,
+                0,
+                -78
+              ],
+              "blender_position": [
+                0.79,
+                0.78,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                -56,
+                -48
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                255,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                -1
+              ],
+              "blender_normal": [
+                -0.5773502691896257,
+                0.5773502691896257,
+                -0.5773502691896257
+              ],
+              "source_array": "butterfly_seg3_vertex_03004348",
+              "source_index": 2,
+              "uv": [
+                -0.0546875,
+                1.0234375
+              ]
+            },
+            {
+              "source_position": [
+                0,
+                0,
+                -78
+              ],
+              "blender_position": [
+                0.0,
+                0.78,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                2004,
+                -48
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                255,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                -1
+              ],
+              "blender_normal": [
+                -0.5773502691896257,
+                0.5773502691896257,
+                -0.5773502691896257
+              ],
+              "source_array": "butterfly_seg3_vertex_03004348",
+              "source_index": 3,
+              "uv": [
+                1.95703125,
+                1.0234375
+              ]
+            },
+            {
+              "source_position": [
+                0,
+                0,
+                39
+              ],
+              "blender_position": [
+                0.0,
+                -0.39,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                2004,
+                4056
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                255,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                -1
+              ],
+              "blender_normal": [
+                -0.5773502691896257,
+                0.5773502691896257,
+                -0.5773502691896257
+              ],
+              "source_array": "butterfly_seg3_vertex_03004348",
+              "source_index": 4,
+              "uv": [
+                1.95703125,
+                -0.98046875
+              ]
+            },
+            {
+              "source_position": [
+                79,
+                0,
+                39
+              ],
+              "blender_position": [
+                0.79,
+                -0.39,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                -60,
+                4056
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                255,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                -1
+              ],
+              "blender_normal": [
+                -0.5773502691896257,
+                0.5773502691896257,
+                -0.5773502691896257
+              ],
+              "source_array": "butterfly_seg3_vertex_03004348",
+              "source_index": 5,
+              "uv": [
+                -0.05859375,
+                -0.98046875
+              ]
+            }
+          ],
+          "triangles": [
+            [
+              0,
+              1,
+              2
+            ],
+            [
+              3,
+              4,
+              5
+            ]
+          ]
+        }
+      ],
+      "triangle_count": 2
+    },
+    "LAYER_ALPHA|butterfly_seg3_dl_030054A0": {
+      "root_display_list": "butterfly_seg3_dl_030054A0",
+      "layer": "LAYER_ALPHA",
+      "draw_calls": [
+        {
+          "material": {
+            "texture_symbol": "butterfly_seg3_texture_030043A8",
+            "texture_asset": "actors/butterfly/butterfly_wing.rgba16.png",
+            "texture_size": [
+              32,
+              64
+            ],
+            "texture_enabled": true,
+            "lighting": false,
+            "texture_gen": false,
+            "combine_mode": "G_CC_DECALRGBA, G_CC_DECALRGBA",
+            "wrap_s": "clamp",
+            "wrap_t": "clamp",
+            "env_color": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "layer": "LAYER_ALPHA"
+          },
+          "vertices": [
+            {
+              "source_position": [
+                79,
+                0,
+                -78
+              ],
+              "blender_position": [
+                0.79,
+                0.78,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                -56,
+                0
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                255,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                -1
+              ],
+              "blender_normal": [
+                -0.5773502691896257,
+                0.5773502691896257,
+                -0.5773502691896257
+              ],
+              "source_array": "butterfly_seg3_vertex_030053A8",
+              "source_index": 0,
+              "uv": [
+                -0.0546875,
+                1.0
+              ]
+            },
+            {
+              "source_position": [
+                0,
+                0,
+                39
+              ],
+              "blender_position": [
+                0.0,
+                -0.39,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                1972,
+                4024
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                255,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                -1
+              ],
+              "blender_normal": [
+                -0.5773502691896257,
+                0.5773502691896257,
+                -0.5773502691896257
+              ],
+              "source_array": "butterfly_seg3_vertex_030053A8",
+              "source_index": 1,
+              "uv": [
+                1.92578125,
+                -0.96484375
+              ]
+            },
+            {
+              "source_position": [
+                0,
+                0,
+                -78
+              ],
+              "blender_position": [
+                0.0,
+                0.78,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                2000,
+                0
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                255,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                -1
+              ],
+              "blender_normal": [
+                -0.5773502691896257,
+                0.5773502691896257,
+                -0.5773502691896257
+              ],
+              "source_array": "butterfly_seg3_vertex_030053A8",
+              "source_index": 2,
+              "uv": [
+                1.953125,
+                1.0
+              ]
+            },
+            {
+              "source_position": [
+                79,
+                0,
+                -78
+              ],
+              "blender_position": [
+                0.79,
+                0.78,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                -56,
+                0
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                255,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                -1
+              ],
+              "blender_normal": [
+                -0.5773502691896257,
+                0.5773502691896257,
+                -0.5773502691896257
+              ],
+              "source_array": "butterfly_seg3_vertex_030053A8",
+              "source_index": 3,
+              "uv": [
+                -0.0546875,
+                1.0
+              ]
+            },
+            {
+              "source_position": [
+                79,
+                0,
+                39
+              ],
+              "blender_position": [
+                0.79,
+                -0.39,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                -80,
+                4032
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                255,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                -1
+              ],
+              "blender_normal": [
+                -0.5773502691896257,
+                0.5773502691896257,
+                -0.5773502691896257
+              ],
+              "source_array": "butterfly_seg3_vertex_030053A8",
+              "source_index": 4,
+              "uv": [
+                -0.078125,
+                -0.96875
+              ]
+            },
+            {
+              "source_position": [
+                0,
+                0,
+                39
+              ],
+              "blender_position": [
+                0.0,
+                -0.39,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                1972,
+                4024
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                255,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                -1
+              ],
+              "blender_normal": [
+                -0.5773502691896257,
+                0.5773502691896257,
+                -0.5773502691896257
+              ],
+              "source_array": "butterfly_seg3_vertex_030053A8",
+              "source_index": 5,
+              "uv": [
+                1.92578125,
+                -0.96484375
+              ]
+            }
+          ],
+          "triangles": [
+            [
+              0,
+              1,
+              2
+            ],
+            [
+              3,
+              4,
+              5
+            ]
+          ]
+        }
+      ],
+      "triangle_count": 2
+    }
+  },
+  "collisions": {},
+  "animations": [
+    {
+      "name": "butterfly_seg3_anim_030055B0",
+      "flags": 0,
+      "anim_y_trans_divisor": 0,
+      "start_frame": 7,
+      "loop_start": 0,
+      "frame_count": 8,
+      "part_count": 6,
+      "values_name": "butterfly_seg3_animvalue_03005538",
+      "indices_name": "butterfly_seg3_animindex_0300555C",
+      "values_s16": [
+        0,
+        13615,
+        10478,
+        4653,
+        1516,
+        3406,
+        7565,
+        11724,
+        13615,
+        19227,
+        22174,
+        27648,
+        30596,
+        28819,
+        24911,
+        21003,
+        19227,
+        0
+      ],
+      "indices_u16": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        8,
+        1,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        8,
+        9,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0
+      ],
+      "translation": {
+        "x": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "y": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "z": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "rotations": [
+        {
+          "part": 0,
+          "x_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "y_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "z_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "part": 1,
+          "x_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "y_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "z_s16": [
+            13615,
+            10478,
+            4653,
+            1516,
+            3406,
+            7565,
+            11724,
+            13615
+          ]
+        },
+        {
+          "part": 2,
+          "x_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "y_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "z_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "part": 3,
+          "x_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "y_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "z_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "part": 4,
+          "x_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "y_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "z_s16": [
+            19227,
+            22174,
+            27648,
+            30596,
+            28819,
+            24911,
+            21003,
+            19227
+          ]
+        },
+        {
+          "part": 5,
+          "x_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "y_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "z_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "butterfly_seg3_anim_03005698",
+      "flags": 0,
+      "anim_y_trans_divisor": 0,
+      "start_frame": 7,
+      "loop_start": 0,
+      "frame_count": 30,
+      "part_count": 6,
+      "values_name": "butterfly_seg3_animvalue_030055C8",
+      "indices_name": "butterfly_seg3_animindex_03005644",
+      "values_s16": [
+        0,
+        14971,
+        14971,
+        14744,
+        14113,
+        13152,
+        11933,
+        10531,
+        9018,
+        7469,
+        5956,
+        4554,
+        3335,
+        2373,
+        1743,
+        1516,
+        1687,
+        2170,
+        2915,
+        3876,
+        5004,
+        6252,
+        7572,
+        8915,
+        10235,
+        11483,
+        12611,
+        13571,
+        14317,
+        14799,
+        14971,
+        17975,
+        17975,
+        18188,
+        18780,
+        19681,
+        20825,
+        22140,
+        23559,
+        25012,
+        26431,
+        27747,
+        28890,
+        29792,
+        30383,
+        30596,
+        30435,
+        29983,
+        29283,
+        28382,
+        27324,
+        26153,
+        24916,
+        23656,
+        22418,
+        21247,
+        20189,
+        19288,
+        18589,
+        18136,
+        17975,
+        0
+      ],
+      "indices_u16": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        30,
+        1,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        30,
+        31,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0
+      ],
+      "translation": {
+        "x": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "y": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "z": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "rotations": [
+        {
+          "part": 0,
+          "x_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "y_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "z_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "part": 1,
+          "x_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "y_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "z_s16": [
+            14971,
+            14971,
+            14744,
+            14113,
+            13152,
+            11933,
+            10531,
+            9018,
+            7469,
+            5956,
+            4554,
+            3335,
+            2373,
+            1743,
+            1516,
+            1687,
+            2170,
+            2915,
+            3876,
+            5004,
+            6252,
+            7572,
+            8915,
+            10235,
+            11483,
+            12611,
+            13571,
+            14317,
+            14799,
+            14971
+          ]
+        },
+        {
+          "part": 2,
+          "x_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "y_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "z_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "part": 3,
+          "x_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "y_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "z_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "part": 4,
+          "x_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "y_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "z_s16": [
+            17975,
+            17975,
+            18188,
+            18780,
+            19681,
+            20825,
+            22140,
+            23559,
+            25012,
+            26431,
+            27747,
+            28890,
+            29792,
+            30383,
+            30596,
+            30435,
+            29983,
+            29283,
+            28382,
+            27324,
+            26153,
+            24916,
+            23656,
+            22418,
+            21247,
+            20189,
+            19288,
+            18589,
+            18136,
+            17975
+          ]
+        },
+        {
+          "part": 5,
+          "x_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "y_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "z_s16": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "vertex_array_count": 2,
+    "source_vertex_count": 12,
+    "display_list_count": 2,
+    "geo_display_list_use_count": 2,
+    "render_mesh_count": 2,
+    "render_triangle_count": 4,
+    "joint_count": 6,
+    "animation_count": 2,
+    "collision_mesh_count": 0,
+    "collision_triangle_count": 0,
+    "all_collision_counts_valid": true,
+    "warnings": []
+  }
+}

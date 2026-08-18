@@ -1,0 +1,618 @@
+{
+  "format": "spyro64.sm64_actor",
+  "format_version": 1,
+  "actor": "mushroom_1up",
+  "source_actor": "mushroom_1up",
+  "geo_layout": "mushroom_1up_geo",
+  "coordinate_system": {
+    "source": "SM64 x/y/z centimetres, Y up",
+    "blender": "x/-z/y metres, Z up",
+    "formula": "(x, -z, y) * 0.01"
+  },
+  "source_files": [
+    {
+      "path": "actors/mushroom_1up/model.inc.c",
+      "sha256": "2d01aa440d0e20ef4c4ecc36e35bc4c6970f81920cee6b1b2c7a3e067d530586"
+    },
+    {
+      "path": "actors/mushroom_1up/geo.inc.c",
+      "sha256": "d1ee88f5615377928da1fb3eecdeb75133dd48d8daa458dde63fa3012a130c0f"
+    }
+  ],
+  "textures": {
+    "mushroom_1up_seg3_texture_03029628": {
+      "asset": "actors/mushroom_1up/1-up_mushroom.rgba16.png",
+      "width": 32,
+      "height": 64,
+      "format": "rgba16",
+      "rom_mio0_offset": 2102288,
+      "source_offset": 169512,
+      "source_size": 4096,
+      "png": "1-up_mushroom.rgba16.png",
+      "sha256": "cbd643d4e0ed5a6fde6b90bbd4237c9faf109006c7597cc71b8418f9a379f793",
+      "relative_path": "textures/1-up_mushroom.rgba16.png"
+    }
+  },
+  "vertex_arrays": {
+    "mushroom_1up_seg3_vertex_030295E8": [
+      {
+        "source_position": [
+          31,
+          31,
+          0
+        ],
+        "blender_position": [
+          0.31,
+          0.0,
+          0.31
+        ],
+        "flag": 0,
+        "raw_uv": [
+          990,
+          0
+        ],
+        "rgba_bytes": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "normal_s8": [
+          -1,
+          -1,
+          -1
+        ],
+        "blender_normal": [
+          -0.5773502691896257,
+          0.5773502691896257,
+          -0.5773502691896257
+        ]
+      },
+      {
+        "source_position": [
+          -30,
+          31,
+          0
+        ],
+        "blender_position": [
+          -0.3,
+          0.0,
+          0.31
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          0
+        ],
+        "rgba_bytes": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "normal_s8": [
+          -1,
+          -1,
+          -1
+        ],
+        "blender_normal": [
+          -0.5773502691896257,
+          0.5773502691896257,
+          -0.5773502691896257
+        ]
+      },
+      {
+        "source_position": [
+          -30,
+          -30,
+          0
+        ],
+        "blender_position": [
+          -0.3,
+          0.0,
+          -0.3
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          2012
+        ],
+        "rgba_bytes": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "normal_s8": [
+          -1,
+          -1,
+          -1
+        ],
+        "blender_normal": [
+          -0.5773502691896257,
+          0.5773502691896257,
+          -0.5773502691896257
+        ]
+      },
+      {
+        "source_position": [
+          31,
+          -30,
+          0
+        ],
+        "blender_position": [
+          0.31,
+          0.0,
+          -0.3
+        ],
+        "flag": 0,
+        "raw_uv": [
+          990,
+          2012
+        ],
+        "rgba_bytes": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "normal_s8": [
+          -1,
+          -1,
+          -1
+        ],
+        "blender_normal": [
+          -0.5773502691896257,
+          0.5773502691896257,
+          -0.5773502691896257
+        ]
+      }
+    ]
+  },
+  "display_lists": {
+    "mushroom_1up_seg3_dl_0302A628": [
+      {
+        "macro": "gsDPSetTextureImage",
+        "args": [
+          "G_IM_FMT_RGBA",
+          "G_IM_SIZ_16b",
+          "1",
+          "mushroom_1up_seg3_texture_03029628"
+        ],
+        "raw": "gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, mushroom_1up_seg3_texture_03029628)"
+      },
+      {
+        "macro": "gsDPLoadSync",
+        "args": [],
+        "raw": "gsDPLoadSync()"
+      },
+      {
+        "macro": "gsDPLoadBlock",
+        "args": [
+          "G_TX_LOADTILE",
+          "0",
+          "0",
+          "32 * 64 - 1",
+          "CALC_DXT(32, G_IM_SIZ_16b_BYTES)"
+        ],
+        "raw": "gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 64 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES))"
+      },
+      {
+        "macro": "gsSPVertex",
+        "args": [
+          "mushroom_1up_seg3_vertex_030295E8",
+          "4",
+          "0"
+        ],
+        "raw": "gsSPVertex(mushroom_1up_seg3_vertex_030295E8, 4, 0)"
+      },
+      {
+        "macro": "gsSP2Triangles",
+        "args": [
+          "0",
+          "1",
+          "2",
+          "0x0",
+          "0",
+          "2",
+          "3",
+          "0x0"
+        ],
+        "raw": "gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0)"
+      },
+      {
+        "macro": "gsSPEndDisplayList",
+        "args": [],
+        "raw": "gsSPEndDisplayList()"
+      }
+    ],
+    "mushroom_1up_seg3_dl_0302A660": [
+      {
+        "macro": "gsDPPipeSync",
+        "args": [],
+        "raw": "gsDPPipeSync()"
+      },
+      {
+        "macro": "gsDPSetCombineMode",
+        "args": [
+          "G_CC_DECALRGBA",
+          "G_CC_DECALRGBA"
+        ],
+        "raw": "gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA)"
+      },
+      {
+        "macro": "gsSPClearGeometryMode",
+        "args": [
+          "G_LIGHTING"
+        ],
+        "raw": "gsSPClearGeometryMode(G_LIGHTING)"
+      },
+      {
+        "macro": "gsDPSetTile",
+        "args": [
+          "G_IM_FMT_RGBA",
+          "G_IM_SIZ_16b",
+          "0",
+          "0",
+          "G_TX_LOADTILE",
+          "0",
+          "G_TX_WRAP | G_TX_NOMIRROR",
+          "G_TX_NOMASK",
+          "G_TX_NOLOD",
+          "G_TX_WRAP | G_TX_NOMIRROR",
+          "G_TX_NOMASK",
+          "G_TX_NOLOD"
+        ],
+        "raw": "gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD)"
+      },
+      {
+        "macro": "gsSPTexture",
+        "args": [
+          "0xFFFF",
+          "0xFFFF",
+          "0",
+          "G_TX_RENDERTILE",
+          "G_ON"
+        ],
+        "raw": "gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON)"
+      },
+      {
+        "macro": "gsDPTileSync",
+        "args": [],
+        "raw": "gsDPTileSync()"
+      },
+      {
+        "macro": "gsDPSetTile",
+        "args": [
+          "G_IM_FMT_RGBA",
+          "G_IM_SIZ_16b",
+          "8",
+          "0",
+          "G_TX_RENDERTILE",
+          "0",
+          "G_TX_WRAP | G_TX_NOMIRROR",
+          "6",
+          "G_TX_NOLOD",
+          "G_TX_WRAP | G_TX_NOMIRROR",
+          "5",
+          "G_TX_NOLOD"
+        ],
+        "raw": "gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0, G_TX_RENDERTILE, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, 5, G_TX_NOLOD)"
+      },
+      {
+        "macro": "gsDPSetTileSize",
+        "args": [
+          "0",
+          "0",
+          "0",
+          "(32 - 1) << G_TEXTURE_IMAGE_FRAC",
+          "(64 - 1) << G_TEXTURE_IMAGE_FRAC"
+        ],
+        "raw": "gsDPSetTileSize(0, 0, 0, (32 - 1) << G_TEXTURE_IMAGE_FRAC, (64 - 1) << G_TEXTURE_IMAGE_FRAC)"
+      },
+      {
+        "macro": "gsSPDisplayList",
+        "args": [
+          "mushroom_1up_seg3_dl_0302A628"
+        ],
+        "raw": "gsSPDisplayList(mushroom_1up_seg3_dl_0302A628)"
+      },
+      {
+        "macro": "gsSPTexture",
+        "args": [
+          "0xFFFF",
+          "0xFFFF",
+          "0",
+          "G_TX_RENDERTILE",
+          "G_OFF"
+        ],
+        "raw": "gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF)"
+      },
+      {
+        "macro": "gsDPPipeSync",
+        "args": [],
+        "raw": "gsDPPipeSync()"
+      },
+      {
+        "macro": "gsDPSetCombineMode",
+        "args": [
+          "G_CC_SHADE",
+          "G_CC_SHADE"
+        ],
+        "raw": "gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE)"
+      },
+      {
+        "macro": "gsSPSetGeometryMode",
+        "args": [
+          "G_LIGHTING"
+        ],
+        "raw": "gsSPSetGeometryMode(G_LIGHTING)"
+      },
+      {
+        "macro": "gsSPEndDisplayList",
+        "args": [],
+        "raw": "gsSPEndDisplayList()"
+      }
+    ]
+  },
+  "geo": {
+    "type": "root",
+    "name": "mushroom_1up_geo",
+    "children": [
+      {
+        "type": "shadow",
+        "args": [
+          "SHADOW_CIRCLE_4_VERTS",
+          "0xB4",
+          "80"
+        ],
+        "children": [
+          {
+            "type": "display_list",
+            "layer": "LAYER_ALPHA",
+            "display_list": "mushroom_1up_seg3_dl_0302A660",
+            "children": []
+          }
+        ]
+      }
+    ],
+    "joint_count": 0,
+    "unsupported_macros": [],
+    "excess_close_nodes": 0
+  },
+  "geo_flat": [
+    {
+      "path": "/root[0]/shadow[0]",
+      "type": "shadow",
+      "args": [
+        "SHADOW_CIRCLE_4_VERTS",
+        "0xB4",
+        "80"
+      ]
+    },
+    {
+      "path": "/root[0]/shadow[0]/display_list[0]",
+      "type": "display_list",
+      "layer": "LAYER_ALPHA",
+      "display_list": "mushroom_1up_seg3_dl_0302A660"
+    }
+  ],
+  "render_meshes": {
+    "LAYER_ALPHA|mushroom_1up_seg3_dl_0302A660": {
+      "root_display_list": "mushroom_1up_seg3_dl_0302A660",
+      "layer": "LAYER_ALPHA",
+      "draw_calls": [
+        {
+          "material": {
+            "texture_symbol": "mushroom_1up_seg3_texture_03029628",
+            "texture_asset": "actors/mushroom_1up/1-up_mushroom.rgba16.png",
+            "texture_size": [
+              32,
+              64
+            ],
+            "texture_enabled": true,
+            "lighting": false,
+            "texture_gen": false,
+            "combine_mode": "G_CC_DECALRGBA, G_CC_DECALRGBA",
+            "wrap_s": "wrap",
+            "wrap_t": "wrap",
+            "env_color": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "layer": "LAYER_ALPHA"
+          },
+          "vertices": [
+            {
+              "source_position": [
+                31,
+                31,
+                0
+              ],
+              "blender_position": [
+                0.31,
+                0.0,
+                0.31
+              ],
+              "flag": 0,
+              "raw_uv": [
+                990,
+                0
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                255,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                -1
+              ],
+              "blender_normal": [
+                -0.5773502691896257,
+                0.5773502691896257,
+                -0.5773502691896257
+              ],
+              "source_array": "mushroom_1up_seg3_vertex_030295E8",
+              "source_index": 0,
+              "uv": [
+                0.966796875,
+                1.0
+              ]
+            },
+            {
+              "source_position": [
+                -30,
+                31,
+                0
+              ],
+              "blender_position": [
+                -0.3,
+                0.0,
+                0.31
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                0
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                255,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                -1
+              ],
+              "blender_normal": [
+                -0.5773502691896257,
+                0.5773502691896257,
+                -0.5773502691896257
+              ],
+              "source_array": "mushroom_1up_seg3_vertex_030295E8",
+              "source_index": 1,
+              "uv": [
+                0.0,
+                1.0
+              ]
+            },
+            {
+              "source_position": [
+                -30,
+                -30,
+                0
+              ],
+              "blender_position": [
+                -0.3,
+                0.0,
+                -0.3
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                2012
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                255,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                -1
+              ],
+              "blender_normal": [
+                -0.5773502691896257,
+                0.5773502691896257,
+                -0.5773502691896257
+              ],
+              "source_array": "mushroom_1up_seg3_vertex_030295E8",
+              "source_index": 2,
+              "uv": [
+                0.0,
+                0.017578125
+              ]
+            },
+            {
+              "source_position": [
+                31,
+                -30,
+                0
+              ],
+              "blender_position": [
+                0.31,
+                0.0,
+                -0.3
+              ],
+              "flag": 0,
+              "raw_uv": [
+                990,
+                2012
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                255,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                -1
+              ],
+              "blender_normal": [
+                -0.5773502691896257,
+                0.5773502691896257,
+                -0.5773502691896257
+              ],
+              "source_array": "mushroom_1up_seg3_vertex_030295E8",
+              "source_index": 3,
+              "uv": [
+                0.966796875,
+                0.017578125
+              ]
+            }
+          ],
+          "triangles": [
+            [
+              0,
+              1,
+              2
+            ],
+            [
+              0,
+              2,
+              3
+            ]
+          ]
+        }
+      ],
+      "triangle_count": 2
+    }
+  },
+  "collisions": {},
+  "animations": [],
+  "validation": {
+    "vertex_array_count": 1,
+    "source_vertex_count": 4,
+    "display_list_count": 2,
+    "geo_display_list_use_count": 1,
+    "render_mesh_count": 1,
+    "render_triangle_count": 2,
+    "joint_count": 0,
+    "animation_count": 0,
+    "collision_mesh_count": 0,
+    "collision_triangle_count": 0,
+    "all_collision_counts_valid": true,
+    "warnings": []
+  }
+}

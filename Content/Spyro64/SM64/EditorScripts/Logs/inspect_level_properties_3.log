@@ -1,0 +1,1015 @@
+﻿Log file open, 08/18/26 20:46:14
+LogInit: Display: Loading text-based GConfig....
+LogPluginManager: Mounting plugin MeshPainting
+LogPluginManager: Mounting plugin MegascansPlugin
+LogPluginManager: Mounting plugin XGEController
+LogPluginManager: Mounting plugin Paper2D
+LogPluginManager: Mounting plugin AISupport
+LogPluginManager: Mounting plugin OodleNetwork
+LogPluginManager: Mounting plugin OodleData
+LogPluginManager: Mounting plugin GameplayCameras
+LogPluginManager: Mounting plugin EnvironmentQueryEditor
+LogPluginManager: Mounting plugin CameraShakePreviewer
+LogPluginManager: Mounting plugin LightPropagationVolume
+LogPluginManager: Mounting plugin Niagara
+LogPluginManager: Mounting plugin AssetManagerEditor
+LogPluginManager: Mounting plugin AnimationSharing
+LogPluginManager: Mounting plugin LuminPlatformFeatures
+LogPluginManager: Mounting plugin DatasmithContent
+LogPluginManager: Mounting plugin MagicLeap
+LogPluginManager: Mounting plugin ActorSequence
+LogPluginManager: Mounting plugin AlembicImporter
+LogPluginManager: Mounting plugin LevelSequenceEditor
+LogPluginManager: Mounting plugin VariantManagerContent
+LogPluginManager: Mounting plugin MagicLeapLightEstimation
+LogPluginManager: Mounting plugin MatineeToLevelSequence
+LogPluginManager: Mounting plugin MagicLeapMedia
+LogPluginManager: Mounting plugin CryptoKeys
+LogPluginManager: Mounting plugin CurveEditorTools
+LogPluginManager: Mounting plugin DataValidation
+LogPluginManager: Mounting plugin FacialAnimation
+LogPluginManager: Mounting plugin AutomationUtils
+LogPluginManager: Mounting plugin BackChannel
+LogPluginManager: Mounting plugin GameplayTagsEditor
+LogPluginManager: Mounting plugin EditorScriptingUtilities
+LogPluginManager: Mounting plugin GeometryMode
+LogPluginManager: Mounting plugin MacGraphicsSwitching
+LogPluginManager: Mounting plugin MaterialAnalyzer
+LogPluginManager: Mounting plugin MobileLauncherProfileWizard
+LogPluginManager: Mounting plugin PluginBrowser
+LogPluginManager: Mounting plugin ChaosEditor
+LogPluginManager: Mounting plugin ChaosNiagara
+LogPluginManager: Mounting plugin AndroidMedia
+LogPluginManager: Mounting plugin ChaosClothEditor
+LogPluginManager: Mounting plugin CharacterAI
+LogPluginManager: Mounting plugin ChaosCloth
+LogPluginManager: Mounting plugin SpeedTreeImporter
+LogPluginManager: Mounting plugin ChaosSolverPlugin
+LogPluginManager: Mounting plugin AvfMedia
+LogPluginManager: Mounting plugin TemplateSequence
+LogPluginManager: Mounting plugin TcpMessaging
+LogPluginManager: Mounting plugin UdpMessaging
+LogPluginManager: Mounting plugin OnlineSubsystem
+LogPluginManager: Mounting plugin ImgMedia
+LogPluginManager: Mounting plugin OnlineSubsystemNull
+LogPluginManager: Mounting plugin MediaCompositing
+LogPluginManager: Mounting plugin OnlineSubsystemUtils
+LogPluginManager: Mounting plugin WebMMedia
+LogPluginManager: Mounting plugin MediaPlayerEditor
+LogPluginManager: Mounting plugin WmfMedia
+LogPluginManager: Mounting plugin CLionSourceCodeAccess
+LogPluginManager: Mounting plugin MagicLeapPassableWorld
+LogPluginManager: Mounting plugin KDevelopSourceCodeAccess
+LogPluginManager: Mounting plugin CodeLiteSourceCodeAccess
+LogPluginManager: Mounting plugin MLSDK
+LogPluginManager: Mounting plugin PerforceSourceControl
+LogPluginManager: Mounting plugin GitSourceControl
+LogPluginManager: Mounting plugin NullSourceCodeAccess
+LogPluginManager: Mounting plugin PixWinPlugin
+LogPluginManager: Mounting plugin PluginUtils
+LogPluginManager: Mounting plugin PropertyAccessNode
+LogPluginManager: Mounting plugin RiderSourceCodeAccess
+LogPluginManager: Mounting plugin SubversionSourceControl
+LogPluginManager: Mounting plugin PlasticSourceControl
+LogPluginManager: Mounting plugin UObjectPlugin
+LogPluginManager: Mounting plugin VisualStudioSourceCodeAccess
+LogPluginManager: Mounting plugin XCodeSourceCodeAccess
+LogPluginManager: Mounting plugin VisualStudioCodeSourceCodeAccess
+LogPluginManager: Mounting plugin ActorLayerUtilities
+LogPluginManager: Mounting plugin AndroidMoviePlayer
+LogPluginManager: Mounting plugin TextureFormatOodle
+LogPluginManager: Mounting plugin AndroidDeviceProfileSelector
+LogPluginManager: Mounting plugin ApexDestruction
+LogPluginManager: Mounting plugin AppleImageUtils
+LogPluginManager: Mounting plugin AssetTags
+LogPluginManager: Mounting plugin AndroidPermission
+LogPluginManager: Mounting plugin AppleMoviePlayer
+LogPluginManager: Mounting plugin AudioCapture
+LogPluginManager: Mounting plugin ArchVisCharacter
+LogPluginManager: Mounting plugin CableComponent
+LogPluginManager: Mounting plugin ChunkDownloader
+LogPluginManager: Mounting plugin AudioSynesthesia
+LogPluginManager: Mounting plugin ExampleDeviceProfileSelector
+LogPluginManager: Mounting plugin CustomMeshComponent
+LogPluginManager: Mounting plugin GoogleCloudMessaging
+LogPluginManager: Mounting plugin GeometryCache
+LogPluginManager: Mounting plugin EditableMesh
+LogPluginManager: Mounting plugin GeometryCollectionPlugin
+LogPluginManager: Mounting plugin GeometryProcessing
+LogPluginManager: Mounting plugin MotoSynth
+LogPluginManager: Mounting plugin OpenImageDenoise
+LogPluginManager: Mounting plugin PlanarCut
+LogPluginManager: Mounting plugin PlatformCrypto
+LogPluginManager: Mounting plugin PythonScriptPlugin
+LogPluginManager: Mounting plugin GooglePAD
+LogPluginManager: Mounting plugin ProxyLODPlugin
+LogPluginManager: Mounting plugin IOSDeviceProfileSelector
+LogPluginManager: Mounting plugin LinuxDeviceProfileSelector
+LogPluginManager: Mounting plugin SkeletalReduction
+LogPluginManager: Mounting plugin LocationServicesBPLibrary
+LogPluginManager: Mounting plugin ScreenshotTools
+LogPluginManager: Mounting plugin LauncherChunkInstaller
+LogPluginManager: Mounting plugin MobilePatchingUtils
+LogPluginManager: Mounting plugin PhysXVehicles
+LogPluginManager: Mounting plugin ProceduralMeshComponent
+LogPluginManager: Mounting plugin RuntimePhysXCooking
+LogPluginManager: Mounting plugin PropertyAccessEditor
+LogPluginManager: Mounting plugin SignificanceManager
+LogPluginManager: Mounting plugin Synthesis
+LogPluginManager: Mounting plugin SoundFields
+LogPluginManager: Mounting plugin PostSplashScreen
+LogPluginManager: Mounting plugin WindowsMoviePlayer
+LogPluginManager: Mounting plugin WebMMoviePlayer
+LogPluginManager: Mounting plugin ContentBrowserFileDataSource
+LogPluginManager: Mounting plugin ContentBrowserClassDataSource
+LogPluginManager: Mounting plugin ContentBrowserAssetDataSource
+LogPluginManager: Mounting plugin OnlineSubsystemGooglePlay
+LogPluginManager: Mounting plugin OnlineSubsystemIOS
+LogPluginManager: Mounting plugin DatabaseSupport
+LogPluginManager: Mounting plugin SQLiteCore
+LogPluginManager: Mounting plugin SQLiteSupport
+LogPluginManager: Mounting plugin MMAEditorTools
+LogPluginManager: Mounting plugin PS1IsoGate
+LogInit: Using libcurl 7.55.1-DEV
+LogInit:  - built for x86_64-pc-win32
+LogInit:  - supports SSL with OpenSSL/1.1.1
+LogInit:  - supports HTTP deflate (compression) using libz 1.2.8
+LogInit:  - other features:
+LogInit:      CURL_VERSION_SSL
+LogInit:      CURL_VERSION_LIBZ
+LogInit:      CURL_VERSION_IPV6
+LogInit:      CURL_VERSION_ASYNCHDNS
+LogInit:      CURL_VERSION_LARGEFILE
+LogInit:      CURL_VERSION_IDN
+LogInit:  CurlRequestOptions (configurable via config and command line):
+LogInit:  - bVerifyPeer = true  - Libcurl will verify peer certificate
+LogInit:  - bUseHttpProxy = false  - Libcurl will NOT use HTTP proxy
+LogInit:  - bDontReuseConnections = false  - Libcurl will reuse connections
+LogInit:  - MaxHostConnections = 16  - Libcurl will limit the number of connections to a host
+LogInit:  - LocalHostAddr = Default
+LogInit:  - BufferSize = 65536
+LogOnline: OSS: Creating online subsystem instance for: NULL
+LogInit: WinSock: version 1.1 (2.2), MaxSocks=32767, MaxUdp=65467
+LogOnline: OSS: TryLoadSubsystemAndSetDefault: Loaded subsystem for module [NULL]
+PixWinPlugin: PIX capture plugin failed to initialize! Check that the process is launched from PIX.
+LogInit: Build: ++UE4+Release-4.27-CL-18319896
+LogInit: Engine Version: 4.27.2-18319896+++UE4+Release-4.27
+LogInit: Compatible Engine Version: 4.27.0-17155196+++UE4+Release-4.27
+LogInit: Net CL: 17155196
+LogInit: OS: Windows 10 (Release 2009) (), CPU: Intel(R) Core(TM) i5-14400F, GPU: NVIDIA GeForce GTX 1050
+LogInit: Compiled (64-bit): Nov 30 2021 07:12:08
+LogInit: Compiled with Visual C++: 19.24.28315.00
+LogInit: Build Configuration: Development
+LogInit: Branch Name: ++UE4+Release-4.27
+LogInit: Command Line:  C:\Users\adace\Desktop\spyro-blowhards-revenge\Spyro_Bunnited.uproject -run=pythonscript -script="C:\Users\adace\Desktop\spyro-blowhards-revenge\Content\Spyro64\SM64\EditorScripts\inspect_level_properties.py /Game/Spyro64/Levels/05_Level5_PreWhomps" -unattended -nop4 -nosplash -stdout -FullStdOutLogOutput -abslog=C:\Users\adace\Desktop\spyro-blowhards-revenge\Content\Spyro64\SM64\EditorScripts\Logs\inspect_level_properties_3.log
+LogInit: Base Directory: C:/Program Files/Epic Games/UE_4.27/Engine/Binaries/Win64/
+LogInit: Allocator: TBB
+LogInit: Installed Engine Build: 1
+LogDevObjectVersion: Number of dev versions registered: 29
+LogDevObjectVersion:   Dev-Blueprints (B0D832E4-1F89-4F0D-ACCF-7EB736FD4AA2): 10
+LogDevObjectVersion:   Dev-Build (E1C64328-A22C-4D53-A36C-8E866417BD8C): 0
+LogDevObjectVersion:   Dev-Core (375EC13C-06E4-48FB-B500-84F0262A717E): 4
+LogDevObjectVersion:   Dev-Editor (E4B068ED-F494-42E9-A231-DA0B2E46BB41): 40
+LogDevObjectVersion:   Dev-Framework (CFFC743F-43B0-4480-9391-14DF171D2073): 37
+LogDevObjectVersion:   Dev-Mobile (B02B49B5-BB20-44E9-A304-32B752E40360): 3
+LogDevObjectVersion:   Dev-Networking (A4E4105C-59A1-49B5-A7C5-40C4547EDFEE): 0
+LogDevObjectVersion:   Dev-Online (39C831C9-5AE6-47DC-9A44-9C173E1C8E7C): 0
+LogDevObjectVersion:   Dev-Physics (78F01B33-EBEA-4F98-B9B4-84EACCB95AA2): 14
+LogDevObjectVersion:   Dev-Platform (6631380F-2D4D-43E0-8009-CF276956A95A): 0
+LogDevObjectVersion:   Dev-Rendering (12F88B9F-8875-4AFC-A67C-D90C383ABD29): 45
+LogDevObjectVersion:   Dev-Sequencer (7B5AE74C-D270-4C10-A958-57980B212A5A): 13
+LogDevObjectVersion:   Dev-VR (D7296918-1DD6-4BDD-9DE2-64A83CC13884): 3
+LogDevObjectVersion:   Dev-LoadTimes (C2A15278-BFE7-4AFE-6C17-90FF531DF755): 1
+LogDevObjectVersion:   Private-Geometry (6EACA3D4-40EC-4CC1-B786-8BED09428FC5): 3
+LogDevObjectVersion:   Dev-AnimPhys (29E575DD-E0A3-4627-9D10-D276232CDCEA): 17
+LogDevObjectVersion:   Dev-Anim (AF43A65D-7FD3-4947-9873-3E8ED9C1BB05): 15
+LogDevObjectVersion:   Dev-ReflectionCapture (6B266CEC-1EC7-4B8F-A30B-E4D90942FC07): 1
+LogDevObjectVersion:   Dev-Automation (0DF73D61-A23F-47EA-B727-89E90C41499A): 1
+LogDevObjectVersion:   FortniteMain (601D1886-AC64-4F84-AA16-D3DE0DEAC7D6): 47
+LogDevObjectVersion:   FortniteRelease (E7086368-6B23-4C58-8439-1B7016265E91): 1
+LogDevObjectVersion:   Dev-Enterprise (9DFFBCD6-494F-0158-E221-12823C92A888): 10
+LogDevObjectVersion:   Dev-Niagara (F2AED0AC-9AFE-416F-8664-AA7FFA26D6FC): 1
+LogDevObjectVersion:   Dev-Destruction (174F1F0B-B4C6-45A5-B13F-2EE8D0FB917D): 10
+LogDevObjectVersion:   Dev-Physics-Ext (35F94A83-E258-406C-A318-09F59610247C): 41
+LogDevObjectVersion:   Dev-PhysicsMaterial-Chaos (B68FC16E-8B1B-42E2-B453-215C058844FE): 1
+LogDevObjectVersion:   Dev-CineCamera (B2E18506-4273-CFC2-A54E-F4BB758BBA07): 1
+LogDevObjectVersion:   Dev-VirtualProduction (64F58936-FD1B-42BA-BA96-7289D5D0FA4E): 1
+LogDevObjectVersion:   Dev-MediaFramework (6F0ED827-A609-4895-9C91-998D90180EA4): 2
+LogInit: Presizing for max 25165824 objects, including 0 objects not considered by GC, pre-allocating 0 bytes for permanent pool.
+LogConfig: Applying CVar settings from Section [/Script/Engine.StreamingSettings] File [C:/Users/adace/Desktop/spyro-blowhards-revenge/Saved/Config/Windows/Engine.ini]
+LogConfig: Setting CVar [[s.MinBulkDataSizeForAsyncLoading:131072]]
+LogConfig: Setting CVar [[s.AsyncLoadingThreadEnabled:0]]
+LogConfig: Setting CVar [[s.EventDrivenLoaderEnabled:1]]
+LogConfig: Setting CVar [[s.WarnIfTimeLimitExceeded:0]]
+LogConfig: Setting CVar [[s.TimeLimitExceededMultiplier:1.5]]
+LogConfig: Setting CVar [[s.TimeLimitExceededMinTime:0.005]]
+LogConfig: Setting CVar [[s.UseBackgroundLevelStreaming:1]]
+LogConfig: Setting CVar [[s.PriorityAsyncLoadingExtraTime:15.0]]
+LogConfig: Setting CVar [[s.LevelStreamingActorsUpdateTimeLimit:5.0]]
+LogConfig: Setting CVar [[s.PriorityLevelStreamingActorsUpdateExtraTime:5.0]]
+LogConfig: Setting CVar [[s.LevelStreamingComponentsRegistrationGranularity:10]]
+LogConfig: Setting CVar [[s.UnregisterComponentsTimeLimit:1.0]]
+LogConfig: Setting CVar [[s.LevelStreamingComponentsUnregistrationGranularity:5]]
+LogConfig: Setting CVar [[s.FlushStreamingOnExit:1]]
+LogInit: Object subsystem initialized
+LogConfig: Setting CVar [[con.DebugEarlyDefault:1]]
+LogConfig: Setting CVar [[r.setres:1280x720]]
+[2026.08.18-11.16.14:497][  0]LogConfig: Setting CVar [[con.DebugEarlyDefault:1]]
+[2026.08.18-11.16.14:497][  0]LogConfig: Setting CVar [[r.setres:1280x720]]
+[2026.08.18-11.16.14:497][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.RendererSettings] File [C:/Users/adace/Desktop/spyro-blowhards-revenge/Saved/Config/Windows/Engine.ini]
+[2026.08.18-11.16.14:497][  0]LogConfig: Setting CVar [[r.GPUCrashDebugging:0]]
+[2026.08.18-11.16.14:497][  0]LogConfig: Setting CVar [[r.DefaultFeature.MotionBlur:0]]
+[2026.08.18-11.16.14:497][  0]LogConfig: Setting CVar [[r.CustomDepth:3]]
+[2026.08.18-11.16.14:497][  0]LogConfig: Setting CVar [[r.DefaultFeature.AntiAliasing:0]]
+[2026.08.18-11.16.14:497][  0]LogConfig: Setting CVar [[r.GenerateMeshDistanceFields:1]]
+[2026.08.18-11.16.14:497][  0]LogConfig: Setting CVar [[r.DistanceFieldBuild.EightBit:1]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.RendererOverrideSettings] File [C:/Users/adace/Desktop/spyro-blowhards-revenge/Saved/Config/Windows/Engine.ini]
+[2026.08.18-11.16.14:498][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.StreamingSettings] File [C:/Users/adace/Desktop/spyro-blowhards-revenge/Saved/Config/Windows/Engine.ini]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[s.MinBulkDataSizeForAsyncLoading:131072]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[s.AsyncLoadingThreadEnabled:0]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[s.EventDrivenLoaderEnabled:1]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[s.WarnIfTimeLimitExceeded:0]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[s.TimeLimitExceededMultiplier:1.5]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[s.TimeLimitExceededMinTime:0.005]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[s.UseBackgroundLevelStreaming:1]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[s.PriorityAsyncLoadingExtraTime:15.0]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[s.LevelStreamingActorsUpdateTimeLimit:5.0]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[s.PriorityLevelStreamingActorsUpdateExtraTime:5.0]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[s.LevelStreamingComponentsRegistrationGranularity:10]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[s.UnregisterComponentsTimeLimit:1.0]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[s.LevelStreamingComponentsUnregistrationGranularity:5]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[s.FlushStreamingOnExit:1]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.GarbageCollectionSettings] File [C:/Users/adace/Desktop/spyro-blowhards-revenge/Saved/Config/Windows/Engine.ini]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[gc.MaxObjectsNotConsideredByGC:1]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[gc.SizeOfPermanentObjectPool:0]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[gc.FlushStreamingOnGC:0]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[gc.NumRetriesBeforeForcingGC:10]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[gc.AllowParallelGC:1]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[gc.TimeBetweenPurgingPendingKillObjects:61.1]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[gc.MaxObjectsInEditor:25165824]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[gc.IncrementalBeginDestroyEnabled:1]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[gc.CreateGCClusters:1]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[gc.MinGCClusterSize:5]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[gc.ActorClusteringEnabled:0]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[gc.BlueprintClusteringEnabled:0]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[gc.UseDisregardForGCOnDedicatedServers:0]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[gc.MultithreadedDestructionEnabled:1]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.NetworkSettings] File [C:/Users/adace/Desktop/spyro-blowhards-revenge/Saved/Config/Windows/Engine.ini]
+[2026.08.18-11.16.14:498][  0]LogConfig: Applying CVar settings from Section [/Script/UnrealEd.CookerSettings] File [C:/Users/adace/Desktop/spyro-blowhards-revenge/Saved/Config/Windows/Engine.ini]
+[2026.08.18-11.16.14:498][  0]LogConfig: Applying CVar settings from Section [ViewDistanceQuality@3] File [C:/Users/adace/Desktop/spyro-blowhards-revenge/Saved/Config/Windows/Scalability.ini]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.SkeletalMeshLODBias:0]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.ViewDistanceScale:1.0]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Applying CVar settings from Section [AntiAliasingQuality@3] File [C:/Users/adace/Desktop/spyro-blowhards-revenge/Saved/Config/Windows/Scalability.ini]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.PostProcessAAQuality:4]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Applying CVar settings from Section [ShadowQuality@3] File [C:/Users/adace/Desktop/spyro-blowhards-revenge/Saved/Config/Windows/Scalability.ini]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.LightFunctionQuality:1]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.ShadowQuality:5]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.Shadow.CSM.MaxCascades:10]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.Shadow.MaxResolution:2048]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.Shadow.MaxCSMResolution:2048]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.Shadow.RadiusThreshold:0.01]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.Shadow.DistanceScale:1.0]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.Shadow.CSM.TransitionScale:1.0]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.Shadow.PreShadowResolutionFactor:1.0]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.DistanceFieldShadowing:1]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.DistanceFieldAO:1]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.AOQuality:2]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.VolumetricFog:1]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.VolumetricFog.GridPixelSize:8]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.VolumetricFog.GridSizeZ:128]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.VolumetricFog.HistoryMissSupersampleCount:4]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.LightMaxDrawDistanceScale:1]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.CapsuleShadows:1]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Applying CVar settings from Section [PostProcessQuality@3] File [C:/Users/adace/Desktop/spyro-blowhards-revenge/Saved/Config/Windows/Scalability.ini]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.MotionBlurQuality:4]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.AmbientOcclusionMipLevelFactor:0.4]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.AmbientOcclusionMaxQuality:100]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.AmbientOcclusionLevels:-1]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.AmbientOcclusionRadiusScale:1.0]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.DepthOfFieldQuality:2]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.RenderTargetPoolMin:400]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.LensFlareQuality:2]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.SceneColorFringeQuality:1]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.EyeAdaptationQuality:2]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.BloomQuality:5]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.FastBlurThreshold:100]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.Upscale.Quality:3]]
+[2026.08.18-11.16.14:498][  0]LogConfig: Setting CVar [[r.Tonemapper.GrainQuantization:1]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.LightShaftQuality:1]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.Filter.SizeScale:1]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.Tonemapper.Quality:5]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.DOF.Gather.AccumulatorQuality:1        ; higher gathering accumulator quality]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.DOF.Gather.PostfilterMethod:1          ; Median3x3 postfilering method]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.DOF.Gather.EnableBokehSettings:0       ; no bokeh simulation when gathering]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.DOF.Gather.RingCount:4                 ; medium number of samples when gathering]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.DOF.Scatter.ForegroundCompositing:1    ; additive foreground scattering]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.DOF.Scatter.BackgroundCompositing:2    ; additive background scattering]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.DOF.Scatter.EnableBokehSettings:1      ; bokeh simulation when scattering]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.DOF.Scatter.MaxSpriteRatio:0.1         ; only a maximum of 10% of scattered bokeh]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.DOF.Recombine.Quality:1                ; cheap slight out of focus]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.DOF.Recombine.EnableBokehSettings:0    ; no bokeh simulation on slight out of focus]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.DOF.TemporalAAQuality:1                ; more stable temporal accumulation]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.DOF.Kernel.MaxForegroundRadius:0.025]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.DOF.Kernel.MaxBackgroundRadius:0.025]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Applying CVar settings from Section [TextureQuality@3] File [C:/Users/adace/Desktop/spyro-blowhards-revenge/Saved/Config/Windows/Scalability.ini]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.Streaming.MipBias:0]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.Streaming.AmortizeCPUToGPUCopy:0]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.Streaming.MaxNumTexturesToStreamPerFrame:0]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.Streaming.Boost:1]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.MaxAnisotropy:8]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.VT.MaxAnisotropy:8]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.Streaming.LimitPoolSizeToVRAM:0]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.Streaming.PoolSize:1000]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.Streaming.MaxEffectiveScreenSize:0]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Applying CVar settings from Section [EffectsQuality@3] File [C:/Users/adace/Desktop/spyro-blowhards-revenge/Saved/Config/Windows/Scalability.ini]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.TranslucencyLightingVolumeDim:64]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.RefractionQuality:2]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.SSR.Quality:3]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.SSR.HalfResSceneColor:0]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.SceneColorFormat:4]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.DetailMode:2]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.TranslucencyVolumeBlur:1]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.MaterialQualityLevel:1 ; High quality]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.AnisotropicMaterials:1]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.SSS.Scale:1]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.SSS.SampleSet:2]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.SSS.Quality:1]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.SSS.HalfRes:0]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.SSGI.Quality:3]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.EmitterSpawnRateScale:1.0]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.ParticleLightQuality:2]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.AerialPerspectiveLUT.FastApplyOnOpaque:1 ; Always have FastSkyLUT 1 in this case to avoid wrong sky]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.AerialPerspectiveLUT.SampleCountMaxPerSlice:4]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.AerialPerspectiveLUT.DepthResolution:16.0]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.FastSkyLUT:1]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.FastSkyLUT.SampleCountMin:4.0]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.FastSkyLUT.SampleCountMax:128.0]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.SampleCountMin:4.0]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.SampleCountMax:128.0]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.TransmittanceLUT.UseSmallFormat:0]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.TransmittanceLUT.SampleCount:10.0]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.MultiScatteringLUT.SampleCount:15.0]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.SkyLight.RealTimeReflectionCapture:1]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Applying CVar settings from Section [FoliageQuality@3] File [C:/Users/adace/Desktop/spyro-blowhards-revenge/Saved/Config/Windows/Scalability.ini]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[foliage.DensityScale:1.0]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[grass.DensityScale:1.0]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Applying CVar settings from Section [ShadingQuality@3] File [C:/Users/adace/Desktop/spyro-blowhards-revenge/Saved/Config/Windows/Scalability.ini]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.HairStrands.SkyLighting.IntegrationType:2]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.HairStrands.SkyAO.SampleCount:4]]
+[2026.08.18-11.16.14:499][  0]LogConfig: Setting CVar [[r.HairStrands.Visibility.MSAA.SamplePerPixel:4]]
+[2026.08.18-11.16.14:502][  0]LogInit: Selected Device Profile: [Windows]
+[2026.08.18-11.16.14:502][  0]LogInit: Applying CVar settings loaded from the selected device profile: [Windows]
+[2026.08.18-11.16.14:502][  0]LogHAL: Display: Platform has ~ 32 GB [34191212544 / 34359738368 / 32], which maps to Largest [LargestMinGB=32, LargerMinGB=12, DefaultMinGB=8, SmallerMinGB=6, SmallestMinGB=0)
+[2026.08.18-11.16.14:502][  0]LogInit: Going up to parent DeviceProfile []
+[2026.08.18-11.16.14:502][  0]LogConfig: Applying CVar settings from Section [ViewDistanceQuality@3] File [C:/Users/adace/Desktop/spyro-blowhards-revenge/Saved/Config/Windows/Scalability.ini]
+[2026.08.18-11.16.14:502][  0]LogConfig: Setting CVar [[r.SkeletalMeshLODBias:0]]
+[2026.08.18-11.16.14:502][  0]LogConfig: Setting CVar [[r.ViewDistanceScale:1.0]]
+[2026.08.18-11.16.14:502][  0]LogConfig: Applying CVar settings from Section [AntiAliasingQuality@0] File [C:/Users/adace/Desktop/spyro-blowhards-revenge/Saved/Config/Windows/Scalability.ini]
+[2026.08.18-11.16.14:502][  0]LogConfig: Setting CVar [[r.PostProcessAAQuality:0]]
+[2026.08.18-11.16.14:502][  0]LogConfig: Applying CVar settings from Section [ShadowQuality@3] File [C:/Users/adace/Desktop/spyro-blowhards-revenge/Saved/Config/Windows/Scalability.ini]
+[2026.08.18-11.16.14:502][  0]LogConfig: Setting CVar [[r.LightFunctionQuality:1]]
+[2026.08.18-11.16.14:502][  0]LogConfig: Setting CVar [[r.ShadowQuality:5]]
+[2026.08.18-11.16.14:502][  0]LogConfig: Setting CVar [[r.Shadow.CSM.MaxCascades:10]]
+[2026.08.18-11.16.14:502][  0]LogConfig: Setting CVar [[r.Shadow.MaxResolution:2048]]
+[2026.08.18-11.16.14:502][  0]LogConfig: Setting CVar [[r.Shadow.MaxCSMResolution:2048]]
+[2026.08.18-11.16.14:502][  0]LogConfig: Setting CVar [[r.Shadow.RadiusThreshold:0.01]]
+[2026.08.18-11.16.14:502][  0]LogConfig: Setting CVar [[r.Shadow.DistanceScale:1.0]]
+[2026.08.18-11.16.14:502][  0]LogConfig: Setting CVar [[r.Shadow.CSM.TransitionScale:1.0]]
+[2026.08.18-11.16.14:502][  0]LogConfig: Setting CVar [[r.Shadow.PreShadowResolutionFactor:1.0]]
+[2026.08.18-11.16.14:502][  0]LogConfig: Setting CVar [[r.DistanceFieldShadowing:1]]
+[2026.08.18-11.16.14:502][  0]LogConfig: Setting CVar [[r.DistanceFieldAO:1]]
+[2026.08.18-11.16.14:502][  0]LogConfig: Setting CVar [[r.AOQuality:2]]
+[2026.08.18-11.16.14:502][  0]LogConfig: Setting CVar [[r.VolumetricFog:1]]
+[2026.08.18-11.16.14:502][  0]LogConfig: Setting CVar [[r.VolumetricFog.GridPixelSize:8]]
+[2026.08.18-11.16.14:502][  0]LogConfig: Setting CVar [[r.VolumetricFog.GridSizeZ:128]]
+[2026.08.18-11.16.14:502][  0]LogConfig: Setting CVar [[r.VolumetricFog.HistoryMissSupersampleCount:4]]
+[2026.08.18-11.16.14:502][  0]LogConfig: Setting CVar [[r.LightMaxDrawDistanceScale:1]]
+[2026.08.18-11.16.14:502][  0]LogConfig: Setting CVar [[r.CapsuleShadows:1]]
+[2026.08.18-11.16.14:502][  0]LogConfig: Applying CVar settings from Section [PostProcessQuality@3] File [C:/Users/adace/Desktop/spyro-blowhards-revenge/Saved/Config/Windows/Scalability.ini]
+[2026.08.18-11.16.14:502][  0]LogConfig: Setting CVar [[r.MotionBlurQuality:4]]
+[2026.08.18-11.16.14:502][  0]LogConfig: Setting CVar [[r.AmbientOcclusionMipLevelFactor:0.4]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.AmbientOcclusionMaxQuality:100]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.AmbientOcclusionLevels:-1]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.AmbientOcclusionRadiusScale:1.0]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.DepthOfFieldQuality:2]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.RenderTargetPoolMin:400]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.LensFlareQuality:2]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.SceneColorFringeQuality:1]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.EyeAdaptationQuality:2]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.BloomQuality:5]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.FastBlurThreshold:100]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.Upscale.Quality:3]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.Tonemapper.GrainQuantization:1]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.LightShaftQuality:1]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.Filter.SizeScale:1]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.Tonemapper.Quality:5]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.DOF.Gather.AccumulatorQuality:1        ; higher gathering accumulator quality]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.DOF.Gather.PostfilterMethod:1          ; Median3x3 postfilering method]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.DOF.Gather.EnableBokehSettings:0       ; no bokeh simulation when gathering]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.DOF.Gather.RingCount:4                 ; medium number of samples when gathering]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.DOF.Scatter.ForegroundCompositing:1    ; additive foreground scattering]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.DOF.Scatter.BackgroundCompositing:2    ; additive background scattering]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.DOF.Scatter.EnableBokehSettings:1      ; bokeh simulation when scattering]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.DOF.Scatter.MaxSpriteRatio:0.1         ; only a maximum of 10% of scattered bokeh]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.DOF.Recombine.Quality:1                ; cheap slight out of focus]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.DOF.Recombine.EnableBokehSettings:0    ; no bokeh simulation on slight out of focus]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.DOF.TemporalAAQuality:1                ; more stable temporal accumulation]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.DOF.Kernel.MaxForegroundRadius:0.025]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.DOF.Kernel.MaxBackgroundRadius:0.025]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Applying CVar settings from Section [TextureQuality@3] File [C:/Users/adace/Desktop/spyro-blowhards-revenge/Saved/Config/Windows/Scalability.ini]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.Streaming.MipBias:0]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.Streaming.AmortizeCPUToGPUCopy:0]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.Streaming.MaxNumTexturesToStreamPerFrame:0]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.Streaming.Boost:1]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.MaxAnisotropy:8]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.VT.MaxAnisotropy:8]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.Streaming.LimitPoolSizeToVRAM:0]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.Streaming.PoolSize:1000]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.Streaming.MaxEffectiveScreenSize:0]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Applying CVar settings from Section [EffectsQuality@3] File [C:/Users/adace/Desktop/spyro-blowhards-revenge/Saved/Config/Windows/Scalability.ini]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.TranslucencyLightingVolumeDim:64]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.RefractionQuality:2]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.SSR.Quality:3]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.SSR.HalfResSceneColor:0]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.SceneColorFormat:4]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.DetailMode:2]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.TranslucencyVolumeBlur:1]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.MaterialQualityLevel:1 ; High quality]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.AnisotropicMaterials:1]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.SSS.Scale:1]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.SSS.SampleSet:2]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.SSS.Quality:1]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.SSS.HalfRes:0]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.SSGI.Quality:3]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.EmitterSpawnRateScale:1.0]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.ParticleLightQuality:2]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.AerialPerspectiveLUT.FastApplyOnOpaque:1 ; Always have FastSkyLUT 1 in this case to avoid wrong sky]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.AerialPerspectiveLUT.SampleCountMaxPerSlice:4]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.AerialPerspectiveLUT.DepthResolution:16.0]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.FastSkyLUT:1]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.FastSkyLUT.SampleCountMin:4.0]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.FastSkyLUT.SampleCountMax:128.0]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.SampleCountMin:4.0]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.SampleCountMax:128.0]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.TransmittanceLUT.UseSmallFormat:0]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.TransmittanceLUT.SampleCount:10.0]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.MultiScatteringLUT.SampleCount:15.0]]
+[2026.08.18-11.16.14:503][  0]LogConfig: Setting CVar [[r.SkyLight.RealTimeReflectionCapture:1]]
+[2026.08.18-11.16.14:504][  0]LogConfig: Applying CVar settings from Section [FoliageQuality@3] File [C:/Users/adace/Desktop/spyro-blowhards-revenge/Saved/Config/Windows/Scalability.ini]
+[2026.08.18-11.16.14:504][  0]LogConfig: Setting CVar [[foliage.DensityScale:1.0]]
+[2026.08.18-11.16.14:504][  0]LogConfig: Setting CVar [[grass.DensityScale:1.0]]
+[2026.08.18-11.16.14:504][  0]LogConfig: Applying CVar settings from Section [ShadingQuality@3] File [C:/Users/adace/Desktop/spyro-blowhards-revenge/Saved/Config/Windows/Scalability.ini]
+[2026.08.18-11.16.14:504][  0]LogConfig: Setting CVar [[r.HairStrands.SkyLighting.IntegrationType:2]]
+[2026.08.18-11.16.14:504][  0]LogConfig: Setting CVar [[r.HairStrands.SkyAO.SampleCount:4]]
+[2026.08.18-11.16.14:504][  0]LogConfig: Setting CVar [[r.HairStrands.Visibility.MSAA.SamplePerPixel:4]]
+[2026.08.18-11.16.14:504][  0]LogConfig: Applying CVar settings from Section [Startup] File [../../../Engine/Config/ConsoleVariables.ini]
+[2026.08.18-11.16.14:504][  0]LogConfig: Setting CVar [[net.UseAdaptiveNetUpdateFrequency:0]]
+[2026.08.18-11.16.14:504][  0]LogConfig: Setting CVar [[p.chaos.AllowCreatePhysxBodies:1]]
+[2026.08.18-11.16.14:504][  0]LogConfig: Setting CVar [[fx.SkipVectorVMBackendOptimizations:1]]
+[2026.08.18-11.16.14:504][  0]LogConfig: Applying CVar settings from Section [ConsoleVariables] File [C:/Users/adace/Desktop/spyro-blowhards-revenge/Saved/Config/Windows/Engine.ini]
+[2026.08.18-11.16.14:504][  0]LogConfig: Applying CVar settings from Section [ConsoleVariables] File [C:/Users/adace/Desktop/spyro-blowhards-revenge/Saved/Config/Windows/Editor.ini]
+[2026.08.18-11.16.14:504][  0]LogInit: Computer: DESKTOP-OCQ2307
+[2026.08.18-11.16.14:504][  0]LogInit: User: adace
+[2026.08.18-11.16.14:504][  0]LogInit: CPU Page size=4096, Cores=10
+[2026.08.18-11.16.14:504][  0]LogInit: High frequency timer resolution =10.000000 MHz
+[2026.08.18-11.16.14:504][  0]LogMemory: Memory total: Physical=31.8GB (32GB approx)
+[2026.08.18-11.16.14:504][  0]LogMemory: Platform Memory Stats for Windows
+[2026.08.18-11.16.14:504][  0]LogMemory: Process Physical Memory: 149.21 MB used, 149.21 MB peak
+[2026.08.18-11.16.14:504][  0]LogMemory: Process Virtual Memory: 128.28 MB used, 128.28 MB peak
+[2026.08.18-11.16.14:504][  0]LogMemory: Physical Memory: 14809.97 MB used,  17797.31 MB free, 32607.28 MB total
+[2026.08.18-11.16.14:504][  0]LogMemory: Virtual Memory: 134204328.00 MB used,  13396.80 MB free, 134217728.00 MB total
+[2026.08.18-11.16.14:509][  0]LogWindows: WindowsPlatformFeatures enabled
+[2026.08.18-11.16.14:546][  0]LogInit: Physics initialised using underlying interface: PhysX
+[2026.08.18-11.16.14:546][  0]LogInit: Using OS detected language (en-US).
+[2026.08.18-11.16.14:546][  0]LogInit: Using OS detected locale (en-AU).
+[2026.08.18-11.16.14:548][  0]LogTextLocalizationManager: No specific localization for 'en-US' exists, so the 'en' localization will be used.
+[2026.08.18-11.16.14:966][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'AllDesktop'
+[2026.08.18-11.16.14:982][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android'
+[2026.08.18-11.16.14:982][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ASTC'
+[2026.08.18-11.16.14:982][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_DXT'
+[2026.08.18-11.16.14:982][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ETC2'
+[2026.08.18-11.16.14:982][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'AndroidClient'
+[2026.08.18-11.16.14:982][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ASTCClient'
+[2026.08.18-11.16.14:982][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_DXTClient'
+[2026.08.18-11.16.14:982][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ETC2Client'
+[2026.08.18-11.16.14:982][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_Multi'
+[2026.08.18-11.16.14:982][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_MultiClient'
+[2026.08.18-11.16.14:997][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'IOSClient'
+[2026.08.18-11.16.14:997][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'IOS'
+[2026.08.18-11.16.15:004][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Linux'
+[2026.08.18-11.16.15:009][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxNoEditor'
+[2026.08.18-11.16.15:012][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxClient'
+[2026.08.18-11.16.15:016][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxServer'
+[2026.08.18-11.16.15:023][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxAArch64NoEditor'
+[2026.08.18-11.16.15:028][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxAArch64Client'
+[2026.08.18-11.16.15:032][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxAArch64Server'
+[2026.08.18-11.16.15:050][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Lumin'
+[2026.08.18-11.16.15:050][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LuminClient'
+[2026.08.18-11.16.15:056][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'MacNoEditor'
+[2026.08.18-11.16.15:060][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Mac'
+[2026.08.18-11.16.15:064][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'MacClient'
+[2026.08.18-11.16.15:067][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'MacServer'
+[2026.08.18-11.16.15:075][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'TVOSClient'
+[2026.08.18-11.16.15:075][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'TVOS'
+[2026.08.18-11.16.15:082][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'WindowsNoEditor'
+[2026.08.18-11.16.15:086][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Windows'
+[2026.08.18-11.16.15:089][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'WindowsClient'
+[2026.08.18-11.16.15:094][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'WindowsServer'
+[2026.08.18-11.16.15:094][  0]LogTargetPlatformManager: Display: Building Assets For Windows
+[2026.08.18-11.16.15:101][  0]LogAudioDebug: Display: Lib vorbis DLL was dynamically loaded.
+[2026.08.18-11.16.15:127][  0]LogTextureFormatOodle: Display: Oodle Texture 2.9.0 init RDO Off
+[2026.08.18-11.16.15:158][  0]LogRendererCore: Ray tracing is disabled. Reason: r.RayTracing=0.
+[2026.08.18-11.16.15:158][  0]LogShaderCompilers: Guid format shader working directory is -16 characters bigger than the processId version (../../../../../../Users/adace/Desktop/spyro-blowhards-revenge/Intermediate/Shaders/WorkingDirectory/27232/).
+[2026.08.18-11.16.15:158][  0]LogShaderCompilers: Cleaned the shader compiler working directory 'C:/Users/adace/AppData/Local/Temp/UnrealShaderWorkingDir/4831C59C45341FE12B0D77942EAE61B2/'.
+[2026.08.18-11.16.15:158][  0]LogXGEController: Cannot use XGE Controller as Incredibuild is not installed on this machine.
+[2026.08.18-11.16.15:158][  0]LogShaderCompilers: Cannot use XGE Shader Compiler as Incredibuild is not installed on this machine.
+[2026.08.18-11.16.15:158][  0]LogShaderCompilers: Display: Using Local Shader Compiler.
+[2026.08.18-11.16.15:609][  0]LogDerivedDataCache: Display: Max Cache Size: 512 MB
+[2026.08.18-11.16.15:610][  0]LogDerivedDataCache: Loaded boot cache 0.00s 1MB C:/Users/adace/AppData/Local/UnrealEngine/4.27/DerivedDataCache/Boot.ddc.
+[2026.08.18-11.16.15:610][  0]LogDerivedDataCache: Display: Loaded Boot cache: C:/Users/adace/AppData/Local/UnrealEngine/4.27/DerivedDataCache/Boot.ddc
+[2026.08.18-11.16.15:610][  0]LogDerivedDataCache: FDerivedDataBackendGraph:  Pak pak cache file ../../../../../../Users/adace/Desktop/spyro-blowhards-revenge/DerivedDataCache/DDC.ddp not found, will not use a pak cache.
+[2026.08.18-11.16.15:610][  0]LogDerivedDataCache: Unable to find inner node Pak for hierarchical cache Hierarchy.
+[2026.08.18-11.16.15:610][  0]LogDerivedDataCache: FDerivedDataBackendGraph:  CompressedPak pak cache file ../../../../../../Users/adace/Desktop/spyro-blowhards-revenge/DerivedDataCache/Compressed.ddp not found, will not use a pak cache.
+[2026.08.18-11.16.15:610][  0]LogDerivedDataCache: Unable to find inner node CompressedPak for hierarchical cache Hierarchy.
+[2026.08.18-11.16.15:624][  0]LogDerivedDataCache: Display: Pak cache opened for reading ../../../Engine/DerivedDataCache/Compressed.ddp.
+[2026.08.18-11.16.15:624][  0]LogDerivedDataCache: FDerivedDataBackendGraph:  EnterprisePak pak cache file ../../../Enterprise/DerivedDataCache/Compressed.ddp not found, will not use a pak cache.
+[2026.08.18-11.16.15:624][  0]LogDerivedDataCache: Unable to find inner node EnterprisePak for hierarchical cache Hierarchy.
+[2026.08.18-11.16.15:631][  0]LogDerivedDataCache: Speed tests for C:/Users/adace/AppData/Local/UnrealEngine/Common/DerivedDataCache took 0.01 seconds
+[2026.08.18-11.16.15:631][  0]LogDerivedDataCache: Display: Performance to C:/Users/adace/AppData/Local/UnrealEngine/Common/DerivedDataCache: Latency=0.02ms. RandomReadSpeed=1100.09MBs, RandomWriteSpeed=162.47MBs. Assigned SpeedClass 'Local'
+[2026.08.18-11.16.15:631][  0]LogDerivedDataCache: Using Local data cache path C:/Users/adace/AppData/Local/UnrealEngine/Common/DerivedDataCache: Writable
+[2026.08.18-11.16.15:632][  0]LogDerivedDataCache: Shared data cache path not found in *engine.ini, will not use an Shared cache.
+[2026.08.18-11.16.15:632][  0]LogDerivedDataCache: Unable to find inner node Shared for hierarchical cache Hierarchy.
+[2026.08.18-11.16.15:638][  0]LogAssetRegistry: FAssetRegistry took 0.0012 seconds to start up
+[2026.08.18-11.16.15:797][  0]LogInit: Selected Device Profile: [Windows]
+[2026.08.18-11.16.15:797][  0]LogInit: Active device profile: [000001C78DFC3800][000001C78BB2E400 49] Windows
+[2026.08.18-11.16.15:797][  0]LogInit: Profiles: [000001C78DFC3800][000001C78BB2E400 49] Windows, [000001C78DF78A00][000001C78BCBE580 49] WindowsNoEditor, [000001C78DFC0A00][000001C78B922700 49] WindowsServer, [000001C78DF7AD00][000001C78B926880 49] WindowsClient, [000001C78DFC2D00][000001C78B92AA00 49] IOS, [000001C78DF7B800][000001C78B92EB80 49] iPadAir, [000001C78DFC3F00][000001C78B932D00 49] iPadAir2, [000001C78DF2B900][000001C78BAB8FC0 49] IPadPro, [000001C78DF2BA00][000001C78B937000 49] iPadAir3, [000001C78DFC2500][000001C78BCBB140 49] iPadAir4, [000001C78DF28F00][000001C78BAC3280 49] iPadMini2, [000001C78DFC1A00][000001C78BAC73C0 49] iPadMini3, [000001C78DF2A800][000001C78BACF540 49] iPadMini4, [000001C78DFC3500][000001C78BAD36C0 49] iPadMini5, [000001C78DF73200][000001C78BADB980 49] iPhone6, [000001C78DF73300][000001C78BAD79C0 49] iPodTouch6, [000001C78DF2A100][000001C78C4EC100 49] iPhone7, [000001C78DF2A200][000001C78BADE140 49] iPodTouch7, [000001C78DF70E00][000001C78C4F02C0 49] iPhone5S, [000001C78DF2BC00][000001C78C4F4440 49] iPhone6Plus, [000001C78DF72900][000001C78C4F85C0 49] iPhone6S, [000001C78DF29400][000001C78C4FC740 49] iPhone6SPlus, [000001C78DF73F00][000001C78C5008C0 49] iPhone7Plus, [000001C78DF29F00][000001C78C504A40 49] iPhoneSE, [000001C78DF70F00][000001C78C508BC0 49] iPhone8, [000001C78DF29700][000001C78C50CD40 49] iPhone8Plus, [000001C78DF70100][000001C78C510EC0 49] iPhoneX, [000001C78DF29100][000001C78C515040 49] iPhoneXS, [000001C78DF70600][000001C78C5191C0 49] iPhoneXSMax, [000001C78DF2BF00][000001C78BACB300 49] iPhoneXR, [000001C78DF72F00][000001C78C51D440 49] iPhone11, [000001C78DF29A00][000001C78C521580 49] iPhone11Pro, [000001C78DF73900][000001C78C529700 49] iPhone11ProMax, [000001C78DF2B100][000001C78C52D880 49] iPhoneSE2, [000001C78DF70D00][000001C78C531A00 49] iPhone12Mini, [000001C78DF2B300][000001C78C535B80 49] iPhone12, [000001C78DF73700][000001C78C538180 49] iPhone12Pro, [000001C78DF29900][000001C78C53C300 49] iPhone12ProMax, [000001C78DF72C00][000001C78C540480 49] iPadPro105, [000001C78DF2B500][000001C78C544600 49] iPadPro129, [000001C78DF72800][000001C78C548780 49] iPadPro97, [000001C78DF2B400][000001C78C54C900 49] iPadPro2_129, [000001C78DF70300][000001C78C550A80 49] iPad5, [000001C78DF29800][000001C78C554C00 49] iPad6, [000001C78DF70C00][000001C78C558D80 49] iPad7, [000001C78DF2B000][000001C78C55CF00 49] iPad8, [000001C78DF71C00][000001C78C561080 49] iPadPro11, [000001C78DF28400][000001C78C565200 49] iPadPro2_11, [000001C78DF72D00][000001C78C569380 49] iPadPro3_129, [000001C78DF29000][000001C78C5254C0 49] iPadPro4_129, [000001C78DF70200][000001C78C56D600 49] AppleTV, [000001C78DF2B700][000001C78E73F740 49] AppleTV4K, [000001C78DF73C00][000001C78E7478C0 49] TVOS, [000001C78DF29B00][000001C78E74BA40 49] Mac, [000001C78DF72500][000001C78E74FBC0 49] MacClient, [000001C78DF2B800][000001C78E7521C0 49] MacNoEditor, [000001C78DF78B00][000001C78E756340 49] MacServer, [000001C78E001200][000001C78E75A4C0 49] Linux, [000001C78DF78300][000001C78E75E640 49] LinuxAArch64, [000001C78E002E00][000001C78E7627C0 49] LinuxNoEditor, [000001C78DF7AC00][000001C78E766940 49] LinuxAArch64NoEditor, [000001C78E000700][000001C78E76AAC0 49] LinuxClient, [000001C78DF78D00][000001C78E76EC40 49] LinuxAArch64Client, [000001C78E001A00][000001C78E772DC0 49] LinuxServer, [000001C78DF78F00][000001C78E776F40 49] LinuxAArch64Server, [000001C78E001100][000001C78E77B0C0 49] Android, [000001C78DF7B300][000001C78E77F240 49] Android_Low, [000001C78E000C00][000001C78E7833C0 49] Android_Mid, [000001C78DF7BE00][000001C78E787540 49] Android_High, [000001C78E001600][000001C78E743680 49] Android_Default, [000001C78DF7AE00][000001C78E78B7C0 49] Android_Adreno4xx, [000001C78E001400][000001C78E78F900 49] Android_Adreno5xx_Low, [000001C78DF7B500][000001C78E793A40 49] Android_Adreno5xx, [000001C78E002B00][000001C78E79BBC0 49] Android_Adreno6xx, [000001C78DF7BA00][000001C78E79E1C0 49] Android_Adreno6xx_Vulkan, [000001C78E002600][000001C78E7A2340 49] Android_Mali_T6xx, [000001C78DF78400][000001C78E7A64C0 49] Android_Mali_T7xx, [000001C78E000200][000001C78E7AA640 49] Android_Mali_T8xx, [000001C78DF7B000][000001C78E7AE7C0 49] Android_Mali_G71, [000001C78E002A00][000001C78E7B2940 49] Android_Mali_G72, [000001C78DF2B200][000001C78E7B6AC0 49] Android_Mali_G72_Vulkan, [000001C78E002900][000001C78E7BAC40 49] Android_Mali_G76, [000001C78DF2AE00][000001C78E7BEDC0 49] Android_Mali_G76_Vulkan, [000001C78E000900][000001C78E7C2F40 49] Android_Mali_G77, [000001C78DF28200][000001C78E7C70C0 49] Android_Mali_G77_Vulkan, [000001C78E001F00][000001C78E7CB240 49] Android_Mali_G78, [000001C78DF29E00][000001C78E7CF3C0 49] Android_Mali_G78_Vulkan, [000001C78E000A00][000001C78E7D3540 49] Android_Mali_G710, [000001C78DF29200][000001C78E7D76C0 49] Android_Mali_G710_Vulkan, [000001C78E002000][000001C78E797800 49] Android_Vulkan_SM5, [000001C78DF2BE00][000001C78E7DB940 49] Android_PowerVR_G6xxx, [000001C78E000600][000001C78E7DFA80 49] Android_PowerVR_GT7xxx, [000001C78DF2AC00][000001C78E7E3BC0 49] Android_PowerVR_GE8xxx, [000001C78E002200][000001C78E7EA1C0 49] Android_PowerVR_GM9xxx, [000001C78DF2A900][000001C78E7EE340 49] Android_PowerVR_GM9xxx_Vulkan, [000001C78E001B00][000001C78E7F24C0 49] Android_TegraK1, [000001C78DF28900][000001C78E7F6640 49] Android_Unknown_Vulkan, [000001C78E001500][000001C78E7FA7C0 49] Lumin, [000001C78DF28B00][000001C78E7FE940 49] Lumin_Desktop, [000001C78E001800][000001C78E802AC0 49] HoloLens, 
+[2026.08.18-11.16.15:827][  0]LogMeshReduction: Using QuadricMeshReduction for automatic static mesh reduction
+[2026.08.18-11.16.15:828][  0]LogMeshReduction: Using SimplygonMeshReduction for automatic skeletal mesh reduction
+[2026.08.18-11.16.15:828][  0]LogMeshReduction: Using ProxyLODMeshReduction for automatic mesh merging
+[2026.08.18-11.16.15:828][  0]LogMeshReduction: No distributed automatic mesh merging module available
+[2026.08.18-11.16.15:828][  0]LogMeshMerging: No distributed automatic mesh merging module available
+[2026.08.18-11.16.15:833][  0]LogNetVersion: Spyro_Bunnited 1.0.0, NetCL: 17155196, EngineNetVer: 17, GameNetVer: 0 (Checksum: 2727633312)
+[2026.08.18-11.16.16:044][  0]LogCollectionManager: Loaded 0 collections in 0.001250 seconds
+[2026.08.18-11.16.16:046][  0]LogFileCache: Scanning file cache for directory 'C:/Users/adace/Desktop/spyro-blowhards-revenge/Saved/Collections/' took 0.00s
+[2026.08.18-11.16.16:046][  0]LogFileCache: Scanning file cache for directory 'C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Developers/adace/Collections/' took 0.00s
+[2026.08.18-11.16.16:046][  0]LogFileCache: Scanning file cache for directory 'C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Collections/' took 0.00s
+[2026.08.18-11.16.16:046][  0]LogCollectionManager: Fixed up redirectors for 0 collections in 0.000002 seconds (updated 0 objects)
+[2026.08.18-11.16.16:120][  0]LogNiagaraDebuggerClient: Niagara Debugger Client Initialized | Session: 72A2973B45F98F6ACC7BF5AB35A66CDD | Instance: 49E706F84A3D5547C794808C16D4C154 (DESKTOP-OCQ2307-27232).
+[2026.08.18-11.16.16:273][  0]LogPython: Using Python 3.7.7
+[2026.08.18-11.16.16:838][  0]SourceControl: Source control is disabled
+[2026.08.18-11.16.16:838][  0]SourceControl: Source control is disabled
+[2026.08.18-11.16.16:841][  0]SourceControl: Source control is disabled
+[2026.08.18-11.16.16:844][  0]SourceControl: Source control is disabled
+[2026.08.18-11.16.16:847][  0]SourceControl: Source control is disabled
+[2026.08.18-11.16.16:853][  0]LogUProjectInfo: Found projects:
+[2026.08.18-11.16.16:883][  0]LogAndroidPermission: UAndroidPermissionCallbackProxy::GetInstance
+[2026.08.18-11.16.16:888][  0]LogAudioCaptureCore: Display: No Audio Capture implementations found. Audio input will be silent.
+[2026.08.18-11.16.16:888][  0]LogAudioCaptureCore: Display: No Audio Capture implementations found. Audio input will be silent.
+[2026.08.18-11.16.16:937][  0]LogOpenImageDenoise: OIDN starting up
+[2026.08.18-11.16.17:012][  0]LogUObjectArray: 22733 objects as part of root set at end of initial load.
+[2026.08.18-11.16.17:012][  0]LogUObjectAllocator: 6225984 out of 0 bytes used by permanent object pool.
+[2026.08.18-11.16.17:012][  0]LogUObjectArray: CloseDisregardForGC: 0/0 objects in disregard for GC pool
+[2026.08.18-11.16.17:016][  0]LogInit: Executing Class /Script/PythonScriptPlugin.PythonScriptCommandlet
+[2026.08.18-11.16.17:016][  0]LogInit: Initializing Editor Engine...
+[2026.08.18-11.16.17:016][  0]LogEngine: Initializing Engine...
+[2026.08.18-11.16.17:018][  0]LogStats: UGameplayTagsManager::InitializeManager -  0.000 s
+[2026.08.18-11.16.18:011][  0]LogInit: Initializing FReadOnlyCVARCache
+[2026.08.18-11.16.18:018][  0]LogAIModule: Creating AISystem for world Untitled
+[2026.08.18-11.16.18:019][  0]LogNetVersion: Set ProjectVersion to 1.0.0.0. Version Checksum will be recalculated on next use.
+[2026.08.18-11.16.18:020][  0]LogDerivedDataCache: Saved boot cache 0.00s 1MB C:/Users/adace/AppData/Local/UnrealEngine/4.27/DerivedDataCache/Boot.ddc.
+[2026.08.18-11.16.18:020][  0]LogInit: Texture streaming: Disabled
+[2026.08.18-11.16.18:050][  0]LogInit: Initializing Editor Engine Completed
+[2026.08.18-11.16.18:102][  0]BlueprintLog: New page: Editor Load
+[2026.08.18-11.16.18:259][  0]LogClass: Display: Int8Property FMTSJson::version is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.08.18-11.16.18:259][  0]LogClass: Display: Int16Property FMTSJson::resolutionValue is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.08.18-11.16.18:259][  0]LogClass: Display: BoolProperty FMTSJson::isExternal is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.08.18-11.16.18:260][  0]LogClass: Display: Int8Property FMTSJson::meshVersion is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.08.18-11.16.18:260][  0]LogClass: Display: BoolProperty FMTSJson::isCustom is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.08.18-11.16.18:260][  0]LogClass: Display: BoolProperty FMTSJson::isModularAsset is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.08.18-11.16.18:260][  0]LogClass: Display: Int8Property FLodList::variation is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.08.18-11.16.18:260][  0]LogClass: Display: Int16Property FMeshList::resolution is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.08.18-11.16.18:261][  0]LogClass: Display: Int16Property FComponents::resolution is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.08.18-11.16.18:261][  0]LogClass: Display: BoolProperty FTextureSets::isUdim is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.08.18-11.16.18:261][  0]LogClass: Display: BoolProperty FMeta::value is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.08.18-11.16.18:261][  0]LogClass: Display: 11 Uninitialized script struct members found including 0 object properties
+[2026.08.18-11.16.18:263][  0]LogPythonScriptCommandlet: Display: Running Python script: C:\Users\adace\Desktop\spyro-blowhards-revenge\Content\Spyro64\SM64\EditorScripts\inspect_level_properties.py /Game/Spyro64/Levels/05_Level5_PreWhomps
+[2026.08.18-11.16.18:267][  0]Cmd: MAP LOAD FILE="../../../../../../Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/Levels/05_Level5_PreWhomps.umap" TEMPLATE=0 SHOWPROGRESS=1 FEATURELEVEL=3
+[2026.08.18-11.16.18:267][  0]LightingResults: New page: Lighting Build
+[2026.08.18-11.16.18:268][  0]LoadErrors: New page: Loading map: 05_Level5_PreWhomps.umap
+[2026.08.18-11.16.18:268][  0]LogWorld: UWorld::CleanupWorld for Untitled, bSessionEnded=true, bCleanupResources=true
+[2026.08.18-11.16.18:274][  0]LogUObjectHash: Compacting FUObjectHashTables data took   0.72ms
+[2026.08.18-11.16.27:778][  0]LogAIModule: Creating AISystem for world 05_Level5_PreWhomps
+[2026.08.18-11.16.27:792][  0]LogEditorServer: Finished looking for orphan Actors (0.000 secs)
+[2026.08.18-11.16.27:867][  0]LogUObjectHash: Compacting FUObjectHashTables data took   3.14ms
+[2026.08.18-11.16.27:868][  0]Cmd: MAP CHECKDEP NOCLEARLOG
+[2026.08.18-11.16.27:869][  0]MapCheck: Map check complete: 0 Error(s), 0 Warning(s), took 0.195ms to complete.
+[2026.08.18-11.16.27:869][  0]LogFileHelpers: Loading map '05_Level5_PreWhomps' took 9.603
+[2026.08.18-11.16.27:869][  0]LogPython: Warning: SM64_LEVEL_PROPERTY_STATUS map=/Game/Spyro64/Levels/05_Level5_PreWhomps world=/Game/Spyro64/Levels/05_Level5_PreWhomps.05_Level5_PreWhomps actors=16
+[2026.08.18-11.16.27:871][  0]LogPython: Warning: C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/EditorScripts/inspect_level_properties.py:64: DeprecationWarning: CapsuleComponent: Property 'capsule_height' on 'CapsuleComponent' is deprecated: 'capsule_height' was renamed to 'capsule_half_height'.
+  property_value = value.get_editor_property(name)
+
+[2026.08.18-11.16.27:879][  0]LogPython: Warning: SM64_LEVEL_PROPERTY={"class": "/Game/SpyroContent/CiC_Assets/CiC_Level_Items/Dragon_Candle/Dragon_Candle_BP.Dragon_Candle_BP_C", "components": [{"absolute_location": false, "class": "/Script/Engine.CapsuleComponent", "name": "Capsule Component", "properties": {"capsule_half_height": 33.61723327636719, "capsule_height": 33.61723327636719, "capsule_radius": 25.32452392578125, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 36.0]}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/NPC_Award_Item.NPC_Award_Item_C", "name": "NPC_Award_Item", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.CameraComponent", "name": "Camera", "properties": {}, "relative_location": [236.932373046875, 141.4087677001953, 50.0]}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/AspectRatioCamera.AspectRatioCamera_C", "name": "AspectRatioCamera", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.SceneComponent", "name": "Root", "properties": {}, "relative_location": [-250.0, -1050.0, -3045.0]}, {"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "SkeletalMesh", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, -34.0]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "ParticleSystem", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 106.0]}, {"absolute_location": false, "class": "/Script/Engine.BoxComponent", "name": "Hitbox", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 14.0]}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_0", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "Dropshadow", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [0.0, 0.0, 2.0]}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/Damageable_Com.Damageable_Com_C", "name": "Damageable", "properties": {}}], "label": "Dragon_Candle_BP2", "location": [-250.0, -1050.0, -3045.0], "map": "/Game/Spyro64/Levels/05_Level5_PreWhomps", "name": "Dragon_Candle_BP2_5", "properties": {"generate_overlap_events_during_level_streaming": false}}
+[2026.08.18-11.16.27:886][  0]LogPython: Warning: SM64_LEVEL_PROPERTY={"class": "/Game/SpyroContent/CiC_Assets/CiC_Level_Items/Dragon_Candle/Dragon_Candle_BP.Dragon_Candle_BP_C", "components": [{"absolute_location": false, "class": "/Script/Engine.CapsuleComponent", "name": "Capsule Component", "properties": {"capsule_half_height": 33.61723327636719, "capsule_height": 33.61723327636719, "capsule_radius": 25.32452392578125, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 36.0]}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/NPC_Award_Item.NPC_Award_Item_C", "name": "NPC_Award_Item", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.CameraComponent", "name": "Camera", "properties": {}, "relative_location": [236.932373046875, 141.4087677001953, 50.0]}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/AspectRatioCamera.AspectRatioCamera_C", "name": "AspectRatioCamera", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.SceneComponent", "name": "Root", "properties": {}, "relative_location": [180.0, -690.0, -3045.0]}, {"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "SkeletalMesh", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, -34.0]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "ParticleSystem", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 106.0]}, {"absolute_location": false, "class": "/Script/Engine.BoxComponent", "name": "Hitbox", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 14.0]}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_0", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "Dropshadow", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [0.0, 0.0, 2.0]}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/Damageable_Com.Damageable_Com_C", "name": "Damageable", "properties": {}}], "label": "Dragon_Candle_BP3", "location": [180.0, -690.0, -3045.0], "map": "/Game/Spyro64/Levels/05_Level5_PreWhomps", "name": "Dragon_Candle_BP3_8", "properties": {"generate_overlap_events_during_level_streaming": false}}
+[2026.08.18-11.16.27:895][  0]LogPython: Warning: SM64_LEVEL_PROPERTY={"class": "/Game/SpyroContent/CiC_Assets/CiC_Level_Items/Dragon_Candle/Dragon_Candle_BP.Dragon_Candle_BP_C", "components": [{"absolute_location": false, "class": "/Script/Engine.CapsuleComponent", "name": "Capsule Component", "properties": {"capsule_half_height": 33.61723327636719, "capsule_height": 33.61723327636719, "capsule_radius": 25.32452392578125, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 36.0]}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/NPC_Award_Item.NPC_Award_Item_C", "name": "NPC_Award_Item", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.CameraComponent", "name": "Camera", "properties": {}, "relative_location": [236.932373046875, 141.4087677001953, 50.0]}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/AspectRatioCamera.AspectRatioCamera_C", "name": "AspectRatioCamera", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.SceneComponent", "name": "Root", "properties": {}, "relative_location": [-40.0, -1090.0, -3045.0]}, {"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "SkeletalMesh", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, -34.0]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "ParticleSystem", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 106.0]}, {"absolute_location": false, "class": "/Script/Engine.BoxComponent", "name": "Hitbox", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 14.0]}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_0", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "Dropshadow", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [0.0, 0.0, 2.0]}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/Damageable_Com.Damageable_Com_C", "name": "Damageable", "properties": {}}], "label": "Dragon_Candle_BP4", "location": [-40.0, -1090.0, -3045.0], "map": "/Game/Spyro64/Levels/05_Level5_PreWhomps", "name": "Dragon_Candle_BP4_11", "properties": {"generate_overlap_events_during_level_streaming": false}}
+[2026.08.18-11.16.27:904][  0]LogPython: Warning: SM64_LEVEL_PROPERTY={"class": "/Game/SpyroContent/CiC_Assets/CiC_Level_Items/Dragon_Candle/Dragon_Candle_BP.Dragon_Candle_BP_C", "components": [{"absolute_location": false, "class": "/Script/Engine.CapsuleComponent", "name": "Capsule Component", "properties": {"capsule_half_height": 33.61723327636719, "capsule_height": 33.61723327636719, "capsule_radius": 25.32452392578125, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 36.0]}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/NPC_Award_Item.NPC_Award_Item_C", "name": "NPC_Award_Item", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.CameraComponent", "name": "Camera", "properties": {}, "relative_location": [236.932373046875, 141.4087677001953, 50.0]}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/AspectRatioCamera.AspectRatioCamera_C", "name": "AspectRatioCamera", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.SceneComponent", "name": "Root", "properties": {}, "relative_location": [-50.0, -900.0, -3045.0]}, {"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "SkeletalMesh", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, -34.0]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "ParticleSystem", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 106.0]}, {"absolute_location": false, "class": "/Script/Engine.BoxComponent", "name": "Hitbox", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 14.0]}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_0", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "Dropshadow", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [0.0, 0.0, 2.0]}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/Damageable_Com.Damageable_Com_C", "name": "Damageable", "properties": {}}], "label": "Dragon_Candle_BP5", "location": [-50.0, -900.0, -3045.0], "map": "/Game/Spyro64/Levels/05_Level5_PreWhomps", "name": "Dragon_Candle_BP5_14", "properties": {"generate_overlap_events_during_level_streaming": false}}
+[2026.08.18-11.16.27:912][  0]LogPython: Warning: SM64_LEVEL_PROPERTY={"class": "/Game/SpyroContent/CiC_Assets/CiC_Level_Items/Dragon_Candle/Dragon_Candle_BP.Dragon_Candle_BP_C", "components": [{"absolute_location": false, "class": "/Script/Engine.CapsuleComponent", "name": "Capsule Component", "properties": {"capsule_half_height": 33.61723327636719, "capsule_height": 33.61723327636719, "capsule_radius": 25.32452392578125, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 36.0]}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/NPC_Award_Item.NPC_Award_Item_C", "name": "NPC_Award_Item", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.CameraComponent", "name": "Camera", "properties": {}, "relative_location": [236.932373046875, 141.4087677001953, 50.0]}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/AspectRatioCamera.AspectRatioCamera_C", "name": "AspectRatioCamera", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.SceneComponent", "name": "Root", "properties": {}, "relative_location": [-150.0, -740.0, -3045.0]}, {"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "SkeletalMesh", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, -34.0]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "ParticleSystem", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 106.0]}, {"absolute_location": false, "class": "/Script/Engine.BoxComponent", "name": "Hitbox", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 14.0]}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_0", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "Dropshadow", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [0.0, 0.0, 2.0]}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/Damageable_Com.Damageable_Com_C", "name": "Damageable", "properties": {}}], "label": "Dragon_Candle_BP", "location": [-150.0, -740.0, -3045.0], "map": "/Game/Spyro64/Levels/05_Level5_PreWhomps", "name": "Dragon_Candle_BP_2", "properties": {"generate_overlap_events_during_level_streaming": false}}
+[2026.08.18-11.16.27:915][  0]LogPython: Warning: SM64_LEVEL_PROPERTY={"class": "/Game/SpyroContent/Global_Assets/Global_Level_Items/Portals/Actors/BP_Skybox.BP_Skybox_C", "components": [{"absolute_location": false, "class": "/Script/Engine.SceneComponent", "name": "DefaultSceneRoot", "properties": {}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "StaticMesh", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.BillboardComponent", "name": "BillboardComponent_1", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}], "label": "BP_Skybox", "location": [0.0, 0.0, 0.0], "map": "/Game/Spyro64/Levels/05_Level5_PreWhomps", "name": "BP_Skybox_2", "properties": {"generate_overlap_events_during_level_streaming": false}}
+[2026.08.18-11.16.27:918][  0]LogPython: Warning: SM64_LEVEL_PROPERTY={"class": "/Game/ExampleAdventure/Utils/BP_Total_Gems.BP_Total_Gems_C", "components": [{"absolute_location": false, "class": "/Script/Engine.SceneComponent", "name": "DefaultSceneRoot", "properties": {}, "relative_location": [105.0, -143.0, 516.0]}, {"absolute_location": false, "class": "/Script/Engine.BillboardComponent", "name": "BillboardComponent_1", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}], "label": "BP_Total_Gems", "location": [105.0, -143.0, 516.0], "map": "/Game/Spyro64/Levels/05_Level5_PreWhomps", "name": "BP_Total_Gems_2", "properties": {"generate_overlap_events_during_level_streaming": false}}
+[2026.08.18-11.16.27:923][  0]LogPython: Warning: SM64_LEVEL_PROPERTY={"class": "/Game/SpyroContent/Global_Assets/Global_Level_Items/BP_KillPlane.BP_KillPlane_C", "components": [{"absolute_location": false, "class": "/Script/Engine.BoxComponent", "name": "Box", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.SceneComponent", "name": "DefaultSceneRoot", "properties": {}, "relative_location": [0.0, 0.0, -7000.0]}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "catch falling enemies", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [0.0, 0.0, -10000.0]}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "visualizer", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.BillboardComponent", "name": "BillboardComponent_1", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}], "label": "BP_KillPlane", "location": [0.0, 0.0, -7000.0], "map": "/Game/Spyro64/Levels/05_Level5_PreWhomps", "name": "BP_KillPlane_2", "properties": {"generate_overlap_events_during_level_streaming": false}}
+[2026.08.18-11.16.27:942][  0]LogPython: Warning: SM64_LEVEL_PROPERTY={"class": "/Game/SpyroContent/Global_Assets/Global_Level_Items/Portals/Actors/BP_Portal_ReturnHome.BP_Portal_ReturnHome_C", "components": [{"absolute_location": false, "class": "/Script/Engine.ArrowComponent", "name": "Camera_Position", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [364.518310546875, 20.88216209411621, 19.999738693237305]}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "Primary_Collectable_Icon", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [-89.0, -2.509822661522776e-05, -29.0]}, {"absolute_location": false, "class": "/Script/Engine.ChildActorComponent", "name": "Gold_Text_Actor", "properties": {}, "relative_location": [30.641864776611328, 42.0, -80.0]}, {"absolute_location": false, "class": "/Script/Engine.AudioComponent", "name": "Audio", "properties": {"auto_attach_socket_name": "None"}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.ChildActorComponent", "name": "Gold_Text_Actor_Backwards", "properties": {}, "relative_location": [15.384654998779297, -153.8461151123047, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.ArrowComponent", "name": "Flying_Direction_Backwards", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [160.00001525878906, 0.0002675056457519531, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.ChildActorComponent", "name": "Requirement_Text_Backwards", "properties": {}, "relative_location": [30.76922035217285, 0.0, -46.153846740722656]}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "X_Letter", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [-55.0, 2.6715192794799805, -7.5]}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "Primary_Collectable_Backwards", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [-87.15369415283203, -9.846085548400879, -29.000009536743164]}, {"absolute_location": false, "class": "/Script/Engine.BoxComponent", "name": "Awake_Radius", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.BillboardComponent", "name": "BillboardComponent_2", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.ArrowComponent", "name": "Flying_Direction", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [81.21653747558594, 6.982028007507324, 100.0]}, {"absolute_location": false, "class": "/Script/Engine.ChildActorComponent", "name": "Requirement_Text", "properties": {}, "relative_location": [30.769229888916016, 3.6679779213955044e-07, -46.153846740722656]}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_1", "properties": {}}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_0", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.ArrowComponent", "name": "Camera_Position_Backwards", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [730.0, -0.0022993087768554688, 3.637978807091713e-12]}, {"absolute_location": false, "class": "/Script/Engine.BillboardComponent", "name": "BillboardComponent_3", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_2", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.SceneComponent", "name": "DefaultSceneRoot", "properties": {}, "relative_location": [1250.0, 0.0, -5000.0]}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "StaticMesh", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "Portal_Surface", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [1.52587890625e-05, 2.288818359375e-05, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "Portal_Surface_Backwards", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "X_Letter_Bakcwards", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [-46.153831481933594, 0.0, 0.0]}], "label": "BP_Portal_ReturnHome", "location": [1250.0, 0.0, -5000.0], "map": "/Game/Spyro64/Levels/05_Level5_PreWhomps", "name": "BP_Portal_ReturnHome_2", "properties": {"generate_overlap_events_during_level_streaming": false}}
+[2026.08.18-11.16.27:945][  0]LogPython: Warning: C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/EditorScripts/inspect_level_properties.py:64: DeprecationWarning: CharacterMovementComponent: Property 'nav_mesh_projection_capsule_height_scale_down' on 'CharacterMovementComponent' is deprecated: 'nav_mesh_projection_capsule_height_scale_down' was renamed to 'nav_mesh_projection_height_scale_down'.
+  property_value = value.get_editor_property(name)
+
+[2026.08.18-11.16.27:945][  0]LogPython: Warning: C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/EditorScripts/inspect_level_properties.py:64: DeprecationWarning: CharacterMovementComponent: Property 'nav_mesh_projection_capsule_height_scale_up' on 'CharacterMovementComponent' is deprecated: 'nav_mesh_projection_capsule_height_scale_up' was renamed to 'nav_mesh_projection_height_scale_up'.
+  property_value = value.get_editor_property(name)
+
+[2026.08.18-11.16.27:969][  0]LogPython: Warning: SM64_LEVEL_PROPERTY={"class": "/Game/SpyroContent/Global_Assets/Global_Characters/Playable_Characters/Spyro/BP_Spyro.BP_Spyro_C", "components": [{"absolute_location": false, "class": "/Script/Engine.CapsuleComponent", "name": "CollisionCylinder", "properties": {"capsule_half_height": 48.0, "capsule_height": 48.0, "capsule_radius": 48.0, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, -4950.0]}, {"absolute_location": false, "class": "/Script/Engine.ArrowComponent", "name": "Arrow", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"class": "/Script/Engine.CharacterMovementComponent", "name": "CharMoveComp", "properties": {"nav_mesh_projection_capsule_height_scale_down": 1.0, "nav_mesh_projection_capsule_height_scale_up": 0.6700000166893005, "project_nav_mesh_on_both_world_channels": false}}, {"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "CharacterMesh0", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [7.0, 0.0008549999911338091, -46.0]}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_2", "properties": {}}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_5_0", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.SpringArmComponent", "name": "CameraBoom", "properties": {}, "relative_location": [0.0, 0.0, -17.0]}, {"absolute_location": false, "class": "/Script/Engine.ChildActorComponent", "name": "DragonBreath", "properties": {}, "relative_location": [6.0, 8.0, -19.0]}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_3", "properties": {}}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_1", "properties": {}}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_10", "properties": {}}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_8", "properties": {}}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_7", "properties": {}}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_0", "properties": {}}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_0_0", "properties": {}}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_6", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.ChildActorComponent", "name": "Sparx", "properties": {}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.BillboardComponent", "name": "BillboardComponent_5", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "superfly wingtip right", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.AudioComponent", "name": "Audio_Charging", "properties": {"auto_attach_socket_name": "None"}, "relative_location": [0.0, 0.0, 0.0]}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_4", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "superfly wingtip left", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "Nostril_Smoke_Left", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [-0.007021999917924404, -2.0000178813934326, -23.409400939941406]}, {"absolute_location": false, "class": "/Script/Engine.BillboardComponent", "name": "BillboardComponent_4", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_5", "properties": {}}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/Damageable_Com.Damageable_Com_C", "name": "Damageable", "properties": {}}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/AspectRatioCamera.AspectRatioCamera_C", "name": "AspectRatioCamera", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.CapsuleComponent", "name": "Gem_Collection_Radius_Sphere", "properties": {"capsule_half_height": 73.6678466796875, "capsule_height": 73.6678466796875, "capsule_radius": 44.0, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "Charge_Bubbles", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0008587837219238281, 13.000008583068848, 5.999988079071045]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "Nostril_Bubbles", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [8.00088882446289, -3.1014089584350586, -23.984479904174805]}, {"absolute_location": false, "class": "/Script/Engine.BillboardComponent", "name": "BillboardComponent_3", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.AudioComponent", "name": "Audio_UnderwaterRumble", "properties": {"auto_attach_socket_name": "None"}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.AudioComponent", "name": "Audio_Drowning", "properties": {"auto_attach_socket_name": "None"}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.ArrowComponent", "name": "Meshs_Forward", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.CameraComponent", "name": "ReturnHome_Cam", "properties": {}, "relative_location": [0.0, 244.0, 89.0]}, {"absolute_location": false, "class": "/Script/Engine.CameraComponent", "name": "Portal_Transition_Cam", "properties": {}, "relative_location": [-107.0119857788086, 142.09461975097656, 16.111886978149414]}, {"absolute_location": true, "class": "/Script/Engine.SkeletalMeshComponent", "name": "DropShadow", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [27.0, 0.0, -47.0]}, {"absolute_location": false, "class": "/Script/Engine.ArrowComponent", "name": "CameraDefaultRotation", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [-263.0, 0.0, 48.0]}, {"absolute_location": false, "class": "/Script/Engine.CameraComponent", "name": "FollowCamera", "properties": {}, "relative_location": [0.0, 0.0, 0.0]}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_4_0", "properties": {}}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_9", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "Nostril_Smoke_Right", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [15.278032302856445, 2.0000219345092773, -16.87164306640625]}], "label": "BP_S3_Spyro", "location": [0.0, 0.0, -4950.0], "map": "/Game/Spyro64/Levels/05_Level5_PreWhomps", "name": "BP_S3_Spyro_2", "properties": {"capsule_component": "/Game/Spyro64/Levels/05_Level5_PreWhomps.05_Level5_PreWhomps:PersistentLevel.BP_S3_Spyro_2.CollisionCylinder", "generate_overlap_events_during_level_streaming": true}}
+[2026.08.18-11.16.27:974][  0]LogPython: Warning: SM64_LEVEL_PROPERTY={"class": "/Game/SpyroContent/Global_Assets/Global_Level_Items/Golden_Text/Gold_Text.Gold_Text_C", "components": [{"absolute_location": false, "class": "/Script/Engine.SceneComponent", "name": "Root", "properties": {}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "StaticMesh", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.BoxComponent", "name": "visibility box", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [179.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.BoxComponent", "name": "invisibility box", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}], "label": "Gold_Text", "location": [1215.0926513671875, -34.179439544677734, -5110.0], "map": "/Game/Spyro64/Levels/05_Level5_PreWhomps", "name": "ChildActor_GEN_VARIABLE_Gold_Text_C_CAT_0", "properties": {"generate_overlap_events_during_level_streaming": false}}
+[2026.08.18-11.16.27:981][  0]LogPython: Warning: SM64_LEVEL_PROPERTY={"class": "/Game/SpyroContent/Global_Assets/Global_Level_Items/Golden_Text/Gold_Text.Gold_Text_C", "components": [{"absolute_location": false, "class": "/Script/Engine.SceneComponent", "name": "Root", "properties": {}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "StaticMesh", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.BoxComponent", "name": "visibility box", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [179.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.BoxComponent", "name": "invisibility box", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}], "label": "Gold_Text1", "location": [1297.02490234375, 30.528472900390625, -5110.0], "map": "/Game/Spyro64/Levels/05_Level5_PreWhomps", "name": "Requirement_Text_GEN_VARIABLE_Gold_Text_C_CAT_1", "properties": {"generate_overlap_events_during_level_streaming": false}}
+[2026.08.18-11.16.27:995][  0]LogPython: Warning: SM64_LEVEL_PROPERTY={"class": "/Game/SpyroContent/Global_Assets/Global_Characters/Sparx/Sparx_BP.Sparx_BP_C", "components": [{"absolute_location": false, "class": "/Script/Engine.SceneComponent", "name": "DefaultSceneRoot", "properties": {}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.BillboardComponent", "name": "BillboardComponent_0", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": true, "class": "/Script/Engine.CapsuleComponent", "name": "Capsule", "properties": {"capsule_half_height": 15.326379776000977, "capsule_height": 15.326379776000977, "capsule_radius": 15.326379776000977, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "Mesh", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [4.0, -1.0, -5.0]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "ParticleSystem_Left", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [11.000011444091797, -3.9999656677246094, 2.0]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "ParticleSystem_Left_LowHP", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "ParticleSystem_Right", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [-12.99998664855957, -4.0000410079956055, 2.0]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "ParticleSystem_Right_LowHP", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "Bubble_Particle", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.10000000149011612, -0.20000000298023224, -0.5]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "Glow_Particle", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.25, -0.20000000298023224, -0.5]}, {"absolute_location": false, "class": "/Script/Engine.AudioComponent", "name": "Audio", "properties": {"auto_attach_socket_name": "None"}, "relative_location": [-0.9999871253967285, -4.000002861022949, 5.0]}, {"absolute_location": false, "class": "/Script/Engine.BillboardComponent", "name": "BillboardComponent_1", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "Glow_Particle_ExtraHP", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.SceneComponent", "name": "Target Location", "properties": {}, "relative_location": [0.0, 0.0, 0.0]}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_0", "properties": {}}], "label": "Sparx_BP", "location": [0.0, 0.0, -4950.0], "map": "/Game/Spyro64/Levels/05_Level5_PreWhomps", "name": "Sparx_GEN_VARIABLE_Sparx_BP_C_CAT_0", "properties": {"generate_overlap_events_during_level_streaming": false}}
+[2026.08.18-11.16.28:018][  0]LogPython: Warning: SM64_LEVEL_PROPERTY={"class": "/Game/SpyroContent/Global_Assets/Global_Level_Items/Dragon_Breath/Blueprints/Dragon_Breath_BP.Dragon_Breath_BP_C", "components": [{"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "Bottom Left", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "Bottom Right", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "Lowest Left", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "Lowest Right", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "Middle Left", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "Middle Right", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "Top Left", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "Top Right", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "Spikes With ABP", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_1", "properties": {}}], "label": "Dragon_Breath_BP", "location": [36.96872329711914, 0.7964487075805664, -4948.4033203125], "map": "/Game/Spyro64/Levels/05_Level5_PreWhomps", "name": "Dragon_Breath_BP_C_0", "properties": {"generate_overlap_events_during_level_streaming": false}}
+[2026.08.18-11.16.28:022][  0]LogCore: Engine exit requested (reason: Commandlet PythonScriptCommandlet_0 finished execution (result 0))
+[2026.08.18-11.16.28:022][  0]LogInit: Display: 
+[2026.08.18-11.16.28:022][  0]LogInit: Display: Warning/Error Summary (Unique only)
+[2026.08.18-11.16.28:022][  0]LogInit: Display: -----------------------------------
+[2026.08.18-11.16.28:022][  0]LogInit: Display: LogPython: Warning: SM64_LEVEL_PROPERTY_STATUS map=/Game/Spyro64/Levels/05_Level5_PreWhomps world=/Game/Spyro64/Levels/05_Level5_PreWhomps.05_Level5_PreWhomps actors=16
+[2026.08.18-11.16.28:023][  0]LogInit: Display: LogPython: Warning: C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/EditorScripts/inspect_level_properties.py:64: DeprecationWarning: CapsuleComponent: Property 'capsule_height' on 'CapsuleComponent' is deprecated: 'capsule_height' was renamed to 'capsule_half_height'.
+  property_value = value.get_editor_property(name)
+
+[2026.08.18-11.16.28:028][  0]LogInit: Display: LogPython: Warning: SM64_LEVEL_PROPERTY={"class": "/Game/SpyroContent/CiC_Assets/CiC_Level_Items/Dragon_Candle/Dragon_Candle_BP.Dragon_Candle_BP_C", "components": [{"absolute_location": false, "class": "/Script/Engine.CapsuleComponent", "name": "Capsule Component", "properties": {"capsule_half_height": 33.61723327636719, "capsule_height": 33.61723327636719, "capsule_radius": 25.32452392578125, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 36.0]}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/NPC_Award_Item.NPC_Award_Item_C", "name": "NPC_Award_Item", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.CameraComponent", "name": "Camera", "properties": {}, "relative_location": [236.932373046875, 141.4087677001953, 50.0]}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/AspectRatioCamera.AspectRatioCamera_C", "name": "AspectRatioCamera", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.SceneComponent", "name": "Root", "properties": {}, "relative_location": [-250.0, -1050.0, -3045.0]}, {"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "SkeletalMesh", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, -34.0]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "ParticleSystem", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 106.0]}, {"absolute_location": false, "class": "/Script/Engine.BoxComponent", "name": "Hitbox", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 14.0]}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_0", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "Dropshadow", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [0.0, 0.0, 2.0]}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/Damageable_Com.Damageable_Com_C", "name": "Damageable", "properties": {}}], "label": "Dragon_Candle_BP2", "location": [-250.0, -1050.0, -3045.0], "map": "/Game/Spyro64/Levels/05_Level5_PreWhomps", "name": "Dragon_Candle_BP2_5", "properties": {"generate_overlap_events_during_level_streaming": false}}
+[2026.08.18-11.16.28:032][  0]LogInit: Display: LogPython: Warning: SM64_LEVEL_PROPERTY={"class": "/Game/SpyroContent/CiC_Assets/CiC_Level_Items/Dragon_Candle/Dragon_Candle_BP.Dragon_Candle_BP_C", "components": [{"absolute_location": false, "class": "/Script/Engine.CapsuleComponent", "name": "Capsule Component", "properties": {"capsule_half_height": 33.61723327636719, "capsule_height": 33.61723327636719, "capsule_radius": 25.32452392578125, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 36.0]}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/NPC_Award_Item.NPC_Award_Item_C", "name": "NPC_Award_Item", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.CameraComponent", "name": "Camera", "properties": {}, "relative_location": [236.932373046875, 141.4087677001953, 50.0]}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/AspectRatioCamera.AspectRatioCamera_C", "name": "AspectRatioCamera", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.SceneComponent", "name": "Root", "properties": {}, "relative_location": [180.0, -690.0, -3045.0]}, {"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "SkeletalMesh", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, -34.0]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "ParticleSystem", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 106.0]}, {"absolute_location": false, "class": "/Script/Engine.BoxComponent", "name": "Hitbox", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 14.0]}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_0", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "Dropshadow", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [0.0, 0.0, 2.0]}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/Damageable_Com.Damageable_Com_C", "name": "Damageable", "properties": {}}], "label": "Dragon_Candle_BP3", "location": [180.0, -690.0, -3045.0], "map": "/Game/Spyro64/Levels/05_Level5_PreWhomps", "name": "Dragon_Candle_BP3_8", "properties": {"generate_overlap_events_during_level_streaming": false}}
+[2026.08.18-11.16.28:036][  0]LogInit: Display: LogPython: Warning: SM64_LEVEL_PROPERTY={"class": "/Game/SpyroContent/CiC_Assets/CiC_Level_Items/Dragon_Candle/Dragon_Candle_BP.Dragon_Candle_BP_C", "components": [{"absolute_location": false, "class": "/Script/Engine.CapsuleComponent", "name": "Capsule Component", "properties": {"capsule_half_height": 33.61723327636719, "capsule_height": 33.61723327636719, "capsule_radius": 25.32452392578125, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 36.0]}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/NPC_Award_Item.NPC_Award_Item_C", "name": "NPC_Award_Item", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.CameraComponent", "name": "Camera", "properties": {}, "relative_location": [236.932373046875, 141.4087677001953, 50.0]}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/AspectRatioCamera.AspectRatioCamera_C", "name": "AspectRatioCamera", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.SceneComponent", "name": "Root", "properties": {}, "relative_location": [-40.0, -1090.0, -3045.0]}, {"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "SkeletalMesh", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, -34.0]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "ParticleSystem", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 106.0]}, {"absolute_location": false, "class": "/Script/Engine.BoxComponent", "name": "Hitbox", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 14.0]}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_0", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "Dropshadow", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [0.0, 0.0, 2.0]}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/Damageable_Com.Damageable_Com_C", "name": "Damageable", "properties": {}}], "label": "Dragon_Candle_BP4", "location": [-40.0, -1090.0, -3045.0], "map": "/Game/Spyro64/Levels/05_Level5_PreWhomps", "name": "Dragon_Candle_BP4_11", "properties": {"generate_overlap_events_during_level_streaming": false}}
+[2026.08.18-11.16.28:040][  0]LogInit: Display: LogPython: Warning: SM64_LEVEL_PROPERTY={"class": "/Game/SpyroContent/CiC_Assets/CiC_Level_Items/Dragon_Candle/Dragon_Candle_BP.Dragon_Candle_BP_C", "components": [{"absolute_location": false, "class": "/Script/Engine.CapsuleComponent", "name": "Capsule Component", "properties": {"capsule_half_height": 33.61723327636719, "capsule_height": 33.61723327636719, "capsule_radius": 25.32452392578125, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 36.0]}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/NPC_Award_Item.NPC_Award_Item_C", "name": "NPC_Award_Item", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.CameraComponent", "name": "Camera", "properties": {}, "relative_location": [236.932373046875, 141.4087677001953, 50.0]}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/AspectRatioCamera.AspectRatioCamera_C", "name": "AspectRatioCamera", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.SceneComponent", "name": "Root", "properties": {}, "relative_location": [-50.0, -900.0, -3045.0]}, {"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "SkeletalMesh", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, -34.0]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "ParticleSystem", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 106.0]}, {"absolute_location": false, "class": "/Script/Engine.BoxComponent", "name": "Hitbox", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 14.0]}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_0", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "Dropshadow", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [0.0, 0.0, 2.0]}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/Damageable_Com.Damageable_Com_C", "name": "Damageable", "properties": {}}], "label": "Dragon_Candle_BP5", "location": [-50.0, -900.0, -3045.0], "map": "/Game/Spyro64/Levels/05_Level5_PreWhomps", "name": "Dragon_Candle_BP5_14", "properties": {"generate_overlap_events_during_level_streaming": false}}
+[2026.08.18-11.16.28:044][  0]LogInit: Display: LogPython: Warning: SM64_LEVEL_PROPERTY={"class": "/Game/SpyroContent/CiC_Assets/CiC_Level_Items/Dragon_Candle/Dragon_Candle_BP.Dragon_Candle_BP_C", "components": [{"absolute_location": false, "class": "/Script/Engine.CapsuleComponent", "name": "Capsule Component", "properties": {"capsule_half_height": 33.61723327636719, "capsule_height": 33.61723327636719, "capsule_radius": 25.32452392578125, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 36.0]}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/NPC_Award_Item.NPC_Award_Item_C", "name": "NPC_Award_Item", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.CameraComponent", "name": "Camera", "properties": {}, "relative_location": [236.932373046875, 141.4087677001953, 50.0]}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/AspectRatioCamera.AspectRatioCamera_C", "name": "AspectRatioCamera", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.SceneComponent", "name": "Root", "properties": {}, "relative_location": [-150.0, -740.0, -3045.0]}, {"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "SkeletalMesh", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, -34.0]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "ParticleSystem", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 106.0]}, {"absolute_location": false, "class": "/Script/Engine.BoxComponent", "name": "Hitbox", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 14.0]}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_0", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "Dropshadow", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [0.0, 0.0, 2.0]}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/Damageable_Com.Damageable_Com_C", "name": "Damageable", "properties": {}}], "label": "Dragon_Candle_BP", "location": [-150.0, -740.0, -3045.0], "map": "/Game/Spyro64/Levels/05_Level5_PreWhomps", "name": "Dragon_Candle_BP_2", "properties": {"generate_overlap_events_during_level_streaming": false}}
+[2026.08.18-11.16.28:044][  0]LogInit: Display: LogPython: Warning: SM64_LEVEL_PROPERTY={"class": "/Game/SpyroContent/Global_Assets/Global_Level_Items/Portals/Actors/BP_Skybox.BP_Skybox_C", "components": [{"absolute_location": false, "class": "/Script/Engine.SceneComponent", "name": "DefaultSceneRoot", "properties": {}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "StaticMesh", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.BillboardComponent", "name": "BillboardComponent_1", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}], "label": "BP_Skybox", "location": [0.0, 0.0, 0.0], "map": "/Game/Spyro64/Levels/05_Level5_PreWhomps", "name": "BP_Skybox_2", "properties": {"generate_overlap_events_during_level_streaming": false}}
+[2026.08.18-11.16.28:046][  0]LogInit: Display: LogPython: Warning: SM64_LEVEL_PROPERTY={"class": "/Game/ExampleAdventure/Utils/BP_Total_Gems.BP_Total_Gems_C", "components": [{"absolute_location": false, "class": "/Script/Engine.SceneComponent", "name": "DefaultSceneRoot", "properties": {}, "relative_location": [105.0, -143.0, 516.0]}, {"absolute_location": false, "class": "/Script/Engine.BillboardComponent", "name": "BillboardComponent_1", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}], "label": "BP_Total_Gems", "location": [105.0, -143.0, 516.0], "map": "/Game/Spyro64/Levels/05_Level5_PreWhomps", "name": "BP_Total_Gems_2", "properties": {"generate_overlap_events_during_level_streaming": false}}
+[2026.08.18-11.16.28:048][  0]LogInit: Display: LogPython: Warning: SM64_LEVEL_PROPERTY={"class": "/Game/SpyroContent/Global_Assets/Global_Level_Items/BP_KillPlane.BP_KillPlane_C", "components": [{"absolute_location": false, "class": "/Script/Engine.BoxComponent", "name": "Box", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.SceneComponent", "name": "DefaultSceneRoot", "properties": {}, "relative_location": [0.0, 0.0, -7000.0]}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "catch falling enemies", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [0.0, 0.0, -10000.0]}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "visualizer", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.BillboardComponent", "name": "BillboardComponent_1", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}], "label": "BP_KillPlane", "location": [0.0, 0.0, -7000.0], "map": "/Game/Spyro64/Levels/05_Level5_PreWhomps", "name": "BP_KillPlane_2", "properties": {"generate_overlap_events_during_level_streaming": false}}
+[2026.08.18-11.16.28:055][  0]LogInit: Display: LogPython: Warning: SM64_LEVEL_PROPERTY={"class": "/Game/SpyroContent/Global_Assets/Global_Level_Items/Portals/Actors/BP_Portal_ReturnHome.BP_Portal_ReturnHome_C", "components": [{"absolute_location": false, "class": "/Script/Engine.ArrowComponent", "name": "Camera_Position", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [364.518310546875, 20.88216209411621, 19.999738693237305]}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "Primary_Collectable_Icon", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [-89.0, -2.509822661522776e-05, -29.0]}, {"absolute_location": false, "class": "/Script/Engine.ChildActorComponent", "name": "Gold_Text_Actor", "properties": {}, "relative_location": [30.641864776611328, 42.0, -80.0]}, {"absolute_location": false, "class": "/Script/Engine.AudioComponent", "name": "Audio", "properties": {"auto_attach_socket_name": "None"}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.ChildActorComponent", "name": "Gold_Text_Actor_Backwards", "properties": {}, "relative_location": [15.384654998779297, -153.8461151123047, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.ArrowComponent", "name": "Flying_Direction_Backwards", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [160.00001525878906, 0.0002675056457519531, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.ChildActorComponent", "name": "Requirement_Text_Backwards", "properties": {}, "relative_location": [30.76922035217285, 0.0, -46.153846740722656]}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "X_Letter", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [-55.0, 2.6715192794799805, -7.5]}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "Primary_Collectable_Backwards", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [-87.15369415283203, -9.846085548400879, -29.000009536743164]}, {"absolute_location": false, "class": "/Script/Engine.BoxComponent", "name": "Awake_Radius", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.BillboardComponent", "name": "BillboardComponent_2", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.ArrowComponent", "name": "Flying_Direction", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [81.21653747558594, 6.982028007507324, 100.0]}, {"absolute_location": false, "class": "/Script/Engine.ChildActorComponent", "name": "Requirement_Text", "properties": {}, "relative_location": [30.769229888916016, 3.6679779213955044e-07, -46.153846740722656]}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_1", "properties": {}}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_0", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.ArrowComponent", "name": "Camera_Position_Backwards", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [730.0, -0.0022993087768554688, 3.637978807091713e-12]}, {"absolute_location": false, "class": "/Script/Engine.BillboardComponent", "name": "BillboardComponent_3", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_2", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.SceneComponent", "name": "DefaultSceneRoot", "properties": {}, "relative_location": [1250.0, 0.0, -5000.0]}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "StaticMesh", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "Portal_Surface", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [1.52587890625e-05, 2.288818359375e-05, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "Portal_Surface_Backwards", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "X_Letter_Bakcwards", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [-46.153831481933594, 0.0, 0.0]}], "label": "BP_Portal_ReturnHome", "location": [1250.0, 0.0, -5000.0], "map": "/Game/Spyro64/Levels/05_Level5_PreWhomps", "name": "BP_Portal_ReturnHome_2", "properties": {"generate_overlap_events_during_level_streaming": false}}
+[2026.08.18-11.16.28:056][  0]LogInit: Display: LogPython: Warning: C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/EditorScripts/inspect_level_properties.py:64: DeprecationWarning: CharacterMovementComponent: Property 'nav_mesh_projection_capsule_height_scale_down' on 'CharacterMovementComponent' is deprecated: 'nav_mesh_projection_capsule_height_scale_down' was renamed to 'nav_mesh_projection_height_scale_down'.
+  property_value = value.get_editor_property(name)
+
+[2026.08.18-11.16.28:056][  0]LogInit: Display: LogPython: Warning: C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/EditorScripts/inspect_level_properties.py:64: DeprecationWarning: CharacterMovementComponent: Property 'nav_mesh_projection_capsule_height_scale_up' on 'CharacterMovementComponent' is deprecated: 'nav_mesh_projection_capsule_height_scale_up' was renamed to 'nav_mesh_projection_height_scale_up'.
+  property_value = value.get_editor_property(name)
+
+[2026.08.18-11.16.28:065][  0]LogInit: Display: LogPython: Warning: SM64_LEVEL_PROPERTY={"class": "/Game/SpyroContent/Global_Assets/Global_Characters/Playable_Characters/Spyro/BP_Spyro.BP_Spyro_C", "components": [{"absolute_location": false, "class": "/Script/Engine.CapsuleComponent", "name": "CollisionCylinder", "properties": {"capsule_half_height": 48.0, "capsule_height": 48.0, "capsule_radius": 48.0, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, -4950.0]}, {"absolute_location": false, "class": "/Script/Engine.ArrowComponent", "name": "Arrow", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"class": "/Script/Engine.CharacterMovementComponent", "name": "CharMoveComp", "properties": {"nav_mesh_projection_capsule_height_scale_down": 1.0, "nav_mesh_projection_capsule_height_scale_up": 0.6700000166893005, "project_nav_mesh_on_both_world_channels": false}}, {"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "CharacterMesh0", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [7.0, 0.0008549999911338091, -46.0]}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_2", "properties": {}}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_5_0", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.SpringArmComponent", "name": "CameraBoom", "properties": {}, "relative_location": [0.0, 0.0, -17.0]}, {"absolute_location": false, "class": "/Script/Engine.ChildActorComponent", "name": "DragonBreath", "properties": {}, "relative_location": [6.0, 8.0, -19.0]}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_3", "properties": {}}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_1", "properties": {}}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_10", "properties": {}}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_8", "properties": {}}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_7", "properties": {}}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_0", "properties": {}}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_0_0", "properties": {}}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_6", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.ChildActorComponent", "name": "Sparx", "properties": {}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.BillboardComponent", "name": "BillboardComponent_5", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "superfly wingtip right", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.AudioComponent", "name": "Audio_Charging", "properties": {"auto_attach_socket_name": "None"}, "relative_location": [0.0, 0.0, 0.0]}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_4", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "superfly wingtip left", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "Nostril_Smoke_Left", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [-0.007021999917924404, -2.0000178813934326, -23.409400939941406]}, {"absolute_location": false, "class": "/Script/Engine.BillboardComponent", "name": "BillboardComponent_4", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_5", "properties": {}}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/Damageable_Com.Damageable_Com_C", "name": "Damageable", "properties": {}}, {"class": "/Game/SpyroContent/Global_Assets/Global_Components/AspectRatioCamera.AspectRatioCamera_C", "name": "AspectRatioCamera", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.CapsuleComponent", "name": "Gem_Collection_Radius_Sphere", "properties": {"capsule_half_height": 73.6678466796875, "capsule_height": 73.6678466796875, "capsule_radius": 44.0, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "Charge_Bubbles", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0008587837219238281, 13.000008583068848, 5.999988079071045]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "Nostril_Bubbles", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [8.00088882446289, -3.1014089584350586, -23.984479904174805]}, {"absolute_location": false, "class": "/Script/Engine.BillboardComponent", "name": "BillboardComponent_3", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.AudioComponent", "name": "Audio_UnderwaterRumble", "properties": {"auto_attach_socket_name": "None"}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.AudioComponent", "name": "Audio_Drowning", "properties": {"auto_attach_socket_name": "None"}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.ArrowComponent", "name": "Meshs_Forward", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.CameraComponent", "name": "ReturnHome_Cam", "properties": {}, "relative_location": [0.0, 244.0, 89.0]}, {"absolute_location": false, "class": "/Script/Engine.CameraComponent", "name": "Portal_Transition_Cam", "properties": {}, "relative_location": [-107.0119857788086, 142.09461975097656, 16.111886978149414]}, {"absolute_location": true, "class": "/Script/Engine.SkeletalMeshComponent", "name": "DropShadow", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [27.0, 0.0, -47.0]}, {"absolute_location": false, "class": "/Script/Engine.ArrowComponent", "name": "CameraDefaultRotation", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [-263.0, 0.0, 48.0]}, {"absolute_location": false, "class": "/Script/Engine.CameraComponent", "name": "FollowCamera", "properties": {}, "relative_location": [0.0, 0.0, 0.0]}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_4_0", "properties": {}}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_9", "properties": {}}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "Nostril_Smoke_Right", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [15.278032302856445, 2.0000219345092773, -16.87164306640625]}], "label": "BP_S3_Spyro", "location": [0.0, 0.0, -4950.0], "map": "/Game/Spyro64/Levels/05_Level5_PreWhomps", "name": "BP_S3_Spyro_2", "properties": {"capsule_component": "/Game/Spyro64/Levels/05_Level5_PreWhomps.05_Level5_PreWhomps:PersistentLevel.BP_S3_Spyro_2.CollisionCylinder", "generate_overlap_events_during_level_streaming": true}}
+[2026.08.18-11.16.28:067][  0]LogInit: Display: LogPython: Warning: SM64_LEVEL_PROPERTY={"class": "/Game/SpyroContent/Global_Assets/Global_Level_Items/Golden_Text/Gold_Text.Gold_Text_C", "components": [{"absolute_location": false, "class": "/Script/Engine.SceneComponent", "name": "Root", "properties": {}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "StaticMesh", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.BoxComponent", "name": "visibility box", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [179.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.BoxComponent", "name": "invisibility box", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}], "label": "Gold_Text", "location": [1215.0926513671875, -34.179439544677734, -5110.0], "map": "/Game/Spyro64/Levels/05_Level5_PreWhomps", "name": "ChildActor_GEN_VARIABLE_Gold_Text_C_CAT_0", "properties": {"generate_overlap_events_during_level_streaming": false}}
+[2026.08.18-11.16.28:069][  0]LogInit: Display: LogPython: Warning: SM64_LEVEL_PROPERTY={"class": "/Game/SpyroContent/Global_Assets/Global_Level_Items/Golden_Text/Gold_Text.Gold_Text_C", "components": [{"absolute_location": false, "class": "/Script/Engine.SceneComponent", "name": "Root", "properties": {}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.StaticMeshComponent", "name": "StaticMesh", "properties": {"evaluate_world_position_offset": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "overridden_light_map_res": 64, "override_light_map_res": false, "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.BoxComponent", "name": "visibility box", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [179.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.BoxComponent", "name": "invisibility box", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}], "label": "Gold_Text1", "location": [1297.02490234375, 30.528472900390625, -5110.0], "map": "/Game/Spyro64/Levels/05_Level5_PreWhomps", "name": "Requirement_Text_GEN_VARIABLE_Gold_Text_C_CAT_1", "properties": {"generate_overlap_events_during_level_streaming": false}}
+[2026.08.18-11.16.28:074][  0]LogInit: Display: LogPython: Warning: SM64_LEVEL_PROPERTY={"class": "/Game/SpyroContent/Global_Assets/Global_Characters/Sparx/Sparx_BP.Sparx_BP_C", "components": [{"absolute_location": false, "class": "/Script/Engine.SceneComponent", "name": "DefaultSceneRoot", "properties": {}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.BillboardComponent", "name": "BillboardComponent_0", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": true, "class": "/Script/Engine.CapsuleComponent", "name": "Capsule", "properties": {"capsule_half_height": 15.326379776000977, "capsule_height": 15.326379776000977, "capsule_radius": 15.326379776000977, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "Mesh", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [4.0, -1.0, -5.0]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "ParticleSystem_Left", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [11.000011444091797, -3.9999656677246094, 2.0]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "ParticleSystem_Left_LowHP", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "ParticleSystem_Right", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [-12.99998664855957, -4.0000410079956055, 2.0]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "ParticleSystem_Right_LowHP", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "Bubble_Particle", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.10000000149011612, -0.20000000298023224, -0.5]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "Glow_Particle", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.25, -0.20000000298023224, -0.5]}, {"absolute_location": false, "class": "/Script/Engine.AudioComponent", "name": "Audio", "properties": {"auto_attach_socket_name": "None"}, "relative_location": [-0.9999871253967285, -4.000002861022949, 5.0]}, {"absolute_location": false, "class": "/Script/Engine.BillboardComponent", "name": "BillboardComponent_1", "properties": {"exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.ParticleSystemComponent", "name": "Glow_Particle_ExtraHP", "properties": {"auto_attach_socket_name": "None", "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.SceneComponent", "name": "Target Location", "properties": {}, "relative_location": [0.0, 0.0, 0.0]}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_0", "properties": {}}], "label": "Sparx_BP", "location": [0.0, 0.0, -4950.0], "map": "/Game/Spyro64/Levels/05_Level5_PreWhomps", "name": "Sparx_GEN_VARIABLE_Sparx_BP_C_CAT_0", "properties": {"generate_overlap_events_during_level_streaming": false}}
+[2026.08.18-11.16.28:078][  0]LogInit: Display: LogPython: Warning: SM64_LEVEL_PROPERTY={"class": "/Game/SpyroContent/Global_Assets/Global_Level_Items/Dragon_Breath/Blueprints/Dragon_Breath_BP.Dragon_Breath_BP_C", "components": [{"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "Bottom Left", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "Bottom Right", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "Lowest Left", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "Lowest Right", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "Middle Left", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "Middle Right", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "Top Left", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "Top Right", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"absolute_location": false, "class": "/Script/Engine.SkeletalMeshComponent", "name": "Spikes With ABP", "properties": {"capsule_indirect_shadow_min_visibility": 0.10000000149011612, "cast_capsule_direct_shadow": false, "cast_capsule_indirect_shadow": false, "exclude_for_specific_hlod_levels": [], "lightmap_type": "<LightmapType.DEFAULT: 0>", "return_material_on_move": false}, "relative_location": [0.0, 0.0, 0.0]}, {"class": "/Script/Engine.TimelineComponent", "name": "Timeline_1", "properties": {}}], "label": "Dragon_Breath_BP", "location": [36.96872329711914, 0.7964487075805664, -4948.4033203125], "map": "/Game/Spyro64/Levels/05_Level5_PreWhomps", "name": "Dragon_Breath_BP_C_0", "properties": {"generate_overlap_events_during_level_streaming": false}}
+[2026.08.18-11.16.28:079][  0]LogInit: Display: 
+[2026.08.18-11.16.28:079][  0]LogInit: Display: Success - 0 error(s), 18 warning(s)
+[2026.08.18-11.16.28:079][  0]LogInit: Display: 
+Execution of commandlet took:  9.82 seconds
+[2026.08.18-11.16.28:079][  0]LogCore: Engine exit requested (reason: EngineExit() was called; note: exit was already requested)
+[2026.08.18-11.16.28:079][  0]LogExit: Preparing to exit.
+[2026.08.18-11.16.28:094][  0]LogUObjectHash: Compacting FUObjectHashTables data took   1.03ms
+[2026.08.18-11.16.28:616][  0]LogDemo: Cleaned up 0 splitscreen connections with owner deletion
+[2026.08.18-11.16.28:619][  0]LogWorld: UWorld::CleanupWorld for None, bSessionEnded=true, bCleanupResources=true
+[2026.08.18-11.16.28:619][  0]LogExit: Editor shut down
+[2026.08.18-11.16.28:673][  0]LogExit: Object subsystem successfully closed.
+[2026.08.18-11.16.28:684][  0]LogShaderCompilers: Display: === FShaderJobCache stats ===
+[2026.08.18-11.16.28:684][  0]LogShaderCompilers: Display: Total job queries 0, among them cache hits 0 (0.00%)
+[2026.08.18-11.16.28:684][  0]LogShaderCompilers: Display: Tracking 0 distinct input hashes that result in 0 distinct outputs (0.00%)
+[2026.08.18-11.16.28:684][  0]LogShaderCompilers: Display: RAM used: 0.00 MB (0.00 GB) of 1638.40 MB (1.60 GB) budget. Usage: 0.00%
+[2026.08.18-11.16.28:684][  0]LogShaderCompilers: Display: ================================================
+[2026.08.18-11.16.28:688][  0]LogShaderCompilers: Display: Shaders left to compile 0
+[2026.08.18-11.16.28:700][  0]LogModuleManager: Shutting down and abandoning module StatsViewer (678)
+[2026.08.18-11.16.28:700][  0]LogModuleManager: Shutting down and abandoning module GooglePADEditor (676)
+[2026.08.18-11.16.28:700][  0]LogModuleManager: Shutting down and abandoning module PlanarCut (674)
+[2026.08.18-11.16.28:701][  0]LogModuleManager: Shutting down and abandoning module AudioCaptureEditor (672)
+[2026.08.18-11.16.28:701][  0]LogModuleManager: Shutting down and abandoning module WmfMediaFactory (670)
+[2026.08.18-11.16.28:701][  0]LogModuleManager: Shutting down and abandoning module WmfMediaEditor (668)
+[2026.08.18-11.16.28:701][  0]LogModuleManager: Shutting down and abandoning module MediaPlayerEditor (666)
+[2026.08.18-11.16.28:701][  0]LogModuleManager: Shutting down and abandoning module WebMMediaFactory (664)
+[2026.08.18-11.16.28:701][  0]LogModuleManager: Shutting down and abandoning module WebMMediaEditor (662)
+[2026.08.18-11.16.28:702][  0]LogModuleManager: Shutting down and abandoning module MediaCompositingEditor (660)
+[2026.08.18-11.16.28:702][  0]LogModuleManager: Shutting down and abandoning module SequenceRecorder (659)
+[2026.08.18-11.16.28:702][  0]LogModuleManager: Shutting down and abandoning module Persona (658)
+[2026.08.18-11.16.28:702][  0]LogModuleManager: Shutting down and abandoning module AdvancedPreviewScene (657)
+[2026.08.18-11.16.28:702][  0]LogModuleManager: Shutting down and abandoning module AnimGraph (655)
+[2026.08.18-11.16.28:702][  0]LogModuleManager: Shutting down and abandoning module ImgMediaFactory (650)
+[2026.08.18-11.16.28:702][  0]LogModuleManager: Shutting down and abandoning module ImgMediaEditor (648)
+[2026.08.18-11.16.28:702][  0]LogModuleManager: Shutting down and abandoning module TemplateSequenceEditor (646)
+[2026.08.18-11.16.28:703][  0]LogModuleManager: Shutting down and abandoning module AvfMediaFactory (644)
+[2026.08.18-11.16.28:703][  0]LogModuleManager: Shutting down and abandoning module AvfMediaEditor (642)
+[2026.08.18-11.16.28:703][  0]LogModuleManager: Shutting down and abandoning module CharacterAI (640)
+[2026.08.18-11.16.28:703][  0]LogModuleManager: Shutting down and abandoning module AndroidMediaFactory (638)
+[2026.08.18-11.16.28:703][  0]LogModuleManager: Shutting down and abandoning module AndroidMediaEditor (636)
+[2026.08.18-11.16.28:703][  0]LogModuleManager: Shutting down and abandoning module TextureAlignMode (634)
+[2026.08.18-11.16.28:703][  0]LogModuleManager: Shutting down and abandoning module BspMode (632)
+[2026.08.18-11.16.28:703][  0]LogModuleManager: Shutting down and abandoning module GeometryMode (630)
+[2026.08.18-11.16.28:704][  0]LogModuleManager: Shutting down and abandoning module MagicLeapMediaEditor (628)
+[2026.08.18-11.16.28:704][  0]LogModuleManager: Shutting down and abandoning module MatineeToLevelSequence (626)
+[2026.08.18-11.16.28:704][  0]LogModuleManager: Shutting down and abandoning module LevelSequenceEditor (624)
+[2026.08.18-11.16.28:704][  0]LogModuleManager: Shutting down and abandoning module ActorSequenceEditor (622)
+[2026.08.18-11.16.28:704][  0]LogModuleManager: Shutting down and abandoning module Kismet (621)
+[2026.08.18-11.16.28:729][  0]LogModuleManager: Shutting down and abandoning module KismetWidgets (620)
+[2026.08.18-11.16.28:729][  0]LogModuleManager: Shutting down and abandoning module CameraShakePreviewer (616)
+[2026.08.18-11.16.28:729][  0]LogModuleManager: Shutting down and abandoning module SmartSnapping (614)
+[2026.08.18-11.16.28:729][  0]LogModuleManager: Shutting down and abandoning module SessionServices (612)
+[2026.08.18-11.16.28:730][  0]LogModuleManager: Shutting down and abandoning module MeshPaint (610)
+[2026.08.18-11.16.28:730][  0]LogModuleManager: Shutting down and abandoning module VirtualTexturingEditor (608)
+[2026.08.18-11.16.28:730][  0]LogModuleManager: Shutting down and abandoning module FoliageEdit (606)
+[2026.08.18-11.16.28:730][  0]LogModuleManager: Shutting down and abandoning module LandscapeEditor (604)
+[2026.08.18-11.16.28:730][  0]LogModuleManager: Shutting down and abandoning module MeshPaintMode (602)
+[2026.08.18-11.16.28:730][  0]LogModuleManager: Shutting down and abandoning module SceneDepthPickerMode (600)
+[2026.08.18-11.16.28:731][  0]LogModuleManager: Shutting down and abandoning module ActorPickerMode (598)
+[2026.08.18-11.16.28:731][  0]LogModuleManager: Shutting down and abandoning module PlacementMode (596)
+[2026.08.18-11.16.28:731][  0]LogModuleManager: Shutting down and abandoning module LiveCoding (594)
+[2026.08.18-11.16.28:731][  0]LogModuleManager: Shutting down and abandoning module LevelSequence (592)
+[2026.08.18-11.16.28:731][  0]LogModuleManager: Shutting down and abandoning module MovieSceneTracks (590)
+[2026.08.18-11.16.28:731][  0]LogModuleManager: Shutting down and abandoning module MovieScene (588)
+[2026.08.18-11.16.28:731][  0]LogModuleManager: Shutting down and abandoning module StreamingPauseRendering (586)
+[2026.08.18-11.16.28:731][  0]LogModuleManager: Shutting down and abandoning module ImageWriteQueue (584)
+[2026.08.18-11.16.28:735][  0]LogModuleManager: Shutting down and abandoning module AIModule (582)
+[2026.08.18-11.16.28:735][  0]LogModuleManager: Shutting down and abandoning module GameplayDebugger (581)
+[2026.08.18-11.16.28:735][  0]LogModuleManager: Shutting down and abandoning module AITestSuite (579)
+[2026.08.18-11.16.28:735][  0]LogModuleManager: Shutting down and abandoning module NavigationSystem (577)
+[2026.08.18-11.16.28:735][  0]LogModuleManager: Shutting down and abandoning module AudioSynesthesiaEditor (574)
+[2026.08.18-11.16.28:735][  0]LogModuleManager: Shutting down and abandoning module MegascansPlugin (572)
+[2026.08.18-11.16.28:735][  0]LogModuleManager: Shutting down and abandoning module PS1IsoGate (570)
+[2026.08.18-11.16.28:735][  0]LogModuleManager: Shutting down and abandoning module MMAEditorTools (568)
+[2026.08.18-11.16.28:737][  0]LogModuleManager: Shutting down and abandoning module MMAGameplay (566)
+[2026.08.18-11.16.28:737][  0]LogModuleManager: Shutting down and abandoning module SQLiteSupport (564)
+[2026.08.18-11.16.28:737][  0]LogModuleManager: Shutting down and abandoning module DatabaseSupport (562)
+[2026.08.18-11.16.28:737][  0]LogModuleManager: Shutting down and abandoning module ContentBrowserAssetDataSource (560)
+[2026.08.18-11.16.28:737][  0]LogModuleManager: Shutting down and abandoning module ContentBrowserClassDataSource (558)
+[2026.08.18-11.16.28:737][  0]LogModuleManager: Shutting down and abandoning module ToolMenus (557)
+[2026.08.18-11.16.28:737][  0]LogModuleManager: Shutting down and abandoning module ContentBrowserFileDataSource (554)
+[2026.08.18-11.16.28:737][  0]LogModuleManager: Shutting down and abandoning module SynthesisEditor (552)
+[2026.08.18-11.16.28:738][  0]LogModuleManager: Shutting down and abandoning module Synthesis (550)
+[2026.08.18-11.16.28:738][  0]LogModuleManager: Shutting down and abandoning module ProceduralMeshComponentEditor (548)
+[2026.08.18-11.16.28:738][  0]LogModuleManager: Shutting down and abandoning module ProceduralMeshComponent (546)
+[2026.08.18-11.16.28:738][  0]LogModuleManager: Shutting down and abandoning module MobilePatchingUtils (544)
+[2026.08.18-11.16.28:738][  0]LogModuleManager: Shutting down and abandoning module ScreenshotTools (542)
+[2026.08.18-11.16.28:738][  0]LogModuleManager: Shutting down and abandoning module GooglePAD (540)
+[2026.08.18-11.16.28:738][  0]LogModuleManager: Shutting down and abandoning module OpenImageDenoise (538)
+[2026.08.18-11.16.28:738][  0]LogOpenImageDenoise: OIDN shutting down
+[2026.08.18-11.16.28:738][  0]LogModuleManager: Shutting down and abandoning module MotoSynthEditor (536)
+[2026.08.18-11.16.28:738][  0]LogModuleManager: Shutting down and abandoning module MotoSynth (534)
+[2026.08.18-11.16.28:739][  0]LogModuleManager: Shutting down and abandoning module MeshConversion (532)
+[2026.08.18-11.16.28:739][  0]LogModuleManager: Shutting down and abandoning module DynamicMesh (530)
+[2026.08.18-11.16.28:739][  0]LogModuleManager: Shutting down and abandoning module GeometryAlgorithms (528)
+[2026.08.18-11.16.28:739][  0]LogModuleManager: Shutting down and abandoning module GeometricObjects (526)
+[2026.08.18-11.16.28:739][  0]LogModuleManager: Shutting down and abandoning module GeometryCollectionTracks (524)
+[2026.08.18-11.16.28:739][  0]LogModuleManager: Shutting down and abandoning module GeometryCollectionSequencer (523)
+[2026.08.18-11.16.28:739][  0]LogModuleManager: Shutting down and abandoning module GeometryCollectionEditor (520)
+[2026.08.18-11.16.28:739][  0]LogModuleManager: Shutting down and abandoning module EditableMesh (518)
+[2026.08.18-11.16.28:740][  0]LogModuleManager: Shutting down and abandoning module GeometryCacheTracks (516)
+[2026.08.18-11.16.28:740][  0]LogModuleManager: Shutting down and abandoning module GeometryCacheStreamer (514)
+[2026.08.18-11.16.28:740][  0]LogModuleManager: Shutting down and abandoning module GeometryCacheSequencer (512)
+[2026.08.18-11.16.28:740][  0]LogModuleManager: Shutting down and abandoning module CustomMeshComponent (510)
+[2026.08.18-11.16.28:740][  0]LogModuleManager: Shutting down and abandoning module CableComponent (508)
+[2026.08.18-11.16.28:740][  0]LogModuleManager: Shutting down and abandoning module ArchVisCharacter (506)
+[2026.08.18-11.16.28:740][  0]LogModuleManager: Shutting down and abandoning module AudioCapture (504)
+[2026.08.18-11.16.28:740][  0]LogModuleManager: Shutting down and abandoning module AudioCaptureRtAudio (503)
+[2026.08.18-11.16.28:741][  0]LogModuleManager: Shutting down and abandoning module AndroidPermission (500)
+[2026.08.18-11.16.28:741][  0]LogModuleManager: Shutting down and abandoning module AssetTags (498)
+[2026.08.18-11.16.28:741][  0]LogModuleManager: Shutting down and abandoning module AppleImageUtilsBlueprintSupport (496)
+[2026.08.18-11.16.28:741][  0]LogModuleManager: Shutting down and abandoning module AppleImageUtils (494)
+[2026.08.18-11.16.28:741][  0]LogModuleManager: Shutting down and abandoning module ActorLayerUtilitiesEditor (492)
+[2026.08.18-11.16.28:741][  0]LogModuleManager: Shutting down and abandoning module ActorLayerUtilities (490)
+[2026.08.18-11.16.28:741][  0]LogModuleManager: Shutting down and abandoning module VisualStudioCodeSourceCodeAccess (488)
+[2026.08.18-11.16.28:741][  0]LogModuleManager: Shutting down and abandoning module VisualStudioSourceCodeAccess (486)
+[2026.08.18-11.16.28:742][  0]LogModuleManager: Shutting down and abandoning module UObjectPlugin (484)
+[2026.08.18-11.16.28:742][  0]LogModuleManager: Shutting down and abandoning module PlasticSourceControl (482)
+[2026.08.18-11.16.28:742][  0]LogModuleManager: Shutting down and abandoning module SubversionSourceControl (480)
+[2026.08.18-11.16.28:742][  0]LogModuleManager: Shutting down and abandoning module PluginUtils (478)
+[2026.08.18-11.16.28:742][  0]LogModuleManager: Shutting down and abandoning module GitSourceControl (476)
+[2026.08.18-11.16.28:742][  0]LogModuleManager: Shutting down and abandoning module PerforceSourceControl (474)
+[2026.08.18-11.16.28:742][  0]LogModuleManager: Shutting down and abandoning module SourceControl (473)
+[2026.08.18-11.16.28:743][  0]LogModuleManager: Shutting down and abandoning module MagicLeapSharedWorld (470)
+[2026.08.18-11.16.28:743][  0]LogModuleManager: Shutting down and abandoning module CLionSourceCodeAccess (468)
+[2026.08.18-11.16.28:743][  0]LogModuleManager: Shutting down and abandoning module MediaCompositing (466)
+[2026.08.18-11.16.28:743][  0]LogModuleManager: Shutting down and abandoning module TemplateSequence (464)
+[2026.08.18-11.16.28:743][  0]LogModuleManager: Shutting down and abandoning module ChaosSolverEditor (462)
+[2026.08.18-11.16.28:743][  0]LogModuleManager: Shutting down and abandoning module SpeedTreeImporter (460)
+[2026.08.18-11.16.28:743][  0]LogModuleManager: Shutting down and abandoning module ChaosClothEditor (458)
+[2026.08.18-11.16.28:744][  0]LogModuleManager: Shutting down and abandoning module ChaosNiagara (456)
+[2026.08.18-11.16.28:744][  0]LogModuleManager: Shutting down and abandoning module FractureEditor (454)
+[2026.08.18-11.16.28:744][  0]LogModuleManager: Shutting down and abandoning module FieldSystemEngine (453)
+[2026.08.18-11.16.28:744][  0]LogModuleManager: Shutting down and abandoning module PluginBrowser (450)
+[2026.08.18-11.16.28:744][  0]LogModuleManager: Shutting down and abandoning module MobileLauncherProfileWizard (448)
+[2026.08.18-11.16.28:744][  0]LogModuleManager: Shutting down and abandoning module MaterialAnalyzer (446)
+[2026.08.18-11.16.28:744][  0]LogModuleManager: Shutting down and abandoning module EditorScriptingUtilities (444)
+[2026.08.18-11.16.28:744][  0]LogModuleManager: Shutting down and abandoning module AutomationUtilsEditor (442)
+[2026.08.18-11.16.28:744][  0]LogModuleManager: Shutting down and abandoning module AutomationUtils (440)
+[2026.08.18-11.16.28:744][  0]LogModuleManager: Shutting down and abandoning module CurveEditorTools (438)
+[2026.08.18-11.16.28:744][  0]LogModuleManager: Shutting down and abandoning module CryptoKeysOpenSSL (436)
+[2026.08.18-11.16.28:744][  0]LogModuleManager: Shutting down and abandoning module CryptoKeys (434)
+[2026.08.18-11.16.28:745][  0]LogModuleManager: Shutting down and abandoning module MagicLeapLightEstimation (432)
+[2026.08.18-11.16.28:745][  0]LogModuleManager: Shutting down and abandoning module VariantManagerContentEditor (430)
+[2026.08.18-11.16.28:745][  0]LogModuleManager: Shutting down and abandoning module AlembicImporter (428)
+[2026.08.18-11.16.28:745][  0]LogModuleManager: Shutting down and abandoning module AlembicLibrary (427)
+[2026.08.18-11.16.28:745][  0]LogModuleManager: Shutting down and abandoning module GeometryCache (426)
+[2026.08.18-11.16.28:745][  0]LogModuleManager: Shutting down and abandoning module GeometryCacheEd (425)
+[2026.08.18-11.16.28:745][  0]LogModuleManager: Shutting down and abandoning module MagicLeapHelperVulkan (420)
+[2026.08.18-11.16.28:746][  0]LogModuleManager: Shutting down and abandoning module MagicLeapHelperOpenGL (418)
+[2026.08.18-11.16.28:746][  0]LogModuleManager: Shutting down and abandoning module MagicLeapAudio (416)
+[2026.08.18-11.16.28:746][  0]LogModuleManager: Shutting down and abandoning module DatasmithContentEditor (414)
+[2026.08.18-11.16.28:746][  0]LogModuleManager: Shutting down and abandoning module AnimationSharingEd (412)
+[2026.08.18-11.16.28:746][  0]LogModuleManager: Shutting down and abandoning module NiagaraEditorWidgets (410)
+[2026.08.18-11.16.28:746][  0]LogModuleManager: Shutting down and abandoning module LightPropagationVolumeEditor (408)
+[2026.08.18-11.16.28:746][  0]LogModuleManager: Shutting down and abandoning module OodleNetworkHandlerComponent (406)
+[2026.08.18-11.16.28:747][  0]LogModuleManager: Shutting down and abandoning module PaperTiledImporter (404)
+[2026.08.18-11.16.28:747][  0]LogModuleManager: Shutting down and abandoning module PaperSpriteSheetImporter (402)
+[2026.08.18-11.16.28:747][  0]LogModuleManager: Shutting down and abandoning module Paper2DEditor (400)
+[2026.08.18-11.16.28:747][  0]LogModuleManager: Shutting down and abandoning module MeshPaintingToolset (398)
+[2026.08.18-11.16.28:747][  0]LogModuleManager: Shutting down and abandoning module MeshPaintEditorMode (396)
+[2026.08.18-11.16.28:747][  0]LogModuleManager: Shutting down and abandoning module SQLiteCore (394)
+[2026.08.18-11.16.28:747][  0]LogModuleManager: Shutting down and abandoning module SoundFields (392)
+[2026.08.18-11.16.28:747][  0]LogModuleManager: Shutting down and abandoning module SignificanceManager (390)
+[2026.08.18-11.16.28:748][  0]LogModuleManager: Shutting down and abandoning module PropertyAccessEditor (388)
+[2026.08.18-11.16.28:748][  0]LogModuleManager: Shutting down and abandoning module RuntimePhysXCooking (386)
+[2026.08.18-11.16.28:748][  0]LogModuleManager: Shutting down and abandoning module PhysXVehiclesEditor (384)
+[2026.08.18-11.16.28:748][  0]LogModuleManager: Shutting down and abandoning module LocationServicesBPLibrary (380)
+[2026.08.18-11.16.28:748][  0]LogModuleManager: Shutting down and abandoning module PythonScriptPlugin (378)
+[2026.08.18-11.16.28:749][  0]LogModuleManager: Shutting down and abandoning module AudioSynesthesia (376)
+[2026.08.18-11.16.28:749][  0]LogModuleManager: Shutting down and abandoning module AudioSynesthesiaCore (374)
+[2026.08.18-11.16.28:749][  0]LogModuleManager: Shutting down and abandoning module ApexDestructionEditor (372)
+[2026.08.18-11.16.28:749][  0]LogModuleManager: Shutting down and abandoning module ApexDestruction (370)
+[2026.08.18-11.16.28:749][  0]LogModuleManager: Shutting down and abandoning module PropertyAccessNode (368)
+[2026.08.18-11.16.28:749][  0]LogModuleManager: Shutting down and abandoning module MagicLeapARPin (366)
+[2026.08.18-11.16.28:749][  0]LogModuleManager: Shutting down and abandoning module UdpMessaging (364)
+[2026.08.18-11.16.28:750][  0]LogModuleManager: Shutting down and abandoning module TcpMessaging (362)
+[2026.08.18-11.16.28:750][  0]LogModuleManager: Shutting down and abandoning module GameplayTagsEditor (360)
+[2026.08.18-11.16.28:750][  0]LogModuleManager: Shutting down and abandoning module FacialAnimationEditor (358)
+[2026.08.18-11.16.28:750][  0]LogModuleManager: Shutting down and abandoning module FacialAnimation (356)
+[2026.08.18-11.16.28:750][  0]LogModuleManager: Shutting down and abandoning module DataValidation (354)
+[2026.08.18-11.16.28:750][  0]LogModuleManager: Shutting down and abandoning module ActorSequence (352)
+[2026.08.18-11.16.28:750][  0]LogModuleManager: Shutting down and abandoning module MagicLeapHandMeshing (350)
+[2026.08.18-11.16.28:751][  0]LogModuleManager: Shutting down and abandoning module MagicLeapSecureStorage (348)
+[2026.08.18-11.16.28:751][  0]LogModuleManager: Shutting down and abandoning module MagicLeapPrivileges (346)
+[2026.08.18-11.16.28:751][  0]LogModuleManager: Shutting down and abandoning module MagicLeapPlanes (344)
+[2026.08.18-11.16.28:751][  0]LogMagicLeapPlanes: Planes tracker already destroyed.
+[2026.08.18-11.16.28:751][  0]LogModuleManager: Shutting down and abandoning module MagicLeapImageTracker (342)
+[2026.08.18-11.16.28:751][  0]LogModuleManager: Shutting down and abandoning module MagicLeapIdentity (340)
+[2026.08.18-11.16.28:751][  0]LogModuleManager: Shutting down and abandoning module MagicLeapHandTracking (338)
+[2026.08.18-11.16.28:751][  0]LogModuleManager: Shutting down and abandoning module MagicLeapEyeTracker (336)
+[2026.08.18-11.16.28:751][  0]LogModuleManager: Shutting down and abandoning module MagicLeapController (334)
+[2026.08.18-11.16.28:752][  0]LogModuleManager: Shutting down and abandoning module MagicLeapARPinImpl (332)
+[2026.08.18-11.16.28:752][  0]LogModuleManager: Shutting down and abandoning module MagicLeapAR (330)
+[2026.08.18-11.16.28:752][  0]LogModuleManager: Shutting down and abandoning module AugmentedReality (329)
+[2026.08.18-11.16.28:752][  0]LogModuleManager: Shutting down and abandoning module AnimationSharing (326)
+[2026.08.18-11.16.28:752][  0]LogModuleManager: Shutting down and abandoning module AssetManagerEditor (324)
+[2026.08.18-11.16.28:752][  0]LogModuleManager: Shutting down and abandoning module TreeMap (323)
+[2026.08.18-11.16.28:752][  0]LogModuleManager: Shutting down and abandoning module NiagaraAnimNotifies (320)
+[2026.08.18-11.16.28:752][  0]LogModuleManager: Shutting down and abandoning module Niagara (318)
+[2026.08.18-11.16.28:752][  0]LogModuleManager: Shutting down and abandoning module SignalProcessing (317)
+[2026.08.18-11.16.28:752][  0]LogModuleManager: Shutting down and abandoning module NiagaraEditor (315)
+[2026.08.18-11.16.28:754][  0]LogModuleManager: Shutting down and abandoning module NiagaraCore (312)
+[2026.08.18-11.16.28:754][  0]LogModuleManager: Shutting down and abandoning module LightPropagationVolumeRuntime (310)
+[2026.08.18-11.16.28:754][  0]LogModuleManager: Shutting down and abandoning module EnvironmentQueryEditor (308)
+[2026.08.18-11.16.28:754][  0]LogModuleManager: Shutting down and abandoning module GameplayCameras (306)
+[2026.08.18-11.16.28:754][  0]LogModuleManager: Shutting down and abandoning module Paper2D (304)
+[2026.08.18-11.16.28:754][  0]LogModuleManager: Shutting down and abandoning module NetworkReplayStreaming (302)
+[2026.08.18-11.16.28:754][  0]LogModuleManager: Shutting down and abandoning module PacketHandler (300)
+[2026.08.18-11.16.28:754][  0]LogModuleManager: Shutting down and abandoning module ClothingSystemEditor (298)
+[2026.08.18-11.16.28:754][  0]LogModuleManager: Shutting down and abandoning module ClothingSystemRuntimeNv (296)
+[2026.08.18-11.16.28:754][  0]LogModuleManager: Shutting down and abandoning module MediaAssets (294)
+[2026.08.18-11.16.28:754][  0]LogModuleManager: Shutting down and abandoning module Overlay (292)
+[2026.08.18-11.16.28:754][  0]LogModuleManager: Shutting down and abandoning module OverlayEditor (291)
+[2026.08.18-11.16.28:755][  0]LogModuleManager: Shutting down and abandoning module Blutility (288)
+[2026.08.18-11.16.28:755][  0]LogModuleManager: Shutting down and abandoning module LevelEditor (287)
+[2026.08.18-11.16.28:755][  0]LogModuleManager: Shutting down and abandoning module PixelInspectorModule (286)
+[2026.08.18-11.16.28:755][  0]LogModuleManager: Shutting down and abandoning module CommonMenuExtensions (284)
+[2026.08.18-11.16.28:756][  0]LogModuleManager: Shutting down and abandoning module MainFrame (282)
+[2026.08.18-11.16.28:756][  0]LogModuleManager: Shutting down and abandoning module HotReload (281)
+[2026.08.18-11.16.28:756][  0]LogModuleManager: Shutting down and abandoning module ContentBrowser (277)
+[2026.08.18-11.16.28:757][  0]LogModuleManager: Shutting down and abandoning module CollectionManager (276)
+[2026.08.18-11.16.28:757][  0]LogModuleManager: Shutting down and abandoning module ContentBrowserData (274)
+[2026.08.18-11.16.28:757][  0]LogModuleManager: Shutting down and abandoning module IntroTutorials (270)
+[2026.08.18-11.16.28:757][  0]LogModuleManager: Shutting down and abandoning module VREditor (268)
+[2026.08.18-11.16.28:757][  0]LogModuleManager: Shutting down and abandoning module StringTableEditor (266)
+[2026.08.18-11.16.28:757][  0]LogModuleManager: Shutting down and abandoning module GameplayTasksEditor (264)
+[2026.08.18-11.16.28:758][  0]LogModuleManager: Shutting down and abandoning module BehaviorTreeEditor (262)
+[2026.08.18-11.16.28:758][  0]LogModuleManager: Shutting down and abandoning module FunctionalTesting (260)
+[2026.08.18-11.16.28:758][  0]LogModuleManager: Shutting down and abandoning module CollisionAnalyzer (258)
+[2026.08.18-11.16.28:759][  0]LogModuleManager: Shutting down and abandoning module WorkspaceMenuStructure (257)
+[2026.08.18-11.16.28:759][  0]LogModuleManager: Shutting down and abandoning module UMG (254)
+[2026.08.18-11.16.28:759][  0]LogModuleManager: Shutting down and abandoning module UMGEditor (253)
+[2026.08.18-11.16.28:759][  0]LogModuleManager: Shutting down and abandoning module MessageLog (251)
+[2026.08.18-11.16.28:759][  0]LogModuleManager: Shutting down and abandoning module SlateReflector (246)
+[2026.08.18-11.16.28:759][  0]LogModuleManager: Shutting down and abandoning module Slate (244)
+[2026.08.18-11.16.28:759][  0]LogModuleManager: Shutting down and abandoning module SlateCore (242)
+[2026.08.18-11.16.28:760][  0]LogModuleManager: Shutting down and abandoning module LandscapeEditorUtilities (240)
+[2026.08.18-11.16.28:761][  0]LogModuleManager: Shutting down and abandoning module UnrealEd (238)
+[2026.08.18-11.16.28:761][  0]LogModuleManager: Shutting down and abandoning module MRMesh (236)
+[2026.08.18-11.16.28:761][  0]LogModuleManager: Shutting down and abandoning module SourceCodeAccess (234)
+[2026.08.18-11.16.28:761][  0]LogModuleManager: Shutting down and abandoning module HeadMountedDisplay (232)
+[2026.08.18-11.16.28:761][  0]LogModuleManager: Shutting down and abandoning module XAudio2 (230)
+[2026.08.18-11.16.28:762][  0]LogModuleManager: Shutting down and abandoning module Networking (228)
+[2026.08.18-11.16.28:762][  0]LogModuleManager: Shutting down and abandoning module Core (226)
+[2026.08.18-11.16.28:762][  0]LogModuleManager: Shutting down and abandoning module MaterialEditor (224)
+[2026.08.18-11.16.28:762][  0]LogModuleManager: Shutting down and abandoning module Settings (223)
+[2026.08.18-11.16.28:762][  0]LogModuleManager: Shutting down and abandoning module MovieSceneTools (220)
+[2026.08.18-11.16.28:762][  0]LogModuleManager: Shutting down and abandoning module CurveEditor (219)
+[2026.08.18-11.16.28:762][  0]LogModuleManager: Shutting down and abandoning module Sequencer (217)
+[2026.08.18-11.16.28:763][  0]LogModuleManager: Shutting down and abandoning module EditorStyle (216)
+[2026.08.18-11.16.28:763][  0]LogModuleManager: Shutting down and abandoning module KismetCompiler (212)
+[2026.08.18-11.16.28:764][  0]LogModuleManager: Shutting down and abandoning module MeshBuilder (210)
+[2026.08.18-11.16.28:764][  0]LogModuleManager: Shutting down and abandoning module MeshUtilities (208)
+[2026.08.18-11.16.28:764][  0]LogModuleManager: Shutting down and abandoning module MeshMergeUtilities (207)
+[2026.08.18-11.16.28:764][  0]LogModuleManager: Shutting down and abandoning module MeshReductionInterface (206)
+[2026.08.18-11.16.28:764][  0]LogModuleManager: Shutting down and abandoning module MeshBoneReduction (205)
+[2026.08.18-11.16.28:764][  0]LogModuleManager: Shutting down and abandoning module SkeletalMeshReduction (203)
+[2026.08.18-11.16.28:764][  0]LogModuleManager: Shutting down and abandoning module ProxyLODMeshReduction (201)
+[2026.08.18-11.16.28:764][  0]LogModuleManager: Shutting down and abandoning module QuadricMeshReduction (199)
+[2026.08.18-11.16.28:764][  0]LogModuleManager: Shutting down and abandoning module MaterialBaking (195)
+[2026.08.18-11.16.28:764][  0]LogModuleManager: Shutting down and abandoning module DirectoryWatcher (191)
+[2026.08.18-11.16.28:764][  0]LogModuleManager: Shutting down and abandoning module NullInstallBundleManager (188)
+[2026.08.18-11.16.28:765][  0]LogModuleManager: Shutting down and abandoning module DerivedDataCache (186)
+[2026.08.18-11.16.28:765][  0]LogModuleManager: Shutting down and abandoning module TargetPlatform (184)
+[2026.08.18-11.16.28:765][  0]LogModuleManager: Shutting down and abandoning module VulkanShaderFormat (183)
+[2026.08.18-11.16.28:765][  0]LogModuleManager: Shutting down and abandoning module ShaderFormatVectorVM (181)
+[2026.08.18-11.16.28:765][  0]LogModuleManager: Shutting down and abandoning module ShaderFormatOpenGL (179)
+[2026.08.18-11.16.28:765][  0]LogModuleManager: Shutting down and abandoning module ShaderFormatD3D (177)
+[2026.08.18-11.16.28:765][  0]LogModuleManager: Shutting down and abandoning module MetalShaderFormat (175)
+[2026.08.18-11.16.28:766][  0]LogModuleManager: Shutting down and abandoning module TextureFormatOodle (173)
+[2026.08.18-11.16.28:766][  0]LogModuleManager: Shutting down and abandoning module TextureFormatUncompressed (171)
+[2026.08.18-11.16.28:766][  0]LogModuleManager: Shutting down and abandoning module TextureFormatPVR (169)
+[2026.08.18-11.16.28:766][  0]LogModuleManager: Shutting down and abandoning module TextureFormatETC2 (167)
+[2026.08.18-11.16.28:766][  0]LogModuleManager: Shutting down and abandoning module TextureFormatDXT (165)
+[2026.08.18-11.16.28:766][  0]LogModuleManager: Shutting down and abandoning module TextureFormatIntelISPCTexComp (163)
+[2026.08.18-11.16.28:766][  0]LogModuleManager: Shutting down and abandoning module TextureFormatASTC (161)
+[2026.08.18-11.16.28:767][  0]LogModuleManager: Shutting down and abandoning module ImageWrapper (160)
+[2026.08.18-11.16.28:767][  0]LogModuleManager: Shutting down and abandoning module AudioFormatOpus (157)
+[2026.08.18-11.16.28:767][  0]LogModuleManager: Shutting down and abandoning module AudioFormatOgg (155)
+[2026.08.18-11.16.28:767][  0]LogModuleManager: Shutting down and abandoning module AudioFormatADPCM (153)
+[2026.08.18-11.16.28:767][  0]LogModuleManager: Shutting down and abandoning module WindowsServerTargetPlatform (151)
+[2026.08.18-11.16.28:767][  0]LogModuleManager: Shutting down and abandoning module WindowsClientTargetPlatform (149)
+[2026.08.18-11.16.28:767][  0]LogModuleManager: Shutting down and abandoning module WindowsTargetPlatform (147)
+[2026.08.18-11.16.28:768][  0]LogModuleManager: Shutting down and abandoning module WindowsNoEditorTargetPlatform (145)
+[2026.08.18-11.16.28:768][  0]LogModuleManager: Shutting down and abandoning module TVOSTargetPlatform (143)
+[2026.08.18-11.16.28:768][  0]LogModuleManager: Shutting down and abandoning module MacServerTargetPlatform (141)
+[2026.08.18-11.16.28:768][  0]LogModuleManager: Shutting down and abandoning module MacClientTargetPlatform (139)
+[2026.08.18-11.16.28:768][  0]LogModuleManager: Shutting down and abandoning module MacTargetPlatform (137)
+[2026.08.18-11.16.28:769][  0]LogModuleManager: Shutting down and abandoning module MacNoEditorTargetPlatform (135)
+[2026.08.18-11.16.28:769][  0]LogModuleManager: Shutting down and abandoning module LuminTargetPlatform (133)
+[2026.08.18-11.16.28:769][  0]LogModuleManager: Shutting down and abandoning module LinuxAArch64ServerTargetPlatform (131)
+[2026.08.18-11.16.28:769][  0]LogModuleManager: Shutting down and abandoning module LinuxAArch64ClientTargetPlatform (129)
+[2026.08.18-11.16.28:770][  0]LogModuleManager: Shutting down and abandoning module LinuxAArch64NoEditorTargetPlatform (127)
+[2026.08.18-11.16.28:770][  0]LogModuleManager: Shutting down and abandoning module LinuxServerTargetPlatform (125)
+[2026.08.18-11.16.28:770][  0]LogModuleManager: Shutting down and abandoning module LinuxClientTargetPlatform (123)
+[2026.08.18-11.16.28:770][  0]LogModuleManager: Shutting down and abandoning module LinuxNoEditorTargetPlatform (121)
+[2026.08.18-11.16.28:770][  0]LogModuleManager: Shutting down and abandoning module LinuxTargetPlatform (119)
+[2026.08.18-11.16.28:770][  0]LogModuleManager: Shutting down and abandoning module Messaging (117)
+[2026.08.18-11.16.28:770][  0]LogModuleManager: Shutting down and abandoning module IOSTargetPlatform (115)
+[2026.08.18-11.16.28:771][  0]LogModuleManager: Shutting down and abandoning module AndroidTargetPlatform (113)
+[2026.08.18-11.16.28:773][  0]LogModuleManager: Shutting down and abandoning module AllDesktopTargetPlatform (111)
+[2026.08.18-11.16.28:773][  0]LogModuleManager: Shutting down and abandoning module NullDrv (108)
+[2026.08.18-11.16.28:774][  0]LogModuleManager: Shutting down and abandoning module PhysXCooking (106)
+[2026.08.18-11.16.28:774][  0]LogModuleManager: Shutting down and abandoning module Chaos (104)
+[2026.08.18-11.16.28:774][  0]LogModuleManager: Shutting down and abandoning module WindowsPlatformFeatures (102)
+[2026.08.18-11.16.28:774][  0]LogModuleManager: Shutting down and abandoning module GameplayMediaEncoder (101)
+[2026.08.18-11.16.28:774][  0]LogModuleManager: Shutting down and abandoning module AVEncoder (100)
+[2026.08.18-11.16.28:774][  0]LogModuleManager: Shutting down and abandoning module ExampleDeviceProfileSelector (96)
+[2026.08.18-11.16.28:774][  0]LogModuleManager: Shutting down and abandoning module LauncherChunkInstaller (94)
+[2026.08.18-11.16.28:775][  0]LogModuleManager: Shutting down and abandoning module ChunkDownloader (92)
+[2026.08.18-11.16.28:775][  0]LogModuleManager: Shutting down and abandoning module PixWinPlugin (90)
+[2026.08.18-11.16.28:775][  0]LogModuleManager: Shutting down and abandoning module MLSDK (88)
+[2026.08.18-11.16.28:775][  0]LogModuleManager: Shutting down and abandoning module WmfMedia (86)
+[2026.08.18-11.16.28:778][  0]LogModuleManager: Shutting down and abandoning module Media (85)
+[2026.08.18-11.16.28:778][  0]LogModuleManager: Shutting down and abandoning module MediaInfo (84)
+[2026.08.18-11.16.28:778][  0]LogModuleManager: Shutting down and abandoning module OnlineBlueprintSupport (80)
+[2026.08.18-11.16.28:778][  0]LogModuleManager: Shutting down and abandoning module ExrReaderGpu (76)
+[2026.08.18-11.16.28:779][  0]LogModuleManager: Shutting down and abandoning module OnlineSubsystem (74)
+[2026.08.18-11.16.28:779][  0]LogModuleManager: Shutting down and abandoning module XMPP (69)
+[2026.08.18-11.16.28:779][  0]LogModuleManager: Shutting down and abandoning module WebSockets (68)
+[2026.08.18-11.16.28:784][  0]LogModuleManager: Shutting down and abandoning module HTTP (65)
+[2026.08.18-11.16.28:784][  0]LogHttp: Display: cleaning up 0 outstanding Http requests.
+[2026.08.18-11.16.28:808][  0]LogModuleManager: Shutting down and abandoning module SSL (64)
+[2026.08.18-11.16.28:809][  0]LogModuleManager: Shutting down and abandoning module ChaosCloth (60)
+[2026.08.18-11.16.28:809][  0]LogModuleManager: Shutting down and abandoning module VariantManagerContent (58)
+[2026.08.18-11.16.28:809][  0]LogModuleManager: Shutting down and abandoning module MagicLeap (56)
+[2026.08.18-11.16.28:809][  0]LogModuleManager: Shutting down and abandoning module DatasmithContent (54)
+[2026.08.18-11.16.28:810][  0]LogModuleManager: Shutting down and abandoning module NiagaraVertexFactories (52)
+[2026.08.18-11.16.28:810][  0]LogModuleManager: Shutting down and abandoning module NiagaraShader (50)
+[2026.08.18-11.16.28:810][  0]LogModuleManager: Shutting down and abandoning module AISupportModule (48)
+[2026.08.18-11.16.28:810][  0]LogModuleManager: Shutting down and abandoning module PythonScriptPluginPreload (46)
+[2026.08.18-11.16.28:811][  0]LogModuleManager: Shutting down and abandoning module PlatformCryptoOpenSSL (44)
+[2026.08.18-11.16.28:811][  0]LogModuleManager: Shutting down and abandoning module PlatformCryptoTypes (42)
+[2026.08.18-11.16.28:811][  0]LogModuleManager: Shutting down and abandoning module PlatformCrypto (40)
+[2026.08.18-11.16.28:811][  0]LogModuleManager: Shutting down and abandoning module OodleDataCompressionFormat (38)
+[2026.08.18-11.16.28:811][  0]LogModuleManager: Shutting down and abandoning module XGEController (36)
+[2026.08.18-11.16.28:811][  0]LogXGEController: Cleaning working directory: C:/Users/adace/AppData/Local/Temp/UnrealXGEWorkingDir/
+[2026.08.18-11.16.28:811][  0]LogModuleManager: Shutting down and abandoning module AnimationModifiers (34)
+[2026.08.18-11.16.28:811][  0]LogModuleManager: Shutting down and abandoning module AudioEditor (32)
+[2026.08.18-11.16.28:812][  0]LogModuleManager: Shutting down and abandoning module PropertyEditor (31)
+[2026.08.18-11.16.28:812][  0]LogModuleManager: Shutting down and abandoning module TextureCompressor (28)
+[2026.08.18-11.16.28:812][  0]LogModuleManager: Shutting down and abandoning module RenderCore (26)
+[2026.08.18-11.16.28:812][  0]LogModuleManager: Shutting down and abandoning module Landscape (24)
+[2026.08.18-11.16.28:812][  0]LogModuleManager: Shutting down and abandoning module SlateRHIRenderer (22)
+[2026.08.18-11.16.28:812][  0]LogModuleManager: Shutting down and abandoning module AnimGraphRuntime (20)
+[2026.08.18-11.16.28:813][  0]LogModuleManager: Shutting down and abandoning module Renderer (18)
+[2026.08.18-11.16.28:813][  0]LogModuleManager: Shutting down and abandoning module Engine (16)
+[2026.08.18-11.16.28:813][  0]LogModuleManager: Shutting down and abandoning module CoreUObject (14)
+[2026.08.18-11.16.28:813][  0]LogModuleManager: Shutting down and abandoning module NetworkFile (12)
+[2026.08.18-11.16.28:813][  0]LogModuleManager: Shutting down and abandoning module CookedIterativeFile (10)
+[2026.08.18-11.16.28:813][  0]LogModuleManager: Shutting down and abandoning module StreamingFile (8)
+[2026.08.18-11.16.28:813][  0]LogModuleManager: Shutting down and abandoning module SandboxFile (6)
+[2026.08.18-11.16.28:814][  0]LogModuleManager: Shutting down and abandoning module PakFile (4)
+[2026.08.18-11.16.28:814][  0]LogModuleManager: Shutting down and abandoning module RSA (3)
+[2026.08.18-11.16.28:847][  0]LogContentStreaming: Display: There are 1 unreleased StreamingManagers
+[2026.08.18-11.16.28:857][  0]LogExit: Exiting.
+[2026.08.18-11.16.28:874][  0]Log file closed, 08/18/26 20:46:28

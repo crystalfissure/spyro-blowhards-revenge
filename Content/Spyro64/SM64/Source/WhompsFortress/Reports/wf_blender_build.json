@@ -1,0 +1,334 @@
+{
+  "passed": true,
+  "blender_version": "5.0.1",
+  "blend_file": {
+    "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/Blender/WF_Master.blend",
+    "sha256": "806715476d942b092ab878eebfc1be32291bf3df7e45d1f346cc2b1b40557273",
+    "bytes": 354989
+  },
+  "preview": {
+    "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/Reports/WF_Master_Preview.png",
+    "sha256": "68ef2a0ae78a8ae7589d0a2ca94a8b51a69d06ba184a65370648976637c99b1c",
+    "bytes": 1386856
+  },
+  "collections": {
+    "WF_StaticWorld": {
+      "objects": 51,
+      "meshes": 51,
+      "triangles": 703
+    },
+    "WF_Conditional": {
+      "objects": 16,
+      "meshes": 16,
+      "triangles": 180
+    },
+    "WF_Moving": {
+      "objects": 43,
+      "meshes": 43,
+      "triangles": 382
+    },
+    "WF_Water": {
+      "objects": 1,
+      "meshes": 1,
+      "triangles": 2
+    },
+    "WF_GameplayMarkers": {
+      "objects": 127,
+      "meshes": 0,
+      "triangles": 0
+    },
+    "WF_Collision": {
+      "objects": 25,
+      "meshes": 25,
+      "triangles": 888
+    }
+  },
+  "source_asset_objects": {
+    "Area1": 17,
+    "SmallStairs": 2,
+    "BigStairs": 2,
+    "Pillar": 2,
+    "Fence": 2,
+    "BrickPlatform": 2,
+    "DirtSlope": 2,
+    "BridgePlatform": 3,
+    "GrassPart1": 7,
+    "GrassPart2": 5,
+    "VerandaPart": 3,
+    "SideRamp": 1,
+    "Tree": 2,
+    "Pole": 1,
+    "PushyRock": 4,
+    "PushyRockBig": 2,
+    "RotatingBridge": 2,
+    "SlidingPlatform": 2,
+    "BridgePiece": 1,
+    "GrassPlatform": 2,
+    "TowerPlatform": 1,
+    "KickWood": 2,
+    "KickWoodDown": 1,
+    "CornerStar": 2,
+    "CornerBreak": 2,
+    "Tower": 8,
+    "BillBlaster": 2,
+    "TowerWall": 1
+  },
+  "placed_mesh_objects": 111,
+  "marker_objects": 127,
+  "fbx_exports": [
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Static/SM_WF_Static_Base.fbx",
+      "sha256": "82167133c219abffb9e1f6b6cd22c5475a9843addc70718b97b7d414f03b7e98",
+      "bytes": 86300,
+      "objects": 16,
+      "triangles": 249
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Static/SM_WF_Static_Props.fbx",
+      "sha256": "fce95cfa59298cad9b08136af073d84b350e4c2a9dbfedeeca4b194d3319e35b",
+      "bytes": 158108,
+      "objects": 35,
+      "triangles": 454
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Water/SM_WF_Water.fbx",
+      "sha256": "04514b0bb17e94e4a9e5bd07361adc4ef21b0757cec03e4e111e6035b5fec184",
+      "bytes": 15900,
+      "objects": 1,
+      "triangles": 2
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Conditional/SM_WF_Tree.fbx",
+      "sha256": "32253216aadbd6efdb74ef5139e8a92e5f8c5f454da88b94ea81530226b0749e",
+      "bytes": 19644,
+      "objects": 2,
+      "triangles": 2
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Conditional/SM_WF_Pole.fbx",
+      "sha256": "55ed2acdc3eda1695ab2f825bb00b4445782435f31d677a608faa636802c49f2",
+      "bytes": 16284,
+      "objects": 1,
+      "triangles": 16
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Movers/SM_WF_PushyRock.fbx",
+      "sha256": "0a1338c72d9d5917e4879e49fd0098beaa9bb485db26b03c1327c22be5a750e5",
+      "bytes": 27500,
+      "objects": 4,
+      "triangles": 28
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Movers/SM_WF_PushyRockBig.fbx",
+      "sha256": "a24d56488ef2bbe38c60fb8b32e59d2ada0ae75473b61c6c5c866a3d0365b920",
+      "bytes": 20668,
+      "objects": 2,
+      "triangles": 18
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Movers/SM_WF_RotatingBridge.fbx",
+      "sha256": "ebe147e96a09262b8e77ecdcd1aec0fcf85946251e5832d7c1f20eec83bd8689",
+      "bytes": 19964,
+      "objects": 2,
+      "triangles": 28
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Movers/SM_WF_SlidingPlatform.fbx",
+      "sha256": "a889706e632f59ee636a46e0b2c227ed4814a18d24be69b7e3119bcc15e26067",
+      "bytes": 19964,
+      "objects": 2,
+      "triangles": 4
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Movers/SM_WF_BridgePiece.fbx",
+      "sha256": "2d5eee747573f677b0a4520b9b004b3be268d6877fc0bb2e393d25aa2eac8cf8",
+      "bytes": 16156,
+      "objects": 1,
+      "triangles": 12
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Movers/SM_WF_GrassPlatform.fbx",
+      "sha256": "f6074a3a18721dc1b5208f094d7cdf9b9a708d0903624e2e3287598635bbd670",
+      "bytes": 20764,
+      "objects": 2,
+      "triangles": 22
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Movers/SM_WF_TowerPlatform.fbx",
+      "sha256": "a5fc667d2be2221dfe0f70c8f15e1f7f44eaa6d4980c2bae7c490c033cdc184e",
+      "bytes": 16380,
+      "objects": 1,
+      "triangles": 10
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Movers/SM_WF_KickWood.fbx",
+      "sha256": "f6ef2133062ae394506b0833475b3e24387ff39d85d93c7e87628e97e4d7592e",
+      "bytes": 20220,
+      "objects": 2,
+      "triangles": 14
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Movers/SM_WF_KickWoodDown.fbx",
+      "sha256": "68555e68bf5a68e12a2ebb807c02011351bfa80c03ec049f99b2482c9848440b",
+      "bytes": 16092,
+      "objects": 1,
+      "triangles": 12
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Conditional/SM_WF_CornerStar.fbx",
+      "sha256": "ae2baea2188c05eec2b00b7ec408b3a45e7bce50f67e71ffa2835316d5b63a5b",
+      "bytes": 19804,
+      "objects": 2,
+      "triangles": 3
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Conditional/SM_WF_CornerBreak.fbx",
+      "sha256": "54a639a56546b7ba2eeed71b70e57cca06895127e3b4628b3c9f66e587b8542f",
+      "bytes": 19820,
+      "objects": 2,
+      "triangles": 3
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Conditional/SM_WF_Tower.fbx",
+      "sha256": "3f6be1a2a47eb391320bd41adf4bba7e6c4d04c8cbe007000ef4a8d52b122952",
+      "bytes": 46316,
+      "objects": 8,
+      "triangles": 146
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Conditional/SM_WF_BillBlaster.fbx",
+      "sha256": "2c119066634d263cc51df45973d09563776cc2380cdad89981587d0dbd6c2666",
+      "bytes": 20300,
+      "objects": 2,
+      "triangles": 10
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Conditional/SM_WF_TowerWall.fbx",
+      "sha256": "8cde4b08b8f6779904312ce7922fe034dc6cf617bc6f9d057e878fbb07daabb5",
+      "bytes": 15820,
+      "objects": 1,
+      "triangles": 2
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Collision/SM_WF_COL_Area1_wf_seg7_collision_070102D8.fbx",
+      "sha256": "f0c4d2b4b902f2e67f4989a5b9f4238a95894a734ca1bc33c09f7e843e415a58",
+      "bytes": 74300,
+      "objects": 9,
+      "triangles": 640
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Collision/SM_WF_COL_Area1_WaterBox.fbx",
+      "sha256": "d24fb1401b606475b7f7289dfb1b73d086cb3d388bafd7ce7da175b635ca225d",
+      "bytes": 11564,
+      "objects": 1,
+      "triangles": 1
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Collision/SM_WF_COL_PushyRock_wf_seg7_collision_small_bomp.fbx",
+      "sha256": "7c58180a46fda1221fdd998a12880abc267505e62757c452548ef0834460b925",
+      "bytes": 15500,
+      "objects": 1,
+      "triangles": 18
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Collision/SM_WF_COL_PushyRockBig_wf_seg7_collision_large_bomp.fbx",
+      "sha256": "59402b2c9e7cfb0e9ee9fe84d0b944f7c8b0e2b3b6a6624c5f480ef2b80a7722",
+      "bytes": 15484,
+      "objects": 1,
+      "triangles": 18
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Collision/SM_WF_COL_RotatingBridge_wf_seg7_collision_clocklike_rotation.fbx",
+      "sha256": "69e1802940c8afc9d150144628ebb7f686942ecc91a9417fe6a378f490016f58",
+      "bytes": 15372,
+      "objects": 1,
+      "triangles": 15
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Collision/SM_WF_COL_SlidingPlatform_wf_seg7_collision_sliding_brick_platform.fbx",
+      "sha256": "6e7f9245dbeae9dc279476831448da6b69080b7a02876ccb0333414a40ac6e40",
+      "bytes": 15132,
+      "objects": 1,
+      "triangles": 4
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Collision/SM_WF_COL_BridgePiece_wf_seg7_collision_tumbling_bridge.fbx",
+      "sha256": "35766374fa389866256050513ad91c2ed45cb949fd81eba022fd1c75b383069d",
+      "bytes": 15052,
+      "objects": 1,
+      "triangles": 2
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Collision/SM_WF_COL_GrassPlatform_wf_seg7_collision_rotating_platform.fbx",
+      "sha256": "35c3ad02847cb54a279961b990086c9071b7e5b51b04ed33cce1bc00ceeb51a3",
+      "bytes": 19084,
+      "objects": 2,
+      "triangles": 22
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Collision/SM_WF_COL_TowerPlatform_wf_seg7_collision_platform.fbx",
+      "sha256": "56343fe81ee0a5959030ee420b29b4a2e1882604b55b7e6937f96b77a40c9a7f",
+      "bytes": 15372,
+      "objects": 1,
+      "triangles": 10
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Collision/SM_WF_COL_KickWood_wf_seg7_collision_kickable_board.fbx",
+      "sha256": "3a5111b347e645d3c9991824619053a5f2ebb417dd62ac0dafa3a350f03362b7",
+      "bytes": 15180,
+      "objects": 1,
+      "triangles": 12
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Collision/SM_WF_COL_CornerStar_wf_seg7_collision_breakable_wall.fbx",
+      "sha256": "3042f722816dc3b78fb99b2e78e124777f4dc3efa403f99a152047c98fc008db",
+      "bytes": 15116,
+      "objects": 1,
+      "triangles": 3
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Collision/SM_WF_COL_CornerBreak_wf_seg7_collision_breakable_wall_2.fbx",
+      "sha256": "632ee9380c48a3debf4bfb14ece312497ddb2da62ba45c7e63ecdc1b4c4b4576",
+      "bytes": 15132,
+      "objects": 1,
+      "triangles": 3
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Collision/SM_WF_COL_Tower_wf_seg7_collision_tower.fbx",
+      "sha256": "e7c5a98f38aa4684edec752f12a151fef6e4211e091deaeff60694212dd4e716",
+      "bytes": 16796,
+      "objects": 1,
+      "triangles": 116
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Collision/SM_WF_COL_BillBlaster_wf_seg7_collision_bullet_bill_cannon.fbx",
+      "sha256": "7abfb2dac29cebe91f56a7218ad04d75caba3cf58815296b232cf88bd5a71e0a",
+      "bytes": 15388,
+      "objects": 1,
+      "triangles": 10
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Collision/SM_WF_COL_TowerWall_wf_seg7_collision_tower_door.fbx",
+      "sha256": "8d599a7a1cd5169160eb6da30a01d0e5721cab1abf6a06857d9425c18027e803",
+      "bytes": 15036,
+      "objects": 1,
+      "triangles": 2
+    },
+    {
+      "file": "C:/Users/adace/Desktop/spyro-blowhards-revenge/Content/Spyro64/SM64/Source/WhompsFortress/FBX/Collision/SM_WF_COL_CheckerboardPlatform_checkerboard_platform_seg8_collision_0800D710.fbx",
+      "sha256": "f3074d7b5dc18f20702d29527449a73a1edab95ae555fe8e995adad52f65ed11",
+      "bytes": 15228,
+      "objects": 1,
+      "triangles": 12
+    }
+  ],
+  "policies": {
+    "recenter_pivots": false,
+    "recalculate_missing_normals": true,
+    "uv0_is_lightmap": false,
+    "texture_filter": "nearest",
+    "texture_addressing": "wrap",
+    "environment_shading": "unlit texture multiplied by vertex colour",
+    "lighting_variant": "keep _light and exclude coincident _dark scene branches"
+  }
+}

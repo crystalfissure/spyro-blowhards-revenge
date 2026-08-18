@@ -1,0 +1,7310 @@
+{
+  "format": "spyro64.sm64.placements",
+  "version": 1,
+  "course": "WhompsFortress",
+  "fixed_step_hz": 30,
+  "coordinate_conventions": {
+    "source": "SM64/Collada centimetres, Y up",
+    "blender": "(x, -z, y) * 0.01 metres; source positive Y yaw becomes positive Blender Z yaw",
+    "unreal": "(x, z, y) centimetres; source yaw is negated after standard Blender FBX import"
+  },
+  "collections": [
+    "WF_StaticWorld",
+    "WF_Conditional",
+    "WF_Moving",
+    "WF_Water",
+    "WF_GameplayMarkers",
+    "WF_Collision"
+  ],
+  "placements": [
+    {
+      "stable_id": "wf/render/area1",
+      "source_kind": "render_root",
+      "source_file": "levels/wf/areas/1/geo.inc.c",
+      "source_line": 1,
+      "model": "WF_AREA_1",
+      "behavior": "static_render_root",
+      "asset": "Area1",
+      "collection": "WF_StaticWorld",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          0.0,
+          -0.0,
+          0.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/model_level_geometry_03/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 22,
+      "model": "MODEL_LEVEL_GEOMETRY_03",
+      "behavior": "bhvStaticObject",
+      "asset": "SmallStairs",
+      "collection": "WF_StaticWorld",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          2305.0,
+          2432.0,
+          -255.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          23.05,
+          2.5500000000000003,
+          24.32
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          2305.0,
+          -255.0,
+          2432.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/model_level_geometry_04/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 23,
+      "model": "MODEL_LEVEL_GEOMETRY_04",
+      "behavior": "bhvStaticObject",
+      "asset": "BigStairs",
+      "collection": "WF_StaticWorld",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          3405.0,
+          1664.0,
+          -1791.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          34.05,
+          17.91,
+          16.64
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          3405.0,
+          -1791.0,
+          1664.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/model_level_geometry_05/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 24,
+      "model": "MODEL_LEVEL_GEOMETRY_05",
+      "behavior": "bhvStaticObject",
+      "asset": "Pillar",
+      "collection": "WF_StaticWorld",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          3840.0,
+          0.0,
+          -2303.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          38.4,
+          23.03,
+          0.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          3840.0,
+          -2303.0,
+          0.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/model_level_geometry_05/001",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 25,
+      "model": "MODEL_LEVEL_GEOMETRY_05",
+      "behavior": "bhvStaticObject",
+      "asset": "Pillar",
+      "collection": "WF_StaticWorld",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          3840.0,
+          0.0,
+          -1279.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          38.4,
+          12.790000000000001,
+          0.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          3840.0,
+          -1279.0,
+          0.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/model_level_geometry_06/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 26,
+      "model": "MODEL_LEVEL_GEOMETRY_06",
+      "behavior": "bhvStaticObject",
+      "asset": "Fence",
+      "collection": "WF_StaticWorld",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          0.0,
+          -0.0,
+          0.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/model_level_geometry_07/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 27,
+      "model": "MODEL_LEVEL_GEOMETRY_07",
+      "behavior": "bhvStaticObject",
+      "asset": "BrickPlatform",
+      "collection": "WF_StaticWorld",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          1757.0,
+          3519.0,
+          -3151.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          17.57,
+          31.51,
+          35.19
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          1757.0,
+          -3151.0,
+          3519.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/model_level_geometry_0a/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 28,
+      "model": "MODEL_LEVEL_GEOMETRY_0A",
+      "behavior": "bhvStaticObject",
+      "asset": "DirtSlope",
+      "collection": "WF_StaticWorld",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          3840.0,
+          794.0,
+          2688.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          38.4,
+          -26.88,
+          7.94
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          3840.0,
+          2688.0,
+          794.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/model_level_geometry_0c/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 29,
+      "model": "MODEL_LEVEL_GEOMETRY_0C",
+      "behavior": "bhvStaticObject",
+      "asset": "BridgePlatform",
+      "collection": "WF_StaticWorld",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          1408.0,
+          2522.0,
+          2431.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          14.08,
+          -24.310000000000002,
+          25.22
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          1408.0,
+          2431.0,
+          2522.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvgiantpole/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 30,
+      "model": "MODEL_WF_GIANT_POLE",
+      "behavior": "bhvGiantPole",
+      "asset": "Pole",
+      "collection": "WF_Conditional",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -2560.0,
+          2560.0,
+          -256.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -25.6,
+          2.56,
+          25.6
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -2560.0,
+          -256.0,
+          2560.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvsmallbomp/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 35,
+      "model": "MODEL_WF_SMALL_BOMP",
+      "behavior": "bhvSmallBomp",
+      "asset": "PushyRock",
+      "collection": "WF_Moving",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          3300.0,
+          1070.0,
+          1.0
+        ],
+        "rotation_deg": [
+          0.0,
+          90.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          33.0,
+          -0.01,
+          10.700000000000001
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          90.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          3300.0,
+          1.0,
+          1070.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -90.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvsmallbomp/001",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 36,
+      "model": "MODEL_WF_SMALL_BOMP",
+      "behavior": "bhvSmallBomp",
+      "asset": "PushyRock",
+      "collection": "WF_Moving",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          3300.0,
+          1070.0,
+          1281.0
+        ],
+        "rotation_deg": [
+          0.0,
+          90.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          33.0,
+          -12.81,
+          10.700000000000001
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          90.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          3300.0,
+          1281.0,
+          1070.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -90.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvlargebomp/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 37,
+      "model": "MODEL_WF_LARGE_BOMP",
+      "behavior": "bhvLargeBomp",
+      "asset": "PushyRockBig",
+      "collection": "WF_Moving",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          3300.0,
+          1070.0,
+          641.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          33.0,
+          -6.41,
+          10.700000000000001
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          3300.0,
+          641.0,
+          1070.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvwfrotatingwoodenplatform/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 38,
+      "model": "MODEL_WF_ROTATING_WOODEN_PLATFORM",
+      "behavior": "bhvWFRotatingWoodenPlatform",
+      "asset": "RotatingBridge",
+      "collection": "WF_Moving",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -255.0,
+          2560.0,
+          2304.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -2.5500000000000003,
+          -23.04,
+          25.6
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -255.0,
+          2304.0,
+          2560.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvwfslidingplatform/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 39,
+      "model": "MODEL_WF_SLIDING_PLATFORM",
+      "behavior": "bhvWFSlidingPlatform",
+      "asset": "SlidingPlatform",
+      "collection": "WF_Moving",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "BPARAM2(WF_SLID_BRICK_PTFM_BP_MOV_VEL_15)",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          3328.0,
+          1075.0,
+          -1791.0
+        ],
+        "rotation_deg": [
+          0.0,
+          90.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          33.28,
+          17.91,
+          10.75
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          90.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          3328.0,
+          -1791.0,
+          1075.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -90.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvwfslidingplatform/001",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 40,
+      "model": "MODEL_WF_SLIDING_PLATFORM",
+      "behavior": "bhvWFSlidingPlatform",
+      "asset": "SlidingPlatform",
+      "collection": "WF_Moving",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "BPARAM2(WF_SLID_BRICK_PTFM_BP_MOV_VEL_10)",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          3328.0,
+          1075.0,
+          -767.0
+        ],
+        "rotation_deg": [
+          0.0,
+          90.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          33.28,
+          7.67,
+          10.75
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          90.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          3328.0,
+          -767.0,
+          1075.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -90.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvwfslidingplatform/002",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 41,
+      "model": "MODEL_WF_SLIDING_PLATFORM",
+      "behavior": "bhvWFSlidingPlatform",
+      "asset": "SlidingPlatform",
+      "collection": "WF_Moving",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "BPARAM2(WF_SLID_BRICK_PTFM_BP_MOV_VEL_20)",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          3328.0,
+          1075.0,
+          -2815.0
+        ],
+        "rotation_deg": [
+          0.0,
+          90.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          33.28,
+          28.150000000000002,
+          10.75
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          90.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          3328.0,
+          -2815.0,
+          1075.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -90.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvtumblingbridge/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 42,
+      "model": "MODEL_WF_TUMBLING_BRIDGE",
+      "behavior": "bhvTumblingBridge",
+      "asset": null,
+      "collection": "WF_Moving",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "BPARAM2(TUMBLING_BRIDGE_BP_WF)",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          1792.0,
+          2496.0,
+          1600.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          17.92,
+          -16.0,
+          24.96
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          1792.0,
+          1600.0,
+          2496.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvwfbreakablewallright/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 43,
+      "model": "MODEL_WF_BREAKABLE_WALL_RIGHT",
+      "behavior": "bhvWFBreakableWallRight",
+      "asset": "CornerStar",
+      "collection": "WF_Conditional",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          512.0,
+          2176.0,
+          2944.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          5.12,
+          -29.44,
+          21.76
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          512.0,
+          2944.0,
+          2176.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvwfbreakablewallleft/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 44,
+      "model": "MODEL_WF_BREAKABLE_WALL_LEFT",
+      "behavior": "bhvWFBreakableWallLeft",
+      "asset": "CornerBreak",
+      "collection": "WF_Conditional",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -1023.0,
+          2176.0,
+          2944.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -10.23,
+          -29.44,
+          21.76
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -1023.0,
+          2944.0,
+          2176.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvkickableboard/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 45,
+      "model": "MODEL_WF_KICKABLE_BOARD",
+      "behavior": "bhvKickableBoard",
+      "asset": "KickWood",
+      "collection": "WF_Moving",
+      "acts": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          13.0,
+          3584.0,
+          -1407.0
+        ],
+        "rotation_deg": [
+          0.0,
+          315.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          0.13,
+          14.07,
+          35.84
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          315.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          13.0,
+          -1407.0,
+          3584.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -315.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhv1up/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 46,
+      "model": "MODEL_1UP",
+      "behavior": "bhv1Up",
+      "asset": null,
+      "collection": "WF_Conditional",
+      "acts": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "BPARAM2(ONE_UP_BP_GENERIC)",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -384.0,
+          3584.0,
+          6.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -3.84,
+          -0.06,
+          35.84
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -384.0,
+          6.0,
+          3584.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvrotatingplatform/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 47,
+      "model": "MODEL_WF_ROTATING_PLATFORM",
+      "behavior": "bhvRotatingPlatform",
+      "asset": "GrassPlatform",
+      "collection": "WF_Moving",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "BPARAM1(0x08) | BPARAM2(ROTATING_PLATFORM_BP_WF)",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          2304.0,
+          3584.0,
+          -2303.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          23.04,
+          23.03,
+          35.84
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          2304.0,
+          -2303.0,
+          3584.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvrotatingplatform/001",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 48,
+      "model": "MODEL_WF_ROTATING_PLATFORM",
+      "behavior": "bhvRotatingPlatform",
+      "asset": "GrassPlatform",
+      "collection": "WF_Moving",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "BPARAM1(0x08) | BPARAM2(ROTATING_PLATFORM_BP_WF)",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          3200.0,
+          3328.0,
+          -1791.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          32.0,
+          17.91,
+          33.28
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          3200.0,
+          -1791.0,
+          3328.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvrotatingplatform/002",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 49,
+      "model": "MODEL_WF_ROTATING_PLATFORM",
+      "behavior": "bhvRotatingPlatform",
+      "asset": "GrassPlatform",
+      "collection": "WF_Moving",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "BPARAM1(0x08) | BPARAM2(ROTATING_PLATFORM_BP_WF)",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          2688.0,
+          3584.0,
+          -895.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          26.88,
+          8.950000000000001,
+          35.84
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          2688.0,
+          -895.0,
+          3584.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvpolegrabbing/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 50,
+      "model": "MODEL_NONE",
+      "behavior": "bhvPoleGrabbing",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "BPARAM2(61)",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -2495.0,
+          1331.0,
+          -256.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -24.95,
+          2.56,
+          13.31
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -2495.0,
+          -256.0,
+          1331.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvthwomp2/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 55,
+      "model": "MODEL_THWOMP",
+      "behavior": "bhvThwomp2",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "BPARAM2(0)",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          3462.0,
+          1939.0,
+          -1545.0
+        ],
+        "rotation_deg": [
+          0.0,
+          180.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          34.62,
+          15.450000000000001,
+          19.39
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          180.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          3462.0,
+          -1545.0,
+          1939.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -180.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvthwomp/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 56,
+      "model": "MODEL_THWOMP",
+      "behavior": "bhvThwomp",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "BPARAM2(0)",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          3462.0,
+          1075.0,
+          -3314.0
+        ],
+        "rotation_deg": [
+          0.0,
+          90.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          34.62,
+          33.14,
+          10.75
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          90.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          3462.0,
+          -3314.0,
+          1075.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -90.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvbetafishsplashspawner/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 57,
+      "model": "MODEL_NONE",
+      "behavior": "bhvBetaFishSplashSpawner",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -856.0,
+          922.0,
+          3819.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -8.56,
+          -38.19,
+          9.22
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -856.0,
+          3819.0,
+          922.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvpiranhaplant/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 58,
+      "model": "MODEL_PIRANHA_PLANT",
+      "behavior": "bhvPiranhaPlant",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          1822.0,
+          2560.0,
+          -101.0
+        ],
+        "rotation_deg": [
+          0.0,
+          90.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          18.22,
+          1.01,
+          25.6
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          90.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          1822.0,
+          -101.0,
+          2560.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -90.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvpiranhaplant/001",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 59,
+      "model": "MODEL_PIRANHA_PLANT",
+      "behavior": "bhvPiranhaPlant",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          4625.0,
+          256.0,
+          5017.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -90.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          46.25,
+          -50.17,
+          2.56
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          -90.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          4625.0,
+          5017.0,
+          256.0
+        ],
+        "rotation_deg": [
+          0.0,
+          90.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvpiranhaplant/002",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 60,
+      "model": "MODEL_PIRANHA_PLANT",
+      "behavior": "bhvPiranhaPlant",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          689.0,
+          2560.0,
+          1845.0
+        ],
+        "rotation_deg": [
+          0.0,
+          90.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          6.890000000000001,
+          -18.45,
+          25.6
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          90.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          689.0,
+          1845.0,
+          2560.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -90.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvsmallwhomp/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 61,
+      "model": "MODEL_WHOMP",
+      "behavior": "bhvSmallWhomp",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "BPARAM2(WHOMP_BP_SMALL)",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -1545.0,
+          2560.0,
+          -286.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -15.450000000000001,
+          2.86,
+          25.6
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -1545.0,
+          -286.0,
+          2560.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvsmallwhomp/001",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 62,
+      "model": "MODEL_WHOMP",
+      "behavior": "bhvSmallWhomp",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "BPARAM2(WHOMP_BP_SMALL)",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          189.0,
+          2560.0,
+          -1857.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -135.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          1.8900000000000001,
+          18.57,
+          25.6
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          -135.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          189.0,
+          -1857.0,
+          2560.0
+        ],
+        "rotation_deg": [
+          0.0,
+          135.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvbutterfly/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 63,
+      "model": "MODEL_BUTTERFLY",
+      "behavior": "bhvButterfly",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          4736.0,
+          256.0,
+          4992.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          47.36,
+          -49.92,
+          2.56
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          4736.0,
+          4992.0,
+          256.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvbutterfly/001",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 64,
+      "model": "MODEL_BUTTERFLY",
+      "behavior": "bhvButterfly",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          4608.0,
+          256.0,
+          5120.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          46.08,
+          -51.2,
+          2.56
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          4608.0,
+          5120.0,
+          256.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvbutterfly/002",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 65,
+      "model": "MODEL_BUTTERFLY",
+      "behavior": "bhvButterfly",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          4608.0,
+          256.0,
+          4992.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          46.08,
+          -49.92,
+          2.56
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          4608.0,
+          4992.0,
+          256.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvbutterfly/003",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 66,
+      "model": "MODEL_BUTTERFLY",
+      "behavior": "bhvButterfly",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          4608.0,
+          256.0,
+          4864.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          46.08,
+          -48.64,
+          2.56
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          4608.0,
+          4864.0,
+          256.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvbutterfly/004",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 67,
+      "model": "MODEL_BUTTERFLY",
+      "behavior": "bhvButterfly",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          4480.0,
+          256.0,
+          4992.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          44.800000000000004,
+          -49.92,
+          2.56
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          4480.0,
+          4992.0,
+          256.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvbutterfly/005",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 68,
+      "model": "MODEL_BUTTERFLY",
+      "behavior": "bhvButterfly",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          4608.0,
+          256.0,
+          256.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          46.08,
+          -2.56,
+          2.56
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          4608.0,
+          256.0,
+          256.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvbutterfly/006",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 69,
+      "model": "MODEL_BUTTERFLY",
+      "behavior": "bhvButterfly",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          4736.0,
+          256.0,
+          128.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          47.36,
+          -1.28,
+          2.56
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          4736.0,
+          128.0,
+          256.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvbutterfly/007",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 70,
+      "model": "MODEL_BUTTERFLY",
+      "behavior": "bhvButterfly",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          4480.0,
+          256.0,
+          128.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          44.800000000000004,
+          -1.28,
+          2.56
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          4480.0,
+          128.0,
+          256.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvbutterfly/008",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 71,
+      "model": "MODEL_BUTTERFLY",
+      "behavior": "bhvButterfly",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          4608.0,
+          256.0,
+          0.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          46.08,
+          -0.0,
+          2.56
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          4608.0,
+          0.0,
+          256.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvbutterfly/009",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 72,
+      "model": "MODEL_BUTTERFLY",
+      "behavior": "bhvButterfly",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          4608.0,
+          256.0,
+          128.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          46.08,
+          -1.28,
+          2.56
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          4608.0,
+          128.0,
+          256.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvcheckerboardelevatorgroup/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 73,
+      "model": "MODEL_NONE",
+      "behavior": "bhvCheckerboardElevatorGroup",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "BPARAM1(0) | BPARAM2(0)",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          1035.0,
+          2880.0,
+          -900.0
+        ],
+        "rotation_deg": [
+          0.0,
+          45.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          10.35,
+          9.0,
+          28.8
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          45.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          1035.0,
+          -900.0,
+          2880.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -45.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvbulletbill/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 74,
+      "model": "MODEL_BULLET_BILL",
+      "behavior": "bhvBulletBill",
+      "asset": null,
+      "collection": "WF_Conditional",
+      "acts": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          1280.0,
+          3712.0,
+          968.0
+        ],
+        "rotation_deg": [
+          0.0,
+          180.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          12.8,
+          -9.68,
+          37.12
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          180.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          1280.0,
+          968.0,
+          3712.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -180.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvtower/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 75,
+      "model": "MODEL_LEVEL_GEOMETRY_08",
+      "behavior": "bhvTower",
+      "asset": "Tower",
+      "collection": "WF_Conditional",
+      "acts": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          0.0,
+          3584.0,
+          0.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          0.0,
+          -0.0,
+          35.84
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          0.0,
+          0.0,
+          3584.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvbulletbillcannon/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 76,
+      "model": "MODEL_LEVEL_GEOMETRY_09",
+      "behavior": "bhvBulletBillCannon",
+      "asset": "BillBlaster",
+      "collection": "WF_Conditional",
+      "acts": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          1280.0,
+          3584.0,
+          896.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          12.8,
+          -8.96,
+          35.84
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          1280.0,
+          896.0,
+          3584.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvtowerplatformgroup/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 77,
+      "model": "MODEL_NONE",
+      "behavior": "bhvTowerPlatformGroup",
+      "asset": null,
+      "collection": "WF_Conditional",
+      "acts": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          0.0,
+          3483.0,
+          0.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          0.0,
+          -0.0,
+          34.83
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          0.0,
+          0.0,
+          3483.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvtowerdoor/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 78,
+      "model": "MODEL_WF_TOWER_DOOR",
+      "behavior": "bhvTowerDoor",
+      "asset": "TowerWall",
+      "collection": "WF_Conditional",
+      "acts": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -511.0,
+          3584.0,
+          0.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -5.11,
+          -0.0,
+          35.84
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -511.0,
+          0.0,
+          3584.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvbobombbuddyopenscannon/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 79,
+      "model": "MODEL_BOBOMB_BUDDY",
+      "behavior": "bhvBobombBuddyOpensCannon",
+      "asset": null,
+      "collection": "WF_Conditional",
+      "acts": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -1700.0,
+          1140.0,
+          3500.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -17.0,
+          -35.0,
+          11.4
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -1700.0,
+          3500.0,
+          1140.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvhoot/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 80,
+      "model": "MODEL_HOOT",
+      "behavior": "bhvHoot",
+      "asset": null,
+      "collection": "WF_Conditional",
+      "acts": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          2560.0,
+          700.0,
+          4608.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          25.6,
+          -46.08,
+          7.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          2560.0,
+          4608.0,
+          700.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvwhompkingboss/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 85,
+      "model": "MODEL_WHOMP",
+      "behavior": "bhvWhompKingBoss",
+      "asset": null,
+      "collection": "WF_Conditional",
+      "acts": [
+        1
+      ],
+      "behavior_param": "BPARAM1(STAR_INDEX_ACT_1)",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          0.0,
+          3584.0,
+          0.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          0.0,
+          -0.0,
+          35.84
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          0.0,
+          0.0,
+          3584.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvstar/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 86,
+      "model": "MODEL_STAR",
+      "behavior": "bhvStar",
+      "asset": null,
+      "collection": "WF_Conditional",
+      "acts": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "BPARAM1(STAR_INDEX_ACT_2)",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          300.0,
+          5550.0,
+          0.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          3.0,
+          -0.0,
+          55.5
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          300.0,
+          0.0,
+          5550.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvstar/001",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 87,
+      "model": "MODEL_STAR",
+      "behavior": "bhvStar",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "BPARAM1(STAR_INDEX_ACT_3)",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -2500.0,
+          1500.0,
+          -750.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -25.0,
+          7.5,
+          15.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -2500.0,
+          -750.0,
+          1500.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvhiddenredcoinstar/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 88,
+      "model": "MODEL_NONE",
+      "behavior": "bhvHiddenRedCoinStar",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "BPARAM1(STAR_INDEX_ACT_4)",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          4600.0,
+          550.0,
+          2500.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          46.0,
+          -25.0,
+          5.5
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          4600.0,
+          2500.0,
+          550.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvstar/002",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 89,
+      "model": "MODEL_STAR",
+      "behavior": "bhvStar",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "BPARAM1(STAR_INDEX_ACT_5)",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          2880.0,
+          4300.0,
+          190.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          28.8,
+          -1.9000000000000001,
+          43.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          2880.0,
+          190.0,
+          4300.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvstar/003",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 90,
+      "model": "MODEL_STAR",
+      "behavior": "bhvStar",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "BPARAM1(STAR_INDEX_ACT_6)",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          590.0,
+          2450.0,
+          2650.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          5.9,
+          -26.5,
+          24.5
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          590.0,
+          2650.0,
+          2450.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvspinairbornewarp/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 143,
+      "model": "MODEL_NONE",
+      "behavior": "bhvSpinAirborneWarp",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "BPARAM2(WARP_NODE_0A)",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          2600.0,
+          1256.0,
+          5120.0
+        ],
+        "rotation_deg": [
+          0.0,
+          90.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          26.0,
+          -51.2,
+          12.56
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          90.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          2600.0,
+          5120.0,
+          1256.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -90.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvfadingwarp/000",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 144,
+      "model": "MODEL_NONE",
+      "behavior": "bhvFadingWarp",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "BPARAM2(WARP_NODE_0B)",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -2925.0,
+          2560.0,
+          -947.0
+        ],
+        "rotation_deg": [
+          0.0,
+          19.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -29.25,
+          9.47,
+          25.6
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          19.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -2925.0,
+          -947.0,
+          2560.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -19.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/object/bhvfadingwarp/001",
+      "source_kind": "level_script",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/script.c",
+      "source_line": 145,
+      "model": "MODEL_NONE",
+      "behavior": "bhvFadingWarp",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "BPARAM2(WARP_NODE_0C)",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          2548.0,
+          1075.0,
+          -3962.0
+        ],
+        "rotation_deg": [
+          0.0,
+          51.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          25.48,
+          39.62,
+          10.75
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          51.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          2548.0,
+          -3962.0,
+          1075.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -51.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_coin_line_horizontal/000",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 3,
+      "model": "macro_coin_line_horizontal",
+      "behavior": "macro_coin_line_horizontal",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          3760.0,
+          960.0,
+          2740.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          37.6,
+          -27.400000000000002,
+          9.6
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          3760.0,
+          2740.0,
+          960.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_coin_line_horizontal/001",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 4,
+      "model": "macro_coin_line_horizontal",
+      "behavior": "macro_coin_line_horizontal",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -1400.0,
+          1160.0,
+          3900.0
+        ],
+        "rotation_deg": [
+          0.0,
+          90.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -14.0,
+          -39.0,
+          11.6
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          90.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -1400.0,
+          3900.0,
+          1160.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -90.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_coin_line_horizontal/002",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 5,
+      "model": "macro_coin_line_horizontal",
+      "behavior": "macro_coin_line_horizontal",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          1254.0,
+          2586.0,
+          2299.0
+        ],
+        "rotation_deg": [
+          0.0,
+          90.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          12.540000000000001,
+          -22.990000000000002,
+          25.86
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          90.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          1254.0,
+          2299.0,
+          2586.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -90.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_coin_ring_horizontal/000",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 6,
+      "model": "macro_coin_ring_horizontal",
+      "behavior": "macro_coin_ring_horizontal",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -2500.0,
+          1795.0,
+          -260.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -25.0,
+          2.6,
+          17.95
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -2500.0,
+          -260.0,
+          1795.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_blue_coin_switch/000",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 7,
+      "model": "macro_blue_coin_switch",
+      "behavior": "macro_blue_coin_switch",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -2500.0,
+          384.0,
+          -250.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -25.0,
+          2.5,
+          3.84
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -2500.0,
+          -250.0,
+          384.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_hidden_blue_coin/000",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 8,
+      "model": "macro_hidden_blue_coin",
+      "behavior": "macro_hidden_blue_coin",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -2500.0,
+          450.0,
+          -1150.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -25.0,
+          11.5,
+          4.5
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -2500.0,
+          -1150.0,
+          450.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_hidden_blue_coin/001",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 9,
+      "model": "macro_hidden_blue_coin",
+      "behavior": "macro_hidden_blue_coin",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -2500.0,
+          450.0,
+          -900.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -25.0,
+          9.0,
+          4.5
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -2500.0,
+          -900.0,
+          450.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_hidden_blue_coin/002",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 10,
+      "model": "macro_hidden_blue_coin",
+      "behavior": "macro_hidden_blue_coin",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -2500.0,
+          450.0,
+          -650.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -25.0,
+          6.5,
+          4.5
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -2500.0,
+          -650.0,
+          450.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_box_metal_cap/000",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 11,
+      "model": "macro_box_metal_cap",
+      "behavior": "macro_box_metal_cap",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          2750.0,
+          1370.0,
+          -3400.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          27.5,
+          34.0,
+          13.700000000000001
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          2750.0,
+          -3400.0,
+          1370.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_yellow_coin_1/000",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 12,
+      "model": "macro_yellow_coin_1",
+      "behavior": "macro_yellow_coin_1",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          0.0,
+          2650.0,
+          2900.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          0.0,
+          -29.0,
+          26.5
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          0.0,
+          2900.0,
+          2650.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_yellow_coin_1/001",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 13,
+      "model": "macro_yellow_coin_1",
+      "behavior": "macro_yellow_coin_1",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -500.0,
+          2650.0,
+          2900.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -5.0,
+          -29.0,
+          26.5
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -500.0,
+          2900.0,
+          2650.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_yellow_coin_1/002",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 14,
+      "model": "macro_yellow_coin_1",
+      "behavior": "macro_yellow_coin_1",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          250.0,
+          2650.0,
+          2800.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          2.5,
+          -28.0,
+          26.5
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          250.0,
+          2800.0,
+          2650.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_yellow_coin_1/003",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 15,
+      "model": "macro_yellow_coin_1",
+      "behavior": "macro_yellow_coin_1",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -750.0,
+          2650.0,
+          2800.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -7.5,
+          -28.0,
+          26.5
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -750.0,
+          2800.0,
+          2650.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_hidden_1up_in_pole/000",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 16,
+      "model": "macro_hidden_1up_in_pole",
+      "behavior": "macro_hidden_1up_in_pole",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -2500.0,
+          4560.0,
+          -256.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -25.0,
+          2.56,
+          45.6
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -2500.0,
+          -256.0,
+          4560.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_hidden_1up_trigger/000",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 17,
+      "model": "macro_hidden_1up_trigger",
+      "behavior": "macro_hidden_1up_trigger",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          0.0,
+          2650.0,
+          2900.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          0.0,
+          -29.0,
+          26.5
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          0.0,
+          2900.0,
+          2650.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_hidden_1up/000",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 18,
+      "model": "macro_hidden_1up",
+      "behavior": "macro_hidden_1up",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "2",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -250.0,
+          2650.0,
+          2400.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -2.5,
+          -24.0,
+          26.5
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -250.0,
+          2400.0,
+          2650.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_wooden_signpost/000",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 19,
+      "model": "macro_wooden_signpost",
+      "behavior": "macro_wooden_signpost",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "DIALOG_018",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          4200.0,
+          256.0,
+          5160.0
+        ],
+        "rotation_deg": [
+          0.0,
+          315.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          42.0,
+          -51.6,
+          2.56
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          315.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          4200.0,
+          5160.0,
+          256.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -315.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_wooden_signpost/001",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 20,
+      "model": "macro_wooden_signpost",
+      "behavior": "macro_wooden_signpost",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "DIALOG_036",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -2540.0,
+          2560.0,
+          -900.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -25.400000000000002,
+          9.0,
+          25.6
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -2540.0,
+          -900.0,
+          2560.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_wooden_signpost/002",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 21,
+      "model": "macro_wooden_signpost",
+      "behavior": "macro_wooden_signpost",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "DIALOG_042",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          1600.0,
+          2560.0,
+          2600.0
+        ],
+        "rotation_deg": [
+          0.0,
+          90.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          16.0,
+          -26.0,
+          25.6
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          90.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          1600.0,
+          2600.0,
+          2560.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -90.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_wooden_signpost/003",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 22,
+      "model": "macro_wooden_signpost",
+      "behavior": "macro_wooden_signpost",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "DIALOG_051",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -2705.0,
+          2560.0,
+          59.0
+        ],
+        "rotation_deg": [
+          0.0,
+          270.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -27.05,
+          -0.59,
+          25.6
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          270.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -2705.0,
+          59.0,
+          2560.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -270.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_wooden_signpost/004",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 23,
+      "model": "macro_wooden_signpost",
+      "behavior": "macro_wooden_signpost",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "DIALOG_096",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          3460.0,
+          2304.0,
+          -40.0
+        ],
+        "rotation_deg": [
+          0.0,
+          180.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          34.6,
+          0.4,
+          23.04
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          180.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          3460.0,
+          -40.0,
+          2304.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -180.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_cannon_closed/000",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 24,
+      "model": "macro_cannon_closed",
+      "behavior": "macro_cannon_closed",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0x40",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -1844.0,
+          1026.0,
+          3893.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -18.44,
+          -38.93,
+          10.26
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -1844.0,
+          3893.0,
+          1026.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_wooden_signpost/005",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 25,
+      "model": "macro_wooden_signpost",
+      "behavior": "macro_wooden_signpost",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "DIALOG_078",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -2932.0,
+          386.0,
+          -157.0
+        ],
+        "rotation_deg": [
+          0.0,
+          270.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -29.32,
+          1.57,
+          3.86
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          270.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -2932.0,
+          -157.0,
+          386.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -270.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_hidden_1up_trigger/001",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 26,
+      "model": "macro_hidden_1up_trigger",
+      "behavior": "macro_hidden_1up_trigger",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -500.0,
+          2650.0,
+          2900.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -5.0,
+          -29.0,
+          26.5
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -500.0,
+          2900.0,
+          2650.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_red_coin/000",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 27,
+      "model": "macro_red_coin",
+      "behavior": "macro_red_coin",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -250.0,
+          2650.0,
+          2970.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -2.5,
+          -29.7,
+          26.5
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -250.0,
+          2970.0,
+          2650.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_red_coin/001",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 28,
+      "model": "macro_red_coin",
+      "behavior": "macro_red_coin",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          1746.0,
+          3620.0,
+          -3120.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          17.46,
+          31.2,
+          36.2
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          1746.0,
+          -3120.0,
+          3620.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_red_coin/002",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 29,
+      "model": "macro_red_coin",
+      "behavior": "macro_red_coin",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          1277.0,
+          2600.0,
+          1350.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          12.77,
+          -13.5,
+          26.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          1277.0,
+          1350.0,
+          2600.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_red_coin/003",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 30,
+      "model": "macro_red_coin",
+      "behavior": "macro_red_coin",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          1585.0,
+          2595.0,
+          -80.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          15.85,
+          0.8,
+          25.95
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          1585.0,
+          -80.0,
+          2595.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_red_coin/004",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 31,
+      "model": "macro_red_coin",
+      "behavior": "macro_red_coin",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          3350.0,
+          3000.0,
+          -1520.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          33.5,
+          15.200000000000001,
+          30.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          3350.0,
+          -1520.0,
+          3000.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_red_coin/005",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 32,
+      "model": "macro_red_coin",
+      "behavior": "macro_red_coin",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          2700.0,
+          3600.0,
+          -900.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          27.0,
+          9.0,
+          36.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          2700.0,
+          -900.0,
+          3600.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_red_coin/006",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 33,
+      "model": "macro_red_coin",
+      "behavior": "macro_red_coin",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          3770.0,
+          1380.0,
+          650.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          37.7,
+          -6.5,
+          13.8
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          3770.0,
+          650.0,
+          1380.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_red_coin/007",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 34,
+      "model": "macro_red_coin",
+      "behavior": "macro_red_coin",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -270.0,
+          1720.0,
+          2250.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -2.7,
+          -22.5,
+          17.2
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -270.0,
+          2250.0,
+          1720.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_coin_arrow/000",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 35,
+      "model": "macro_coin_arrow",
+      "behavior": "macro_coin_arrow",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          1215.0,
+          3600.0,
+          -2609.0
+        ],
+        "rotation_deg": [
+          0.0,
+          135.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          12.15,
+          26.09,
+          36.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          135.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          1215.0,
+          -2609.0,
+          3600.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -135.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_hidden_blue_coin/003",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 36,
+      "model": "macro_hidden_blue_coin",
+      "behavior": "macro_hidden_blue_coin",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -2500.0,
+          450.0,
+          -1400.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -25.0,
+          14.0,
+          4.5
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -2500.0,
+          -1400.0,
+          450.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_coin_ring_horizontal/001",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 37,
+      "model": "macro_coin_ring_horizontal",
+      "behavior": "macro_coin_ring_horizontal",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          4611.0,
+          256.0,
+          141.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          46.11,
+          -1.41,
+          2.56
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          4611.0,
+          141.0,
+          256.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_coin_ring_horizontal/002",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 38,
+      "model": "macro_coin_ring_horizontal",
+      "behavior": "macro_coin_ring_horizontal",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          1558.0,
+          922.0,
+          2329.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          15.58,
+          -23.29,
+          9.22
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          1558.0,
+          2329.0,
+          922.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_coin_line_horizontal/003",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 39,
+      "model": "macro_coin_line_horizontal",
+      "behavior": "macro_coin_line_horizontal",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          3396.0,
+          1380.0,
+          3280.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          33.96,
+          -32.8,
+          13.8
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          3396.0,
+          3280.0,
+          1380.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_coin_ring_horizontal_flying/000",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 40,
+      "model": "macro_coin_ring_horizontal_flying",
+      "behavior": "macro_coin_ring_horizontal_flying",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          3234.0,
+          3345.0,
+          -1787.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          32.34,
+          17.87,
+          33.45
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          3234.0,
+          -1787.0,
+          3345.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_wooden_signpost/006",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 41,
+      "model": "macro_wooden_signpost",
+      "behavior": "macro_wooden_signpost",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "DIALOG_104",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          4800.0,
+          256.0,
+          3000.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          48.0,
+          -30.0,
+          2.56
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          4800.0,
+          3000.0,
+          256.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_wooden_signpost/007",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 42,
+      "model": "macro_wooden_signpost",
+      "behavior": "macro_wooden_signpost",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "DIALOG_113",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          2930.0,
+          1075.0,
+          -3740.0
+        ],
+        "rotation_deg": [
+          0.0,
+          90.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          29.3,
+          37.4,
+          10.75
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          90.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          2930.0,
+          -3740.0,
+          1075.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -90.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_breakable_box_small/000",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 43,
+      "model": "macro_breakable_box_small",
+      "behavior": "macro_breakable_box_small",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          4320.0,
+          256.0,
+          1880.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          43.2,
+          -18.8,
+          2.56
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          4320.0,
+          1880.0,
+          256.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_breakable_box_small/001",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 44,
+      "model": "macro_breakable_box_small",
+      "behavior": "macro_breakable_box_small",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -2940.0,
+          384.0,
+          -1320.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -29.400000000000002,
+          13.200000000000001,
+          3.84
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -2940.0,
+          -1320.0,
+          384.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/macro/macro_butterfly_triplet_no_bombs/000",
+      "source_kind": "macro_object",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/macro.inc.c",
+      "source_line": 45,
+      "model": "macro_butterfly_triplet_no_bombs",
+      "behavior": "macro_butterfly_triplet_no_bombs",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          4574.0,
+          300.0,
+          1130.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          45.74,
+          -11.3,
+          3.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          4574.0,
+          1130.0,
+          300.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/special/special_null_start/000",
+      "source_kind": "collision_special",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/collision.inc.c",
+      "source_line": 1078,
+      "model": "special_null_start",
+      "behavior": "special_null_start",
+      "asset": null,
+      "collection": "WF_GameplayMarkers",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          2560.0,
+          256.0,
+          5120.0
+        ],
+        "rotation_deg": [
+          0.0,
+          90.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          25.6,
+          -51.2,
+          2.56
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          90.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          2560.0,
+          5120.0,
+          256.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -90.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/special/special_level_geo_0e/000",
+      "source_kind": "collision_special",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/collision.inc.c",
+      "source_line": 1079,
+      "model": "special_level_geo_0E",
+      "behavior": "special_level_geo_0E",
+      "asset": "GrassPart1",
+      "collection": "WF_StaticWorld",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          3584.0,
+          154.0,
+          4864.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          35.84,
+          -48.64,
+          1.54
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          3584.0,
+          4864.0,
+          154.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/special/special_level_geo_0f/000",
+      "source_kind": "collision_special",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/collision.inc.c",
+      "source_line": 1080,
+      "model": "special_level_geo_0F",
+      "behavior": "special_level_geo_0F",
+      "asset": "GrassPart2",
+      "collection": "WF_StaticWorld",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          4608.0,
+          256.0,
+          1792.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          46.08,
+          -17.92,
+          2.56
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          4608.0,
+          1792.0,
+          256.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/special/special_level_geo_11/000",
+      "source_kind": "collision_special",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/collision.inc.c",
+      "source_line": 1081,
+      "model": "special_level_geo_11",
+      "behavior": "special_level_geo_11",
+      "asset": "VerandaPart",
+      "collection": "WF_StaticWorld",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -2499.0,
+          1792.0,
+          -261.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -24.990000000000002,
+          2.61,
+          17.92
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -2499.0,
+          -261.0,
+          1792.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/special/special_level_geo_12/000",
+      "source_kind": "collision_special",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/collision.inc.c",
+      "source_line": 1082,
+      "model": "special_level_geo_12",
+      "behavior": "special_level_geo_12",
+      "asset": "SideRamp",
+      "collection": "WF_StaticWorld",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          -2661.0,
+          384.0,
+          640.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -26.61,
+          -6.4,
+          3.84
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -2661.0,
+          640.0,
+          384.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/special/special_bubble_tree/000",
+      "source_kind": "collision_special",
+      "source_file": "C:/Users/adace/Downloads/sm64-master/sm64-master/levels/wf/areas/1/collision.inc.c",
+      "source_line": 1083,
+      "model": "special_bubble_tree",
+      "behavior": "special_bubble_tree",
+      "asset": "Tree",
+      "collection": "WF_StaticWorld",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": null,
+      "metadata": {},
+      "source_transform": {
+        "location_cm": [
+          2560.0,
+          256.0,
+          4608.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          25.6,
+          -46.08,
+          2.56
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          2560.0,
+          4608.0,
+          256.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/generated/tumbling_bridge_piece/00",
+      "source_kind": "behavior_generated",
+      "source_file": "src/game/behaviors/tumbling_bridge.inc.c",
+      "source_line": 17,
+      "model": "MODEL_WF_TUMBLING_BRIDGE_PART",
+      "behavior": "bhvTumblingBridgePlatform",
+      "asset": "BridgePiece",
+      "collection": "WF_Moving",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": "wf/object/bhvtumblingbridge/000",
+      "metadata": {
+        "piece_index": 0,
+        "relative_z_cm": -512
+      },
+      "source_transform": {
+        "location_cm": [
+          1792.0,
+          2496.0,
+          1088.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          17.92,
+          -10.88,
+          24.96
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          1792.0,
+          1088.0,
+          2496.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/generated/tumbling_bridge_piece/01",
+      "source_kind": "behavior_generated",
+      "source_file": "src/game/behaviors/tumbling_bridge.inc.c",
+      "source_line": 17,
+      "model": "MODEL_WF_TUMBLING_BRIDGE_PART",
+      "behavior": "bhvTumblingBridgePlatform",
+      "asset": "BridgePiece",
+      "collection": "WF_Moving",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": "wf/object/bhvtumblingbridge/000",
+      "metadata": {
+        "piece_index": 1,
+        "relative_z_cm": -384
+      },
+      "source_transform": {
+        "location_cm": [
+          1792.0,
+          2496.0,
+          1216.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          17.92,
+          -12.16,
+          24.96
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          1792.0,
+          1216.0,
+          2496.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/generated/tumbling_bridge_piece/02",
+      "source_kind": "behavior_generated",
+      "source_file": "src/game/behaviors/tumbling_bridge.inc.c",
+      "source_line": 17,
+      "model": "MODEL_WF_TUMBLING_BRIDGE_PART",
+      "behavior": "bhvTumblingBridgePlatform",
+      "asset": "BridgePiece",
+      "collection": "WF_Moving",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": "wf/object/bhvtumblingbridge/000",
+      "metadata": {
+        "piece_index": 2,
+        "relative_z_cm": -256
+      },
+      "source_transform": {
+        "location_cm": [
+          1792.0,
+          2496.0,
+          1344.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          17.92,
+          -13.44,
+          24.96
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          1792.0,
+          1344.0,
+          2496.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/generated/tumbling_bridge_piece/03",
+      "source_kind": "behavior_generated",
+      "source_file": "src/game/behaviors/tumbling_bridge.inc.c",
+      "source_line": 17,
+      "model": "MODEL_WF_TUMBLING_BRIDGE_PART",
+      "behavior": "bhvTumblingBridgePlatform",
+      "asset": "BridgePiece",
+      "collection": "WF_Moving",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": "wf/object/bhvtumblingbridge/000",
+      "metadata": {
+        "piece_index": 3,
+        "relative_z_cm": -128
+      },
+      "source_transform": {
+        "location_cm": [
+          1792.0,
+          2496.0,
+          1472.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          17.92,
+          -14.72,
+          24.96
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          1792.0,
+          1472.0,
+          2496.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/generated/tumbling_bridge_piece/04",
+      "source_kind": "behavior_generated",
+      "source_file": "src/game/behaviors/tumbling_bridge.inc.c",
+      "source_line": 17,
+      "model": "MODEL_WF_TUMBLING_BRIDGE_PART",
+      "behavior": "bhvTumblingBridgePlatform",
+      "asset": "BridgePiece",
+      "collection": "WF_Moving",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": "wf/object/bhvtumblingbridge/000",
+      "metadata": {
+        "piece_index": 4,
+        "relative_z_cm": 0
+      },
+      "source_transform": {
+        "location_cm": [
+          1792.0,
+          2496.0,
+          1600.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          17.92,
+          -16.0,
+          24.96
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          1792.0,
+          1600.0,
+          2496.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/generated/tumbling_bridge_piece/05",
+      "source_kind": "behavior_generated",
+      "source_file": "src/game/behaviors/tumbling_bridge.inc.c",
+      "source_line": 17,
+      "model": "MODEL_WF_TUMBLING_BRIDGE_PART",
+      "behavior": "bhvTumblingBridgePlatform",
+      "asset": "BridgePiece",
+      "collection": "WF_Moving",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": "wf/object/bhvtumblingbridge/000",
+      "metadata": {
+        "piece_index": 5,
+        "relative_z_cm": 128
+      },
+      "source_transform": {
+        "location_cm": [
+          1792.0,
+          2496.0,
+          1728.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          17.92,
+          -17.28,
+          24.96
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          1792.0,
+          1728.0,
+          2496.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/generated/tumbling_bridge_piece/06",
+      "source_kind": "behavior_generated",
+      "source_file": "src/game/behaviors/tumbling_bridge.inc.c",
+      "source_line": 17,
+      "model": "MODEL_WF_TUMBLING_BRIDGE_PART",
+      "behavior": "bhvTumblingBridgePlatform",
+      "asset": "BridgePiece",
+      "collection": "WF_Moving",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": "wf/object/bhvtumblingbridge/000",
+      "metadata": {
+        "piece_index": 6,
+        "relative_z_cm": 256
+      },
+      "source_transform": {
+        "location_cm": [
+          1792.0,
+          2496.0,
+          1856.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          17.92,
+          -18.56,
+          24.96
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          1792.0,
+          1856.0,
+          2496.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/generated/tumbling_bridge_piece/07",
+      "source_kind": "behavior_generated",
+      "source_file": "src/game/behaviors/tumbling_bridge.inc.c",
+      "source_line": 17,
+      "model": "MODEL_WF_TUMBLING_BRIDGE_PART",
+      "behavior": "bhvTumblingBridgePlatform",
+      "asset": "BridgePiece",
+      "collection": "WF_Moving",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": "wf/object/bhvtumblingbridge/000",
+      "metadata": {
+        "piece_index": 7,
+        "relative_z_cm": 384
+      },
+      "source_transform": {
+        "location_cm": [
+          1792.0,
+          2496.0,
+          1984.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          17.92,
+          -19.84,
+          24.96
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          1792.0,
+          1984.0,
+          2496.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/generated/tumbling_bridge_piece/08",
+      "source_kind": "behavior_generated",
+      "source_file": "src/game/behaviors/tumbling_bridge.inc.c",
+      "source_line": 17,
+      "model": "MODEL_WF_TUMBLING_BRIDGE_PART",
+      "behavior": "bhvTumblingBridgePlatform",
+      "asset": "BridgePiece",
+      "collection": "WF_Moving",
+      "acts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": "wf/object/bhvtumblingbridge/000",
+      "metadata": {
+        "piece_index": 8,
+        "relative_z_cm": 512
+      },
+      "source_transform": {
+        "location_cm": [
+          1792.0,
+          2496.0,
+          2112.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          17.92,
+          -21.12,
+          24.96
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          1792.0,
+          2112.0,
+          2496.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/generated/tower_platform/00",
+      "source_kind": "behavior_generated",
+      "source_file": "src/game/behaviors/tower_platform.inc.c",
+      "source_line": 102,
+      "model": "MODEL_WF_TOWER_SQUARE_PLATORM",
+      "behavior": "bhvWFSolidTowerPlatform",
+      "asset": "TowerPlatform",
+      "collection": "WF_Moving",
+      "acts": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": "wf/object/bhvtowerplatformgroup/000",
+      "metadata": {
+        "piece_index": 0,
+        "variant": "solid",
+        "radius_cm": 704,
+        "sliding_distance_cm": 0,
+        "speed_cm_per_frame": 0
+      },
+      "source_transform": {
+        "location_cm": [
+          0.0,
+          3483.0,
+          704.0
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          0.0,
+          -7.04,
+          34.83
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          0.0,
+          704.0,
+          3483.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/generated/tower_platform/01",
+      "source_kind": "behavior_generated",
+      "source_file": "src/game/behaviors/tower_platform.inc.c",
+      "source_line": 103,
+      "model": "MODEL_WF_TOWER_SQUARE_PLATORM",
+      "behavior": "bhvWFSlidingTowerPlatform",
+      "asset": "TowerPlatform",
+      "collection": "WF_Moving",
+      "acts": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": "wf/object/bhvtowerplatformgroup/000",
+      "metadata": {
+        "piece_index": 1,
+        "variant": "sliding",
+        "radius_cm": 704,
+        "sliding_distance_cm": 380,
+        "speed_cm_per_frame": 3
+      },
+      "source_transform": {
+        "location_cm": [
+          497.8031739553295,
+          3583.0,
+          497.8031739553295
+        ],
+        "rotation_deg": [
+          0.0,
+          45.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          4.978031739553295,
+          -4.978031739553295,
+          35.83
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          45.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          497.8031739553295,
+          497.8031739553295,
+          3583.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -45.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/generated/tower_platform/02",
+      "source_kind": "behavior_generated",
+      "source_file": "src/game/behaviors/tower_platform.inc.c",
+      "source_line": 104,
+      "model": "MODEL_WF_TOWER_SQUARE_PLATORM",
+      "behavior": "bhvWFSolidTowerPlatform",
+      "asset": "TowerPlatform",
+      "collection": "WF_Moving",
+      "acts": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": "wf/object/bhvtowerplatformgroup/000",
+      "metadata": {
+        "piece_index": 2,
+        "variant": "solid",
+        "radius_cm": 704,
+        "sliding_distance_cm": 0,
+        "speed_cm_per_frame": 0
+      },
+      "source_transform": {
+        "location_cm": [
+          704.0,
+          3683.0,
+          4.3107567329986835e-14
+        ],
+        "rotation_deg": [
+          0.0,
+          90.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          7.04,
+          -4.3107567329986836e-16,
+          36.83
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          90.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          704.0,
+          4.3107567329986835e-14,
+          3683.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -90.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/generated/tower_platform/03",
+      "source_kind": "behavior_generated",
+      "source_file": "src/game/behaviors/tower_platform.inc.c",
+      "source_line": 105,
+      "model": "MODEL_WF_TOWER_SQUARE_PLATORM",
+      "behavior": "bhvWFSlidingTowerPlatform",
+      "asset": "TowerPlatform",
+      "collection": "WF_Moving",
+      "acts": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": "wf/object/bhvtowerplatformgroup/000",
+      "metadata": {
+        "piece_index": 3,
+        "variant": "sliding",
+        "radius_cm": 704,
+        "sliding_distance_cm": 380,
+        "speed_cm_per_frame": 3
+      },
+      "source_transform": {
+        "location_cm": [
+          497.8031739553295,
+          3783.0,
+          -497.8031739553294
+        ],
+        "rotation_deg": [
+          0.0,
+          135.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          4.978031739553295,
+          4.978031739553294,
+          37.83
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          135.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          497.8031739553295,
+          -497.8031739553294,
+          3783.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -135.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/generated/tower_platform/04",
+      "source_kind": "behavior_generated",
+      "source_file": "src/game/behaviors/tower_platform.inc.c",
+      "source_line": 106,
+      "model": "MODEL_WF_TOWER_SQUARE_PLATORM",
+      "behavior": "bhvWFSolidTowerPlatform",
+      "asset": "TowerPlatform",
+      "collection": "WF_Moving",
+      "acts": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": "wf/object/bhvtowerplatformgroup/000",
+      "metadata": {
+        "piece_index": 4,
+        "variant": "solid",
+        "radius_cm": 704,
+        "sliding_distance_cm": 0,
+        "speed_cm_per_frame": 0
+      },
+      "source_transform": {
+        "location_cm": [
+          8.621513465997367e-14,
+          3883.0,
+          -704.0
+        ],
+        "rotation_deg": [
+          0.0,
+          180.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          8.621513465997367e-16,
+          7.04,
+          38.83
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          180.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          8.621513465997367e-14,
+          -704.0,
+          3883.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -180.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/generated/tower_platform/05",
+      "source_kind": "behavior_generated",
+      "source_file": "src/game/behaviors/tower_platform.inc.c",
+      "source_line": 107,
+      "model": "MODEL_WF_TOWER_SQUARE_PLATORM",
+      "behavior": "bhvWFSlidingTowerPlatform",
+      "asset": "TowerPlatform",
+      "collection": "WF_Moving",
+      "acts": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": "wf/object/bhvtowerplatformgroup/000",
+      "metadata": {
+        "piece_index": 5,
+        "variant": "sliding",
+        "radius_cm": 704,
+        "sliding_distance_cm": 380,
+        "speed_cm_per_frame": 3
+      },
+      "source_transform": {
+        "location_cm": [
+          -497.8031739553294,
+          3983.0,
+          -497.80317395532956
+        ],
+        "rotation_deg": [
+          0.0,
+          225.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -4.978031739553294,
+          4.978031739553296,
+          39.83
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          225.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -497.8031739553294,
+          -497.80317395532956,
+          3983.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -225.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/generated/tower_platform/06",
+      "source_kind": "behavior_generated",
+      "source_file": "src/game/behaviors/tower_platform.inc.c",
+      "source_line": 108,
+      "model": "MODEL_WF_TOWER_SQUARE_PLATORM",
+      "behavior": "bhvWFSolidTowerPlatform",
+      "asset": "TowerPlatform",
+      "collection": "WF_Moving",
+      "acts": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": "wf/object/bhvtowerplatformgroup/000",
+      "metadata": {
+        "piece_index": 6,
+        "variant": "solid",
+        "radius_cm": 704,
+        "sliding_distance_cm": 0,
+        "speed_cm_per_frame": 0
+      },
+      "source_transform": {
+        "location_cm": [
+          -704.0,
+          4083.0,
+          -1.293227019899605e-13
+        ],
+        "rotation_deg": [
+          0.0,
+          270.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -7.04,
+          1.2932270198996049e-15,
+          40.83
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          270.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -704.0,
+          -1.293227019899605e-13,
+          4083.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -270.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "stable_id": "wf/generated/tower_platform/07",
+      "source_kind": "behavior_generated",
+      "source_file": "src/game/behaviors/tower_platform.inc.c",
+      "source_line": 109,
+      "model": "MODEL_WF_TOWER_SQUARE_PLATORM_ELEVATOR",
+      "behavior": "bhvWFElevatorTowerPlatform",
+      "asset": "TowerPlatform",
+      "collection": "WF_Moving",
+      "acts": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "behavior_param": "0",
+      "parent_id": "wf/object/bhvtowerplatformgroup/000",
+      "metadata": {
+        "piece_index": 7,
+        "variant": "elevator",
+        "radius_cm": 704,
+        "sliding_distance_cm": 0,
+        "speed_cm_per_frame": 5
+      },
+      "source_transform": {
+        "location_cm": [
+          -497.80317395532956,
+          4183.0,
+          497.8031739553293
+        ],
+        "rotation_deg": [
+          0.0,
+          315.0,
+          0.0
+        ]
+      },
+      "blender_transform": {
+        "location_m": [
+          -4.978031739553296,
+          -4.978031739553294,
+          41.83
+        ],
+        "rotation_deg": [
+          0.0,
+          0.0,
+          315.0
+        ]
+      },
+      "unreal_transform": {
+        "location_cm": [
+          -497.80317395532956,
+          497.8031739553293,
+          4183.0
+        ],
+        "rotation_deg": [
+          0.0,
+          -315.0,
+          0.0
+        ]
+      }
+    }
+  ]
+}

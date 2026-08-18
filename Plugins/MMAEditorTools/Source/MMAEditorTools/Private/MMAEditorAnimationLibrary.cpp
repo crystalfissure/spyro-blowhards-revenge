@@ -11,9 +11,18 @@
 #include "EdGraph/EdGraph.h"
 #include "EdGraph/EdGraphNode.h"
 #include "EdGraph/EdGraphPin.h"
+#include "EdGraphSchema_K2.h"
 #include "Engine/Blueprint.h"
 #include "Engine/SkeletalMesh.h"
 #include "GameFramework/Character.h"
+#include "K2Node_CallArrayFunction.h"
+#include "K2Node_CallFunction.h"
+#include "K2Node_FunctionEntry.h"
+#include "K2Node_FunctionResult.h"
+#include "K2Node_IfThenElse.h"
+#include "K2Node_VariableGet.h"
+#include "Kismet/KismetArrayLibrary.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "Particles/ParticleSystem.h"
 #include "Rendering/SkeletalMeshLODModel.h"
 #include "Rendering/SkeletalMeshModel.h"
@@ -306,6 +315,284 @@ bool UMMAEditorAnimationLibrary::CompileBlueprint(UBlueprint* Blueprint)
     }
     FKismetEditorUtilities::CompileBlueprint(Blueprint);
     return Blueprint->Status != BS_Error;
+}
+
+bool UMMAEditorAnimationLibrary::AddClubAttackAlertTargetGuard(UBlueprint* Blueprint)
+{
+    if (!Blueprint)
+    {
+        return false;
+    }
+
+    static const FString GuardComment =
+        TEXT("Guard: only evaluate nearest-player logic when an alert target exists");
+
+    TArray<UEdGraph*> Graphs;
+    Blueprint->GetAllGraphs(Graphs);
+    for (UEdGraph* Graph : Graphs)
+    {
+        if (!Graph || Graph->GetFName() != UEdGraphSchema_K2::GN_EventGraph)
+        {
+            continue;
+        }
+
+        for (UEdGraphNode* Node : Graph->Nodes)
+        {
+            if (Node && Node->NodeComment == GuardComment)
+            {
+                return true;
+            }
+        }
+
+        UK2Node_CallFunction* NearestPlayerCall = nullptr;
+        for (UEdGraphNode* Node : Graph->Nodes)
+        {
+            UK2Node_CallFunction* Call = Cast<UK2Node_CallFunction>(Node);
+            if (Call &&
+                Call->GetNodeTitle(ENodeTitleType::ListView).ToString() ==
+                    TEXT("Get Nearest Player Im Alert To"))
+            {
+                NearestPlayerCall = Call;
+                break;
+            }
+        }
+        if (!NearestPlayerCall)
+        {
+            continue;
+        }
+
+        UEdGraphPin* NearestExec = NearestPlayerCall->GetExecPin();
+        UEdGraphPin* NearestSelf = NearestPlayerCall->FindPin(UEdGraphSchema_K2::PN_Self);
+        if (!NearestExec || NearestExec->LinkedTo.Num() != 1 ||
+            !NearestSelf || NearestSelf->LinkedTo.Num() != 1)
+        {
+            return false;
+        }
+
+        UEdGraphPin* UpstreamExec = NearestExec->LinkedTo[0];
+        UEdGraphPin* CharacterReference = NearestSelf->LinkedTo[0];
+        UClass* CharacterClass = Cast<UClass>(CharacterReference->PinType.PinSubCategoryObject.Get());
+        if (!CharacterClass ||
+            !CharacterClass->FindPropertyByName(TEXT("Players_I_Am_Alert_To")))
+        {
+            return false;
+        }
+
+        const UEdGraphSchema_K2* Schema = Cast<UEdGraphSchema_K2>(Graph->GetSchema());
+        if (!Schema)
+        {
+            return false;
+        }
+
+        Blueprint->Modify();
+        Graph->Modify();
+
+        FGraphNodeCreator<UK2Node_VariableGet> TargetsCreator(*Graph);
+        UK2Node_VariableGet* TargetsNode = TargetsCreator.CreateNode();
+        TargetsNode->VariableReference.SetExternalMember(
+            TEXT("Players_I_Am_Alert_To"), CharacterClass);
+        TargetsNode->NodePosX = NearestPlayerCall->NodePosX - 256;
+        TargetsNode->NodePosY = NearestPlayerCall->NodePosY + 576;
+        TargetsCreator.Finalize();
+
+        FGraphNodeCreator<UK2Node_CallArrayFunction> LengthCreator(*Graph);
+        UK2Node_CallArrayFunction* LengthNode = LengthCreator.CreateNode();
+        LengthNode->SetFromFunction(
+            UKismetArrayLibrary::StaticClass()->FindFunctionByName(
+                GET_FUNCTION_NAME_CHECKED(UKismetArrayLibrary, Array_Length)));
+        LengthNode->NodePosX = NearestPlayerCall->NodePosX;
+        LengthNode->NodePosY = NearestPlayerCall->NodePosY + 576;
+        LengthCreator.Finalize();
+
+        FGraphNodeCreator<UK2Node_CallFunction> HasTargetsCreator(*Graph);
+        UK2Node_CallFunction* HasTargetsNode = HasTargetsCreator.CreateNode();
+        HasTargetsNode->SetFromFunction(
+            UKismetMathLibrary::StaticClass()->FindFunctionByName(
+                GET_FUNCTION_NAME_CHECKED(UKismetMathLibrary, Greater_IntInt)));
+        HasTargetsNode->NodePosX = NearestPlayerCall->NodePosX + 240;
+        HasTargetsNode->NodePosY = NearestPlayerCall->NodePosY + 576;
+        HasTargetsCreator.Finalize();
+
+        FGraphNodeCreator<UK2Node_IfThenElse> GuardCreator(*Graph);
+        UK2Node_IfThenElse* GuardNode = GuardCreator.CreateNode();
+        GuardNode->NodePosX = NearestPlayerCall->NodePosX - 224;
+        GuardNode->NodePosY = NearestPlayerCall->NodePosY - 192;
+        GuardNode->NodeComment = GuardComment;
+        GuardNode->bCommentBubbleVisible = true;
+        GuardCreator.Finalize();
+
+        UEdGraphPin* TargetsSelf = TargetsNode->FindPin(UEdGraphSchema_K2::PN_Self);
+        UEdGraphPin* TargetsValue = TargetsNode->GetValuePin();
+        UEdGraphPin* LengthArray = LengthNode->GetTargetArrayPin();
+        UEdGraphPin* LengthResult = LengthNode->GetReturnValuePin();
+        UEdGraphPin* ComparisonA = HasTargetsNode->FindPin(TEXT("A"));
+        UEdGraphPin* ComparisonB = HasTargetsNode->FindPin(TEXT("B"));
+        UEdGraphPin* ComparisonResult = HasTargetsNode->GetReturnValuePin();
+        if (!TargetsSelf || !TargetsValue || !LengthArray || !LengthResult ||
+            !ComparisonA || !ComparisonB || !ComparisonResult)
+        {
+            return false;
+        }
+
+        ComparisonB->DefaultValue = TEXT("0");
+        UpstreamExec->BreakLinkTo(NearestExec);
+
+        const bool bConnected =
+            Schema->TryCreateConnection(CharacterReference, TargetsSelf) &&
+            Schema->TryCreateConnection(TargetsValue, LengthArray) &&
+            Schema->TryCreateConnection(LengthResult, ComparisonA) &&
+            Schema->TryCreateConnection(ComparisonResult, GuardNode->GetConditionPin()) &&
+            Schema->TryCreateConnection(UpstreamExec, GuardNode->GetExecPin()) &&
+            Schema->TryCreateConnection(GuardNode->GetThenPin(), NearestExec);
+        LengthNode->PinConnectionListChanged(LengthArray);
+        if (!bConnected)
+        {
+            return false;
+        }
+
+        FBlueprintEditorUtils::MarkBlueprintAsStructurallyModified(Blueprint);
+        FKismetEditorUtilities::CompileBlueprint(Blueprint);
+        Blueprint->MarkPackageDirty();
+        return Blueprint->Status != BS_Error;
+    }
+
+    return false;
+}
+
+bool UMMAEditorAnimationLibrary::AddNearestAlertPlayerEmptyArrayGuard(
+    UBlueprint* Blueprint)
+{
+    if (!Blueprint)
+    {
+        return false;
+    }
+
+    static const FName FunctionGraphName(TEXT("Get Nearest Player Im Alert To"));
+    static const FString GuardComment =
+        TEXT("Guard: return None without indexing when the alert-target array is empty");
+
+    TArray<UEdGraph*> Graphs;
+    Blueprint->GetAllGraphs(Graphs);
+    for (UEdGraph* Graph : Graphs)
+    {
+        if (!Graph || Graph->GetFName() != FunctionGraphName)
+        {
+            continue;
+        }
+
+        for (UEdGraphNode* Node : Graph->Nodes)
+        {
+            if (Node && Node->NodeComment == GuardComment)
+            {
+                return true;
+            }
+        }
+
+        UK2Node_FunctionEntry* EntryNode = nullptr;
+        UK2Node_FunctionResult* ExistingResult = nullptr;
+        UK2Node_VariableGet* TargetsNode = nullptr;
+        for (UEdGraphNode* Node : Graph->Nodes)
+        {
+            if (!EntryNode)
+            {
+                EntryNode = Cast<UK2Node_FunctionEntry>(Node);
+            }
+            if (!ExistingResult)
+            {
+                ExistingResult = Cast<UK2Node_FunctionResult>(Node);
+            }
+            UK2Node_VariableGet* VariableGet = Cast<UK2Node_VariableGet>(Node);
+            if (VariableGet &&
+                VariableGet->GetNodeTitle(ENodeTitleType::ListView).ToString() ==
+                    TEXT("Get Players_I_Am_Alert_To"))
+            {
+                TargetsNode = VariableGet;
+            }
+        }
+
+        const UEdGraphSchema_K2* Schema = Cast<UEdGraphSchema_K2>(Graph->GetSchema());
+        UEdGraphPin* EntryThen = EntryNode && Schema
+            ? Schema->FindExecutionPin(*EntryNode, EGPD_Output)
+            : nullptr;
+        UEdGraphPin* TargetsValue = TargetsNode ? TargetsNode->GetValuePin() : nullptr;
+        if (!Schema || !EntryNode || !ExistingResult || !TargetsNode ||
+            !EntryThen || EntryThen->LinkedTo.Num() != 1 || !TargetsValue)
+        {
+            return false;
+        }
+        UEdGraphPin* OriginalFirstExec = EntryThen->LinkedTo[0];
+
+        Blueprint->Modify();
+        Graph->Modify();
+
+        FGraphNodeCreator<UK2Node_CallArrayFunction> LengthCreator(*Graph);
+        UK2Node_CallArrayFunction* LengthNode = LengthCreator.CreateNode();
+        LengthNode->SetFromFunction(
+            UKismetArrayLibrary::StaticClass()->FindFunctionByName(
+                GET_FUNCTION_NAME_CHECKED(UKismetArrayLibrary, Array_Length)));
+        LengthNode->NodePosX = EntryNode->NodePosX + 224;
+        LengthNode->NodePosY = EntryNode->NodePosY + 208;
+        LengthCreator.Finalize();
+
+        FGraphNodeCreator<UK2Node_CallFunction> HasTargetsCreator(*Graph);
+        UK2Node_CallFunction* HasTargetsNode = HasTargetsCreator.CreateNode();
+        HasTargetsNode->SetFromFunction(
+            UKismetMathLibrary::StaticClass()->FindFunctionByName(
+                GET_FUNCTION_NAME_CHECKED(UKismetMathLibrary, Greater_IntInt)));
+        HasTargetsNode->NodePosX = EntryNode->NodePosX + 448;
+        HasTargetsNode->NodePosY = EntryNode->NodePosY + 208;
+        HasTargetsCreator.Finalize();
+
+        FGraphNodeCreator<UK2Node_IfThenElse> GuardCreator(*Graph);
+        UK2Node_IfThenElse* GuardNode = GuardCreator.CreateNode();
+        GuardNode->NodePosX = EntryNode->NodePosX + 224;
+        GuardNode->NodePosY = EntryNode->NodePosY - 16;
+        GuardNode->NodeComment = GuardComment;
+        GuardNode->bCommentBubbleVisible = true;
+        GuardCreator.Finalize();
+
+        FGraphNodeCreator<UK2Node_FunctionResult> EmptyResultCreator(*Graph);
+        UK2Node_FunctionResult* EmptyResult = EmptyResultCreator.CreateNode();
+        EmptyResult->FunctionReference = EntryNode->FunctionReference;
+        EmptyResult->NodePosX = EntryNode->NodePosX + 704;
+        EmptyResult->NodePosY = EntryNode->NodePosY + 352;
+        EmptyResultCreator.Finalize();
+
+        UEdGraphPin* LengthArray = LengthNode->GetTargetArrayPin();
+        UEdGraphPin* LengthResult = LengthNode->GetReturnValuePin();
+        UEdGraphPin* ComparisonA = HasTargetsNode->FindPin(TEXT("A"));
+        UEdGraphPin* ComparisonB = HasTargetsNode->FindPin(TEXT("B"));
+        UEdGraphPin* ComparisonResult = HasTargetsNode->GetReturnValuePin();
+        UEdGraphPin* EmptyResultExec =
+            Schema->FindExecutionPin(*EmptyResult, EGPD_Input);
+        if (!LengthArray || !LengthResult || !ComparisonA || !ComparisonB ||
+            !ComparisonResult || !EmptyResultExec)
+        {
+            return false;
+        }
+
+        ComparisonB->DefaultValue = TEXT("0");
+        EntryThen->BreakLinkTo(OriginalFirstExec);
+        const bool bConnected =
+            Schema->TryCreateConnection(TargetsValue, LengthArray) &&
+            Schema->TryCreateConnection(LengthResult, ComparisonA) &&
+            Schema->TryCreateConnection(ComparisonResult, GuardNode->GetConditionPin()) &&
+            Schema->TryCreateConnection(EntryThen, GuardNode->GetExecPin()) &&
+            Schema->TryCreateConnection(GuardNode->GetThenPin(), OriginalFirstExec) &&
+            Schema->TryCreateConnection(GuardNode->GetElsePin(), EmptyResultExec);
+        LengthNode->PinConnectionListChanged(LengthArray);
+        if (!bConnected)
+        {
+            return false;
+        }
+
+        FBlueprintEditorUtils::MarkBlueprintAsStructurallyModified(Blueprint);
+        FKismetEditorUtilities::CompileBlueprint(Blueprint);
+        Blueprint->MarkPackageDirty();
+        return Blueprint->Status != BS_Error;
+    }
+
+    return false;
 }
 
 bool UMMAEditorAnimationLibrary::ConfigureMMAHedgeTrimmerBehavior(

@@ -1,0 +1,2174 @@
+{
+  "format": "spyro64.sm64_actor",
+  "format_version": 1,
+  "actor": "blue_coin_switch",
+  "source_actor": "blue_coin_switch",
+  "geo_layout": "blue_coin_switch_geo",
+  "coordinate_system": {
+    "source": "SM64 x/y/z centimetres, Y up",
+    "blender": "x/-z/y metres, Z up",
+    "formula": "(x, -z, y) * 0.01"
+  },
+  "source_files": [
+    {
+      "path": "actors/blue_coin_switch/model.inc.c",
+      "sha256": "9f34b7d432c7c129c1f5e3e5764c5bed133f48ccc9268243b144db584d50afe1"
+    },
+    {
+      "path": "actors/blue_coin_switch/geo.inc.c",
+      "sha256": "d31d41bb0c20d335949fbbf363feffa6d5f726b96b2569f387d95e480593ae03"
+    },
+    {
+      "path": "actors/blue_coin_switch/collision.inc.c",
+      "sha256": "9551be5855cb21d32c8eb17f310edbfb8fb1d6875678ebdd50ab86a27456d86a"
+    }
+  ],
+  "textures": {
+    "blue_coin_switch_seg8_texture_08000018": {
+      "asset": "actors/blue_coin_switch/blue_coin_switch_side.rgba16.png",
+      "width": 32,
+      "height": 16,
+      "format": "rgba16",
+      "rom_mio0_offset": 2040320,
+      "source_offset": 24,
+      "source_size": 1024,
+      "png": "blue_coin_switch_side.rgba16.png",
+      "sha256": "6b368db9b952ea0f476d6749ca2dae195b9ca962346f7c9dffda3b50a5829881",
+      "relative_path": "textures/blue_coin_switch_side.rgba16.png"
+    },
+    "blue_coin_switch_seg8_texture_08000418": {
+      "asset": "actors/blue_coin_switch/blue_coin_switch_top.rgba16.png",
+      "width": 32,
+      "height": 32,
+      "format": "rgba16",
+      "rom_mio0_offset": 2040320,
+      "source_offset": 1048,
+      "source_size": 2048,
+      "png": "blue_coin_switch_top.rgba16.png",
+      "sha256": "756ca9c15022a0a8b33ab5d859ac4ce7b61510b61b33a6d558abaf4fbbcd88ac",
+      "relative_path": "textures/blue_coin_switch_top.rgba16.png"
+    }
+  },
+  "vertex_arrays": {
+    "blue_coin_switch_seg8_vertex_08000C18": [
+      {
+        "source_position": [
+          26,
+          0,
+          26
+        ],
+        "blender_position": [
+          0.26,
+          -0.26,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          990,
+          479
+        ],
+        "rgba_bytes": [
+          0,
+          0,
+          127,
+          255
+        ],
+        "normal_s8": [
+          0,
+          0,
+          127
+        ],
+        "blender_normal": [
+          0.0,
+          -1.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          26,
+          26,
+          26
+        ],
+        "blender_position": [
+          0.26,
+          -0.26,
+          0.26
+        ],
+        "flag": 0,
+        "raw_uv": [
+          990,
+          0
+        ],
+        "rgba_bytes": [
+          0,
+          0,
+          127,
+          255
+        ],
+        "normal_s8": [
+          0,
+          0,
+          127
+        ],
+        "blender_normal": [
+          0.0,
+          -1.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          -25,
+          26,
+          26
+        ],
+        "blender_position": [
+          -0.25,
+          -0.26,
+          0.26
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          0
+        ],
+        "rgba_bytes": [
+          0,
+          0,
+          127,
+          255
+        ],
+        "normal_s8": [
+          0,
+          0,
+          127
+        ],
+        "blender_normal": [
+          0.0,
+          -1.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          -25,
+          0,
+          26
+        ],
+        "blender_position": [
+          -0.25,
+          -0.26,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          479
+        ],
+        "rgba_bytes": [
+          0,
+          0,
+          127,
+          255
+        ],
+        "normal_s8": [
+          0,
+          0,
+          127
+        ],
+        "blender_normal": [
+          0.0,
+          -1.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          -25,
+          0,
+          -25
+        ],
+        "blender_position": [
+          -0.25,
+          0.25,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          990,
+          479
+        ],
+        "rgba_bytes": [
+          0,
+          0,
+          129,
+          255
+        ],
+        "normal_s8": [
+          0,
+          0,
+          -127
+        ],
+        "blender_normal": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          26,
+          26,
+          -25
+        ],
+        "blender_position": [
+          0.26,
+          0.25,
+          0.26
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          0
+        ],
+        "rgba_bytes": [
+          0,
+          0,
+          129,
+          255
+        ],
+        "normal_s8": [
+          0,
+          0,
+          -127
+        ],
+        "blender_normal": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          26,
+          0,
+          -25
+        ],
+        "blender_position": [
+          0.26,
+          0.25,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          479
+        ],
+        "rgba_bytes": [
+          0,
+          0,
+          129,
+          255
+        ],
+        "normal_s8": [
+          0,
+          0,
+          -127
+        ],
+        "blender_normal": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          -25,
+          26,
+          -25
+        ],
+        "blender_position": [
+          -0.25,
+          0.25,
+          0.26
+        ],
+        "flag": 0,
+        "raw_uv": [
+          990,
+          0
+        ],
+        "rgba_bytes": [
+          0,
+          0,
+          129,
+          255
+        ],
+        "normal_s8": [
+          0,
+          0,
+          -127
+        ],
+        "blender_normal": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          -25,
+          0,
+          26
+        ],
+        "blender_position": [
+          -0.25,
+          -0.26,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          990,
+          479
+        ],
+        "rgba_bytes": [
+          129,
+          0,
+          0,
+          255
+        ],
+        "normal_s8": [
+          -127,
+          0,
+          0
+        ],
+        "blender_normal": [
+          -1.0,
+          -0.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          -25,
+          26,
+          -25
+        ],
+        "blender_position": [
+          -0.25,
+          0.25,
+          0.26
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          0
+        ],
+        "rgba_bytes": [
+          129,
+          0,
+          0,
+          255
+        ],
+        "normal_s8": [
+          -127,
+          0,
+          0
+        ],
+        "blender_normal": [
+          -1.0,
+          -0.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          -25,
+          0,
+          -25
+        ],
+        "blender_position": [
+          -0.25,
+          0.25,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          479
+        ],
+        "rgba_bytes": [
+          129,
+          0,
+          0,
+          255
+        ],
+        "normal_s8": [
+          -127,
+          0,
+          0
+        ],
+        "blender_normal": [
+          -1.0,
+          -0.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          -25,
+          26,
+          26
+        ],
+        "blender_position": [
+          -0.25,
+          -0.26,
+          0.26
+        ],
+        "flag": 0,
+        "raw_uv": [
+          990,
+          0
+        ],
+        "rgba_bytes": [
+          129,
+          0,
+          0,
+          255
+        ],
+        "normal_s8": [
+          -127,
+          0,
+          0
+        ],
+        "blender_normal": [
+          -1.0,
+          -0.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          26,
+          0,
+          -25
+        ],
+        "blender_position": [
+          0.26,
+          0.25,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          990,
+          479
+        ],
+        "rgba_bytes": [
+          127,
+          0,
+          0,
+          255
+        ],
+        "normal_s8": [
+          127,
+          0,
+          0
+        ],
+        "blender_normal": [
+          1.0,
+          -0.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          26,
+          26,
+          -25
+        ],
+        "blender_position": [
+          0.26,
+          0.25,
+          0.26
+        ],
+        "flag": 0,
+        "raw_uv": [
+          990,
+          0
+        ],
+        "rgba_bytes": [
+          127,
+          0,
+          0,
+          255
+        ],
+        "normal_s8": [
+          127,
+          0,
+          0
+        ],
+        "blender_normal": [
+          1.0,
+          -0.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          26,
+          26,
+          26
+        ],
+        "blender_position": [
+          0.26,
+          -0.26,
+          0.26
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          0
+        ],
+        "rgba_bytes": [
+          127,
+          0,
+          0,
+          255
+        ],
+        "normal_s8": [
+          127,
+          0,
+          0
+        ],
+        "blender_normal": [
+          1.0,
+          -0.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          26,
+          0,
+          26
+        ],
+        "blender_position": [
+          0.26,
+          -0.26,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          479
+        ],
+        "rgba_bytes": [
+          127,
+          0,
+          0,
+          255
+        ],
+        "normal_s8": [
+          127,
+          0,
+          0
+        ],
+        "blender_normal": [
+          1.0,
+          -0.0,
+          0.0
+        ]
+      }
+    ],
+    "blue_coin_switch_seg8_vertex_08000D18": [
+      {
+        "source_position": [
+          26,
+          26,
+          -25
+        ],
+        "blender_position": [
+          0.26,
+          0.25,
+          0.26
+        ],
+        "flag": 0,
+        "raw_uv": [
+          990,
+          0
+        ],
+        "rgba_bytes": [
+          0,
+          127,
+          0,
+          255
+        ],
+        "normal_s8": [
+          0,
+          127,
+          0
+        ],
+        "blender_normal": [
+          0.0,
+          -0.0,
+          1.0
+        ]
+      },
+      {
+        "source_position": [
+          -25,
+          26,
+          26
+        ],
+        "blender_position": [
+          -0.25,
+          -0.26,
+          0.26
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          990
+        ],
+        "rgba_bytes": [
+          0,
+          127,
+          0,
+          255
+        ],
+        "normal_s8": [
+          0,
+          127,
+          0
+        ],
+        "blender_normal": [
+          0.0,
+          -0.0,
+          1.0
+        ]
+      },
+      {
+        "source_position": [
+          26,
+          26,
+          26
+        ],
+        "blender_position": [
+          0.26,
+          -0.26,
+          0.26
+        ],
+        "flag": 0,
+        "raw_uv": [
+          990,
+          990
+        ],
+        "rgba_bytes": [
+          0,
+          127,
+          0,
+          255
+        ],
+        "normal_s8": [
+          0,
+          127,
+          0
+        ],
+        "blender_normal": [
+          0.0,
+          -0.0,
+          1.0
+        ]
+      },
+      {
+        "source_position": [
+          -25,
+          26,
+          -25
+        ],
+        "blender_position": [
+          -0.25,
+          0.25,
+          0.26
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          0
+        ],
+        "rgba_bytes": [
+          0,
+          127,
+          0,
+          255
+        ],
+        "normal_s8": [
+          0,
+          127,
+          0
+        ],
+        "blender_normal": [
+          0.0,
+          -0.0,
+          1.0
+        ]
+      }
+    ]
+  },
+  "display_lists": {
+    "blue_coin_switch_seg8_dl_08000D58": [
+      {
+        "macro": "gsDPSetTextureImage",
+        "args": [
+          "G_IM_FMT_RGBA",
+          "G_IM_SIZ_16b",
+          "1",
+          "blue_coin_switch_seg8_texture_08000018"
+        ],
+        "raw": "gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, blue_coin_switch_seg8_texture_08000018)"
+      },
+      {
+        "macro": "gsDPLoadSync",
+        "args": [],
+        "raw": "gsDPLoadSync()"
+      },
+      {
+        "macro": "gsDPLoadBlock",
+        "args": [
+          "G_TX_LOADTILE",
+          "0",
+          "0",
+          "16 * 32 - 1",
+          "CALC_DXT(32, G_IM_SIZ_16b_BYTES)"
+        ],
+        "raw": "gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 16 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES))"
+      },
+      {
+        "macro": "gsSPLight",
+        "args": [
+          "&blue_coin_switch_seg8_lights_08000000.l",
+          "1"
+        ],
+        "raw": "gsSPLight(&blue_coin_switch_seg8_lights_08000000.l, 1)"
+      },
+      {
+        "macro": "gsSPLight",
+        "args": [
+          "&blue_coin_switch_seg8_lights_08000000.a",
+          "2"
+        ],
+        "raw": "gsSPLight(&blue_coin_switch_seg8_lights_08000000.a, 2)"
+      },
+      {
+        "macro": "gsSPVertex",
+        "args": [
+          "blue_coin_switch_seg8_vertex_08000C18",
+          "16",
+          "0"
+        ],
+        "raw": "gsSPVertex(blue_coin_switch_seg8_vertex_08000C18, 16, 0)"
+      },
+      {
+        "macro": "gsSP2Triangles",
+        "args": [
+          "0",
+          "1",
+          "2",
+          "0x0",
+          "0",
+          "2",
+          "3",
+          "0x0"
+        ],
+        "raw": "gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0)"
+      },
+      {
+        "macro": "gsSP2Triangles",
+        "args": [
+          "4",
+          "5",
+          "6",
+          "0x0",
+          "4",
+          "7",
+          "5",
+          "0x0"
+        ],
+        "raw": "gsSP2Triangles( 4,  5,  6, 0x0,  4,  7,  5, 0x0)"
+      },
+      {
+        "macro": "gsSP2Triangles",
+        "args": [
+          "8",
+          "9",
+          "10",
+          "0x0",
+          "8",
+          "11",
+          "9",
+          "0x0"
+        ],
+        "raw": "gsSP2Triangles( 8,  9, 10, 0x0,  8, 11,  9, 0x0)"
+      },
+      {
+        "macro": "gsSP2Triangles",
+        "args": [
+          "12",
+          "13",
+          "14",
+          "0x0",
+          "12",
+          "14",
+          "15",
+          "0x0"
+        ],
+        "raw": "gsSP2Triangles(12, 13, 14, 0x0, 12, 14, 15, 0x0)"
+      },
+      {
+        "macro": "gsSPEndDisplayList",
+        "args": [],
+        "raw": "gsSPEndDisplayList()"
+      }
+    ],
+    "blue_coin_switch_seg8_dl_08000DD0": [
+      {
+        "macro": "gsDPSetTextureImage",
+        "args": [
+          "G_IM_FMT_RGBA",
+          "G_IM_SIZ_16b",
+          "1",
+          "blue_coin_switch_seg8_texture_08000418"
+        ],
+        "raw": "gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, blue_coin_switch_seg8_texture_08000418)"
+      },
+      {
+        "macro": "gsDPLoadSync",
+        "args": [],
+        "raw": "gsDPLoadSync()"
+      },
+      {
+        "macro": "gsDPLoadBlock",
+        "args": [
+          "G_TX_LOADTILE",
+          "0",
+          "0",
+          "32 * 32 - 1",
+          "CALC_DXT(32, G_IM_SIZ_16b_BYTES)"
+        ],
+        "raw": "gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES))"
+      },
+      {
+        "macro": "gsSPVertex",
+        "args": [
+          "blue_coin_switch_seg8_vertex_08000D18",
+          "4",
+          "0"
+        ],
+        "raw": "gsSPVertex(blue_coin_switch_seg8_vertex_08000D18, 4, 0)"
+      },
+      {
+        "macro": "gsSP2Triangles",
+        "args": [
+          "0",
+          "1",
+          "2",
+          "0x0",
+          "0",
+          "3",
+          "1",
+          "0x0"
+        ],
+        "raw": "gsSP2Triangles( 0,  1,  2, 0x0,  0,  3,  1, 0x0)"
+      },
+      {
+        "macro": "gsSPEndDisplayList",
+        "args": [],
+        "raw": "gsSPEndDisplayList()"
+      }
+    ],
+    "blue_coin_switch_seg8_dl_08000E08": [
+      {
+        "macro": "gsDPPipeSync",
+        "args": [],
+        "raw": "gsDPPipeSync()"
+      },
+      {
+        "macro": "gsDPSetCombineMode",
+        "args": [
+          "G_CC_MODULATERGB",
+          "G_CC_MODULATERGB"
+        ],
+        "raw": "gsDPSetCombineMode(G_CC_MODULATERGB, G_CC_MODULATERGB)"
+      },
+      {
+        "macro": "gsSPClearGeometryMode",
+        "args": [
+          "G_SHADING_SMOOTH"
+        ],
+        "raw": "gsSPClearGeometryMode(G_SHADING_SMOOTH)"
+      },
+      {
+        "macro": "gsDPSetTile",
+        "args": [
+          "G_IM_FMT_RGBA",
+          "G_IM_SIZ_16b",
+          "0",
+          "0",
+          "G_TX_LOADTILE",
+          "0",
+          "G_TX_WRAP | G_TX_NOMIRROR",
+          "G_TX_NOMASK",
+          "G_TX_NOLOD",
+          "G_TX_WRAP | G_TX_NOMIRROR",
+          "G_TX_NOMASK",
+          "G_TX_NOLOD"
+        ],
+        "raw": "gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD)"
+      },
+      {
+        "macro": "gsSPTexture",
+        "args": [
+          "0xFFFF",
+          "0xFFFF",
+          "0",
+          "G_TX_RENDERTILE",
+          "G_ON"
+        ],
+        "raw": "gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON)"
+      },
+      {
+        "macro": "gsDPTileSync",
+        "args": [],
+        "raw": "gsDPTileSync()"
+      },
+      {
+        "macro": "gsDPSetTile",
+        "args": [
+          "G_IM_FMT_RGBA",
+          "G_IM_SIZ_16b",
+          "8",
+          "0",
+          "G_TX_RENDERTILE",
+          "0",
+          "G_TX_CLAMP",
+          "4",
+          "G_TX_NOLOD",
+          "G_TX_CLAMP",
+          "5",
+          "G_TX_NOLOD"
+        ],
+        "raw": "gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 4, G_TX_NOLOD, G_TX_CLAMP, 5, G_TX_NOLOD)"
+      },
+      {
+        "macro": "gsDPSetTileSize",
+        "args": [
+          "0",
+          "0",
+          "0",
+          "(32 - 1) << G_TEXTURE_IMAGE_FRAC",
+          "(16 - 1) << G_TEXTURE_IMAGE_FRAC"
+        ],
+        "raw": "gsDPSetTileSize(0, 0, 0, (32 - 1) << G_TEXTURE_IMAGE_FRAC, (16 - 1) << G_TEXTURE_IMAGE_FRAC)"
+      },
+      {
+        "macro": "gsSPDisplayList",
+        "args": [
+          "blue_coin_switch_seg8_dl_08000D58"
+        ],
+        "raw": "gsSPDisplayList(blue_coin_switch_seg8_dl_08000D58)"
+      },
+      {
+        "macro": "gsDPTileSync",
+        "args": [],
+        "raw": "gsDPTileSync()"
+      },
+      {
+        "macro": "gsDPSetTile",
+        "args": [
+          "G_IM_FMT_RGBA",
+          "G_IM_SIZ_16b",
+          "8",
+          "0",
+          "G_TX_RENDERTILE",
+          "0",
+          "G_TX_CLAMP",
+          "5",
+          "G_TX_NOLOD",
+          "G_TX_CLAMP",
+          "5",
+          "G_TX_NOLOD"
+        ],
+        "raw": "gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 5, G_TX_NOLOD, G_TX_CLAMP, 5, G_TX_NOLOD)"
+      },
+      {
+        "macro": "gsDPSetTileSize",
+        "args": [
+          "0",
+          "0",
+          "0",
+          "(32 - 1) << G_TEXTURE_IMAGE_FRAC",
+          "(32 - 1) << G_TEXTURE_IMAGE_FRAC"
+        ],
+        "raw": "gsDPSetTileSize(0, 0, 0, (32 - 1) << G_TEXTURE_IMAGE_FRAC, (32 - 1) << G_TEXTURE_IMAGE_FRAC)"
+      },
+      {
+        "macro": "gsSPDisplayList",
+        "args": [
+          "blue_coin_switch_seg8_dl_08000DD0"
+        ],
+        "raw": "gsSPDisplayList(blue_coin_switch_seg8_dl_08000DD0)"
+      },
+      {
+        "macro": "gsSPTexture",
+        "args": [
+          "0xFFFF",
+          "0xFFFF",
+          "0",
+          "G_TX_RENDERTILE",
+          "G_OFF"
+        ],
+        "raw": "gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF)"
+      },
+      {
+        "macro": "gsDPPipeSync",
+        "args": [],
+        "raw": "gsDPPipeSync()"
+      },
+      {
+        "macro": "gsDPSetCombineMode",
+        "args": [
+          "G_CC_SHADE",
+          "G_CC_SHADE"
+        ],
+        "raw": "gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE)"
+      },
+      {
+        "macro": "gsSPSetGeometryMode",
+        "args": [
+          "G_SHADING_SMOOTH"
+        ],
+        "raw": "gsSPSetGeometryMode(G_SHADING_SMOOTH)"
+      },
+      {
+        "macro": "gsSPEndDisplayList",
+        "args": [],
+        "raw": "gsSPEndDisplayList()"
+      }
+    ]
+  },
+  "geo": {
+    "type": "root",
+    "name": "blue_coin_switch_geo",
+    "children": [
+      {
+        "type": "culling_radius",
+        "args": [
+          "300"
+        ],
+        "children": [
+          {
+            "type": "display_list",
+            "layer": "LAYER_OPAQUE",
+            "display_list": "blue_coin_switch_seg8_dl_08000E08",
+            "children": []
+          }
+        ]
+      }
+    ],
+    "joint_count": 0,
+    "unsupported_macros": [],
+    "excess_close_nodes": 0
+  },
+  "geo_flat": [
+    {
+      "path": "/root[0]/culling_radius[0]",
+      "type": "culling_radius",
+      "args": [
+        "300"
+      ]
+    },
+    {
+      "path": "/root[0]/culling_radius[0]/display_list[0]",
+      "type": "display_list",
+      "layer": "LAYER_OPAQUE",
+      "display_list": "blue_coin_switch_seg8_dl_08000E08"
+    }
+  ],
+  "render_meshes": {
+    "LAYER_OPAQUE|blue_coin_switch_seg8_dl_08000E08": {
+      "root_display_list": "blue_coin_switch_seg8_dl_08000E08",
+      "layer": "LAYER_OPAQUE",
+      "draw_calls": [
+        {
+          "material": {
+            "texture_symbol": "blue_coin_switch_seg8_texture_08000018",
+            "texture_asset": "actors/blue_coin_switch/blue_coin_switch_side.rgba16.png",
+            "texture_size": [
+              32,
+              16
+            ],
+            "texture_enabled": true,
+            "lighting": true,
+            "texture_gen": false,
+            "combine_mode": "G_CC_MODULATERGB, G_CC_MODULATERGB",
+            "wrap_s": "clamp",
+            "wrap_t": "clamp",
+            "env_color": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "layer": "LAYER_OPAQUE"
+          },
+          "vertices": [
+            {
+              "source_position": [
+                26,
+                0,
+                26
+              ],
+              "blender_position": [
+                0.26,
+                -0.26,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                990,
+                479
+              ],
+              "rgba_bytes": [
+                0,
+                0,
+                127,
+                255
+              ],
+              "normal_s8": [
+                0,
+                0,
+                127
+              ],
+              "blender_normal": [
+                0.0,
+                -1.0,
+                0.0
+              ],
+              "source_array": "blue_coin_switch_seg8_vertex_08000C18",
+              "source_index": 0,
+              "uv": [
+                0.966796875,
+                0.064453125
+              ]
+            },
+            {
+              "source_position": [
+                26,
+                26,
+                26
+              ],
+              "blender_position": [
+                0.26,
+                -0.26,
+                0.26
+              ],
+              "flag": 0,
+              "raw_uv": [
+                990,
+                0
+              ],
+              "rgba_bytes": [
+                0,
+                0,
+                127,
+                255
+              ],
+              "normal_s8": [
+                0,
+                0,
+                127
+              ],
+              "blender_normal": [
+                0.0,
+                -1.0,
+                0.0
+              ],
+              "source_array": "blue_coin_switch_seg8_vertex_08000C18",
+              "source_index": 1,
+              "uv": [
+                0.966796875,
+                1.0
+              ]
+            },
+            {
+              "source_position": [
+                -25,
+                26,
+                26
+              ],
+              "blender_position": [
+                -0.25,
+                -0.26,
+                0.26
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                0
+              ],
+              "rgba_bytes": [
+                0,
+                0,
+                127,
+                255
+              ],
+              "normal_s8": [
+                0,
+                0,
+                127
+              ],
+              "blender_normal": [
+                0.0,
+                -1.0,
+                0.0
+              ],
+              "source_array": "blue_coin_switch_seg8_vertex_08000C18",
+              "source_index": 2,
+              "uv": [
+                0.0,
+                1.0
+              ]
+            },
+            {
+              "source_position": [
+                -25,
+                0,
+                26
+              ],
+              "blender_position": [
+                -0.25,
+                -0.26,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                479
+              ],
+              "rgba_bytes": [
+                0,
+                0,
+                127,
+                255
+              ],
+              "normal_s8": [
+                0,
+                0,
+                127
+              ],
+              "blender_normal": [
+                0.0,
+                -1.0,
+                0.0
+              ],
+              "source_array": "blue_coin_switch_seg8_vertex_08000C18",
+              "source_index": 3,
+              "uv": [
+                0.0,
+                0.064453125
+              ]
+            },
+            {
+              "source_position": [
+                -25,
+                0,
+                -25
+              ],
+              "blender_position": [
+                -0.25,
+                0.25,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                990,
+                479
+              ],
+              "rgba_bytes": [
+                0,
+                0,
+                129,
+                255
+              ],
+              "normal_s8": [
+                0,
+                0,
+                -127
+              ],
+              "blender_normal": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "source_array": "blue_coin_switch_seg8_vertex_08000C18",
+              "source_index": 4,
+              "uv": [
+                0.966796875,
+                0.064453125
+              ]
+            },
+            {
+              "source_position": [
+                26,
+                26,
+                -25
+              ],
+              "blender_position": [
+                0.26,
+                0.25,
+                0.26
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                0
+              ],
+              "rgba_bytes": [
+                0,
+                0,
+                129,
+                255
+              ],
+              "normal_s8": [
+                0,
+                0,
+                -127
+              ],
+              "blender_normal": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "source_array": "blue_coin_switch_seg8_vertex_08000C18",
+              "source_index": 5,
+              "uv": [
+                0.0,
+                1.0
+              ]
+            },
+            {
+              "source_position": [
+                26,
+                0,
+                -25
+              ],
+              "blender_position": [
+                0.26,
+                0.25,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                479
+              ],
+              "rgba_bytes": [
+                0,
+                0,
+                129,
+                255
+              ],
+              "normal_s8": [
+                0,
+                0,
+                -127
+              ],
+              "blender_normal": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "source_array": "blue_coin_switch_seg8_vertex_08000C18",
+              "source_index": 6,
+              "uv": [
+                0.0,
+                0.064453125
+              ]
+            },
+            {
+              "source_position": [
+                -25,
+                26,
+                -25
+              ],
+              "blender_position": [
+                -0.25,
+                0.25,
+                0.26
+              ],
+              "flag": 0,
+              "raw_uv": [
+                990,
+                0
+              ],
+              "rgba_bytes": [
+                0,
+                0,
+                129,
+                255
+              ],
+              "normal_s8": [
+                0,
+                0,
+                -127
+              ],
+              "blender_normal": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "source_array": "blue_coin_switch_seg8_vertex_08000C18",
+              "source_index": 7,
+              "uv": [
+                0.966796875,
+                1.0
+              ]
+            },
+            {
+              "source_position": [
+                -25,
+                0,
+                26
+              ],
+              "blender_position": [
+                -0.25,
+                -0.26,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                990,
+                479
+              ],
+              "rgba_bytes": [
+                129,
+                0,
+                0,
+                255
+              ],
+              "normal_s8": [
+                -127,
+                0,
+                0
+              ],
+              "blender_normal": [
+                -1.0,
+                -0.0,
+                0.0
+              ],
+              "source_array": "blue_coin_switch_seg8_vertex_08000C18",
+              "source_index": 8,
+              "uv": [
+                0.966796875,
+                0.064453125
+              ]
+            },
+            {
+              "source_position": [
+                -25,
+                26,
+                -25
+              ],
+              "blender_position": [
+                -0.25,
+                0.25,
+                0.26
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                0
+              ],
+              "rgba_bytes": [
+                129,
+                0,
+                0,
+                255
+              ],
+              "normal_s8": [
+                -127,
+                0,
+                0
+              ],
+              "blender_normal": [
+                -1.0,
+                -0.0,
+                0.0
+              ],
+              "source_array": "blue_coin_switch_seg8_vertex_08000C18",
+              "source_index": 9,
+              "uv": [
+                0.0,
+                1.0
+              ]
+            },
+            {
+              "source_position": [
+                -25,
+                0,
+                -25
+              ],
+              "blender_position": [
+                -0.25,
+                0.25,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                479
+              ],
+              "rgba_bytes": [
+                129,
+                0,
+                0,
+                255
+              ],
+              "normal_s8": [
+                -127,
+                0,
+                0
+              ],
+              "blender_normal": [
+                -1.0,
+                -0.0,
+                0.0
+              ],
+              "source_array": "blue_coin_switch_seg8_vertex_08000C18",
+              "source_index": 10,
+              "uv": [
+                0.0,
+                0.064453125
+              ]
+            },
+            {
+              "source_position": [
+                -25,
+                26,
+                26
+              ],
+              "blender_position": [
+                -0.25,
+                -0.26,
+                0.26
+              ],
+              "flag": 0,
+              "raw_uv": [
+                990,
+                0
+              ],
+              "rgba_bytes": [
+                129,
+                0,
+                0,
+                255
+              ],
+              "normal_s8": [
+                -127,
+                0,
+                0
+              ],
+              "blender_normal": [
+                -1.0,
+                -0.0,
+                0.0
+              ],
+              "source_array": "blue_coin_switch_seg8_vertex_08000C18",
+              "source_index": 11,
+              "uv": [
+                0.966796875,
+                1.0
+              ]
+            },
+            {
+              "source_position": [
+                26,
+                0,
+                -25
+              ],
+              "blender_position": [
+                0.26,
+                0.25,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                990,
+                479
+              ],
+              "rgba_bytes": [
+                127,
+                0,
+                0,
+                255
+              ],
+              "normal_s8": [
+                127,
+                0,
+                0
+              ],
+              "blender_normal": [
+                1.0,
+                -0.0,
+                0.0
+              ],
+              "source_array": "blue_coin_switch_seg8_vertex_08000C18",
+              "source_index": 12,
+              "uv": [
+                0.966796875,
+                0.064453125
+              ]
+            },
+            {
+              "source_position": [
+                26,
+                26,
+                -25
+              ],
+              "blender_position": [
+                0.26,
+                0.25,
+                0.26
+              ],
+              "flag": 0,
+              "raw_uv": [
+                990,
+                0
+              ],
+              "rgba_bytes": [
+                127,
+                0,
+                0,
+                255
+              ],
+              "normal_s8": [
+                127,
+                0,
+                0
+              ],
+              "blender_normal": [
+                1.0,
+                -0.0,
+                0.0
+              ],
+              "source_array": "blue_coin_switch_seg8_vertex_08000C18",
+              "source_index": 13,
+              "uv": [
+                0.966796875,
+                1.0
+              ]
+            },
+            {
+              "source_position": [
+                26,
+                26,
+                26
+              ],
+              "blender_position": [
+                0.26,
+                -0.26,
+                0.26
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                0
+              ],
+              "rgba_bytes": [
+                127,
+                0,
+                0,
+                255
+              ],
+              "normal_s8": [
+                127,
+                0,
+                0
+              ],
+              "blender_normal": [
+                1.0,
+                -0.0,
+                0.0
+              ],
+              "source_array": "blue_coin_switch_seg8_vertex_08000C18",
+              "source_index": 14,
+              "uv": [
+                0.0,
+                1.0
+              ]
+            },
+            {
+              "source_position": [
+                26,
+                0,
+                26
+              ],
+              "blender_position": [
+                0.26,
+                -0.26,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                479
+              ],
+              "rgba_bytes": [
+                127,
+                0,
+                0,
+                255
+              ],
+              "normal_s8": [
+                127,
+                0,
+                0
+              ],
+              "blender_normal": [
+                1.0,
+                -0.0,
+                0.0
+              ],
+              "source_array": "blue_coin_switch_seg8_vertex_08000C18",
+              "source_index": 15,
+              "uv": [
+                0.0,
+                0.064453125
+              ]
+            }
+          ],
+          "triangles": [
+            [
+              0,
+              1,
+              2
+            ],
+            [
+              0,
+              2,
+              3
+            ],
+            [
+              4,
+              5,
+              6
+            ],
+            [
+              4,
+              7,
+              5
+            ],
+            [
+              8,
+              9,
+              10
+            ],
+            [
+              8,
+              11,
+              9
+            ],
+            [
+              12,
+              13,
+              14
+            ],
+            [
+              12,
+              14,
+              15
+            ]
+          ]
+        },
+        {
+          "material": {
+            "texture_symbol": "blue_coin_switch_seg8_texture_08000418",
+            "texture_asset": "actors/blue_coin_switch/blue_coin_switch_top.rgba16.png",
+            "texture_size": [
+              32,
+              32
+            ],
+            "texture_enabled": true,
+            "lighting": true,
+            "texture_gen": false,
+            "combine_mode": "G_CC_MODULATERGB, G_CC_MODULATERGB",
+            "wrap_s": "clamp",
+            "wrap_t": "clamp",
+            "env_color": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "layer": "LAYER_OPAQUE"
+          },
+          "vertices": [
+            {
+              "source_position": [
+                26,
+                26,
+                -25
+              ],
+              "blender_position": [
+                0.26,
+                0.25,
+                0.26
+              ],
+              "flag": 0,
+              "raw_uv": [
+                990,
+                0
+              ],
+              "rgba_bytes": [
+                0,
+                127,
+                0,
+                255
+              ],
+              "normal_s8": [
+                0,
+                127,
+                0
+              ],
+              "blender_normal": [
+                0.0,
+                -0.0,
+                1.0
+              ],
+              "source_array": "blue_coin_switch_seg8_vertex_08000D18",
+              "source_index": 0,
+              "uv": [
+                0.966796875,
+                1.0
+              ]
+            },
+            {
+              "source_position": [
+                -25,
+                26,
+                26
+              ],
+              "blender_position": [
+                -0.25,
+                -0.26,
+                0.26
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                990
+              ],
+              "rgba_bytes": [
+                0,
+                127,
+                0,
+                255
+              ],
+              "normal_s8": [
+                0,
+                127,
+                0
+              ],
+              "blender_normal": [
+                0.0,
+                -0.0,
+                1.0
+              ],
+              "source_array": "blue_coin_switch_seg8_vertex_08000D18",
+              "source_index": 1,
+              "uv": [
+                0.0,
+                0.033203125
+              ]
+            },
+            {
+              "source_position": [
+                26,
+                26,
+                26
+              ],
+              "blender_position": [
+                0.26,
+                -0.26,
+                0.26
+              ],
+              "flag": 0,
+              "raw_uv": [
+                990,
+                990
+              ],
+              "rgba_bytes": [
+                0,
+                127,
+                0,
+                255
+              ],
+              "normal_s8": [
+                0,
+                127,
+                0
+              ],
+              "blender_normal": [
+                0.0,
+                -0.0,
+                1.0
+              ],
+              "source_array": "blue_coin_switch_seg8_vertex_08000D18",
+              "source_index": 2,
+              "uv": [
+                0.966796875,
+                0.033203125
+              ]
+            },
+            {
+              "source_position": [
+                -25,
+                26,
+                -25
+              ],
+              "blender_position": [
+                -0.25,
+                0.25,
+                0.26
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                0
+              ],
+              "rgba_bytes": [
+                0,
+                127,
+                0,
+                255
+              ],
+              "normal_s8": [
+                0,
+                127,
+                0
+              ],
+              "blender_normal": [
+                0.0,
+                -0.0,
+                1.0
+              ],
+              "source_array": "blue_coin_switch_seg8_vertex_08000D18",
+              "source_index": 3,
+              "uv": [
+                0.0,
+                1.0
+              ]
+            }
+          ],
+          "triangles": [
+            [
+              0,
+              1,
+              2
+            ],
+            [
+              0,
+              3,
+              1
+            ]
+          ]
+        }
+      ],
+      "triangle_count": 10
+    }
+  },
+  "collisions": {
+    "blue_coin_switch_seg8_collision_08000E98": {
+      "source_vertices": [
+        [
+          26,
+          0,
+          26
+        ],
+        [
+          26,
+          26,
+          26
+        ],
+        [
+          -25,
+          26,
+          26
+        ],
+        [
+          -25,
+          0,
+          26
+        ],
+        [
+          26,
+          0,
+          -25
+        ],
+        [
+          26,
+          26,
+          -25
+        ],
+        [
+          -25,
+          26,
+          -25
+        ],
+        [
+          -25,
+          0,
+          -25
+        ]
+      ],
+      "blender_vertices": [
+        [
+          0.26,
+          -0.26,
+          0.0
+        ],
+        [
+          0.26,
+          -0.26,
+          0.26
+        ],
+        [
+          -0.25,
+          -0.26,
+          0.26
+        ],
+        [
+          -0.25,
+          -0.26,
+          0.0
+        ],
+        [
+          0.26,
+          0.25,
+          0.0
+        ],
+        [
+          0.26,
+          0.25,
+          0.26
+        ],
+        [
+          -0.25,
+          0.25,
+          0.26
+        ],
+        [
+          -0.25,
+          0.25,
+          0.0
+        ]
+      ],
+      "declared_vertex_count": 8,
+      "surface_groups": [
+        {
+          "surface": "SURFACE_DEFAULT",
+          "declared_count": 10,
+          "triangles": [
+            {
+              "indices": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "indices": [
+                0,
+                2,
+                3
+              ]
+            },
+            {
+              "indices": [
+                4,
+                5,
+                1
+              ]
+            },
+            {
+              "indices": [
+                5,
+                6,
+                2
+              ]
+            },
+            {
+              "indices": [
+                5,
+                2,
+                1
+              ]
+            },
+            {
+              "indices": [
+                7,
+                6,
+                5
+              ]
+            },
+            {
+              "indices": [
+                7,
+                5,
+                4
+              ]
+            },
+            {
+              "indices": [
+                3,
+                6,
+                7
+              ]
+            },
+            {
+              "indices": [
+                3,
+                2,
+                6
+              ]
+            },
+            {
+              "indices": [
+                4,
+                1,
+                0
+              ]
+            }
+          ]
+        }
+      ],
+      "triangle_count": 10,
+      "valid_counts": true
+    }
+  },
+  "animations": [],
+  "validation": {
+    "vertex_array_count": 2,
+    "source_vertex_count": 20,
+    "display_list_count": 3,
+    "geo_display_list_use_count": 1,
+    "render_mesh_count": 1,
+    "render_triangle_count": 10,
+    "joint_count": 0,
+    "animation_count": 0,
+    "collision_mesh_count": 1,
+    "collision_triangle_count": 10,
+    "all_collision_counts_valid": true,
+    "warnings": []
+  }
+}

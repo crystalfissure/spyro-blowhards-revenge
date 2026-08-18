@@ -1,0 +1,3329 @@
+{
+  "format": "spyro64.sm64_actor",
+  "format_version": 1,
+  "actor": "wooden_signpost",
+  "source_actor": "wooden_signpost",
+  "geo_layout": "wooden_signpost_geo",
+  "coordinate_system": {
+    "source": "SM64 x/y/z centimetres, Y up",
+    "blender": "x/-z/y metres, Z up",
+    "formula": "(x, -z, y) * 0.01"
+  },
+  "source_files": [
+    {
+      "path": "actors/wooden_signpost/model.inc.c",
+      "sha256": "b36010eeafdcce17dad79dd728ed214be39282ef924aa6b7da9c9c697c5afc96"
+    },
+    {
+      "path": "actors/wooden_signpost/geo.inc.c",
+      "sha256": "93ee841936024635ec532b3aaaf52f3b403913ffe3e44e84de96ac615f58a8f2"
+    },
+    {
+      "path": "actors/wooden_signpost/collision.inc.c",
+      "sha256": "dc5c6a7f6e3b14768de49391516c0cded58c2dbc6d5b8f0c008d33bd0678bc44"
+    }
+  ],
+  "textures": {
+    "wooden_signpost_seg3_texture_0302C9C8": {
+      "asset": "actors/wooden_signpost/wooden_signpost_back.rgba16.png",
+      "width": 32,
+      "height": 32,
+      "format": "rgba16",
+      "rom_mio0_offset": 2102288,
+      "source_offset": 182728,
+      "source_size": 2048,
+      "png": "wooden_signpost_back.rgba16.png",
+      "sha256": "55a69d4aac415245814866d45266d4374b4addc69a4a6c6507488f49ec8faf1b",
+      "relative_path": "textures/wooden_signpost_back.rgba16.png"
+    },
+    "wooden_signpost_seg3_texture_0302D1C8": {
+      "asset": "actors/wooden_signpost/wooden_signpost_front.rgba16.png",
+      "width": 32,
+      "height": 32,
+      "format": "rgba16",
+      "rom_mio0_offset": 2102288,
+      "source_offset": 184776,
+      "source_size": 2048,
+      "png": "wooden_signpost_front.rgba16.png",
+      "sha256": "a7fe70ec43d90ac28ed884472a903ab0534d18000d1302d4e45d5b425afd1788",
+      "relative_path": "textures/wooden_signpost_front.rgba16.png"
+    }
+  },
+  "vertex_arrays": {
+    "wooden_signpost_seg3_vertex_0302C958": [
+      {
+        "source_position": [
+          0,
+          504,
+          19
+        ],
+        "blender_position": [
+          0.0,
+          -0.19,
+          5.04
+        ],
+        "flag": 0,
+        "raw_uv": [
+          962,
+          478
+        ],
+        "rgba_bytes": [
+          0,
+          126,
+          252,
+          255
+        ],
+        "normal_s8": [
+          0,
+          126,
+          -4
+        ],
+        "blender_normal": [
+          0.0,
+          0.03173004683477357,
+          0.9994964752953674
+        ]
+      },
+      {
+        "source_position": [
+          24,
+          490,
+          34
+        ],
+        "blender_position": [
+          0.24,
+          -0.34,
+          4.9
+        ],
+        "flag": 0,
+        "raw_uv": [
+          938,
+          780
+        ],
+        "rgba_bytes": [
+          98,
+          59,
+          54,
+          255
+        ],
+        "normal_s8": [
+          98,
+          59,
+          54
+        ],
+        "blender_normal": [
+          0.7747338166877576,
+          -0.4268941438891726,
+          0.4664213794344663
+        ]
+      },
+      {
+        "source_position": [
+          0,
+          490,
+          -6
+        ],
+        "blender_position": [
+          0.0,
+          0.06,
+          4.9
+        ],
+        "flag": 0,
+        "raw_uv": [
+          938,
+          478
+        ],
+        "rgba_bytes": [
+          255,
+          57,
+          144,
+          255
+        ],
+        "normal_s8": [
+          -1,
+          57,
+          -112
+        ],
+        "blender_normal": [
+          -0.00795708382391934,
+          0.891193388278966,
+          0.45355377796340235
+        ]
+      },
+      {
+        "source_position": [
+          -23,
+          490,
+          34
+        ],
+        "blender_position": [
+          -0.23,
+          -0.34,
+          4.9
+        ],
+        "flag": 0,
+        "raw_uv": [
+          938,
+          178
+        ],
+        "rgba_bytes": [
+          158,
+          58,
+          54,
+          255
+        ],
+        "normal_s8": [
+          -98,
+          58,
+          54
+        ],
+        "blender_normal": [
+          -0.7775818886479167,
+          -0.4284634896631378,
+          0.4602015259344813
+        ]
+      },
+      {
+        "source_position": [
+          0,
+          -39,
+          34
+        ],
+        "blender_position": [
+          0.0,
+          -0.34,
+          -0.39
+        ],
+        "flag": 0,
+        "raw_uv": [
+          36,
+          478
+        ],
+        "rgba_bytes": [
+          0,
+          252,
+          126,
+          255
+        ],
+        "normal_s8": [
+          0,
+          -4,
+          126
+        ],
+        "blender_normal": [
+          0.0,
+          -0.9994964752953674,
+          -0.03173004683477357
+        ]
+      },
+      {
+        "source_position": [
+          -23,
+          -39,
+          -6
+        ],
+        "blender_position": [
+          -0.23,
+          0.06,
+          -0.39
+        ],
+        "flag": 0,
+        "raw_uv": [
+          36,
+          178
+        ],
+        "rgba_bytes": [
+          147,
+          0,
+          193,
+          255
+        ],
+        "normal_s8": [
+          -109,
+          0,
+          -63
+        ],
+        "blender_normal": [
+          -0.865788603160596,
+          0.5004099265974087,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          24,
+          -39,
+          -6
+        ],
+        "blender_position": [
+          0.24,
+          0.06,
+          -0.39
+        ],
+        "flag": 0,
+        "raw_uv": [
+          36,
+          780
+        ],
+        "rgba_bytes": [
+          109,
+          0,
+          192,
+          255
+        ],
+        "normal_s8": [
+          109,
+          0,
+          -64
+        ],
+        "blender_normal": [
+          0.8623406926722569,
+          0.5063284801011416,
+          0.0
+        ]
+      }
+    ],
+    "wooden_signpost_seg3_vertex_0302DAC0": [
+      {
+        "source_position": [
+          180,
+          260,
+          20
+        ],
+        "blender_position": [
+          1.8,
+          -0.2,
+          2.6
+        ],
+        "flag": 0,
+        "raw_uv": [
+          990,
+          990
+        ],
+        "rgba_bytes": [
+          0,
+          129,
+          0,
+          255
+        ],
+        "normal_s8": [
+          0,
+          -127,
+          0
+        ],
+        "blender_normal": [
+          0.0,
+          -0.0,
+          -1.0
+        ]
+      },
+      {
+        "source_position": [
+          -179,
+          260,
+          60
+        ],
+        "blender_position": [
+          -1.79,
+          -0.6,
+          2.6
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          990
+        ],
+        "rgba_bytes": [
+          0,
+          129,
+          0,
+          255
+        ],
+        "normal_s8": [
+          0,
+          -127,
+          0
+        ],
+        "blender_normal": [
+          0.0,
+          -0.0,
+          -1.0
+        ]
+      },
+      {
+        "source_position": [
+          -179,
+          260,
+          20
+        ],
+        "blender_position": [
+          -1.79,
+          -0.2,
+          2.6
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          990
+        ],
+        "rgba_bytes": [
+          0,
+          129,
+          0,
+          255
+        ],
+        "normal_s8": [
+          0,
+          -127,
+          0
+        ],
+        "blender_normal": [
+          0.0,
+          -0.0,
+          -1.0
+        ]
+      },
+      {
+        "source_position": [
+          180,
+          260,
+          20
+        ],
+        "blender_position": [
+          1.8,
+          -0.2,
+          2.6
+        ],
+        "flag": 0,
+        "raw_uv": [
+          990,
+          990
+        ],
+        "rgba_bytes": [
+          0,
+          0,
+          129,
+          255
+        ],
+        "normal_s8": [
+          0,
+          0,
+          -127
+        ],
+        "blender_normal": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          -179,
+          260,
+          20
+        ],
+        "blender_position": [
+          -1.79,
+          -0.2,
+          2.6
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          990
+        ],
+        "rgba_bytes": [
+          0,
+          0,
+          129,
+          255
+        ],
+        "normal_s8": [
+          0,
+          0,
+          -127
+        ],
+        "blender_normal": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          -179,
+          460,
+          20
+        ],
+        "blender_position": [
+          -1.79,
+          -0.2,
+          4.6000000000000005
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          0
+        ],
+        "rgba_bytes": [
+          0,
+          0,
+          129,
+          255
+        ],
+        "normal_s8": [
+          0,
+          0,
+          -127
+        ],
+        "blender_normal": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          -179,
+          260,
+          20
+        ],
+        "blender_position": [
+          -1.79,
+          -0.2,
+          2.6
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          990
+        ],
+        "rgba_bytes": [
+          129,
+          0,
+          0,
+          255
+        ],
+        "normal_s8": [
+          -127,
+          0,
+          0
+        ],
+        "blender_normal": [
+          -1.0,
+          -0.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          -179,
+          260,
+          60
+        ],
+        "blender_position": [
+          -1.79,
+          -0.6,
+          2.6
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          990
+        ],
+        "rgba_bytes": [
+          129,
+          0,
+          0,
+          255
+        ],
+        "normal_s8": [
+          -127,
+          0,
+          0
+        ],
+        "blender_normal": [
+          -1.0,
+          -0.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          -179,
+          460,
+          60
+        ],
+        "blender_position": [
+          -1.79,
+          -0.6,
+          4.6000000000000005
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          0
+        ],
+        "rgba_bytes": [
+          129,
+          0,
+          0,
+          255
+        ],
+        "normal_s8": [
+          -127,
+          0,
+          0
+        ],
+        "blender_normal": [
+          -1.0,
+          -0.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          -179,
+          460,
+          20
+        ],
+        "blender_position": [
+          -1.79,
+          -0.2,
+          4.6000000000000005
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          0
+        ],
+        "rgba_bytes": [
+          129,
+          0,
+          0,
+          255
+        ],
+        "normal_s8": [
+          -127,
+          0,
+          0
+        ],
+        "blender_normal": [
+          -1.0,
+          -0.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          180,
+          260,
+          60
+        ],
+        "blender_position": [
+          1.8,
+          -0.6,
+          2.6
+        ],
+        "flag": 0,
+        "raw_uv": [
+          990,
+          990
+        ],
+        "rgba_bytes": [
+          0,
+          129,
+          0,
+          255
+        ],
+        "normal_s8": [
+          0,
+          -127,
+          0
+        ],
+        "blender_normal": [
+          0.0,
+          -0.0,
+          -1.0
+        ]
+      },
+      {
+        "source_position": [
+          -179,
+          460,
+          20
+        ],
+        "blender_position": [
+          -1.79,
+          -0.2,
+          4.6000000000000005
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          0
+        ],
+        "rgba_bytes": [
+          0,
+          127,
+          0,
+          255
+        ],
+        "normal_s8": [
+          0,
+          127,
+          0
+        ],
+        "blender_normal": [
+          0.0,
+          -0.0,
+          1.0
+        ]
+      },
+      {
+        "source_position": [
+          -179,
+          460,
+          60
+        ],
+        "blender_position": [
+          -1.79,
+          -0.6,
+          4.6000000000000005
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          0
+        ],
+        "rgba_bytes": [
+          0,
+          127,
+          0,
+          255
+        ],
+        "normal_s8": [
+          0,
+          127,
+          0
+        ],
+        "blender_normal": [
+          0.0,
+          -0.0,
+          1.0
+        ]
+      },
+      {
+        "source_position": [
+          180,
+          460,
+          60
+        ],
+        "blender_position": [
+          1.8,
+          -0.6,
+          4.6000000000000005
+        ],
+        "flag": 0,
+        "raw_uv": [
+          990,
+          0
+        ],
+        "rgba_bytes": [
+          0,
+          127,
+          0,
+          255
+        ],
+        "normal_s8": [
+          0,
+          127,
+          0
+        ],
+        "blender_normal": [
+          0.0,
+          -0.0,
+          1.0
+        ]
+      },
+      {
+        "source_position": [
+          180,
+          460,
+          20
+        ],
+        "blender_position": [
+          1.8,
+          -0.2,
+          4.6000000000000005
+        ],
+        "flag": 0,
+        "raw_uv": [
+          990,
+          0
+        ],
+        "rgba_bytes": [
+          0,
+          0,
+          129,
+          255
+        ],
+        "normal_s8": [
+          0,
+          0,
+          -127
+        ],
+        "blender_normal": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          180,
+          460,
+          20
+        ],
+        "blender_position": [
+          1.8,
+          -0.2,
+          4.6000000000000005
+        ],
+        "flag": 0,
+        "raw_uv": [
+          990,
+          0
+        ],
+        "rgba_bytes": [
+          0,
+          127,
+          0,
+          255
+        ],
+        "normal_s8": [
+          0,
+          127,
+          0
+        ],
+        "blender_normal": [
+          0.0,
+          -0.0,
+          1.0
+        ]
+      }
+    ],
+    "wooden_signpost_seg3_vertex_0302DBC0": [
+      {
+        "source_position": [
+          180,
+          260,
+          60
+        ],
+        "blender_position": [
+          1.8,
+          -0.6,
+          2.6
+        ],
+        "flag": 0,
+        "raw_uv": [
+          990,
+          990
+        ],
+        "rgba_bytes": [
+          127,
+          0,
+          0,
+          255
+        ],
+        "normal_s8": [
+          127,
+          0,
+          0
+        ],
+        "blender_normal": [
+          1.0,
+          -0.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          180,
+          460,
+          20
+        ],
+        "blender_position": [
+          1.8,
+          -0.2,
+          4.6000000000000005
+        ],
+        "flag": 0,
+        "raw_uv": [
+          990,
+          0
+        ],
+        "rgba_bytes": [
+          127,
+          0,
+          0,
+          255
+        ],
+        "normal_s8": [
+          127,
+          0,
+          0
+        ],
+        "blender_normal": [
+          1.0,
+          -0.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          180,
+          460,
+          60
+        ],
+        "blender_position": [
+          1.8,
+          -0.6,
+          4.6000000000000005
+        ],
+        "flag": 0,
+        "raw_uv": [
+          990,
+          0
+        ],
+        "rgba_bytes": [
+          127,
+          0,
+          0,
+          255
+        ],
+        "normal_s8": [
+          127,
+          0,
+          0
+        ],
+        "blender_normal": [
+          1.0,
+          -0.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          180,
+          260,
+          20
+        ],
+        "blender_position": [
+          1.8,
+          -0.2,
+          2.6
+        ],
+        "flag": 0,
+        "raw_uv": [
+          990,
+          990
+        ],
+        "rgba_bytes": [
+          127,
+          0,
+          0,
+          255
+        ],
+        "normal_s8": [
+          127,
+          0,
+          0
+        ],
+        "blender_normal": [
+          1.0,
+          -0.0,
+          0.0
+        ]
+      }
+    ],
+    "wooden_signpost_seg3_vertex_0302DC00": [
+      {
+        "source_position": [
+          -179,
+          260,
+          60
+        ],
+        "blender_position": [
+          -1.79,
+          -0.6,
+          2.6
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          990
+        ],
+        "rgba_bytes": [
+          0,
+          0,
+          127,
+          255
+        ],
+        "normal_s8": [
+          0,
+          0,
+          127
+        ],
+        "blender_normal": [
+          0.0,
+          -1.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          180,
+          460,
+          60
+        ],
+        "blender_position": [
+          1.8,
+          -0.6,
+          4.6000000000000005
+        ],
+        "flag": 0,
+        "raw_uv": [
+          990,
+          0
+        ],
+        "rgba_bytes": [
+          0,
+          0,
+          127,
+          255
+        ],
+        "normal_s8": [
+          0,
+          0,
+          127
+        ],
+        "blender_normal": [
+          0.0,
+          -1.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          -179,
+          460,
+          60
+        ],
+        "blender_position": [
+          -1.79,
+          -0.6,
+          4.6000000000000005
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          0
+        ],
+        "rgba_bytes": [
+          0,
+          0,
+          127,
+          255
+        ],
+        "normal_s8": [
+          0,
+          0,
+          127
+        ],
+        "blender_normal": [
+          0.0,
+          -1.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          180,
+          260,
+          60
+        ],
+        "blender_position": [
+          1.8,
+          -0.6,
+          2.6
+        ],
+        "flag": 0,
+        "raw_uv": [
+          990,
+          990
+        ],
+        "rgba_bytes": [
+          0,
+          0,
+          127,
+          255
+        ],
+        "normal_s8": [
+          0,
+          0,
+          127
+        ],
+        "blender_normal": [
+          0.0,
+          -1.0,
+          0.0
+        ]
+      }
+    ]
+  },
+  "display_lists": {
+    "wooden_signpost_seg3_dl_0302D9C8": [
+      {
+        "macro": "gsDPSetTextureImage",
+        "args": [
+          "G_IM_FMT_RGBA",
+          "G_IM_SIZ_16b",
+          "1",
+          "wooden_signpost_seg3_texture_0302C9C8"
+        ],
+        "raw": "gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, wooden_signpost_seg3_texture_0302C9C8)"
+      },
+      {
+        "macro": "gsDPLoadSync",
+        "args": [],
+        "raw": "gsDPLoadSync()"
+      },
+      {
+        "macro": "gsDPLoadBlock",
+        "args": [
+          "G_TX_LOADTILE",
+          "0",
+          "0",
+          "32 * 32 - 1",
+          "CALC_DXT(32, G_IM_SIZ_16b_BYTES)"
+        ],
+        "raw": "gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES))"
+      },
+      {
+        "macro": "gsSPLight",
+        "args": [
+          "&wooden_signpost_seg3_lights_0302C940.l",
+          "1"
+        ],
+        "raw": "gsSPLight(&wooden_signpost_seg3_lights_0302C940.l, 1)"
+      },
+      {
+        "macro": "gsSPLight",
+        "args": [
+          "&wooden_signpost_seg3_lights_0302C940.a",
+          "2"
+        ],
+        "raw": "gsSPLight(&wooden_signpost_seg3_lights_0302C940.a, 2)"
+      },
+      {
+        "macro": "gsSPVertex",
+        "args": [
+          "wooden_signpost_seg3_vertex_0302C958",
+          "7",
+          "0"
+        ],
+        "raw": "gsSPVertex(wooden_signpost_seg3_vertex_0302C958, 7, 0)"
+      },
+      {
+        "macro": "gsSP2Triangles",
+        "args": [
+          "0",
+          "1",
+          "2",
+          "0x0",
+          "2",
+          "3",
+          "0",
+          "0x0"
+        ],
+        "raw": "gsSP2Triangles( 0,  1,  2, 0x0,  2,  3,  0, 0x0)"
+      },
+      {
+        "macro": "gsSP2Triangles",
+        "args": [
+          "0",
+          "3",
+          "1",
+          "0x0",
+          "4",
+          "1",
+          "3",
+          "0x0"
+        ],
+        "raw": "gsSP2Triangles( 0,  3,  1, 0x0,  4,  1,  3, 0x0)"
+      },
+      {
+        "macro": "gsSP2Triangles",
+        "args": [
+          "3",
+          "5",
+          "4",
+          "0x0",
+          "5",
+          "3",
+          "2",
+          "0x0"
+        ],
+        "raw": "gsSP2Triangles( 3,  5,  4, 0x0,  5,  3,  2, 0x0)"
+      },
+      {
+        "macro": "gsSP2Triangles",
+        "args": [
+          "2",
+          "6",
+          "5",
+          "0x0",
+          "1",
+          "4",
+          "6",
+          "0x0"
+        ],
+        "raw": "gsSP2Triangles( 2,  6,  5, 0x0,  1,  4,  6, 0x0)"
+      },
+      {
+        "macro": "gsSP1Triangle",
+        "args": [
+          "6",
+          "2",
+          "1",
+          "0x0"
+        ],
+        "raw": "gsSP1Triangle( 6,  2,  1, 0x0)"
+      },
+      {
+        "macro": "gsSPEndDisplayList",
+        "args": [],
+        "raw": "gsSPEndDisplayList()"
+      }
+    ],
+    "wooden_signpost_seg3_dl_0302DA48": [
+      {
+        "macro": "gsDPPipeSync",
+        "args": [],
+        "raw": "gsDPPipeSync()"
+      },
+      {
+        "macro": "gsDPSetCombineMode",
+        "args": [
+          "G_CC_MODULATERGB",
+          "G_CC_MODULATERGB"
+        ],
+        "raw": "gsDPSetCombineMode(G_CC_MODULATERGB, G_CC_MODULATERGB)"
+      },
+      {
+        "macro": "gsDPSetTile",
+        "args": [
+          "G_IM_FMT_RGBA",
+          "G_IM_SIZ_16b",
+          "0",
+          "0",
+          "G_TX_LOADTILE",
+          "0",
+          "G_TX_WRAP | G_TX_NOMIRROR",
+          "G_TX_NOMASK",
+          "G_TX_NOLOD",
+          "G_TX_WRAP | G_TX_NOMIRROR",
+          "G_TX_NOMASK",
+          "G_TX_NOLOD"
+        ],
+        "raw": "gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD)"
+      },
+      {
+        "macro": "gsSPTexture",
+        "args": [
+          "0xFFFF",
+          "0xFFFF",
+          "0",
+          "G_TX_RENDERTILE",
+          "G_ON"
+        ],
+        "raw": "gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON)"
+      },
+      {
+        "macro": "gsDPTileSync",
+        "args": [],
+        "raw": "gsDPTileSync()"
+      },
+      {
+        "macro": "gsDPSetTile",
+        "args": [
+          "G_IM_FMT_RGBA",
+          "G_IM_SIZ_16b",
+          "8",
+          "0",
+          "G_TX_RENDERTILE",
+          "0",
+          "G_TX_CLAMP",
+          "5",
+          "G_TX_NOLOD",
+          "G_TX_CLAMP",
+          "5",
+          "G_TX_NOLOD"
+        ],
+        "raw": "gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 5, G_TX_NOLOD, G_TX_CLAMP, 5, G_TX_NOLOD)"
+      },
+      {
+        "macro": "gsDPSetTileSize",
+        "args": [
+          "0",
+          "0",
+          "0",
+          "(32 - 1) << G_TEXTURE_IMAGE_FRAC",
+          "(32 - 1) << G_TEXTURE_IMAGE_FRAC"
+        ],
+        "raw": "gsDPSetTileSize(0, 0, 0, (32 - 1) << G_TEXTURE_IMAGE_FRAC, (32 - 1) << G_TEXTURE_IMAGE_FRAC)"
+      },
+      {
+        "macro": "gsSPDisplayList",
+        "args": [
+          "wooden_signpost_seg3_dl_0302D9C8"
+        ],
+        "raw": "gsSPDisplayList(wooden_signpost_seg3_dl_0302D9C8)"
+      },
+      {
+        "macro": "gsSPTexture",
+        "args": [
+          "0xFFFF",
+          "0xFFFF",
+          "0",
+          "G_TX_RENDERTILE",
+          "G_OFF"
+        ],
+        "raw": "gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF)"
+      },
+      {
+        "macro": "gsDPPipeSync",
+        "args": [],
+        "raw": "gsDPPipeSync()"
+      },
+      {
+        "macro": "gsDPSetCombineMode",
+        "args": [
+          "G_CC_SHADE",
+          "G_CC_SHADE"
+        ],
+        "raw": "gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE)"
+      },
+      {
+        "macro": "gsSPEndDisplayList",
+        "args": [],
+        "raw": "gsSPEndDisplayList()"
+      }
+    ],
+    "wooden_signpost_seg3_dl_0302DC40": [
+      {
+        "macro": "gsDPSetTextureImage",
+        "args": [
+          "G_IM_FMT_RGBA",
+          "G_IM_SIZ_16b",
+          "1",
+          "wooden_signpost_seg3_texture_0302C9C8"
+        ],
+        "raw": "gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, wooden_signpost_seg3_texture_0302C9C8)"
+      },
+      {
+        "macro": "gsDPLoadSync",
+        "args": [],
+        "raw": "gsDPLoadSync()"
+      },
+      {
+        "macro": "gsDPLoadBlock",
+        "args": [
+          "G_TX_LOADTILE",
+          "0",
+          "0",
+          "32 * 32 - 1",
+          "CALC_DXT(32, G_IM_SIZ_16b_BYTES)"
+        ],
+        "raw": "gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES))"
+      },
+      {
+        "macro": "gsSPLight",
+        "args": [
+          "&wooden_signpost_seg3_lights_0302DAA8.l",
+          "1"
+        ],
+        "raw": "gsSPLight(&wooden_signpost_seg3_lights_0302DAA8.l, 1)"
+      },
+      {
+        "macro": "gsSPLight",
+        "args": [
+          "&wooden_signpost_seg3_lights_0302DAA8.a",
+          "2"
+        ],
+        "raw": "gsSPLight(&wooden_signpost_seg3_lights_0302DAA8.a, 2)"
+      },
+      {
+        "macro": "gsSPVertex",
+        "args": [
+          "wooden_signpost_seg3_vertex_0302DAC0",
+          "16",
+          "0"
+        ],
+        "raw": "gsSPVertex(wooden_signpost_seg3_vertex_0302DAC0, 16, 0)"
+      },
+      {
+        "macro": "gsSP2Triangles",
+        "args": [
+          "0",
+          "1",
+          "2",
+          "0x0",
+          "3",
+          "4",
+          "5",
+          "0x0"
+        ],
+        "raw": "gsSP2Triangles( 0,  1,  2, 0x0,  3,  4,  5, 0x0)"
+      },
+      {
+        "macro": "gsSP2Triangles",
+        "args": [
+          "6",
+          "7",
+          "8",
+          "0x0",
+          "6",
+          "8",
+          "9",
+          "0x0"
+        ],
+        "raw": "gsSP2Triangles( 6,  7,  8, 0x0,  6,  8,  9, 0x0)"
+      },
+      {
+        "macro": "gsSP2Triangles",
+        "args": [
+          "0",
+          "10",
+          "1",
+          "0x0",
+          "11",
+          "12",
+          "13",
+          "0x0"
+        ],
+        "raw": "gsSP2Triangles( 0, 10,  1, 0x0, 11, 12, 13, 0x0)"
+      },
+      {
+        "macro": "gsSP2Triangles",
+        "args": [
+          "3",
+          "5",
+          "14",
+          "0x0",
+          "11",
+          "13",
+          "15",
+          "0x0"
+        ],
+        "raw": "gsSP2Triangles( 3,  5, 14, 0x0, 11, 13, 15, 0x0)"
+      },
+      {
+        "macro": "gsSPVertex",
+        "args": [
+          "wooden_signpost_seg3_vertex_0302DBC0",
+          "4",
+          "0"
+        ],
+        "raw": "gsSPVertex(wooden_signpost_seg3_vertex_0302DBC0, 4, 0)"
+      },
+      {
+        "macro": "gsSP2Triangles",
+        "args": [
+          "0",
+          "1",
+          "2",
+          "0x0",
+          "0",
+          "3",
+          "1",
+          "0x0"
+        ],
+        "raw": "gsSP2Triangles( 0,  1,  2, 0x0,  0,  3,  1, 0x0)"
+      },
+      {
+        "macro": "gsSPEndDisplayList",
+        "args": [],
+        "raw": "gsSPEndDisplayList()"
+      }
+    ],
+    "wooden_signpost_seg3_dl_0302DCD0": [
+      {
+        "macro": "gsDPSetTextureImage",
+        "args": [
+          "G_IM_FMT_RGBA",
+          "G_IM_SIZ_16b",
+          "1",
+          "wooden_signpost_seg3_texture_0302D1C8"
+        ],
+        "raw": "gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, wooden_signpost_seg3_texture_0302D1C8)"
+      },
+      {
+        "macro": "gsDPLoadSync",
+        "args": [],
+        "raw": "gsDPLoadSync()"
+      },
+      {
+        "macro": "gsDPLoadBlock",
+        "args": [
+          "G_TX_LOADTILE",
+          "0",
+          "0",
+          "32 * 32 - 1",
+          "CALC_DXT(32, G_IM_SIZ_16b_BYTES)"
+        ],
+        "raw": "gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES))"
+      },
+      {
+        "macro": "gsSPVertex",
+        "args": [
+          "wooden_signpost_seg3_vertex_0302DC00",
+          "4",
+          "0"
+        ],
+        "raw": "gsSPVertex(wooden_signpost_seg3_vertex_0302DC00, 4, 0)"
+      },
+      {
+        "macro": "gsSP2Triangles",
+        "args": [
+          "0",
+          "1",
+          "2",
+          "0x0",
+          "0",
+          "3",
+          "1",
+          "0x0"
+        ],
+        "raw": "gsSP2Triangles( 0,  1,  2, 0x0,  0,  3,  1, 0x0)"
+      },
+      {
+        "macro": "gsSPEndDisplayList",
+        "args": [],
+        "raw": "gsSPEndDisplayList()"
+      }
+    ],
+    "wooden_signpost_seg3_dl_0302DD08": [
+      {
+        "macro": "gsDPPipeSync",
+        "args": [],
+        "raw": "gsDPPipeSync()"
+      },
+      {
+        "macro": "gsDPSetCombineMode",
+        "args": [
+          "G_CC_MODULATERGB",
+          "G_CC_MODULATERGB"
+        ],
+        "raw": "gsDPSetCombineMode(G_CC_MODULATERGB, G_CC_MODULATERGB)"
+      },
+      {
+        "macro": "gsSPClearGeometryMode",
+        "args": [
+          "G_SHADING_SMOOTH"
+        ],
+        "raw": "gsSPClearGeometryMode(G_SHADING_SMOOTH)"
+      },
+      {
+        "macro": "gsDPSetTile",
+        "args": [
+          "G_IM_FMT_RGBA",
+          "G_IM_SIZ_16b",
+          "0",
+          "0",
+          "G_TX_LOADTILE",
+          "0",
+          "G_TX_WRAP | G_TX_NOMIRROR",
+          "G_TX_NOMASK",
+          "G_TX_NOLOD",
+          "G_TX_WRAP | G_TX_NOMIRROR",
+          "G_TX_NOMASK",
+          "G_TX_NOLOD"
+        ],
+        "raw": "gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD)"
+      },
+      {
+        "macro": "gsSPTexture",
+        "args": [
+          "0xFFFF",
+          "0xFFFF",
+          "0",
+          "G_TX_RENDERTILE",
+          "G_ON"
+        ],
+        "raw": "gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON)"
+      },
+      {
+        "macro": "gsDPTileSync",
+        "args": [],
+        "raw": "gsDPTileSync()"
+      },
+      {
+        "macro": "gsDPSetTile",
+        "args": [
+          "G_IM_FMT_RGBA",
+          "G_IM_SIZ_16b",
+          "8",
+          "0",
+          "G_TX_RENDERTILE",
+          "0",
+          "G_TX_CLAMP",
+          "5",
+          "G_TX_NOLOD",
+          "G_TX_CLAMP",
+          "5",
+          "G_TX_NOLOD"
+        ],
+        "raw": "gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 5, G_TX_NOLOD, G_TX_CLAMP, 5, G_TX_NOLOD)"
+      },
+      {
+        "macro": "gsDPSetTileSize",
+        "args": [
+          "0",
+          "0",
+          "0",
+          "(32 - 1) << G_TEXTURE_IMAGE_FRAC",
+          "(32 - 1) << G_TEXTURE_IMAGE_FRAC"
+        ],
+        "raw": "gsDPSetTileSize(0, 0, 0, (32 - 1) << G_TEXTURE_IMAGE_FRAC, (32 - 1) << G_TEXTURE_IMAGE_FRAC)"
+      },
+      {
+        "macro": "gsSPDisplayList",
+        "args": [
+          "wooden_signpost_seg3_dl_0302DC40"
+        ],
+        "raw": "gsSPDisplayList(wooden_signpost_seg3_dl_0302DC40)"
+      },
+      {
+        "macro": "gsSPDisplayList",
+        "args": [
+          "wooden_signpost_seg3_dl_0302DCD0"
+        ],
+        "raw": "gsSPDisplayList(wooden_signpost_seg3_dl_0302DCD0)"
+      },
+      {
+        "macro": "gsSPTexture",
+        "args": [
+          "0xFFFF",
+          "0xFFFF",
+          "0",
+          "G_TX_RENDERTILE",
+          "G_OFF"
+        ],
+        "raw": "gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF)"
+      },
+      {
+        "macro": "gsDPPipeSync",
+        "args": [],
+        "raw": "gsDPPipeSync()"
+      },
+      {
+        "macro": "gsDPSetCombineMode",
+        "args": [
+          "G_CC_SHADE",
+          "G_CC_SHADE"
+        ],
+        "raw": "gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE)"
+      },
+      {
+        "macro": "gsSPSetGeometryMode",
+        "args": [
+          "G_SHADING_SMOOTH"
+        ],
+        "raw": "gsSPSetGeometryMode(G_SHADING_SMOOTH)"
+      },
+      {
+        "macro": "gsSPEndDisplayList",
+        "args": [],
+        "raw": "gsSPEndDisplayList()"
+      }
+    ]
+  },
+  "geo": {
+    "type": "root",
+    "name": "wooden_signpost_geo",
+    "children": [
+      {
+        "type": "shadow",
+        "args": [
+          "SHADOW_CIRCLE_4_VERTS",
+          "0xC8",
+          "60"
+        ],
+        "children": [
+          {
+            "type": "scale",
+            "raw_scale": 16384,
+            "scale": 0.25,
+            "children": [
+              {
+                "type": "display_list",
+                "layer": "LAYER_OPAQUE",
+                "display_list": "wooden_signpost_seg3_dl_0302DA48",
+                "children": []
+              },
+              {
+                "type": "display_list",
+                "layer": "LAYER_OPAQUE",
+                "display_list": "wooden_signpost_seg3_dl_0302DD08",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "joint_count": 0,
+    "unsupported_macros": [],
+    "excess_close_nodes": 0
+  },
+  "geo_flat": [
+    {
+      "path": "/root[0]/shadow[0]",
+      "type": "shadow",
+      "args": [
+        "SHADOW_CIRCLE_4_VERTS",
+        "0xC8",
+        "60"
+      ]
+    },
+    {
+      "path": "/root[0]/shadow[0]/scale[0]",
+      "type": "scale",
+      "raw_scale": 16384,
+      "scale": 0.25
+    },
+    {
+      "path": "/root[0]/shadow[0]/scale[0]/display_list[0]",
+      "type": "display_list",
+      "layer": "LAYER_OPAQUE",
+      "display_list": "wooden_signpost_seg3_dl_0302DA48"
+    },
+    {
+      "path": "/root[0]/shadow[0]/scale[0]/display_list[1]",
+      "type": "display_list",
+      "layer": "LAYER_OPAQUE",
+      "display_list": "wooden_signpost_seg3_dl_0302DD08"
+    }
+  ],
+  "render_meshes": {
+    "LAYER_OPAQUE|wooden_signpost_seg3_dl_0302DA48": {
+      "root_display_list": "wooden_signpost_seg3_dl_0302DA48",
+      "layer": "LAYER_OPAQUE",
+      "draw_calls": [
+        {
+          "material": {
+            "texture_symbol": "wooden_signpost_seg3_texture_0302C9C8",
+            "texture_asset": "actors/wooden_signpost/wooden_signpost_back.rgba16.png",
+            "texture_size": [
+              32,
+              32
+            ],
+            "texture_enabled": true,
+            "lighting": true,
+            "texture_gen": false,
+            "combine_mode": "G_CC_MODULATERGB, G_CC_MODULATERGB",
+            "wrap_s": "clamp",
+            "wrap_t": "clamp",
+            "env_color": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "layer": "LAYER_OPAQUE"
+          },
+          "vertices": [
+            {
+              "source_position": [
+                0,
+                504,
+                19
+              ],
+              "blender_position": [
+                0.0,
+                -0.19,
+                5.04
+              ],
+              "flag": 0,
+              "raw_uv": [
+                962,
+                478
+              ],
+              "rgba_bytes": [
+                0,
+                126,
+                252,
+                255
+              ],
+              "normal_s8": [
+                0,
+                126,
+                -4
+              ],
+              "blender_normal": [
+                0.0,
+                0.03173004683477357,
+                0.9994964752953674
+              ],
+              "source_array": "wooden_signpost_seg3_vertex_0302C958",
+              "source_index": 0,
+              "uv": [
+                0.939453125,
+                0.533203125
+              ]
+            },
+            {
+              "source_position": [
+                24,
+                490,
+                34
+              ],
+              "blender_position": [
+                0.24,
+                -0.34,
+                4.9
+              ],
+              "flag": 0,
+              "raw_uv": [
+                938,
+                780
+              ],
+              "rgba_bytes": [
+                98,
+                59,
+                54,
+                255
+              ],
+              "normal_s8": [
+                98,
+                59,
+                54
+              ],
+              "blender_normal": [
+                0.7747338166877576,
+                -0.4268941438891726,
+                0.4664213794344663
+              ],
+              "source_array": "wooden_signpost_seg3_vertex_0302C958",
+              "source_index": 1,
+              "uv": [
+                0.916015625,
+                0.23828125
+              ]
+            },
+            {
+              "source_position": [
+                0,
+                490,
+                -6
+              ],
+              "blender_position": [
+                0.0,
+                0.06,
+                4.9
+              ],
+              "flag": 0,
+              "raw_uv": [
+                938,
+                478
+              ],
+              "rgba_bytes": [
+                255,
+                57,
+                144,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                57,
+                -112
+              ],
+              "blender_normal": [
+                -0.00795708382391934,
+                0.891193388278966,
+                0.45355377796340235
+              ],
+              "source_array": "wooden_signpost_seg3_vertex_0302C958",
+              "source_index": 2,
+              "uv": [
+                0.916015625,
+                0.533203125
+              ]
+            },
+            {
+              "source_position": [
+                -23,
+                490,
+                34
+              ],
+              "blender_position": [
+                -0.23,
+                -0.34,
+                4.9
+              ],
+              "flag": 0,
+              "raw_uv": [
+                938,
+                178
+              ],
+              "rgba_bytes": [
+                158,
+                58,
+                54,
+                255
+              ],
+              "normal_s8": [
+                -98,
+                58,
+                54
+              ],
+              "blender_normal": [
+                -0.7775818886479167,
+                -0.4284634896631378,
+                0.4602015259344813
+              ],
+              "source_array": "wooden_signpost_seg3_vertex_0302C958",
+              "source_index": 3,
+              "uv": [
+                0.916015625,
+                0.826171875
+              ]
+            },
+            {
+              "source_position": [
+                0,
+                -39,
+                34
+              ],
+              "blender_position": [
+                0.0,
+                -0.34,
+                -0.39
+              ],
+              "flag": 0,
+              "raw_uv": [
+                36,
+                478
+              ],
+              "rgba_bytes": [
+                0,
+                252,
+                126,
+                255
+              ],
+              "normal_s8": [
+                0,
+                -4,
+                126
+              ],
+              "blender_normal": [
+                0.0,
+                -0.9994964752953674,
+                -0.03173004683477357
+              ],
+              "source_array": "wooden_signpost_seg3_vertex_0302C958",
+              "source_index": 4,
+              "uv": [
+                0.03515625,
+                0.533203125
+              ]
+            },
+            {
+              "source_position": [
+                -23,
+                -39,
+                -6
+              ],
+              "blender_position": [
+                -0.23,
+                0.06,
+                -0.39
+              ],
+              "flag": 0,
+              "raw_uv": [
+                36,
+                178
+              ],
+              "rgba_bytes": [
+                147,
+                0,
+                193,
+                255
+              ],
+              "normal_s8": [
+                -109,
+                0,
+                -63
+              ],
+              "blender_normal": [
+                -0.865788603160596,
+                0.5004099265974087,
+                0.0
+              ],
+              "source_array": "wooden_signpost_seg3_vertex_0302C958",
+              "source_index": 5,
+              "uv": [
+                0.03515625,
+                0.826171875
+              ]
+            },
+            {
+              "source_position": [
+                24,
+                -39,
+                -6
+              ],
+              "blender_position": [
+                0.24,
+                0.06,
+                -0.39
+              ],
+              "flag": 0,
+              "raw_uv": [
+                36,
+                780
+              ],
+              "rgba_bytes": [
+                109,
+                0,
+                192,
+                255
+              ],
+              "normal_s8": [
+                109,
+                0,
+                -64
+              ],
+              "blender_normal": [
+                0.8623406926722569,
+                0.5063284801011416,
+                0.0
+              ],
+              "source_array": "wooden_signpost_seg3_vertex_0302C958",
+              "source_index": 6,
+              "uv": [
+                0.03515625,
+                0.23828125
+              ]
+            }
+          ],
+          "triangles": [
+            [
+              0,
+              1,
+              2
+            ],
+            [
+              2,
+              3,
+              0
+            ],
+            [
+              0,
+              3,
+              1
+            ],
+            [
+              4,
+              1,
+              3
+            ],
+            [
+              3,
+              5,
+              4
+            ],
+            [
+              5,
+              3,
+              2
+            ],
+            [
+              2,
+              6,
+              5
+            ],
+            [
+              1,
+              4,
+              6
+            ],
+            [
+              6,
+              2,
+              1
+            ]
+          ]
+        }
+      ],
+      "triangle_count": 9
+    },
+    "LAYER_OPAQUE|wooden_signpost_seg3_dl_0302DD08": {
+      "root_display_list": "wooden_signpost_seg3_dl_0302DD08",
+      "layer": "LAYER_OPAQUE",
+      "draw_calls": [
+        {
+          "material": {
+            "texture_symbol": "wooden_signpost_seg3_texture_0302C9C8",
+            "texture_asset": "actors/wooden_signpost/wooden_signpost_back.rgba16.png",
+            "texture_size": [
+              32,
+              32
+            ],
+            "texture_enabled": true,
+            "lighting": true,
+            "texture_gen": false,
+            "combine_mode": "G_CC_MODULATERGB, G_CC_MODULATERGB",
+            "wrap_s": "clamp",
+            "wrap_t": "clamp",
+            "env_color": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "layer": "LAYER_OPAQUE"
+          },
+          "vertices": [
+            {
+              "source_position": [
+                180,
+                260,
+                20
+              ],
+              "blender_position": [
+                1.8,
+                -0.2,
+                2.6
+              ],
+              "flag": 0,
+              "raw_uv": [
+                990,
+                990
+              ],
+              "rgba_bytes": [
+                0,
+                129,
+                0,
+                255
+              ],
+              "normal_s8": [
+                0,
+                -127,
+                0
+              ],
+              "blender_normal": [
+                0.0,
+                -0.0,
+                -1.0
+              ],
+              "source_array": "wooden_signpost_seg3_vertex_0302DAC0",
+              "source_index": 0,
+              "uv": [
+                0.966796875,
+                0.033203125
+              ]
+            },
+            {
+              "source_position": [
+                -179,
+                260,
+                60
+              ],
+              "blender_position": [
+                -1.79,
+                -0.6,
+                2.6
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                990
+              ],
+              "rgba_bytes": [
+                0,
+                129,
+                0,
+                255
+              ],
+              "normal_s8": [
+                0,
+                -127,
+                0
+              ],
+              "blender_normal": [
+                0.0,
+                -0.0,
+                -1.0
+              ],
+              "source_array": "wooden_signpost_seg3_vertex_0302DAC0",
+              "source_index": 1,
+              "uv": [
+                0.0,
+                0.033203125
+              ]
+            },
+            {
+              "source_position": [
+                -179,
+                260,
+                20
+              ],
+              "blender_position": [
+                -1.79,
+                -0.2,
+                2.6
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                990
+              ],
+              "rgba_bytes": [
+                0,
+                129,
+                0,
+                255
+              ],
+              "normal_s8": [
+                0,
+                -127,
+                0
+              ],
+              "blender_normal": [
+                0.0,
+                -0.0,
+                -1.0
+              ],
+              "source_array": "wooden_signpost_seg3_vertex_0302DAC0",
+              "source_index": 2,
+              "uv": [
+                0.0,
+                0.033203125
+              ]
+            },
+            {
+              "source_position": [
+                180,
+                260,
+                20
+              ],
+              "blender_position": [
+                1.8,
+                -0.2,
+                2.6
+              ],
+              "flag": 0,
+              "raw_uv": [
+                990,
+                990
+              ],
+              "rgba_bytes": [
+                0,
+                0,
+                129,
+                255
+              ],
+              "normal_s8": [
+                0,
+                0,
+                -127
+              ],
+              "blender_normal": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "source_array": "wooden_signpost_seg3_vertex_0302DAC0",
+              "source_index": 3,
+              "uv": [
+                0.966796875,
+                0.033203125
+              ]
+            },
+            {
+              "source_position": [
+                -179,
+                260,
+                20
+              ],
+              "blender_position": [
+                -1.79,
+                -0.2,
+                2.6
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                990
+              ],
+              "rgba_bytes": [
+                0,
+                0,
+                129,
+                255
+              ],
+              "normal_s8": [
+                0,
+                0,
+                -127
+              ],
+              "blender_normal": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "source_array": "wooden_signpost_seg3_vertex_0302DAC0",
+              "source_index": 4,
+              "uv": [
+                0.0,
+                0.033203125
+              ]
+            },
+            {
+              "source_position": [
+                -179,
+                460,
+                20
+              ],
+              "blender_position": [
+                -1.79,
+                -0.2,
+                4.6000000000000005
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                0
+              ],
+              "rgba_bytes": [
+                0,
+                0,
+                129,
+                255
+              ],
+              "normal_s8": [
+                0,
+                0,
+                -127
+              ],
+              "blender_normal": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "source_array": "wooden_signpost_seg3_vertex_0302DAC0",
+              "source_index": 5,
+              "uv": [
+                0.0,
+                1.0
+              ]
+            },
+            {
+              "source_position": [
+                -179,
+                260,
+                20
+              ],
+              "blender_position": [
+                -1.79,
+                -0.2,
+                2.6
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                990
+              ],
+              "rgba_bytes": [
+                129,
+                0,
+                0,
+                255
+              ],
+              "normal_s8": [
+                -127,
+                0,
+                0
+              ],
+              "blender_normal": [
+                -1.0,
+                -0.0,
+                0.0
+              ],
+              "source_array": "wooden_signpost_seg3_vertex_0302DAC0",
+              "source_index": 6,
+              "uv": [
+                0.0,
+                0.033203125
+              ]
+            },
+            {
+              "source_position": [
+                -179,
+                260,
+                60
+              ],
+              "blender_position": [
+                -1.79,
+                -0.6,
+                2.6
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                990
+              ],
+              "rgba_bytes": [
+                129,
+                0,
+                0,
+                255
+              ],
+              "normal_s8": [
+                -127,
+                0,
+                0
+              ],
+              "blender_normal": [
+                -1.0,
+                -0.0,
+                0.0
+              ],
+              "source_array": "wooden_signpost_seg3_vertex_0302DAC0",
+              "source_index": 7,
+              "uv": [
+                0.0,
+                0.033203125
+              ]
+            },
+            {
+              "source_position": [
+                -179,
+                460,
+                60
+              ],
+              "blender_position": [
+                -1.79,
+                -0.6,
+                4.6000000000000005
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                0
+              ],
+              "rgba_bytes": [
+                129,
+                0,
+                0,
+                255
+              ],
+              "normal_s8": [
+                -127,
+                0,
+                0
+              ],
+              "blender_normal": [
+                -1.0,
+                -0.0,
+                0.0
+              ],
+              "source_array": "wooden_signpost_seg3_vertex_0302DAC0",
+              "source_index": 8,
+              "uv": [
+                0.0,
+                1.0
+              ]
+            },
+            {
+              "source_position": [
+                -179,
+                460,
+                20
+              ],
+              "blender_position": [
+                -1.79,
+                -0.2,
+                4.6000000000000005
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                0
+              ],
+              "rgba_bytes": [
+                129,
+                0,
+                0,
+                255
+              ],
+              "normal_s8": [
+                -127,
+                0,
+                0
+              ],
+              "blender_normal": [
+                -1.0,
+                -0.0,
+                0.0
+              ],
+              "source_array": "wooden_signpost_seg3_vertex_0302DAC0",
+              "source_index": 9,
+              "uv": [
+                0.0,
+                1.0
+              ]
+            },
+            {
+              "source_position": [
+                180,
+                260,
+                60
+              ],
+              "blender_position": [
+                1.8,
+                -0.6,
+                2.6
+              ],
+              "flag": 0,
+              "raw_uv": [
+                990,
+                990
+              ],
+              "rgba_bytes": [
+                0,
+                129,
+                0,
+                255
+              ],
+              "normal_s8": [
+                0,
+                -127,
+                0
+              ],
+              "blender_normal": [
+                0.0,
+                -0.0,
+                -1.0
+              ],
+              "source_array": "wooden_signpost_seg3_vertex_0302DAC0",
+              "source_index": 10,
+              "uv": [
+                0.966796875,
+                0.033203125
+              ]
+            },
+            {
+              "source_position": [
+                -179,
+                460,
+                20
+              ],
+              "blender_position": [
+                -1.79,
+                -0.2,
+                4.6000000000000005
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                0
+              ],
+              "rgba_bytes": [
+                0,
+                127,
+                0,
+                255
+              ],
+              "normal_s8": [
+                0,
+                127,
+                0
+              ],
+              "blender_normal": [
+                0.0,
+                -0.0,
+                1.0
+              ],
+              "source_array": "wooden_signpost_seg3_vertex_0302DAC0",
+              "source_index": 11,
+              "uv": [
+                0.0,
+                1.0
+              ]
+            },
+            {
+              "source_position": [
+                -179,
+                460,
+                60
+              ],
+              "blender_position": [
+                -1.79,
+                -0.6,
+                4.6000000000000005
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                0
+              ],
+              "rgba_bytes": [
+                0,
+                127,
+                0,
+                255
+              ],
+              "normal_s8": [
+                0,
+                127,
+                0
+              ],
+              "blender_normal": [
+                0.0,
+                -0.0,
+                1.0
+              ],
+              "source_array": "wooden_signpost_seg3_vertex_0302DAC0",
+              "source_index": 12,
+              "uv": [
+                0.0,
+                1.0
+              ]
+            },
+            {
+              "source_position": [
+                180,
+                460,
+                60
+              ],
+              "blender_position": [
+                1.8,
+                -0.6,
+                4.6000000000000005
+              ],
+              "flag": 0,
+              "raw_uv": [
+                990,
+                0
+              ],
+              "rgba_bytes": [
+                0,
+                127,
+                0,
+                255
+              ],
+              "normal_s8": [
+                0,
+                127,
+                0
+              ],
+              "blender_normal": [
+                0.0,
+                -0.0,
+                1.0
+              ],
+              "source_array": "wooden_signpost_seg3_vertex_0302DAC0",
+              "source_index": 13,
+              "uv": [
+                0.966796875,
+                1.0
+              ]
+            },
+            {
+              "source_position": [
+                180,
+                460,
+                20
+              ],
+              "blender_position": [
+                1.8,
+                -0.2,
+                4.6000000000000005
+              ],
+              "flag": 0,
+              "raw_uv": [
+                990,
+                0
+              ],
+              "rgba_bytes": [
+                0,
+                0,
+                129,
+                255
+              ],
+              "normal_s8": [
+                0,
+                0,
+                -127
+              ],
+              "blender_normal": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "source_array": "wooden_signpost_seg3_vertex_0302DAC0",
+              "source_index": 14,
+              "uv": [
+                0.966796875,
+                1.0
+              ]
+            },
+            {
+              "source_position": [
+                180,
+                460,
+                20
+              ],
+              "blender_position": [
+                1.8,
+                -0.2,
+                4.6000000000000005
+              ],
+              "flag": 0,
+              "raw_uv": [
+                990,
+                0
+              ],
+              "rgba_bytes": [
+                0,
+                127,
+                0,
+                255
+              ],
+              "normal_s8": [
+                0,
+                127,
+                0
+              ],
+              "blender_normal": [
+                0.0,
+                -0.0,
+                1.0
+              ],
+              "source_array": "wooden_signpost_seg3_vertex_0302DAC0",
+              "source_index": 15,
+              "uv": [
+                0.966796875,
+                1.0
+              ]
+            },
+            {
+              "source_position": [
+                180,
+                260,
+                60
+              ],
+              "blender_position": [
+                1.8,
+                -0.6,
+                2.6
+              ],
+              "flag": 0,
+              "raw_uv": [
+                990,
+                990
+              ],
+              "rgba_bytes": [
+                127,
+                0,
+                0,
+                255
+              ],
+              "normal_s8": [
+                127,
+                0,
+                0
+              ],
+              "blender_normal": [
+                1.0,
+                -0.0,
+                0.0
+              ],
+              "source_array": "wooden_signpost_seg3_vertex_0302DBC0",
+              "source_index": 0,
+              "uv": [
+                0.966796875,
+                0.033203125
+              ]
+            },
+            {
+              "source_position": [
+                180,
+                460,
+                20
+              ],
+              "blender_position": [
+                1.8,
+                -0.2,
+                4.6000000000000005
+              ],
+              "flag": 0,
+              "raw_uv": [
+                990,
+                0
+              ],
+              "rgba_bytes": [
+                127,
+                0,
+                0,
+                255
+              ],
+              "normal_s8": [
+                127,
+                0,
+                0
+              ],
+              "blender_normal": [
+                1.0,
+                -0.0,
+                0.0
+              ],
+              "source_array": "wooden_signpost_seg3_vertex_0302DBC0",
+              "source_index": 1,
+              "uv": [
+                0.966796875,
+                1.0
+              ]
+            },
+            {
+              "source_position": [
+                180,
+                460,
+                60
+              ],
+              "blender_position": [
+                1.8,
+                -0.6,
+                4.6000000000000005
+              ],
+              "flag": 0,
+              "raw_uv": [
+                990,
+                0
+              ],
+              "rgba_bytes": [
+                127,
+                0,
+                0,
+                255
+              ],
+              "normal_s8": [
+                127,
+                0,
+                0
+              ],
+              "blender_normal": [
+                1.0,
+                -0.0,
+                0.0
+              ],
+              "source_array": "wooden_signpost_seg3_vertex_0302DBC0",
+              "source_index": 2,
+              "uv": [
+                0.966796875,
+                1.0
+              ]
+            },
+            {
+              "source_position": [
+                180,
+                260,
+                20
+              ],
+              "blender_position": [
+                1.8,
+                -0.2,
+                2.6
+              ],
+              "flag": 0,
+              "raw_uv": [
+                990,
+                990
+              ],
+              "rgba_bytes": [
+                127,
+                0,
+                0,
+                255
+              ],
+              "normal_s8": [
+                127,
+                0,
+                0
+              ],
+              "blender_normal": [
+                1.0,
+                -0.0,
+                0.0
+              ],
+              "source_array": "wooden_signpost_seg3_vertex_0302DBC0",
+              "source_index": 3,
+              "uv": [
+                0.966796875,
+                0.033203125
+              ]
+            }
+          ],
+          "triangles": [
+            [
+              0,
+              1,
+              2
+            ],
+            [
+              3,
+              4,
+              5
+            ],
+            [
+              6,
+              7,
+              8
+            ],
+            [
+              6,
+              8,
+              9
+            ],
+            [
+              0,
+              10,
+              1
+            ],
+            [
+              11,
+              12,
+              13
+            ],
+            [
+              3,
+              5,
+              14
+            ],
+            [
+              11,
+              13,
+              15
+            ],
+            [
+              16,
+              17,
+              18
+            ],
+            [
+              16,
+              19,
+              17
+            ]
+          ]
+        },
+        {
+          "material": {
+            "texture_symbol": "wooden_signpost_seg3_texture_0302D1C8",
+            "texture_asset": "actors/wooden_signpost/wooden_signpost_front.rgba16.png",
+            "texture_size": [
+              32,
+              32
+            ],
+            "texture_enabled": true,
+            "lighting": true,
+            "texture_gen": false,
+            "combine_mode": "G_CC_MODULATERGB, G_CC_MODULATERGB",
+            "wrap_s": "clamp",
+            "wrap_t": "clamp",
+            "env_color": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "layer": "LAYER_OPAQUE"
+          },
+          "vertices": [
+            {
+              "source_position": [
+                -179,
+                260,
+                60
+              ],
+              "blender_position": [
+                -1.79,
+                -0.6,
+                2.6
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                990
+              ],
+              "rgba_bytes": [
+                0,
+                0,
+                127,
+                255
+              ],
+              "normal_s8": [
+                0,
+                0,
+                127
+              ],
+              "blender_normal": [
+                0.0,
+                -1.0,
+                0.0
+              ],
+              "source_array": "wooden_signpost_seg3_vertex_0302DC00",
+              "source_index": 0,
+              "uv": [
+                0.0,
+                0.033203125
+              ]
+            },
+            {
+              "source_position": [
+                180,
+                460,
+                60
+              ],
+              "blender_position": [
+                1.8,
+                -0.6,
+                4.6000000000000005
+              ],
+              "flag": 0,
+              "raw_uv": [
+                990,
+                0
+              ],
+              "rgba_bytes": [
+                0,
+                0,
+                127,
+                255
+              ],
+              "normal_s8": [
+                0,
+                0,
+                127
+              ],
+              "blender_normal": [
+                0.0,
+                -1.0,
+                0.0
+              ],
+              "source_array": "wooden_signpost_seg3_vertex_0302DC00",
+              "source_index": 1,
+              "uv": [
+                0.966796875,
+                1.0
+              ]
+            },
+            {
+              "source_position": [
+                -179,
+                460,
+                60
+              ],
+              "blender_position": [
+                -1.79,
+                -0.6,
+                4.6000000000000005
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                0
+              ],
+              "rgba_bytes": [
+                0,
+                0,
+                127,
+                255
+              ],
+              "normal_s8": [
+                0,
+                0,
+                127
+              ],
+              "blender_normal": [
+                0.0,
+                -1.0,
+                0.0
+              ],
+              "source_array": "wooden_signpost_seg3_vertex_0302DC00",
+              "source_index": 2,
+              "uv": [
+                0.0,
+                1.0
+              ]
+            },
+            {
+              "source_position": [
+                180,
+                260,
+                60
+              ],
+              "blender_position": [
+                1.8,
+                -0.6,
+                2.6
+              ],
+              "flag": 0,
+              "raw_uv": [
+                990,
+                990
+              ],
+              "rgba_bytes": [
+                0,
+                0,
+                127,
+                255
+              ],
+              "normal_s8": [
+                0,
+                0,
+                127
+              ],
+              "blender_normal": [
+                0.0,
+                -1.0,
+                0.0
+              ],
+              "source_array": "wooden_signpost_seg3_vertex_0302DC00",
+              "source_index": 3,
+              "uv": [
+                0.966796875,
+                0.033203125
+              ]
+            }
+          ],
+          "triangles": [
+            [
+              0,
+              1,
+              2
+            ],
+            [
+              0,
+              3,
+              1
+            ]
+          ]
+        }
+      ],
+      "triangle_count": 12
+    }
+  },
+  "collisions": {
+    "wooden_signpost_seg3_collision_0302DD80": {
+      "source_vertices": [
+        [
+          -44,
+          -9,
+          -12
+        ],
+        [
+          -44,
+          126,
+          20
+        ],
+        [
+          -44,
+          126,
+          -12
+        ],
+        [
+          45,
+          126,
+          20
+        ],
+        [
+          45,
+          126,
+          -12
+        ],
+        [
+          45,
+          -9,
+          -12
+        ],
+        [
+          -44,
+          -9,
+          20
+        ],
+        [
+          45,
+          -9,
+          20
+        ]
+      ],
+      "blender_vertices": [
+        [
+          -0.44,
+          0.12,
+          -0.09
+        ],
+        [
+          -0.44,
+          -0.2,
+          1.26
+        ],
+        [
+          -0.44,
+          0.12,
+          1.26
+        ],
+        [
+          0.45,
+          -0.2,
+          1.26
+        ],
+        [
+          0.45,
+          0.12,
+          1.26
+        ],
+        [
+          0.45,
+          0.12,
+          -0.09
+        ],
+        [
+          -0.44,
+          -0.2,
+          -0.09
+        ],
+        [
+          0.45,
+          -0.2,
+          -0.09
+        ]
+      ],
+      "declared_vertex_count": 8,
+      "surface_groups": [
+        {
+          "surface": "SURFACE_DEFAULT",
+          "declared_count": 12,
+          "triangles": [
+            {
+              "indices": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "indices": [
+                2,
+                1,
+                3
+              ]
+            },
+            {
+              "indices": [
+                2,
+                3,
+                4
+              ]
+            },
+            {
+              "indices": [
+                5,
+                0,
+                2
+              ]
+            },
+            {
+              "indices": [
+                5,
+                2,
+                4
+              ]
+            },
+            {
+              "indices": [
+                6,
+                3,
+                1
+              ]
+            },
+            {
+              "indices": [
+                0,
+                6,
+                1
+              ]
+            },
+            {
+              "indices": [
+                7,
+                4,
+                3
+              ]
+            },
+            {
+              "indices": [
+                6,
+                7,
+                3
+              ]
+            },
+            {
+              "indices": [
+                7,
+                5,
+                4
+              ]
+            },
+            {
+              "indices": [
+                5,
+                7,
+                6
+              ]
+            },
+            {
+              "indices": [
+                5,
+                6,
+                0
+              ]
+            }
+          ]
+        }
+      ],
+      "triangle_count": 12,
+      "valid_counts": true
+    }
+  },
+  "animations": [],
+  "validation": {
+    "vertex_array_count": 4,
+    "source_vertex_count": 31,
+    "display_list_count": 5,
+    "geo_display_list_use_count": 2,
+    "render_mesh_count": 2,
+    "render_triangle_count": 21,
+    "joint_count": 0,
+    "animation_count": 0,
+    "collision_mesh_count": 1,
+    "collision_triangle_count": 12,
+    "all_collision_counts_valid": true,
+    "warnings": []
+  }
+}

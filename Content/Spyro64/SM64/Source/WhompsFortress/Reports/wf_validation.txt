@@ -1,0 +1,6 @@
+Whomp's Fortress deterministic source validation
+Result: PASS
+Canonical DAEs: 28
+Placements: 127 (48 DAE-backed)
+Terrain collision: 422 vertices, 640 triangles
+DAE marker cross-check: 109/109

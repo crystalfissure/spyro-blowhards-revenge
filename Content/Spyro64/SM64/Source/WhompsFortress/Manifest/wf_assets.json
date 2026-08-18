@@ -1,0 +1,2435 @@
+{
+  "format": "spyro64.sm64.assets",
+  "version": 1,
+  "course": "WhompsFortress",
+  "assets": [
+    {
+      "asset": "Area1",
+      "dae": "Area1.dae",
+      "sha256": "371b55225c2a2986f18e15bb45aa5550a9ad07508e4692fb06bb4200de72a893",
+      "unit_meter": 0.01,
+      "up_axis": "Y_UP",
+      "geometry_count": 31,
+      "instance_count": 31,
+      "vertices_with_split_attributes": 874,
+      "triangles": 486,
+      "gameplay_selected_triangles": 251,
+      "excluded_coincident_dark_variants": [
+        "Mesh0_dark",
+        "Mesh1_dark",
+        "Mesh2_dark",
+        "Mesh3_dark",
+        "Mesh4_dark",
+        "Mesh5_dark",
+        "Mesh6_dark",
+        "Mesh7_dark",
+        "Mesh8_dark",
+        "Mesh9_dark",
+        "Mesh10_dark",
+        "Mesh11_dark",
+        "Mesh12_dark",
+        "Mesh13_dark"
+      ],
+      "uv_values": 874,
+      "color_values": 874,
+      "source_normals": 0,
+      "recalculate_normals": true,
+      "materials": 16,
+      "textures": [
+        "tex_0.png",
+        "tex_2014AB8.png",
+        "tex_7000000.png",
+        "tex_7000800.png",
+        "tex_7001000.png",
+        "tex_9000800.png",
+        "tex_9001000.png",
+        "tex_9004000.png",
+        "tex_9004800.png",
+        "tex_9005000.png",
+        "tex_9005800.png",
+        "tex_9006800.png",
+        "tex_9007800.png",
+        "tex_9008000.png",
+        "tex_9008800.png",
+        "tex_9009800.png"
+      ],
+      "source_bounds_cm": [
+        [
+          -2508.0,
+          0.0,
+          -4095.0
+        ],
+        [
+          4096.0,
+          4096.0,
+          4096.0
+        ]
+      ],
+      "blender_bounds_m": [
+        [
+          -25.080000000000002,
+          -40.96,
+          0.0
+        ],
+        [
+          40.96,
+          40.95,
+          40.96
+        ]
+      ],
+      "uv_bounds": [
+        [
+          -15.0,
+          -17.94921875
+        ],
+        [
+          22.32421875,
+          16.001953125
+        ]
+      ],
+      "uv0_wraps_outside_zero_one": true,
+      "pivot_policy": "preserve_source_origin",
+      "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "role": "static_world",
+      "collision_source": "levels/wf/areas/1/collision.inc.c",
+      "act_mask": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "notes": ""
+    },
+    {
+      "asset": "SmallStairs",
+      "dae": "SmallStairs.dae",
+      "sha256": "89dffb5d484215ab573240a36cf1f9c1f6f80eab1175ef9dd7dd134c694794a0",
+      "unit_meter": 0.01,
+      "up_axis": "Y_UP",
+      "geometry_count": 2,
+      "instance_count": 2,
+      "vertices_with_split_attributes": 84,
+      "triangles": 42,
+      "gameplay_selected_triangles": 42,
+      "excluded_coincident_dark_variants": [],
+      "uv_values": 84,
+      "color_values": 84,
+      "source_normals": 0,
+      "recalculate_normals": true,
+      "materials": 1,
+      "textures": [
+        "tex_9009800.png"
+      ],
+      "source_bounds_cm": [
+        [
+          -256.0,
+          -127.0,
+          -255.0
+        ],
+        [
+          255.0,
+          128.0,
+          256.0
+        ]
+      ],
+      "blender_bounds_m": [
+        [
+          -2.56,
+          -2.56,
+          -1.27
+        ],
+        [
+          2.5500000000000003,
+          2.5500000000000003,
+          1.28
+        ]
+      ],
+      "uv_bounds": [
+        [
+          0.0,
+          -0.962890625
+        ],
+        [
+          3.9609375,
+          6.021484375
+        ]
+      ],
+      "uv0_wraps_outside_zero_one": true,
+      "pivot_policy": "preserve_source_origin",
+      "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "role": "static_world",
+      "collision_source": null,
+      "act_mask": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "notes": ""
+    },
+    {
+      "asset": "BigStairs",
+      "dae": "BigStairs.dae",
+      "sha256": "c0a3124c28f478bb4110c40fe04cb11f90b00513f6ba456be5acd5d14d57f2dc",
+      "unit_meter": 0.01,
+      "up_axis": "Y_UP",
+      "geometry_count": 2,
+      "instance_count": 2,
+      "vertices_with_split_attributes": 65,
+      "triangles": 32,
+      "gameplay_selected_triangles": 32,
+      "excluded_coincident_dark_variants": [],
+      "uv_values": 65,
+      "color_values": 65,
+      "source_normals": 0,
+      "recalculate_normals": true,
+      "materials": 1,
+      "textures": [
+        "tex_9008000.png"
+      ],
+      "source_bounds_cm": [
+        [
+          -178.0,
+          -600.0,
+          -1304.0
+        ],
+        [
+          179.0,
+          640.0,
+          1280.0
+        ]
+      ],
+      "blender_bounds_m": [
+        [
+          -1.78,
+          -12.8,
+          -6.0
+        ],
+        [
+          1.79,
+          13.040000000000001,
+          6.4
+        ]
+      ],
+      "uv_bounds": [
+        [
+          -1.02734375,
+          -7.6328125
+        ],
+        [
+          11.146484375,
+          1.4296875
+        ]
+      ],
+      "uv0_wraps_outside_zero_one": true,
+      "pivot_policy": "preserve_source_origin",
+      "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "role": "static_world",
+      "collision_source": null,
+      "act_mask": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "notes": ""
+    },
+    {
+      "asset": "Pillar",
+      "dae": "Pillar.dae",
+      "sha256": "276227c9cf2f9cf4d8ad1aa9edcb3e28b994882a3b940b19014575af49051e3d",
+      "unit_meter": 0.01,
+      "up_axis": "Y_UP",
+      "geometry_count": 2,
+      "instance_count": 2,
+      "vertices_with_split_attributes": 16,
+      "triangles": 8,
+      "gameplay_selected_triangles": 8,
+      "excluded_coincident_dark_variants": [],
+      "uv_values": 16,
+      "color_values": 16,
+      "source_normals": 0,
+      "recalculate_normals": true,
+      "materials": 2,
+      "textures": [
+        "tex_9000800.png",
+        "tex_9001000.png"
+      ],
+      "source_bounds_cm": [
+        [
+          -255.0,
+          0.0,
+          -255.0
+        ],
+        [
+          256.0,
+          1075.0,
+          256.0
+        ]
+      ],
+      "blender_bounds_m": [
+        [
+          -2.5500000000000003,
+          -2.56,
+          0.0
+        ],
+        [
+          2.56,
+          2.5500000000000003,
+          10.75
+        ]
+      ],
+      "uv_bounds": [
+        [
+          -11.0078125,
+          -3.158203125
+        ],
+        [
+          4.958984375,
+          2.029296875
+        ]
+      ],
+      "uv0_wraps_outside_zero_one": true,
+      "pivot_policy": "preserve_source_origin",
+      "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "role": "static_world",
+      "collision_source": null,
+      "act_mask": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "notes": ""
+    },
+    {
+      "asset": "Fence",
+      "dae": "Fence.dae",
+      "sha256": "bae66b2d0600e4dfc41497b2e4831a0c1661ce42b6fef5878f267ec0b8ac4b68",
+      "unit_meter": 0.01,
+      "up_axis": "Y_UP",
+      "geometry_count": 2,
+      "instance_count": 2,
+      "vertices_with_split_attributes": 106,
+      "triangles": 60,
+      "gameplay_selected_triangles": 60,
+      "excluded_coincident_dark_variants": [],
+      "uv_values": 106,
+      "color_values": 106,
+      "source_normals": 0,
+      "recalculate_normals": true,
+      "materials": 2,
+      "textures": [
+        "tex_9000000.png",
+        "tex_900A000.png"
+      ],
+      "source_bounds_cm": [
+        [
+          -3276.0,
+          256.0,
+          -4095.0
+        ],
+        [
+          5120.0,
+          4352.0,
+          5632.0
+        ]
+      ],
+      "blender_bounds_m": [
+        [
+          -32.76,
+          -56.32,
+          2.56
+        ],
+        [
+          51.2,
+          40.95,
+          43.52
+        ]
+      ],
+      "uv_bounds": [
+        [
+          -20.98828125,
+          -7.51171875
+        ],
+        [
+          19.9296875,
+          12.509765625
+        ]
+      ],
+      "uv0_wraps_outside_zero_one": true,
+      "pivot_policy": "preserve_source_origin",
+      "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "role": "static_world",
+      "collision_source": null,
+      "act_mask": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "notes": "Masked/two-sided in Unreal"
+    },
+    {
+      "asset": "BrickPlatform",
+      "dae": "BrickPlatform.dae",
+      "sha256": "d5e463c40bf208e0a12c7edf2ee376e83112c6ab147549a7eb8abd7342aa44db",
+      "unit_meter": 0.01,
+      "up_axis": "Y_UP",
+      "geometry_count": 2,
+      "instance_count": 2,
+      "vertices_with_split_attributes": 24,
+      "triangles": 12,
+      "gameplay_selected_triangles": 12,
+      "excluded_coincident_dark_variants": [],
+      "uv_values": 24,
+      "color_values": 24,
+      "source_normals": 0,
+      "recalculate_normals": true,
+      "materials": 2,
+      "textures": [
+        "tex_9000800.png",
+        "tex_9001000.png"
+      ],
+      "source_bounds_cm": [
+        [
+          -255.0,
+          -62.0,
+          -255.0
+        ],
+        [
+          256.0,
+          65.0,
+          256.0
+        ]
+      ],
+      "blender_bounds_m": [
+        [
+          -2.5500000000000003,
+          -2.56,
+          -0.62
+        ],
+        [
+          2.56,
+          2.5500000000000003,
+          0.65
+        ]
+      ],
+      "uv_bounds": [
+        [
+          -1.52734375,
+          0.033203125
+        ],
+        [
+          2.33984375,
+          2.529296875
+        ]
+      ],
+      "uv0_wraps_outside_zero_one": true,
+      "pivot_policy": "preserve_source_origin",
+      "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "role": "static_world",
+      "collision_source": null,
+      "act_mask": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "notes": ""
+    },
+    {
+      "asset": "DirtSlope",
+      "dae": "DirtSlope.dae",
+      "sha256": "94f7ee35db3dd91b084f497db6dc2ae69f2a74f7825c589847db67d285e537f5",
+      "unit_meter": 0.01,
+      "up_axis": "Y_UP",
+      "geometry_count": 2,
+      "instance_count": 2,
+      "vertices_with_split_attributes": 17,
+      "triangles": 21,
+      "gameplay_selected_triangles": 21,
+      "excluded_coincident_dark_variants": [],
+      "uv_values": 17,
+      "color_values": 17,
+      "source_normals": 0,
+      "recalculate_normals": true,
+      "materials": 1,
+      "textures": [
+        "tex_9004800.png"
+      ],
+      "source_bounds_cm": [
+        [
+          -255.0,
+          -281.0,
+          -1151.0
+        ],
+        [
+          256.0,
+          282.0,
+          1152.0
+        ]
+      ],
+      "blender_bounds_m": [
+        [
+          -2.5500000000000003,
+          -11.52,
+          -2.81
+        ],
+        [
+          2.56,
+          11.51,
+          2.82
+        ]
+      ],
+      "uv_bounds": [
+        [
+          0.0,
+          -0.09765625
+        ],
+        [
+          4.708984375,
+          4.5234375
+        ]
+      ],
+      "uv0_wraps_outside_zero_one": true,
+      "pivot_policy": "preserve_source_origin",
+      "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "role": "static_world",
+      "collision_source": null,
+      "act_mask": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "notes": ""
+    },
+    {
+      "asset": "BridgePlatform",
+      "dae": "BridgePlatform.dae",
+      "sha256": "c0ead1b4e23edab1c220638aabd7a96f37f06ad908a9720f0e3f7988936ed0a0",
+      "unit_meter": 0.01,
+      "up_axis": "Y_UP",
+      "geometry_count": 3,
+      "instance_count": 3,
+      "vertices_with_split_attributes": 47,
+      "triangles": 24,
+      "gameplay_selected_triangles": 24,
+      "excluded_coincident_dark_variants": [],
+      "uv_values": 47,
+      "color_values": 47,
+      "source_normals": 0,
+      "recalculate_normals": true,
+      "materials": 3,
+      "textures": [
+        "tex_9000800.png",
+        "tex_9001000.png",
+        "tex_9006800.png"
+      ],
+      "source_bounds_cm": [
+        [
+          -666.0,
+          -89.0,
+          -255.0
+        ],
+        [
+          794.0,
+          63.0,
+          512.0
+        ]
+      ],
+      "blender_bounds_m": [
+        [
+          -6.66,
+          -5.12,
+          -0.89
+        ],
+        [
+          7.94,
+          2.5500000000000003,
+          0.63
+        ]
+      ],
+      "uv_bounds": [
+        [
+          -13.00390625,
+          -7.447265625
+        ],
+        [
+          21.92578125,
+          4.025390625
+        ]
+      ],
+      "uv0_wraps_outside_zero_one": true,
+      "pivot_policy": "preserve_source_origin",
+      "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "role": "static_world",
+      "collision_source": null,
+      "act_mask": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "notes": ""
+    },
+    {
+      "asset": "GrassPart1",
+      "dae": "GrassPart1.dae",
+      "sha256": "db0eff30170025b4889943bbe6fa57111a3ce7d19b35ce68a933c0659fc0d47c",
+      "unit_meter": 0.01,
+      "up_axis": "Y_UP",
+      "geometry_count": 13,
+      "instance_count": 13,
+      "vertices_with_split_attributes": 256,
+      "triangles": 150,
+      "gameplay_selected_triangles": 76,
+      "excluded_coincident_dark_variants": [
+        "Mesh0_dark",
+        "Mesh1_dark",
+        "Mesh2_dark",
+        "Mesh3_dark",
+        "Mesh5_dark",
+        "Mesh6_dark"
+      ],
+      "uv_values": 256,
+      "color_values": 256,
+      "source_normals": 0,
+      "recalculate_normals": true,
+      "materials": 5,
+      "textures": [
+        "tex_9002000.png",
+        "tex_9002800.png",
+        "tex_9005000.png",
+        "tex_9005800.png",
+        "tex_900B000.png"
+      ],
+      "source_bounds_cm": [
+        [
+          -1535.0,
+          -153.0,
+          -767.0
+        ],
+        [
+          1536.0,
+          154.0,
+          768.0
+        ]
+      ],
+      "blender_bounds_m": [
+        [
+          -15.35,
+          -7.68,
+          -1.53
+        ],
+        [
+          15.36,
+          7.67,
+          1.54
+        ]
+      ],
+      "uv_bounds": [
+        [
+          -9.01171875,
+          -5.205078125
+        ],
+        [
+          5.95703125,
+          4.025390625
+        ]
+      ],
+      "uv0_wraps_outside_zero_one": true,
+      "pivot_policy": "preserve_source_origin",
+      "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "role": "static_world",
+      "collision_source": null,
+      "act_mask": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "notes": ""
+    },
+    {
+      "asset": "GrassPart2",
+      "dae": "GrassPart2.dae",
+      "sha256": "97c353f68bce8a9e3fa490c3698a47f0787fef1ed6eec551c5e15388d099d65e",
+      "unit_meter": 0.01,
+      "up_axis": "Y_UP",
+      "geometry_count": 5,
+      "instance_count": 5,
+      "vertices_with_split_attributes": 109,
+      "triangles": 59,
+      "gameplay_selected_triangles": 59,
+      "excluded_coincident_dark_variants": [],
+      "uv_values": 109,
+      "color_values": 109,
+      "source_normals": 0,
+      "recalculate_normals": true,
+      "materials": 5,
+      "textures": [
+        "tex_9002000.png",
+        "tex_9002800.png",
+        "tex_9004800.png",
+        "tex_9005000.png",
+        "tex_9005800.png"
+      ],
+      "source_bounds_cm": [
+        [
+          -511.0,
+          -255.0,
+          -2303.0
+        ],
+        [
+          512.0,
+          256.0,
+          2304.0
+        ]
+      ],
+      "blender_bounds_m": [
+        [
+          -5.11,
+          -23.04,
+          -2.5500000000000003
+        ],
+        [
+          5.12,
+          23.03,
+          2.56
+        ]
+      ],
+      "uv_bounds": [
+        [
+          -14.677734375,
+          -5.205078125
+        ],
+        [
+          24.919921875,
+          4.025390625
+        ]
+      ],
+      "uv0_wraps_outside_zero_one": true,
+      "pivot_policy": "preserve_source_origin",
+      "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "role": "static_world",
+      "collision_source": null,
+      "act_mask": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "notes": ""
+    },
+    {
+      "asset": "VerandaPart",
+      "dae": "VerandaPart.dae",
+      "sha256": "98786f6d8986f3a7a02c4a776ff881ceeda43ddc2463b2ed2dc019d546a819ef",
+      "unit_meter": 0.01,
+      "up_axis": "Y_UP",
+      "geometry_count": 3,
+      "instance_count": 3,
+      "vertices_with_split_attributes": 172,
+      "triangles": 98,
+      "gameplay_selected_triangles": 98,
+      "excluded_coincident_dark_variants": [],
+      "uv_values": 172,
+      "color_values": 172,
+      "source_normals": 0,
+      "recalculate_normals": true,
+      "materials": 3,
+      "textures": [
+        "tex_9000800.png",
+        "tex_9001000.png",
+        "tex_9007800.png"
+      ],
+      "source_bounds_cm": [
+        [
+          -571.0,
+          -588.0,
+          -761.0
+        ],
+        [
+          452.0,
+          768.0,
+          774.0
+        ]
+      ],
+      "blender_bounds_m": [
+        [
+          -5.71,
+          -7.74,
+          -5.88
+        ],
+        [
+          4.5200000000000005,
+          7.61,
+          7.68
+        ]
+      ],
+      "uv_bounds": [
+        [
+          -5.01953125,
+          -4.955078125
+        ],
+        [
+          24.09375,
+          24.15234375
+        ]
+      ],
+      "uv0_wraps_outside_zero_one": true,
+      "pivot_policy": "preserve_source_origin",
+      "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "role": "static_world",
+      "collision_source": null,
+      "act_mask": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "notes": ""
+    },
+    {
+      "asset": "SideRamp",
+      "dae": "SideRamp.dae",
+      "sha256": "09fd1ad7b3c137649f0451f7446ac89374e7186ce1830fbe63c7101a035a060a",
+      "unit_meter": 0.01,
+      "up_axis": "Y_UP",
+      "geometry_count": 1,
+      "instance_count": 1,
+      "vertices_with_split_attributes": 24,
+      "triangles": 12,
+      "gameplay_selected_triangles": 12,
+      "excluded_coincident_dark_variants": [],
+      "uv_values": 24,
+      "color_values": 24,
+      "source_normals": 0,
+      "recalculate_normals": true,
+      "materials": 1,
+      "textures": [
+        "tex_9008000.png"
+      ],
+      "source_bounds_cm": [
+        [
+          -613.0,
+          -383.0,
+          -2175.0
+        ],
+        [
+          614.0,
+          640.0,
+          2432.0
+        ]
+      ],
+      "blender_bounds_m": [
+        [
+          -6.13,
+          -24.32,
+          -3.83
+        ],
+        [
+          6.140000000000001,
+          21.75,
+          6.4
+        ]
+      ],
+      "uv_bounds": [
+        [
+          -19.791015625,
+          0.033203125
+        ],
+        [
+          2.962890625,
+          11.01171875
+        ]
+      ],
+      "uv0_wraps_outside_zero_one": true,
+      "pivot_policy": "preserve_source_origin",
+      "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "role": "static_world",
+      "collision_source": null,
+      "act_mask": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "notes": ""
+    },
+    {
+      "asset": "Tree",
+      "dae": "Tree.dae",
+      "sha256": "1a3abb1c568c8756293373d338d594784c0937b6e7c851c24f8efc740ca77779",
+      "unit_meter": 0.01,
+      "up_axis": "Y_UP",
+      "geometry_count": 2,
+      "instance_count": 2,
+      "vertices_with_split_attributes": 6,
+      "triangles": 2,
+      "gameplay_selected_triangles": 2,
+      "excluded_coincident_dark_variants": [],
+      "uv_values": 6,
+      "color_values": 6,
+      "source_normals": 0,
+      "recalculate_normals": true,
+      "materials": 2,
+      "textures": [
+        "tex_302DE28.png",
+        "tex_302EE28.png"
+      ],
+      "source_bounds_cm": [
+        [
+          -356.0,
+          -9.0,
+          0.0
+        ],
+        [
+          358.0,
+          800.0,
+          0.0
+        ]
+      ],
+      "blender_bounds_m": [
+        [
+          -3.56,
+          -0.0,
+          -0.09
+        ],
+        [
+          3.58,
+          -0.0,
+          8.0
+        ]
+      ],
+      "uv_bounds": [
+        [
+          -0.77734375,
+          0.017578125
+        ],
+        [
+          1.71484375,
+          1.34765625
+        ]
+      ],
+      "uv0_wraps_outside_zero_one": true,
+      "pivot_policy": "preserve_source_origin",
+      "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "role": "interactive",
+      "collision_source": null,
+      "act_mask": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "notes": "Shared bubbly-tree actor geometry"
+    },
+    {
+      "asset": "Pole",
+      "dae": "Pole.dae",
+      "sha256": "513c47aeb277f78fe4eeeab73fffa9aaa544306035c9007bcf9ae50164687130",
+      "unit_meter": 0.01,
+      "up_axis": "Y_UP",
+      "geometry_count": 1,
+      "instance_count": 1,
+      "vertices_with_split_attributes": 20,
+      "triangles": 16,
+      "gameplay_selected_triangles": 16,
+      "excluded_coincident_dark_variants": [],
+      "uv_values": 20,
+      "color_values": 20,
+      "source_normals": 0,
+      "recalculate_normals": true,
+      "materials": 1,
+      "textures": [
+        "tex_9007800.png"
+      ],
+      "source_bounds_cm": [
+        [
+          -14.0,
+          0.0,
+          -12.0
+        ],
+        [
+          15.0,
+          2100.0,
+          13.0
+        ]
+      ],
+      "blender_bounds_m": [
+        [
+          -0.14,
+          -0.13,
+          0.0
+        ],
+        [
+          0.15,
+          0.12,
+          21.0
+        ]
+      ],
+      "uv_bounds": [
+        [
+          -0.146484375,
+          0.00390625
+        ],
+        [
+          2.962890625,
+          20.50390625
+        ]
+      ],
+      "uv0_wraps_outside_zero_one": true,
+      "pivot_policy": "preserve_source_origin",
+      "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "role": "interactive",
+      "collision_source": null,
+      "act_mask": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "notes": ""
+    },
+    {
+      "asset": "PushyRock",
+      "dae": "PushyRock.dae",
+      "sha256": "08a44feda0fe439f807c2b0c41dafeb4c7742e2d63933d28055e0c84b686dd0c",
+      "unit_meter": 0.01,
+      "up_axis": "Y_UP",
+      "geometry_count": 4,
+      "instance_count": 4,
+      "vertices_with_split_attributes": 62,
+      "triangles": 28,
+      "gameplay_selected_triangles": 28,
+      "excluded_coincident_dark_variants": [],
+      "uv_values": 62,
+      "color_values": 62,
+      "source_normals": 0,
+      "recalculate_normals": true,
+      "materials": 2,
+      "textures": [
+        "tex_7002000.png",
+        "tex_9008000.png"
+      ],
+      "source_bounds_cm": [
+        [
+          -252.0,
+          5.0,
+          -128.0
+        ],
+        [
+          259.0,
+          261.0,
+          127.0
+        ]
+      ],
+      "blender_bounds_m": [
+        [
+          -2.52,
+          -1.27,
+          0.05
+        ],
+        [
+          2.59,
+          1.28,
+          2.61
+        ]
+      ],
+      "uv_bounds": [
+        [
+          -3.0234375,
+          -0.08984375
+        ],
+        [
+          3.9609375,
+          4.064453125
+        ]
+      ],
+      "uv0_wraps_outside_zero_one": true,
+      "pivot_policy": "preserve_source_origin",
+      "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "role": "moving",
+      "collision_source": "levels/wf/small_bomp/collision.inc.c",
+      "act_mask": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "notes": ""
+    },
+    {
+      "asset": "PushyRockBig",
+      "dae": "PushyRockBig.dae",
+      "sha256": "4b0238defc71c15f3e7a1e656f3cdd88f3064788cd87cc13105d135d5711a58c",
+      "unit_meter": 0.01,
+      "up_axis": "Y_UP",
+      "geometry_count": 2,
+      "instance_count": 2,
+      "vertices_with_split_attributes": 40,
+      "triangles": 18,
+      "gameplay_selected_triangles": 18,
+      "excluded_coincident_dark_variants": [],
+      "uv_values": 40,
+      "color_values": 40,
+      "source_normals": 0,
+      "recalculate_normals": true,
+      "materials": 2,
+      "textures": [
+        "tex_7002000.png",
+        "tex_9008000.png"
+      ],
+      "source_bounds_cm": [
+        [
+          -252.0,
+          5.0,
+          -258.0
+        ],
+        [
+          259.0,
+          261.0,
+          253.0
+        ]
+      ],
+      "blender_bounds_m": [
+        [
+          -2.52,
+          -2.5300000000000002,
+          0.05
+        ],
+        [
+          2.59,
+          2.58,
+          2.61
+        ]
+      ],
+      "uv_bounds": [
+        [
+          -3.0234375,
+          -0.08984375
+        ],
+        [
+          3.9609375,
+          4.064453125
+        ]
+      ],
+      "uv0_wraps_outside_zero_one": true,
+      "pivot_policy": "preserve_source_origin",
+      "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "role": "moving",
+      "collision_source": "levels/wf/large_bomp/collision.inc.c",
+      "act_mask": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "notes": ""
+    },
+    {
+      "asset": "RotatingBridge",
+      "dae": "RotatingBridge.dae",
+      "sha256": "845553fc8b1b749592f7d47b8a7ac536788c5e967aa953e485e61d23ccc38b4e",
+      "unit_meter": 0.01,
+      "up_axis": "Y_UP",
+      "geometry_count": 2,
+      "instance_count": 2,
+      "vertices_with_split_attributes": 39,
+      "triangles": 28,
+      "gameplay_selected_triangles": 28,
+      "excluded_coincident_dark_variants": [],
+      "uv_values": 39,
+      "color_values": 39,
+      "source_normals": 0,
+      "recalculate_normals": true,
+      "materials": 1,
+      "textures": [
+        "tex_9006800.png"
+      ],
+      "source_bounds_cm": [
+        [
+          -176.0,
+          -127.0,
+          -204.0
+        ],
+        [
+          768.0,
+          0.0,
+          205.0
+        ]
+      ],
+      "blender_bounds_m": [
+        [
+          -1.76,
+          -2.05,
+          -1.27
+        ],
+        [
+          7.68,
+          2.04,
+          0.0
+        ]
+      ],
+      "uv_bounds": [
+        [
+          0.03515625,
+          -0.962890625
+        ],
+        [
+          4.708984375,
+          1.23046875
+        ]
+      ],
+      "uv0_wraps_outside_zero_one": true,
+      "pivot_policy": "preserve_source_origin",
+      "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "role": "moving",
+      "collision_source": "levels/wf/rotating_wooden_platform/collision.inc.c",
+      "act_mask": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "notes": "Source shaft pivot must remain at the DAE origin"
+    },
+    {
+      "asset": "SlidingPlatform",
+      "dae": "SlidingPlatform.dae",
+      "sha256": "4b90d385ca2653a427f1d07d48d286cddd0f6f5f5bf14f958796e8e09ca21a83",
+      "unit_meter": 0.01,
+      "up_axis": "Y_UP",
+      "geometry_count": 2,
+      "instance_count": 2,
+      "vertices_with_split_attributes": 8,
+      "triangles": 4,
+      "gameplay_selected_triangles": 4,
+      "excluded_coincident_dark_variants": [],
+      "uv_values": 8,
+      "color_values": 8,
+      "source_normals": 0,
+      "recalculate_normals": true,
+      "materials": 2,
+      "textures": [
+        "tex_9000800.png",
+        "tex_9001000.png"
+      ],
+      "source_bounds_cm": [
+        [
+          -255.0,
+          -50.0,
+          -255.0
+        ],
+        [
+          256.0,
+          0.0,
+          256.0
+        ]
+      ],
+      "blender_bounds_m": [
+        [
+          -2.5500000000000003,
+          -2.56,
+          -0.5
+        ],
+        [
+          2.56,
+          2.5500000000000003,
+          0.0
+        ]
+      ],
+      "uv_bounds": [
+        [
+          0.0,
+          0.033203125
+        ],
+        [
+          1.96484375,
+          2.029296875
+        ]
+      ],
+      "uv0_wraps_outside_zero_one": true,
+      "pivot_policy": "preserve_source_origin",
+      "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "role": "moving",
+      "collision_source": "levels/wf/sliding_platform/collision.inc.c",
+      "act_mask": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "notes": ""
+    },
+    {
+      "asset": "BridgePiece",
+      "dae": "BridgePiece.dae",
+      "sha256": "bd7e4d6b63a75b07453f952ae327c435b7dac1207ead31af42ad7d6a4fb31af8",
+      "unit_meter": 0.01,
+      "up_axis": "Y_UP",
+      "geometry_count": 1,
+      "instance_count": 1,
+      "vertices_with_split_attributes": 24,
+      "triangles": 12,
+      "gameplay_selected_triangles": 12,
+      "excluded_coincident_dark_variants": [],
+      "uv_values": 24,
+      "color_values": 24,
+      "source_normals": 0,
+      "recalculate_normals": true,
+      "materials": 1,
+      "textures": [
+        "tex_9004000.png"
+      ],
+      "source_bounds_cm": [
+        [
+          -127.0,
+          -63.0,
+          -63.0
+        ],
+        [
+          215.0,
+          64.0,
+          64.0
+        ]
+      ],
+      "blender_bounds_m": [
+        [
+          -1.27,
+          -0.64,
+          -0.63
+        ],
+        [
+          2.15,
+          0.63,
+          0.64
+        ]
+      ],
+      "uv_bounds": [
+        [
+          0.0,
+          0.033203125
+        ],
+        [
+          5.95703125,
+          1.53125
+        ]
+      ],
+      "uv0_wraps_outside_zero_one": true,
+      "pivot_policy": "preserve_source_origin",
+      "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "role": "moving",
+      "collision_source": "levels/wf/tumbling_bridge_near/collision.inc.c",
+      "act_mask": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "notes": "Hinge pivot must remain at the DAE origin; instantiated nine times"
+    },
+    {
+      "asset": "GrassPlatform",
+      "dae": "GrassPlatform.dae",
+      "sha256": "ce6b9e54a6b9751858691aaddde07e73b27762bffaa352641e53c67cdb769c11",
+      "unit_meter": 0.01,
+      "up_axis": "Y_UP",
+      "geometry_count": 2,
+      "instance_count": 2,
+      "vertices_with_split_attributes": 38,
+      "triangles": 22,
+      "gameplay_selected_triangles": 22,
+      "excluded_coincident_dark_variants": [],
+      "uv_values": 38,
+      "color_values": 38,
+      "source_normals": 0,
+      "recalculate_normals": true,
+      "materials": 2,
+      "textures": [
+        "tex_9005000.png",
+        "tex_9005800.png"
+      ],
+      "source_bounds_cm": [
+        [
+          -511.0,
+          -255.0,
+          -511.0
+        ],
+        [
+          512.0,
+          0.0,
+          512.0
+        ]
+      ],
+      "blender_bounds_m": [
+        [
+          -5.11,
+          -5.12,
+          -2.5500000000000003
+        ],
+        [
+          5.12,
+          5.11,
+          0.0
+        ]
+      ],
+      "uv_bounds": [
+        [
+          -0.361328125,
+          -0.296875
+        ],
+        [
+          2.296875,
+          2.361328125
+        ]
+      ],
+      "uv0_wraps_outside_zero_one": true,
+      "pivot_policy": "preserve_source_origin",
+      "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "role": "moving",
+      "collision_source": "levels/wf/rotating_platform/collision.inc.c",
+      "act_mask": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "notes": ""
+    },
+    {
+      "asset": "TowerPlatform",
+      "dae": "TowerPlatform.dae",
+      "sha256": "688e4b243bf0d7fdd8129783ad9dac582cc376c73a7c0fd319e94138a8897b07",
+      "unit_meter": 0.01,
+      "up_axis": "Y_UP",
+      "geometry_count": 1,
+      "instance_count": 1,
+      "vertices_with_split_attributes": 19,
+      "triangles": 10,
+      "gameplay_selected_triangles": 10,
+      "excluded_coincident_dark_variants": [],
+      "uv_values": 19,
+      "color_values": 19,
+      "source_normals": 0,
+      "recalculate_normals": true,
+      "materials": 1,
+      "textures": [
+        "tex_9007000.png"
+      ],
+      "source_bounds_cm": [
+        [
+          -214.0,
+          0.0,
+          -204.0
+        ],
+        [
+          215.0,
+          102.0,
+          205.0
+        ]
+      ],
+      "blender_bounds_m": [
+        [
+          -2.14,
+          -2.05,
+          0.0
+        ],
+        [
+          2.15,
+          2.04,
+          1.02
+        ]
+      ],
+      "uv_bounds": [
+        [
+          0.0,
+          0.033203125
+        ],
+        [
+          1.96484375,
+          1.0
+        ]
+      ],
+      "uv0_wraps_outside_zero_one": true,
+      "pivot_policy": "preserve_source_origin",
+      "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "role": "moving",
+      "collision_source": "levels/wf/extending_platform/collision.inc.c",
+      "act_mask": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "notes": ""
+    },
+    {
+      "asset": "KickWood",
+      "dae": "KickWood.dae",
+      "sha256": "4bce9545572c8c62c0f042f9d9b26c7190d21a74201345f042c0c5db331efd61",
+      "unit_meter": 0.01,
+      "up_axis": "Y_UP",
+      "geometry_count": 3,
+      "instance_count": 3,
+      "vertices_with_split_attributes": 44,
+      "triangles": 26,
+      "gameplay_selected_triangles": 14,
+      "excluded_coincident_dark_variants": [
+        "Mesh0_dark"
+      ],
+      "uv_values": 44,
+      "color_values": 44,
+      "source_normals": 0,
+      "recalculate_normals": true,
+      "materials": 2,
+      "textures": [
+        "tex_7002800.png",
+        "tex_9006800.png"
+      ],
+      "source_bounds_cm": [
+        [
+          -96.0,
+          0.0,
+          0.0
+        ],
+        [
+          95.0,
+          1178.0,
+          300.0
+        ]
+      ],
+      "blender_bounds_m": [
+        [
+          -0.96,
+          -3.0,
+          0.0
+        ],
+        [
+          0.9500000000000001,
+          -0.0,
+          11.78
+        ]
+      ],
+      "uv_bounds": [
+        [
+          -0.9375,
+          0.033203125
+        ],
+        [
+          1.095703125,
+          1.9375
+        ]
+      ],
+      "uv0_wraps_outside_zero_one": true,
+      "pivot_policy": "preserve_source_origin",
+      "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "role": "moving",
+      "collision_source": "levels/wf/kickable_board/collision.inc.c",
+      "act_mask": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "notes": "Base/hinge pivot must remain at the DAE origin"
+    },
+    {
+      "asset": "KickWoodDown",
+      "dae": "KickWoodDown.dae",
+      "sha256": "f1914e054f54ba13c42feefa35291b463d88509c40f7f535aee3cebe447cc7e2",
+      "unit_meter": 0.01,
+      "up_axis": "Y_UP",
+      "geometry_count": 1,
+      "instance_count": 1,
+      "vertices_with_split_attributes": 20,
+      "triangles": 12,
+      "gameplay_selected_triangles": 12,
+      "excluded_coincident_dark_variants": [],
+      "uv_values": 20,
+      "color_values": 20,
+      "source_normals": 0,
+      "recalculate_normals": true,
+      "materials": 1,
+      "textures": [
+        "tex_9006800.png"
+      ],
+      "source_bounds_cm": [
+        [
+          -96.0,
+          0.0,
+          0.0
+        ],
+        [
+          95.0,
+          1178.0,
+          77.0
+        ]
+      ],
+      "blender_bounds_m": [
+        [
+          -0.96,
+          -0.77,
+          0.0
+        ],
+        [
+          0.9500000000000001,
+          -0.0,
+          11.78
+        ]
+      ],
+      "uv_bounds": [
+        [
+          -0.1484375,
+          0.033203125
+        ],
+        [
+          1.095703125,
+          1.052734375
+        ]
+      ],
+      "uv0_wraps_outside_zero_one": true,
+      "pivot_policy": "preserve_source_origin",
+      "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "role": "state_mesh",
+      "collision_source": null,
+      "act_mask": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "notes": ""
+    },
+    {
+      "asset": "CornerStar",
+      "dae": "CornerStar.dae",
+      "sha256": "fe792c22a639b2c5bd0aa652777d46b7b268049b9626bd3dee1c1444df551135",
+      "unit_meter": 0.01,
+      "up_axis": "Y_UP",
+      "geometry_count": 2,
+      "instance_count": 2,
+      "vertices_with_split_attributes": 9,
+      "triangles": 3,
+      "gameplay_selected_triangles": 3,
+      "excluded_coincident_dark_variants": [],
+      "uv_values": 9,
+      "color_values": 9,
+      "source_normals": 0,
+      "recalculate_normals": true,
+      "materials": 2,
+      "textures": [
+        "tex_9000800.png",
+        "tex_9001000.png"
+      ],
+      "source_bounds_cm": [
+        [
+          0.0,
+          -383.0,
+          -378.0
+        ],
+        [
+          184.0,
+          384.0,
+          128.0
+        ]
+      ],
+      "blender_bounds_m": [
+        [
+          0.0,
+          -1.28,
+          -3.83
+        ],
+        [
+          1.84,
+          3.7800000000000002,
+          3.84
+        ]
+      ],
+      "uv_bounds": [
+        [
+          -1.0078125,
+          -8.947265625
+        ],
+        [
+          16.65625,
+          1.0
+        ]
+      ],
+      "uv0_wraps_outside_zero_one": true,
+      "pivot_policy": "preserve_source_origin",
+      "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "role": "breakable",
+      "collision_source": "levels/wf/breakable_wall_right/collision.inc.c",
+      "act_mask": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "notes": ""
+    },
+    {
+      "asset": "CornerBreak",
+      "dae": "CornerBreak.dae",
+      "sha256": "ee061693817b802fd32ae5a57e40109fd291e0a4979ad4b16dbff3e1ffea643b",
+      "unit_meter": 0.01,
+      "up_axis": "Y_UP",
+      "geometry_count": 2,
+      "instance_count": 2,
+      "vertices_with_split_attributes": 9,
+      "triangles": 3,
+      "gameplay_selected_triangles": 3,
+      "excluded_coincident_dark_variants": [],
+      "uv_values": 9,
+      "color_values": 9,
+      "source_normals": 0,
+      "recalculate_normals": true,
+      "materials": 2,
+      "textures": [
+        "tex_9000800.png",
+        "tex_9001000.png"
+      ],
+      "source_bounds_cm": [
+        [
+          -168.0,
+          -383.0,
+          -378.0
+        ],
+        [
+          0.0,
+          384.0,
+          128.0
+        ]
+      ],
+      "blender_bounds_m": [
+        [
+          -1.68,
+          -1.28,
+          -3.83
+        ],
+        [
+          0.0,
+          3.7800000000000002,
+          3.84
+        ]
+      ],
+      "uv_bounds": [
+        [
+          -1.02734375,
+          -8.947265625
+        ],
+        [
+          9.94921875,
+          1.0
+        ]
+      ],
+      "uv0_wraps_outside_zero_one": true,
+      "pivot_policy": "preserve_source_origin",
+      "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "role": "breakable",
+      "collision_source": "levels/wf/breakable_wall_left/collision.inc.c",
+      "act_mask": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "notes": ""
+    },
+    {
+      "asset": "Tower",
+      "dae": "Tower.dae",
+      "sha256": "934527a8fc9c7a7d9ee3ed38d445595844a8e72446211bb8a78492826ab5e127",
+      "unit_meter": 0.01,
+      "up_axis": "Y_UP",
+      "geometry_count": 8,
+      "instance_count": 8,
+      "vertices_with_split_attributes": 288,
+      "triangles": 146,
+      "gameplay_selected_triangles": 146,
+      "excluded_coincident_dark_variants": [],
+      "uv_values": 288,
+      "color_values": 288,
+      "source_normals": 0,
+      "recalculate_normals": true,
+      "materials": 4,
+      "textures": [
+        "tex_7001800.png",
+        "tex_9007000.png",
+        "tex_9007800.png",
+        "tex_9009000.png"
+      ],
+      "source_bounds_cm": [
+        [
+          -511.0,
+          0.0,
+          -537.0
+        ],
+        [
+          512.0,
+          2560.0,
+          538.0
+        ]
+      ],
+      "blender_bounds_m": [
+        [
+          -5.11,
+          -5.38,
+          0.0
+        ],
+        [
+          5.12,
+          5.37,
+          25.6
+        ]
+      ],
+      "uv_bounds": [
+        [
+          -2.599609375,
+          -5.953125
+        ],
+        [
+          3.9609375,
+          7.51953125
+        ]
+      ],
+      "uv0_wraps_outside_zero_one": true,
+      "pivot_policy": "preserve_source_origin",
+      "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "role": "conditional",
+      "collision_source": "levels/wf/areas/1/10/collision.inc.c",
+      "act_mask": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "notes": ""
+    },
+    {
+      "asset": "BillBlaster",
+      "dae": "BillBlaster.dae",
+      "sha256": "853227110096235a0d3de0099ae2149d5b69f5d1a66e8414fb122c21851e7e7c",
+      "unit_meter": 0.01,
+      "up_axis": "Y_UP",
+      "geometry_count": 2,
+      "instance_count": 2,
+      "vertices_with_split_attributes": 19,
+      "triangles": 10,
+      "gameplay_selected_triangles": 10,
+      "excluded_coincident_dark_variants": [],
+      "uv_values": 19,
+      "color_values": 19,
+      "source_normals": 0,
+      "recalculate_normals": true,
+      "materials": 2,
+      "textures": [
+        "tex_7000000.png",
+        "tex_7001000.png"
+      ],
+      "source_bounds_cm": [
+        [
+          -127.0,
+          0.0,
+          -127.0
+        ],
+        [
+          128.0,
+          256.0,
+          179.0
+        ]
+      ],
+      "blender_bounds_m": [
+        [
+          -1.27,
+          -1.79,
+          0.0
+        ],
+        [
+          1.28,
+          1.27,
+          2.56
+        ]
+      ],
+      "uv_bounds": [
+        [
+          0.0,
+          0.033203125
+        ],
+        [
+          0.966796875,
+          1.029296875
+        ]
+      ],
+      "uv0_wraps_outside_zero_one": true,
+      "pivot_policy": "preserve_source_origin",
+      "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "role": "conditional",
+      "collision_source": "levels/wf/areas/1/11/collision.inc.c",
+      "act_mask": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "notes": ""
+    },
+    {
+      "asset": "TowerWall",
+      "dae": "TowerWall.dae",
+      "sha256": "20477b1126fa1310834b81f00a4ff2ab626de429de4ed55723acb591b8eb0b8d",
+      "unit_meter": 0.01,
+      "up_axis": "Y_UP",
+      "geometry_count": 1,
+      "instance_count": 1,
+      "vertices_with_split_attributes": 4,
+      "triangles": 2,
+      "gameplay_selected_triangles": 2,
+      "excluded_coincident_dark_variants": [],
+      "uv_values": 4,
+      "color_values": 4,
+      "source_normals": 0,
+      "recalculate_normals": true,
+      "materials": 1,
+      "textures": [
+        "tex_9007000.png"
+      ],
+      "source_bounds_cm": [
+        [
+          0.0,
+          0.0,
+          -107.0
+        ],
+        [
+          0.0,
+          205.0,
+          108.0
+        ]
+      ],
+      "blender_bounds_m": [
+        [
+          0.0,
+          -1.08,
+          0.0
+        ],
+        [
+          0.0,
+          1.07,
+          2.05
+        ]
+      ],
+      "uv_bounds": [
+        [
+          0.181640625,
+          0.033203125
+        ],
+        [
+          0.705078125,
+          1.0
+        ]
+      ],
+      "uv0_wraps_outside_zero_one": false,
+      "pivot_policy": "preserve_source_origin",
+      "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "role": "breakable",
+      "collision_source": "levels/wf/tower_door/collision.inc.c",
+      "act_mask": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "notes": "Bottom pivot must remain at the DAE origin"
+    }
+  ],
+  "textures": [
+    {
+      "file": "tex_0.png",
+      "sha256": "51041c974addfb6d32db2d1733ca98dca7194f3285b6f9511bbc0919810f2547",
+      "bytes": 100
+    },
+    {
+      "file": "tex_2014AB8.png",
+      "sha256": "7ad61aa57c6652837c2a5729f997e1987a8c15fb0ec4681339202be18f6f5838",
+      "bytes": 1139
+    },
+    {
+      "file": "tex_302DE28.png",
+      "sha256": "631260eb3905ba0ee5b9681a734455222340a01b31880e2a75af98f369be3238",
+      "bytes": 1195
+    },
+    {
+      "file": "tex_302EE28.png",
+      "sha256": "f3df9a441a4a77df1ccd485324c214aadd421411818f7d250c77dcc92cec0de5",
+      "bytes": 1164
+    },
+    {
+      "file": "tex_7000000.png",
+      "sha256": "60cfdc772bd770f239068de3127ecc1567c5d80c436b207a111846d9ca9cbeec",
+      "bytes": 1011
+    },
+    {
+      "file": "tex_7000800.png",
+      "sha256": "2fbb13945474a49ef8d304a958001dc285c4a832733c78bbdc6890a85a742ef6",
+      "bytes": 1384
+    },
+    {
+      "file": "tex_7001000.png",
+      "sha256": "3746d2a98db6b89f718e13f19cf883a98bf817bfaf5bd59cbffbd25b355ab2f4",
+      "bytes": 1274
+    },
+    {
+      "file": "tex_7001800.png",
+      "sha256": "5fb6692acd288beef181a41ce2a0c144f98943c2cf36d55ef5e4218ad4c05bcf",
+      "bytes": 1385
+    },
+    {
+      "file": "tex_7002000.png",
+      "sha256": "aca06611c6327f90cb1d9bdb1b220574612933c50f5576cec61884deef4a7877",
+      "bytes": 2500
+    },
+    {
+      "file": "tex_7002800.png",
+      "sha256": "d4f888eaa77b4460e762045be8c13d7fffa7f34a44d489bc3c4f2317fcb24975",
+      "bytes": 167
+    },
+    {
+      "file": "tex_9000000.png",
+      "sha256": "408f69338f8a51a4b7619b7e0cbd27f8c53bc4133ddca9e8bf53ab7448212ee9",
+      "bytes": 943
+    },
+    {
+      "file": "tex_9000800.png",
+      "sha256": "b67df434e859abb63a62c2470047cd98a70227ea7849984ae09f3589a22e2113",
+      "bytes": 1498
+    },
+    {
+      "file": "tex_9001000.png",
+      "sha256": "c0407bd1fc85bf3368d048d04e049d643148ab2252742b7c8ade0f5926d7c0a6",
+      "bytes": 1537
+    },
+    {
+      "file": "tex_9002000.png",
+      "sha256": "3f4ee761050db0bd3d16a2751079a12c9a682ddcb6805f8838158a4f4a0e1ee0",
+      "bytes": 2391
+    },
+    {
+      "file": "tex_9002800.png",
+      "sha256": "1ab609f1b6c9e32a715b2a58dac1fa3cd4dd14e05782092489b055e4a3e4d55b",
+      "bytes": 1830
+    },
+    {
+      "file": "tex_9004000.png",
+      "sha256": "ae7af475a249db76e167fcc2ca2e5280f0d844960d9923196f278af0d3f0ba57",
+      "bytes": 785
+    },
+    {
+      "file": "tex_9004800.png",
+      "sha256": "ad46439b4a188cdefb8c26658664e99b0e0463aa209c7b7b84eb08c2fea2bb84",
+      "bytes": 2356
+    },
+    {
+      "file": "tex_9005000.png",
+      "sha256": "1df4ae0a91ff86f9396f6224b74c16a85681d5baa50f2d5dd9db6883397e4beb",
+      "bytes": 2242
+    },
+    {
+      "file": "tex_9005800.png",
+      "sha256": "e3d69194ed193648c0fae4ce3102d1bc5a6d2dbe8960f0062b598eda36d0c0da",
+      "bytes": 1166
+    },
+    {
+      "file": "tex_9006800.png",
+      "sha256": "1bbd5426816e08a5af935d7e27d271860cdc7beac472b3c9a93a1b5882df0285",
+      "bytes": 1428
+    },
+    {
+      "file": "tex_9007000.png",
+      "sha256": "84e072f17800442986829bde21993dd486932ecf2f79c9ddff21eadb9b6cbc9c",
+      "bytes": 2024
+    },
+    {
+      "file": "tex_9007800.png",
+      "sha256": "b01b02b62b0e3aa5ca7d2f0758a4cd9f7063e285da09c40445acfd0eae2566db",
+      "bytes": 1527
+    },
+    {
+      "file": "tex_9008000.png",
+      "sha256": "ca309e5aefa57ab35e63edbd06acc070b7ec88c83e6aa8afbfe8e0f5e4791bf1",
+      "bytes": 2585
+    },
+    {
+      "file": "tex_9008800.png",
+      "sha256": "8bb87619846739ec21db70ad8d639467d4576a406e5f9164ab9e59d720d45f83",
+      "bytes": 1354
+    },
+    {
+      "file": "tex_9009000.png",
+      "sha256": "faf108d3f1ce023f6c7cc9e5df47849c18b14e65a6b42847bab216140458fc6a",
+      "bytes": 1244
+    },
+    {
+      "file": "tex_9009800.png",
+      "sha256": "4dbbaf46c28133e0877d07332906c0d71e1c78f658e5aeae72ff214e828ddc3d",
+      "bytes": 2668
+    },
+    {
+      "file": "tex_900A000.png",
+      "sha256": "7abd5fc38a816ef555fc55c9fe618cafd66d41efa89379e76ec01650305b90f2",
+      "bytes": 1286
+    },
+    {
+      "file": "tex_900B000.png",
+      "sha256": "0a68a2be8c14a86282fd1e6f916506e513d7449d8f4f7ec5bbe31af4f0b0e07f",
+      "bytes": 991
+    }
+  ],
+  "excluded_daes": [
+    {
+      "file": "Area1_bake.dae",
+      "reason": "Baked light/dark overlays coincide with Area1 geometry and cause z-fighting",
+      "sha256": "dc64af2a93d07547cdecd2b233f6e6ad4811c15f0b36c60e4ee9a0e8a3ab60d8"
+    },
+    {
+      "file": "KickWood_bake.dae",
+      "reason": "Baked overlay duplicates KickWood surfaces and changes its source topology",
+      "sha256": "0fe0cd348535e16944003ac51d018b7da3fa8adb8a3638000cec10d7d6810e16"
+    },
+    {
+      "file": "TowerPlatformWide.dae",
+      "reason": "Unused beta platform (MODEL_WF_TOWER_SQUARE_PLATORM_UNUSED)",
+      "sha256": "0062c638a26ab545a5f0d4d554a2b12216e95d1312c283c99f78b486f3847000"
+    },
+    {
+      "file": "BridgeWhole.dae",
+      "reason": "Far-distance bridge LOD; disabled while nine playable BridgePiece instances are visible",
+      "sha256": "6fa9c567b57d699daa9931466c4cf1280e8c439aa8abe07b70cd9ae527790ad0"
+    }
+  ],
+  "collision_assets": [
+    {
+      "asset": "Area1",
+      "name": "wf_seg7_collision_070102D8",
+      "source": "levels/wf/areas/1/collision.inc.c",
+      "sha256": "66dc34faf6ee0cc93f080f06bdea60b3940704cdd5e431e4aeae64933184d421",
+      "vertices": 422,
+      "triangles": 640,
+      "surface_sections": [
+        {
+          "surface": "SURFACE_DEFAULT",
+          "triangles": 409
+        },
+        {
+          "surface": "SURFACE_DEATH_PLANE",
+          "triangles": 2
+        },
+        {
+          "surface": "SURFACE_VERY_SLIPPERY",
+          "triangles": 14
+        },
+        {
+          "surface": "SURFACE_SLIPPERY",
+          "triangles": 43
+        },
+        {
+          "surface": "SURFACE_NOT_SLIPPERY",
+          "triangles": 4
+        },
+        {
+          "surface": "SURFACE_WALL_MISC",
+          "triangles": 143
+        },
+        {
+          "surface": "SURFACE_NOISE_DEFAULT",
+          "triangles": 15
+        },
+        {
+          "surface": "SURFACE_BOSS_FIGHT_CAMERA",
+          "triangles": 5
+        },
+        {
+          "surface": "SURFACE_CAMERA_MIDDLE",
+          "triangles": 5
+        }
+      ],
+      "water_boxes": [
+        {
+          "box_id": 0,
+          "min_x": -1023,
+          "min_z": 1024,
+          "max_x": 3226,
+          "max_z": 4096,
+          "height_y": 973
+        }
+      ]
+    },
+    {
+      "asset": "PushyRock",
+      "name": "wf_seg7_collision_small_bomp",
+      "source": "levels/wf/small_bomp/collision.inc.c",
+      "sha256": "566223f9694481b6bc4bf5ecdab75fe14dea8b8b20981e3783dc53d33ac78bf8",
+      "vertices": 14,
+      "triangles": 18,
+      "surface_sections": [
+        {
+          "surface": "SURFACE_WALL_MISC",
+          "triangles": 18
+        }
+      ],
+      "water_boxes": []
+    },
+    {
+      "asset": "PushyRockBig",
+      "name": "wf_seg7_collision_large_bomp",
+      "source": "levels/wf/large_bomp/collision.inc.c",
+      "sha256": "3f766ca743d2c67608c4c0de130e8b11e4462e7421ff3d2c8d6842b4a0a69c7c",
+      "vertices": 14,
+      "triangles": 18,
+      "surface_sections": [
+        {
+          "surface": "SURFACE_WALL_MISC",
+          "triangles": 18
+        }
+      ],
+      "water_boxes": []
+    },
+    {
+      "asset": "RotatingBridge",
+      "name": "wf_seg7_collision_clocklike_rotation",
+      "source": "levels/wf/rotating_wooden_platform/collision.inc.c",
+      "sha256": "cbf8197f00cee3973dc2c2cae611d4cbe5cc8d12eb8da8a698a2bb9e885fbbf0",
+      "vertices": 10,
+      "triangles": 15,
+      "surface_sections": [
+        {
+          "surface": "SURFACE_DEFAULT",
+          "triangles": 15
+        }
+      ],
+      "water_boxes": []
+    },
+    {
+      "asset": "SlidingPlatform",
+      "name": "wf_seg7_collision_sliding_brick_platform",
+      "source": "levels/wf/sliding_platform/collision.inc.c",
+      "sha256": "c10e6c2868d5b384a65d1216e825210a463fdef4264f7ee41308fb4682b918cf",
+      "vertices": 6,
+      "triangles": 4,
+      "surface_sections": [
+        {
+          "surface": "SURFACE_DEFAULT",
+          "triangles": 4
+        }
+      ],
+      "water_boxes": []
+    },
+    {
+      "asset": "BridgePiece",
+      "name": "wf_seg7_collision_tumbling_bridge",
+      "source": "levels/wf/tumbling_bridge_near/collision.inc.c",
+      "sha256": "a10c03cf472a910977765433fbe5aaea169d578ba464bd8aaf44725d516e75f8",
+      "vertices": 4,
+      "triangles": 2,
+      "surface_sections": [
+        {
+          "surface": "SURFACE_DEFAULT",
+          "triangles": 2
+        }
+      ],
+      "water_boxes": []
+    },
+    {
+      "asset": "GrassPlatform",
+      "name": "wf_seg7_collision_rotating_platform",
+      "source": "levels/wf/rotating_platform/collision.inc.c",
+      "sha256": "f6252f5a686c922c737354d17e247a32956db1f4a8dbd3bd39d5b7629c9ad424",
+      "vertices": 13,
+      "triangles": 22,
+      "surface_sections": [
+        {
+          "surface": "SURFACE_DEFAULT",
+          "triangles": 12
+        },
+        {
+          "surface": "SURFACE_NOISE_DEFAULT",
+          "triangles": 10
+        }
+      ],
+      "water_boxes": []
+    },
+    {
+      "asset": "TowerPlatform",
+      "name": "wf_seg7_collision_platform",
+      "source": "levels/wf/extending_platform/collision.inc.c",
+      "sha256": "619f69847edb7513cefb14596db9db64aeeac8e4b57a0329cfd58798afc9df58",
+      "vertices": 8,
+      "triangles": 10,
+      "surface_sections": [
+        {
+          "surface": "SURFACE_DEFAULT",
+          "triangles": 10
+        }
+      ],
+      "water_boxes": []
+    },
+    {
+      "asset": "KickWood",
+      "name": "wf_seg7_collision_kickable_board",
+      "source": "levels/wf/kickable_board/collision.inc.c",
+      "sha256": "1c2ebb937840d6ae44e9f1f61d53e8de28475d13b47bbc59570c9fd962207654",
+      "vertices": 8,
+      "triangles": 12,
+      "surface_sections": [
+        {
+          "surface": "SURFACE_WALL_MISC",
+          "triangles": 12
+        }
+      ],
+      "water_boxes": []
+    },
+    {
+      "asset": "CornerStar",
+      "name": "wf_seg7_collision_breakable_wall",
+      "source": "levels/wf/breakable_wall_right/collision.inc.c",
+      "sha256": "2f9c69345eb79d66b18ea894e7d362352ca568a291b595a5d22925fa55b84617",
+      "vertices": 4,
+      "triangles": 3,
+      "surface_sections": [
+        {
+          "surface": "SURFACE_DEFAULT",
+          "triangles": 3
+        }
+      ],
+      "water_boxes": []
+    },
+    {
+      "asset": "CornerBreak",
+      "name": "wf_seg7_collision_breakable_wall_2",
+      "source": "levels/wf/breakable_wall_left/collision.inc.c",
+      "sha256": "bc9768d242af22d5feaf73d900bb32f214378439a309eff9ab6875c7c386529e",
+      "vertices": 4,
+      "triangles": 3,
+      "surface_sections": [
+        {
+          "surface": "SURFACE_DEFAULT",
+          "triangles": 3
+        }
+      ],
+      "water_boxes": []
+    },
+    {
+      "asset": "Tower",
+      "name": "wf_seg7_collision_tower",
+      "source": "levels/wf/areas/1/10/collision.inc.c",
+      "sha256": "7ad4bef94d6b61548fbdbe98c33d61b255e4ad505bf05ca8b6aa358dd77d02c7",
+      "vertices": 65,
+      "triangles": 116,
+      "surface_sections": [
+        {
+          "surface": "SURFACE_DEFAULT",
+          "triangles": 116
+        }
+      ],
+      "water_boxes": []
+    },
+    {
+      "asset": "BillBlaster",
+      "name": "wf_seg7_collision_bullet_bill_cannon",
+      "source": "levels/wf/areas/1/11/collision.inc.c",
+      "sha256": "f9fe4996988bc69af4a81b4e6fb3ccbf596202a0a08c3c55949451b81e4c0127",
+      "vertices": 8,
+      "triangles": 10,
+      "surface_sections": [
+        {
+          "surface": "SURFACE_DEFAULT",
+          "triangles": 10
+        }
+      ],
+      "water_boxes": []
+    },
+    {
+      "asset": "TowerWall",
+      "name": "wf_seg7_collision_tower_door",
+      "source": "levels/wf/tower_door/collision.inc.c",
+      "sha256": "2e36c27ca867a9aba104dc3e5e7d298f725ddbd84fae99f226525d1afff9f7fc",
+      "vertices": 4,
+      "triangles": 2,
+      "surface_sections": [
+        {
+          "surface": "SURFACE_DEFAULT",
+          "triangles": 2
+        }
+      ],
+      "water_boxes": []
+    },
+    {
+      "asset": "CheckerboardPlatform",
+      "name": "checkerboard_platform_seg8_collision_0800D710",
+      "source": "actors/checkerboard_platform/collision.inc.c",
+      "sha256": "61ba339a6e7315929a805a8089e6564d125776c1b3669e3ad87432f9bdf1ec8f",
+      "vertices": 8,
+      "triangles": 12,
+      "surface_sections": [
+        {
+          "surface": "SURFACE_WALL_MISC",
+          "triangles": 12
+        }
+      ],
+      "water_boxes": []
+    }
+  ]
+}

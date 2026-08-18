@@ -1,0 +1,2174 @@
+{
+  "format": "spyro64.sm64_actor",
+  "format_version": 1,
+  "actor": "purple_switch",
+  "source_actor": "purple_switch",
+  "geo_layout": "purple_switch_geo",
+  "coordinate_system": {
+    "source": "SM64 x/y/z centimetres, Y up",
+    "blender": "x/-z/y metres, Z up",
+    "formula": "(x, -z, y) * 0.01"
+  },
+  "source_files": [
+    {
+      "path": "actors/purple_switch/model.inc.c",
+      "sha256": "a05b7f210ddbd566e17bf101a85ac198bdf560e6e8aadc967f0791b7e7b6e757"
+    },
+    {
+      "path": "actors/purple_switch/geo.inc.c",
+      "sha256": "1d638ac9b634a296cf86b13932d51a2478520896246ec6ce8c8dcc5f82245a84"
+    },
+    {
+      "path": "actors/purple_switch/collision.inc.c",
+      "sha256": "27e0bf4796b64be0dde2539be58dd831b914d2a069614bde7b69dbd2f9d81172"
+    }
+  ],
+  "textures": {
+    "purple_switch_seg8_texture_0800C0A8": {
+      "asset": "actors/purple_switch/purple_switch_base.rgba16.png",
+      "width": 16,
+      "height": 4,
+      "format": "rgba16",
+      "rom_mio0_offset": 2040320,
+      "source_offset": 49320,
+      "source_size": 128,
+      "png": "purple_switch_base.rgba16.png",
+      "sha256": "9d42150e34bda2fdb3905858bbef60ee2a72148e2a2210bfb9902abeb923ddce",
+      "relative_path": "textures/purple_switch_base.rgba16.png"
+    },
+    "purple_switch_seg8_texture_0800C128": {
+      "asset": "actors/purple_switch/purple_switch_exclamation_point.rgba16.png",
+      "width": 16,
+      "height": 32,
+      "format": "rgba16",
+      "rom_mio0_offset": 2040320,
+      "source_offset": 49448,
+      "source_size": 1024,
+      "png": "purple_switch_exclamation_point.rgba16.png",
+      "sha256": "16bd057f3354bfafc0009fec4a419207861ec063b5056a16862b9c7ab0357e23",
+      "relative_path": "textures/purple_switch_exclamation_point.rgba16.png"
+    }
+  },
+  "vertex_arrays": {
+    "purple_switch_seg8_vertex_0800C528": [
+      {
+        "source_position": [
+          102,
+          0,
+          -101
+        ],
+        "blender_position": [
+          1.02,
+          1.01,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          -543
+        ],
+        "rgba_bytes": [
+          83,
+          95,
+          0,
+          255
+        ],
+        "normal_s8": [
+          83,
+          95,
+          0
+        ],
+        "blender_normal": [
+          0.6579432193429395,
+          -0.0,
+          0.7530675402117983
+        ]
+      },
+      {
+        "source_position": [
+          61,
+          36,
+          -60
+        ],
+        "blender_position": [
+          0.61,
+          0.6,
+          0.36
+        ],
+        "flag": 0,
+        "raw_uv": [
+          1326,
+          -287
+        ],
+        "rgba_bytes": [
+          83,
+          95,
+          0,
+          255
+        ],
+        "normal_s8": [
+          83,
+          95,
+          0
+        ],
+        "blender_normal": [
+          0.6579432193429395,
+          -0.0,
+          0.7530675402117983
+        ]
+      },
+      {
+        "source_position": [
+          61,
+          36,
+          61
+        ],
+        "blender_position": [
+          0.61,
+          -0.61,
+          0.36
+        ],
+        "flag": 0,
+        "raw_uv": [
+          1326,
+          478
+        ],
+        "rgba_bytes": [
+          83,
+          95,
+          0,
+          255
+        ],
+        "normal_s8": [
+          83,
+          95,
+          0
+        ],
+        "blender_normal": [
+          0.6579432193429395,
+          -0.0,
+          0.7530675402117983
+        ]
+      },
+      {
+        "source_position": [
+          -101,
+          0,
+          -101
+        ],
+        "blender_position": [
+          -1.01,
+          1.01,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          734
+        ],
+        "rgba_bytes": [
+          0,
+          95,
+          173,
+          255
+        ],
+        "normal_s8": [
+          0,
+          95,
+          -83
+        ],
+        "blender_normal": [
+          0.0,
+          0.6579432193429395,
+          0.7530675402117983
+        ]
+      },
+      {
+        "source_position": [
+          61,
+          36,
+          -60
+        ],
+        "blender_position": [
+          0.61,
+          0.6,
+          0.36
+        ],
+        "flag": 0,
+        "raw_uv": [
+          1326,
+          -287
+        ],
+        "rgba_bytes": [
+          0,
+          95,
+          173,
+          255
+        ],
+        "normal_s8": [
+          0,
+          95,
+          -83
+        ],
+        "blender_normal": [
+          0.0,
+          0.6579432193429395,
+          0.7530675402117983
+        ]
+      },
+      {
+        "source_position": [
+          102,
+          0,
+          -101
+        ],
+        "blender_position": [
+          1.02,
+          1.01,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          -543
+        ],
+        "rgba_bytes": [
+          0,
+          95,
+          173,
+          255
+        ],
+        "normal_s8": [
+          0,
+          95,
+          -83
+        ],
+        "blender_normal": [
+          0.0,
+          0.6579432193429395,
+          0.7530675402117983
+        ]
+      },
+      {
+        "source_position": [
+          -60,
+          36,
+          -60
+        ],
+        "blender_position": [
+          -0.6,
+          0.6,
+          0.36
+        ],
+        "flag": 0,
+        "raw_uv": [
+          1326,
+          478
+        ],
+        "rgba_bytes": [
+          0,
+          95,
+          173,
+          255
+        ],
+        "normal_s8": [
+          0,
+          95,
+          -83
+        ],
+        "blender_normal": [
+          0.0,
+          0.6579432193429395,
+          0.7530675402117983
+        ]
+      },
+      {
+        "source_position": [
+          -101,
+          0,
+          102
+        ],
+        "blender_position": [
+          -1.01,
+          -1.02,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          734
+        ],
+        "rgba_bytes": [
+          173,
+          95,
+          0,
+          255
+        ],
+        "normal_s8": [
+          -83,
+          95,
+          0
+        ],
+        "blender_normal": [
+          -0.6579432193429395,
+          -0.0,
+          0.7530675402117983
+        ]
+      },
+      {
+        "source_position": [
+          -60,
+          36,
+          -60
+        ],
+        "blender_position": [
+          -0.6,
+          0.6,
+          0.36
+        ],
+        "flag": 0,
+        "raw_uv": [
+          1326,
+          -287
+        ],
+        "rgba_bytes": [
+          173,
+          95,
+          0,
+          255
+        ],
+        "normal_s8": [
+          -83,
+          95,
+          0
+        ],
+        "blender_normal": [
+          -0.6579432193429395,
+          -0.0,
+          0.7530675402117983
+        ]
+      },
+      {
+        "source_position": [
+          -101,
+          0,
+          -101
+        ],
+        "blender_position": [
+          -1.01,
+          1.01,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          -543
+        ],
+        "rgba_bytes": [
+          173,
+          95,
+          0,
+          255
+        ],
+        "normal_s8": [
+          -83,
+          95,
+          0
+        ],
+        "blender_normal": [
+          -0.6579432193429395,
+          -0.0,
+          0.7530675402117983
+        ]
+      },
+      {
+        "source_position": [
+          -60,
+          36,
+          61
+        ],
+        "blender_position": [
+          -0.6,
+          -0.61,
+          0.36
+        ],
+        "flag": 0,
+        "raw_uv": [
+          1326,
+          478
+        ],
+        "rgba_bytes": [
+          173,
+          95,
+          0,
+          255
+        ],
+        "normal_s8": [
+          -83,
+          95,
+          0
+        ],
+        "blender_normal": [
+          -0.6579432193429395,
+          -0.0,
+          0.7530675402117983
+        ]
+      },
+      {
+        "source_position": [
+          102,
+          0,
+          102
+        ],
+        "blender_position": [
+          1.02,
+          -1.02,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          -543
+        ],
+        "rgba_bytes": [
+          0,
+          95,
+          83,
+          255
+        ],
+        "normal_s8": [
+          0,
+          95,
+          83
+        ],
+        "blender_normal": [
+          0.0,
+          -0.6579432193429395,
+          0.7530675402117983
+        ]
+      },
+      {
+        "source_position": [
+          61,
+          36,
+          61
+        ],
+        "blender_position": [
+          0.61,
+          -0.61,
+          0.36
+        ],
+        "flag": 0,
+        "raw_uv": [
+          1326,
+          -287
+        ],
+        "rgba_bytes": [
+          0,
+          95,
+          83,
+          255
+        ],
+        "normal_s8": [
+          0,
+          95,
+          83
+        ],
+        "blender_normal": [
+          0.0,
+          -0.6579432193429395,
+          0.7530675402117983
+        ]
+      },
+      {
+        "source_position": [
+          -60,
+          36,
+          61
+        ],
+        "blender_position": [
+          -0.6,
+          -0.61,
+          0.36
+        ],
+        "flag": 0,
+        "raw_uv": [
+          1326,
+          478
+        ],
+        "rgba_bytes": [
+          0,
+          95,
+          83,
+          255
+        ],
+        "normal_s8": [
+          0,
+          95,
+          83
+        ],
+        "blender_normal": [
+          0.0,
+          -0.6579432193429395,
+          0.7530675402117983
+        ]
+      },
+      {
+        "source_position": [
+          -101,
+          0,
+          102
+        ],
+        "blender_position": [
+          -1.01,
+          -1.02,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          734
+        ],
+        "rgba_bytes": [
+          0,
+          95,
+          83,
+          255
+        ],
+        "normal_s8": [
+          0,
+          95,
+          83
+        ],
+        "blender_normal": [
+          0.0,
+          -0.6579432193429395,
+          0.7530675402117983
+        ]
+      },
+      {
+        "source_position": [
+          102,
+          0,
+          102
+        ],
+        "blender_position": [
+          1.02,
+          -1.02,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          734
+        ],
+        "rgba_bytes": [
+          83,
+          95,
+          0,
+          255
+        ],
+        "normal_s8": [
+          83,
+          95,
+          0
+        ],
+        "blender_normal": [
+          0.6579432193429395,
+          -0.0,
+          0.7530675402117983
+        ]
+      }
+    ],
+    "purple_switch_seg8_vertex_0800C628": [
+      {
+        "source_position": [
+          61,
+          36,
+          -60
+        ],
+        "blender_position": [
+          0.61,
+          0.6,
+          0.36
+        ],
+        "flag": 0,
+        "raw_uv": [
+          607,
+          -134
+        ],
+        "rgba_bytes": [
+          0,
+          127,
+          0,
+          255
+        ],
+        "normal_s8": [
+          0,
+          127,
+          0
+        ],
+        "blender_normal": [
+          0.0,
+          -0.0,
+          1.0
+        ]
+      },
+      {
+        "source_position": [
+          -60,
+          36,
+          61
+        ],
+        "blender_position": [
+          -0.6,
+          -0.61,
+          0.36
+        ],
+        "flag": 0,
+        "raw_uv": [
+          -159,
+          1090
+        ],
+        "rgba_bytes": [
+          0,
+          127,
+          0,
+          255
+        ],
+        "normal_s8": [
+          0,
+          127,
+          0
+        ],
+        "blender_normal": [
+          0.0,
+          -0.0,
+          1.0
+        ]
+      },
+      {
+        "source_position": [
+          61,
+          36,
+          61
+        ],
+        "blender_position": [
+          0.61,
+          -0.61,
+          0.36
+        ],
+        "flag": 0,
+        "raw_uv": [
+          607,
+          1090
+        ],
+        "rgba_bytes": [
+          0,
+          127,
+          0,
+          255
+        ],
+        "normal_s8": [
+          0,
+          127,
+          0
+        ],
+        "blender_normal": [
+          0.0,
+          -0.0,
+          1.0
+        ]
+      },
+      {
+        "source_position": [
+          -60,
+          36,
+          -60
+        ],
+        "blender_position": [
+          -0.6,
+          0.6,
+          0.36
+        ],
+        "flag": 0,
+        "raw_uv": [
+          -159,
+          -134
+        ],
+        "rgba_bytes": [
+          0,
+          127,
+          0,
+          255
+        ],
+        "normal_s8": [
+          0,
+          127,
+          0
+        ],
+        "blender_normal": [
+          0.0,
+          -0.0,
+          1.0
+        ]
+      }
+    ]
+  },
+  "display_lists": {
+    "purple_switch_seg8_dl_0800C668": [
+      {
+        "macro": "gsDPSetTextureImage",
+        "args": [
+          "G_IM_FMT_RGBA",
+          "G_IM_SIZ_16b",
+          "1",
+          "purple_switch_seg8_texture_0800C0A8"
+        ],
+        "raw": "gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, purple_switch_seg8_texture_0800C0A8)"
+      },
+      {
+        "macro": "gsDPLoadSync",
+        "args": [],
+        "raw": "gsDPLoadSync()"
+      },
+      {
+        "macro": "gsDPLoadBlock",
+        "args": [
+          "G_TX_LOADTILE",
+          "0",
+          "0",
+          "16 * 4 - 1",
+          "CALC_DXT(16, G_IM_SIZ_16b_BYTES)"
+        ],
+        "raw": "gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 16 * 4 - 1, CALC_DXT(16, G_IM_SIZ_16b_BYTES))"
+      },
+      {
+        "macro": "gsSPLight",
+        "args": [
+          "&purple_switch_seg8_lights_0800C090.l",
+          "1"
+        ],
+        "raw": "gsSPLight(&purple_switch_seg8_lights_0800C090.l, 1)"
+      },
+      {
+        "macro": "gsSPLight",
+        "args": [
+          "&purple_switch_seg8_lights_0800C090.a",
+          "2"
+        ],
+        "raw": "gsSPLight(&purple_switch_seg8_lights_0800C090.a, 2)"
+      },
+      {
+        "macro": "gsSPVertex",
+        "args": [
+          "purple_switch_seg8_vertex_0800C528",
+          "16",
+          "0"
+        ],
+        "raw": "gsSPVertex(purple_switch_seg8_vertex_0800C528, 16, 0)"
+      },
+      {
+        "macro": "gsSP2Triangles",
+        "args": [
+          "0",
+          "1",
+          "2",
+          "0x0",
+          "3",
+          "4",
+          "5",
+          "0x0"
+        ],
+        "raw": "gsSP2Triangles( 0,  1,  2, 0x0,  3,  4,  5, 0x0)"
+      },
+      {
+        "macro": "gsSP2Triangles",
+        "args": [
+          "3",
+          "6",
+          "4",
+          "0x0",
+          "7",
+          "8",
+          "9",
+          "0x0"
+        ],
+        "raw": "gsSP2Triangles( 3,  6,  4, 0x0,  7,  8,  9, 0x0)"
+      },
+      {
+        "macro": "gsSP2Triangles",
+        "args": [
+          "7",
+          "10",
+          "8",
+          "0x0",
+          "11",
+          "12",
+          "13",
+          "0x0"
+        ],
+        "raw": "gsSP2Triangles( 7, 10,  8, 0x0, 11, 12, 13, 0x0)"
+      },
+      {
+        "macro": "gsSP2Triangles",
+        "args": [
+          "11",
+          "13",
+          "14",
+          "0x0",
+          "0",
+          "2",
+          "15",
+          "0x0"
+        ],
+        "raw": "gsSP2Triangles(11, 13, 14, 0x0,  0,  2, 15, 0x0)"
+      },
+      {
+        "macro": "gsSPEndDisplayList",
+        "args": [],
+        "raw": "gsSPEndDisplayList()"
+      }
+    ],
+    "purple_switch_seg8_dl_0800C6E0": [
+      {
+        "macro": "gsDPSetTextureImage",
+        "args": [
+          "G_IM_FMT_RGBA",
+          "G_IM_SIZ_16b",
+          "1",
+          "purple_switch_seg8_texture_0800C128"
+        ],
+        "raw": "gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, purple_switch_seg8_texture_0800C128)"
+      },
+      {
+        "macro": "gsDPLoadSync",
+        "args": [],
+        "raw": "gsDPLoadSync()"
+      },
+      {
+        "macro": "gsDPLoadBlock",
+        "args": [
+          "G_TX_LOADTILE",
+          "0",
+          "0",
+          "16 * 32 - 1",
+          "CALC_DXT(16, G_IM_SIZ_16b_BYTES)"
+        ],
+        "raw": "gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 16 * 32 - 1, CALC_DXT(16, G_IM_SIZ_16b_BYTES))"
+      },
+      {
+        "macro": "gsSPVertex",
+        "args": [
+          "purple_switch_seg8_vertex_0800C628",
+          "4",
+          "0"
+        ],
+        "raw": "gsSPVertex(purple_switch_seg8_vertex_0800C628, 4, 0)"
+      },
+      {
+        "macro": "gsSP2Triangles",
+        "args": [
+          "0",
+          "1",
+          "2",
+          "0x0",
+          "0",
+          "3",
+          "1",
+          "0x0"
+        ],
+        "raw": "gsSP2Triangles( 0,  1,  2, 0x0,  0,  3,  1, 0x0)"
+      },
+      {
+        "macro": "gsSPEndDisplayList",
+        "args": [],
+        "raw": "gsSPEndDisplayList()"
+      }
+    ],
+    "purple_switch_seg8_dl_0800C718": [
+      {
+        "macro": "gsDPPipeSync",
+        "args": [],
+        "raw": "gsDPPipeSync()"
+      },
+      {
+        "macro": "gsDPSetCombineMode",
+        "args": [
+          "G_CC_MODULATERGB",
+          "G_CC_MODULATERGB"
+        ],
+        "raw": "gsDPSetCombineMode(G_CC_MODULATERGB, G_CC_MODULATERGB)"
+      },
+      {
+        "macro": "gsSPClearGeometryMode",
+        "args": [
+          "G_SHADING_SMOOTH"
+        ],
+        "raw": "gsSPClearGeometryMode(G_SHADING_SMOOTH)"
+      },
+      {
+        "macro": "gsDPSetTile",
+        "args": [
+          "G_IM_FMT_RGBA",
+          "G_IM_SIZ_16b",
+          "0",
+          "0",
+          "G_TX_LOADTILE",
+          "0",
+          "G_TX_WRAP | G_TX_NOMIRROR",
+          "G_TX_NOMASK",
+          "G_TX_NOLOD",
+          "G_TX_WRAP | G_TX_NOMIRROR",
+          "G_TX_NOMASK",
+          "G_TX_NOLOD"
+        ],
+        "raw": "gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD)"
+      },
+      {
+        "macro": "gsSPTexture",
+        "args": [
+          "0xFFFF",
+          "0xFFFF",
+          "0",
+          "G_TX_RENDERTILE",
+          "G_ON"
+        ],
+        "raw": "gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON)"
+      },
+      {
+        "macro": "gsDPTileSync",
+        "args": [],
+        "raw": "gsDPTileSync()"
+      },
+      {
+        "macro": "gsDPSetTile",
+        "args": [
+          "G_IM_FMT_RGBA",
+          "G_IM_SIZ_16b",
+          "4",
+          "0",
+          "G_TX_RENDERTILE",
+          "0",
+          "G_TX_CLAMP",
+          "2",
+          "G_TX_NOLOD",
+          "G_TX_CLAMP",
+          "4",
+          "G_TX_NOLOD"
+        ],
+        "raw": "gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 2, G_TX_NOLOD, G_TX_CLAMP, 4, G_TX_NOLOD)"
+      },
+      {
+        "macro": "gsDPSetTileSize",
+        "args": [
+          "0",
+          "0",
+          "0",
+          "(16 - 1) << G_TEXTURE_IMAGE_FRAC",
+          "(4 - 1) << G_TEXTURE_IMAGE_FRAC"
+        ],
+        "raw": "gsDPSetTileSize(0, 0, 0, (16 - 1) << G_TEXTURE_IMAGE_FRAC, (4 - 1) << G_TEXTURE_IMAGE_FRAC)"
+      },
+      {
+        "macro": "gsSPDisplayList",
+        "args": [
+          "purple_switch_seg8_dl_0800C668"
+        ],
+        "raw": "gsSPDisplayList(purple_switch_seg8_dl_0800C668)"
+      },
+      {
+        "macro": "gsDPTileSync",
+        "args": [],
+        "raw": "gsDPTileSync()"
+      },
+      {
+        "macro": "gsDPSetTile",
+        "args": [
+          "G_IM_FMT_RGBA",
+          "G_IM_SIZ_16b",
+          "4",
+          "0",
+          "G_TX_RENDERTILE",
+          "0",
+          "G_TX_CLAMP",
+          "5",
+          "G_TX_NOLOD",
+          "G_TX_CLAMP",
+          "4",
+          "G_TX_NOLOD"
+        ],
+        "raw": "gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 5, G_TX_NOLOD, G_TX_CLAMP, 4, G_TX_NOLOD)"
+      },
+      {
+        "macro": "gsDPSetTileSize",
+        "args": [
+          "0",
+          "0",
+          "0",
+          "(16 - 1) << G_TEXTURE_IMAGE_FRAC",
+          "(32 - 1) << G_TEXTURE_IMAGE_FRAC"
+        ],
+        "raw": "gsDPSetTileSize(0, 0, 0, (16 - 1) << G_TEXTURE_IMAGE_FRAC, (32 - 1) << G_TEXTURE_IMAGE_FRAC)"
+      },
+      {
+        "macro": "gsSPDisplayList",
+        "args": [
+          "purple_switch_seg8_dl_0800C6E0"
+        ],
+        "raw": "gsSPDisplayList(purple_switch_seg8_dl_0800C6E0)"
+      },
+      {
+        "macro": "gsSPTexture",
+        "args": [
+          "0xFFFF",
+          "0xFFFF",
+          "0",
+          "G_TX_RENDERTILE",
+          "G_OFF"
+        ],
+        "raw": "gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF)"
+      },
+      {
+        "macro": "gsDPPipeSync",
+        "args": [],
+        "raw": "gsDPPipeSync()"
+      },
+      {
+        "macro": "gsDPSetCombineMode",
+        "args": [
+          "G_CC_SHADE",
+          "G_CC_SHADE"
+        ],
+        "raw": "gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE)"
+      },
+      {
+        "macro": "gsSPSetGeometryMode",
+        "args": [
+          "G_SHADING_SMOOTH"
+        ],
+        "raw": "gsSPSetGeometryMode(G_SHADING_SMOOTH)"
+      },
+      {
+        "macro": "gsSPEndDisplayList",
+        "args": [],
+        "raw": "gsSPEndDisplayList()"
+      }
+    ]
+  },
+  "geo": {
+    "type": "root",
+    "name": "purple_switch_geo",
+    "children": [
+      {
+        "type": "culling_radius",
+        "args": [
+          "300"
+        ],
+        "children": [
+          {
+            "type": "display_list",
+            "layer": "LAYER_OPAQUE",
+            "display_list": "purple_switch_seg8_dl_0800C718",
+            "children": []
+          }
+        ]
+      }
+    ],
+    "joint_count": 0,
+    "unsupported_macros": [],
+    "excess_close_nodes": 0
+  },
+  "geo_flat": [
+    {
+      "path": "/root[0]/culling_radius[0]",
+      "type": "culling_radius",
+      "args": [
+        "300"
+      ]
+    },
+    {
+      "path": "/root[0]/culling_radius[0]/display_list[0]",
+      "type": "display_list",
+      "layer": "LAYER_OPAQUE",
+      "display_list": "purple_switch_seg8_dl_0800C718"
+    }
+  ],
+  "render_meshes": {
+    "LAYER_OPAQUE|purple_switch_seg8_dl_0800C718": {
+      "root_display_list": "purple_switch_seg8_dl_0800C718",
+      "layer": "LAYER_OPAQUE",
+      "draw_calls": [
+        {
+          "material": {
+            "texture_symbol": "purple_switch_seg8_texture_0800C0A8",
+            "texture_asset": "actors/purple_switch/purple_switch_base.rgba16.png",
+            "texture_size": [
+              16,
+              4
+            ],
+            "texture_enabled": true,
+            "lighting": true,
+            "texture_gen": false,
+            "combine_mode": "G_CC_MODULATERGB, G_CC_MODULATERGB",
+            "wrap_s": "clamp",
+            "wrap_t": "clamp",
+            "env_color": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "layer": "LAYER_OPAQUE"
+          },
+          "vertices": [
+            {
+              "source_position": [
+                102,
+                0,
+                -101
+              ],
+              "blender_position": [
+                1.02,
+                1.01,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                -543
+              ],
+              "rgba_bytes": [
+                83,
+                95,
+                0,
+                255
+              ],
+              "normal_s8": [
+                83,
+                95,
+                0
+              ],
+              "blender_normal": [
+                0.6579432193429395,
+                -0.0,
+                0.7530675402117983
+              ],
+              "source_array": "purple_switch_seg8_vertex_0800C528",
+              "source_index": 0,
+              "uv": [
+                0.0,
+                5.2421875
+              ]
+            },
+            {
+              "source_position": [
+                61,
+                36,
+                -60
+              ],
+              "blender_position": [
+                0.61,
+                0.6,
+                0.36
+              ],
+              "flag": 0,
+              "raw_uv": [
+                1326,
+                -287
+              ],
+              "rgba_bytes": [
+                83,
+                95,
+                0,
+                255
+              ],
+              "normal_s8": [
+                83,
+                95,
+                0
+              ],
+              "blender_normal": [
+                0.6579432193429395,
+                -0.0,
+                0.7530675402117983
+              ],
+              "source_array": "purple_switch_seg8_vertex_0800C528",
+              "source_index": 1,
+              "uv": [
+                2.58984375,
+                3.2421875
+              ]
+            },
+            {
+              "source_position": [
+                61,
+                36,
+                61
+              ],
+              "blender_position": [
+                0.61,
+                -0.61,
+                0.36
+              ],
+              "flag": 0,
+              "raw_uv": [
+                1326,
+                478
+              ],
+              "rgba_bytes": [
+                83,
+                95,
+                0,
+                255
+              ],
+              "normal_s8": [
+                83,
+                95,
+                0
+              ],
+              "blender_normal": [
+                0.6579432193429395,
+                -0.0,
+                0.7530675402117983
+              ],
+              "source_array": "purple_switch_seg8_vertex_0800C528",
+              "source_index": 2,
+              "uv": [
+                2.58984375,
+                -2.734375
+              ]
+            },
+            {
+              "source_position": [
+                -101,
+                0,
+                -101
+              ],
+              "blender_position": [
+                -1.01,
+                1.01,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                734
+              ],
+              "rgba_bytes": [
+                0,
+                95,
+                173,
+                255
+              ],
+              "normal_s8": [
+                0,
+                95,
+                -83
+              ],
+              "blender_normal": [
+                0.0,
+                0.6579432193429395,
+                0.7530675402117983
+              ],
+              "source_array": "purple_switch_seg8_vertex_0800C528",
+              "source_index": 3,
+              "uv": [
+                0.0,
+                -4.734375
+              ]
+            },
+            {
+              "source_position": [
+                61,
+                36,
+                -60
+              ],
+              "blender_position": [
+                0.61,
+                0.6,
+                0.36
+              ],
+              "flag": 0,
+              "raw_uv": [
+                1326,
+                -287
+              ],
+              "rgba_bytes": [
+                0,
+                95,
+                173,
+                255
+              ],
+              "normal_s8": [
+                0,
+                95,
+                -83
+              ],
+              "blender_normal": [
+                0.0,
+                0.6579432193429395,
+                0.7530675402117983
+              ],
+              "source_array": "purple_switch_seg8_vertex_0800C528",
+              "source_index": 4,
+              "uv": [
+                2.58984375,
+                3.2421875
+              ]
+            },
+            {
+              "source_position": [
+                102,
+                0,
+                -101
+              ],
+              "blender_position": [
+                1.02,
+                1.01,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                -543
+              ],
+              "rgba_bytes": [
+                0,
+                95,
+                173,
+                255
+              ],
+              "normal_s8": [
+                0,
+                95,
+                -83
+              ],
+              "blender_normal": [
+                0.0,
+                0.6579432193429395,
+                0.7530675402117983
+              ],
+              "source_array": "purple_switch_seg8_vertex_0800C528",
+              "source_index": 5,
+              "uv": [
+                0.0,
+                5.2421875
+              ]
+            },
+            {
+              "source_position": [
+                -60,
+                36,
+                -60
+              ],
+              "blender_position": [
+                -0.6,
+                0.6,
+                0.36
+              ],
+              "flag": 0,
+              "raw_uv": [
+                1326,
+                478
+              ],
+              "rgba_bytes": [
+                0,
+                95,
+                173,
+                255
+              ],
+              "normal_s8": [
+                0,
+                95,
+                -83
+              ],
+              "blender_normal": [
+                0.0,
+                0.6579432193429395,
+                0.7530675402117983
+              ],
+              "source_array": "purple_switch_seg8_vertex_0800C528",
+              "source_index": 6,
+              "uv": [
+                2.58984375,
+                -2.734375
+              ]
+            },
+            {
+              "source_position": [
+                -101,
+                0,
+                102
+              ],
+              "blender_position": [
+                -1.01,
+                -1.02,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                734
+              ],
+              "rgba_bytes": [
+                173,
+                95,
+                0,
+                255
+              ],
+              "normal_s8": [
+                -83,
+                95,
+                0
+              ],
+              "blender_normal": [
+                -0.6579432193429395,
+                -0.0,
+                0.7530675402117983
+              ],
+              "source_array": "purple_switch_seg8_vertex_0800C528",
+              "source_index": 7,
+              "uv": [
+                0.0,
+                -4.734375
+              ]
+            },
+            {
+              "source_position": [
+                -60,
+                36,
+                -60
+              ],
+              "blender_position": [
+                -0.6,
+                0.6,
+                0.36
+              ],
+              "flag": 0,
+              "raw_uv": [
+                1326,
+                -287
+              ],
+              "rgba_bytes": [
+                173,
+                95,
+                0,
+                255
+              ],
+              "normal_s8": [
+                -83,
+                95,
+                0
+              ],
+              "blender_normal": [
+                -0.6579432193429395,
+                -0.0,
+                0.7530675402117983
+              ],
+              "source_array": "purple_switch_seg8_vertex_0800C528",
+              "source_index": 8,
+              "uv": [
+                2.58984375,
+                3.2421875
+              ]
+            },
+            {
+              "source_position": [
+                -101,
+                0,
+                -101
+              ],
+              "blender_position": [
+                -1.01,
+                1.01,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                -543
+              ],
+              "rgba_bytes": [
+                173,
+                95,
+                0,
+                255
+              ],
+              "normal_s8": [
+                -83,
+                95,
+                0
+              ],
+              "blender_normal": [
+                -0.6579432193429395,
+                -0.0,
+                0.7530675402117983
+              ],
+              "source_array": "purple_switch_seg8_vertex_0800C528",
+              "source_index": 9,
+              "uv": [
+                0.0,
+                5.2421875
+              ]
+            },
+            {
+              "source_position": [
+                -60,
+                36,
+                61
+              ],
+              "blender_position": [
+                -0.6,
+                -0.61,
+                0.36
+              ],
+              "flag": 0,
+              "raw_uv": [
+                1326,
+                478
+              ],
+              "rgba_bytes": [
+                173,
+                95,
+                0,
+                255
+              ],
+              "normal_s8": [
+                -83,
+                95,
+                0
+              ],
+              "blender_normal": [
+                -0.6579432193429395,
+                -0.0,
+                0.7530675402117983
+              ],
+              "source_array": "purple_switch_seg8_vertex_0800C528",
+              "source_index": 10,
+              "uv": [
+                2.58984375,
+                -2.734375
+              ]
+            },
+            {
+              "source_position": [
+                102,
+                0,
+                102
+              ],
+              "blender_position": [
+                1.02,
+                -1.02,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                -543
+              ],
+              "rgba_bytes": [
+                0,
+                95,
+                83,
+                255
+              ],
+              "normal_s8": [
+                0,
+                95,
+                83
+              ],
+              "blender_normal": [
+                0.0,
+                -0.6579432193429395,
+                0.7530675402117983
+              ],
+              "source_array": "purple_switch_seg8_vertex_0800C528",
+              "source_index": 11,
+              "uv": [
+                0.0,
+                5.2421875
+              ]
+            },
+            {
+              "source_position": [
+                61,
+                36,
+                61
+              ],
+              "blender_position": [
+                0.61,
+                -0.61,
+                0.36
+              ],
+              "flag": 0,
+              "raw_uv": [
+                1326,
+                -287
+              ],
+              "rgba_bytes": [
+                0,
+                95,
+                83,
+                255
+              ],
+              "normal_s8": [
+                0,
+                95,
+                83
+              ],
+              "blender_normal": [
+                0.0,
+                -0.6579432193429395,
+                0.7530675402117983
+              ],
+              "source_array": "purple_switch_seg8_vertex_0800C528",
+              "source_index": 12,
+              "uv": [
+                2.58984375,
+                3.2421875
+              ]
+            },
+            {
+              "source_position": [
+                -60,
+                36,
+                61
+              ],
+              "blender_position": [
+                -0.6,
+                -0.61,
+                0.36
+              ],
+              "flag": 0,
+              "raw_uv": [
+                1326,
+                478
+              ],
+              "rgba_bytes": [
+                0,
+                95,
+                83,
+                255
+              ],
+              "normal_s8": [
+                0,
+                95,
+                83
+              ],
+              "blender_normal": [
+                0.0,
+                -0.6579432193429395,
+                0.7530675402117983
+              ],
+              "source_array": "purple_switch_seg8_vertex_0800C528",
+              "source_index": 13,
+              "uv": [
+                2.58984375,
+                -2.734375
+              ]
+            },
+            {
+              "source_position": [
+                -101,
+                0,
+                102
+              ],
+              "blender_position": [
+                -1.01,
+                -1.02,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                734
+              ],
+              "rgba_bytes": [
+                0,
+                95,
+                83,
+                255
+              ],
+              "normal_s8": [
+                0,
+                95,
+                83
+              ],
+              "blender_normal": [
+                0.0,
+                -0.6579432193429395,
+                0.7530675402117983
+              ],
+              "source_array": "purple_switch_seg8_vertex_0800C528",
+              "source_index": 14,
+              "uv": [
+                0.0,
+                -4.734375
+              ]
+            },
+            {
+              "source_position": [
+                102,
+                0,
+                102
+              ],
+              "blender_position": [
+                1.02,
+                -1.02,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                734
+              ],
+              "rgba_bytes": [
+                83,
+                95,
+                0,
+                255
+              ],
+              "normal_s8": [
+                83,
+                95,
+                0
+              ],
+              "blender_normal": [
+                0.6579432193429395,
+                -0.0,
+                0.7530675402117983
+              ],
+              "source_array": "purple_switch_seg8_vertex_0800C528",
+              "source_index": 15,
+              "uv": [
+                0.0,
+                -4.734375
+              ]
+            }
+          ],
+          "triangles": [
+            [
+              0,
+              1,
+              2
+            ],
+            [
+              3,
+              4,
+              5
+            ],
+            [
+              3,
+              6,
+              4
+            ],
+            [
+              7,
+              8,
+              9
+            ],
+            [
+              7,
+              10,
+              8
+            ],
+            [
+              11,
+              12,
+              13
+            ],
+            [
+              11,
+              13,
+              14
+            ],
+            [
+              0,
+              2,
+              15
+            ]
+          ]
+        },
+        {
+          "material": {
+            "texture_symbol": "purple_switch_seg8_texture_0800C128",
+            "texture_asset": "actors/purple_switch/purple_switch_exclamation_point.rgba16.png",
+            "texture_size": [
+              16,
+              32
+            ],
+            "texture_enabled": true,
+            "lighting": true,
+            "texture_gen": false,
+            "combine_mode": "G_CC_MODULATERGB, G_CC_MODULATERGB",
+            "wrap_s": "clamp",
+            "wrap_t": "clamp",
+            "env_color": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "layer": "LAYER_OPAQUE"
+          },
+          "vertices": [
+            {
+              "source_position": [
+                61,
+                36,
+                -60
+              ],
+              "blender_position": [
+                0.61,
+                0.6,
+                0.36
+              ],
+              "flag": 0,
+              "raw_uv": [
+                607,
+                -134
+              ],
+              "rgba_bytes": [
+                0,
+                127,
+                0,
+                255
+              ],
+              "normal_s8": [
+                0,
+                127,
+                0
+              ],
+              "blender_normal": [
+                0.0,
+                -0.0,
+                1.0
+              ],
+              "source_array": "purple_switch_seg8_vertex_0800C628",
+              "source_index": 0,
+              "uv": [
+                1.185546875,
+                1.130859375
+              ]
+            },
+            {
+              "source_position": [
+                -60,
+                36,
+                61
+              ],
+              "blender_position": [
+                -0.6,
+                -0.61,
+                0.36
+              ],
+              "flag": 0,
+              "raw_uv": [
+                -159,
+                1090
+              ],
+              "rgba_bytes": [
+                0,
+                127,
+                0,
+                255
+              ],
+              "normal_s8": [
+                0,
+                127,
+                0
+              ],
+              "blender_normal": [
+                0.0,
+                -0.0,
+                1.0
+              ],
+              "source_array": "purple_switch_seg8_vertex_0800C628",
+              "source_index": 1,
+              "uv": [
+                -0.310546875,
+                -0.064453125
+              ]
+            },
+            {
+              "source_position": [
+                61,
+                36,
+                61
+              ],
+              "blender_position": [
+                0.61,
+                -0.61,
+                0.36
+              ],
+              "flag": 0,
+              "raw_uv": [
+                607,
+                1090
+              ],
+              "rgba_bytes": [
+                0,
+                127,
+                0,
+                255
+              ],
+              "normal_s8": [
+                0,
+                127,
+                0
+              ],
+              "blender_normal": [
+                0.0,
+                -0.0,
+                1.0
+              ],
+              "source_array": "purple_switch_seg8_vertex_0800C628",
+              "source_index": 2,
+              "uv": [
+                1.185546875,
+                -0.064453125
+              ]
+            },
+            {
+              "source_position": [
+                -60,
+                36,
+                -60
+              ],
+              "blender_position": [
+                -0.6,
+                0.6,
+                0.36
+              ],
+              "flag": 0,
+              "raw_uv": [
+                -159,
+                -134
+              ],
+              "rgba_bytes": [
+                0,
+                127,
+                0,
+                255
+              ],
+              "normal_s8": [
+                0,
+                127,
+                0
+              ],
+              "blender_normal": [
+                0.0,
+                -0.0,
+                1.0
+              ],
+              "source_array": "purple_switch_seg8_vertex_0800C628",
+              "source_index": 3,
+              "uv": [
+                -0.310546875,
+                1.130859375
+              ]
+            }
+          ],
+          "triangles": [
+            [
+              0,
+              1,
+              2
+            ],
+            [
+              0,
+              3,
+              1
+            ]
+          ]
+        }
+      ],
+      "triangle_count": 10
+    }
+  },
+  "collisions": {
+    "purple_switch_seg8_collision_0800C7A8": {
+      "source_vertices": [
+        [
+          61,
+          36,
+          -60
+        ],
+        [
+          -60,
+          36,
+          -60
+        ],
+        [
+          -60,
+          36,
+          61
+        ],
+        [
+          61,
+          36,
+          61
+        ],
+        [
+          -101,
+          0,
+          -101
+        ],
+        [
+          102,
+          0,
+          -101
+        ],
+        [
+          -101,
+          0,
+          102
+        ],
+        [
+          102,
+          0,
+          102
+        ]
+      ],
+      "blender_vertices": [
+        [
+          0.61,
+          0.6,
+          0.36
+        ],
+        [
+          -0.6,
+          0.6,
+          0.36
+        ],
+        [
+          -0.6,
+          -0.61,
+          0.36
+        ],
+        [
+          0.61,
+          -0.61,
+          0.36
+        ],
+        [
+          -1.01,
+          1.01,
+          0.0
+        ],
+        [
+          1.02,
+          1.01,
+          0.0
+        ],
+        [
+          -1.01,
+          -1.02,
+          0.0
+        ],
+        [
+          1.02,
+          -1.02,
+          0.0
+        ]
+      ],
+      "declared_vertex_count": 8,
+      "surface_groups": [
+        {
+          "surface": "SURFACE_SWITCH",
+          "declared_count": 10,
+          "triangles": [
+            {
+              "indices": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "indices": [
+                0,
+                2,
+                3
+              ]
+            },
+            {
+              "indices": [
+                4,
+                1,
+                0
+              ]
+            },
+            {
+              "indices": [
+                4,
+                0,
+                5
+              ]
+            },
+            {
+              "indices": [
+                6,
+                1,
+                4
+              ]
+            },
+            {
+              "indices": [
+                6,
+                2,
+                1
+              ]
+            },
+            {
+              "indices": [
+                7,
+                3,
+                2
+              ]
+            },
+            {
+              "indices": [
+                7,
+                2,
+                6
+              ]
+            },
+            {
+              "indices": [
+                5,
+                0,
+                3
+              ]
+            },
+            {
+              "indices": [
+                5,
+                3,
+                7
+              ]
+            }
+          ]
+        }
+      ],
+      "triangle_count": 10,
+      "valid_counts": true
+    }
+  },
+  "animations": [],
+  "validation": {
+    "vertex_array_count": 2,
+    "source_vertex_count": 20,
+    "display_list_count": 3,
+    "geo_display_list_use_count": 1,
+    "render_mesh_count": 1,
+    "render_triangle_count": 10,
+    "joint_count": 0,
+    "animation_count": 0,
+    "collision_mesh_count": 1,
+    "collision_triangle_count": 10,
+    "all_collision_counts_valid": true,
+    "warnings": []
+  }
+}

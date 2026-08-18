@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "errors": [],
+  "warnings": [],
+  "marker_crosscheck": {
+    "dae_marker_count": 117,
+    "authoritative_placements_checked": 109,
+    "position_matches": 109,
+    "missing_from_dae_markers": [],
+    "note": "The DAE markers are an independent audit only; decomp transforms remain authoritative."
+  },
+  "checks": {
+    "canonical_asset_count": 28,
+    "placement_count": 127,
+    "dae_backed_placement_count": 48,
+    "red_coin_count": 8,
+    "terrain_vertices": 422,
+    "terrain_triangles": 640,
+    "fixed_step_hz": 30
+  }
+}

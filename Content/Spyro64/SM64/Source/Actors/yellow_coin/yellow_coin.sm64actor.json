@@ -1,0 +1,2063 @@
+{
+  "format": "spyro64.sm64_actor",
+  "format_version": 1,
+  "actor": "yellow_coin",
+  "source_actor": "coin",
+  "geo_layout": "yellow_coin_geo",
+  "coordinate_system": {
+    "source": "SM64 x/y/z centimetres, Y up",
+    "blender": "x/-z/y metres, Z up",
+    "formula": "(x, -z, y) * 0.01"
+  },
+  "source_files": [
+    {
+      "path": "actors/coin/model.inc.c",
+      "sha256": "acd4028428658ad26be2f240009011a3355e9963467a4db097845aaff68d4ebb"
+    },
+    {
+      "path": "actors/coin/geo.inc.c",
+      "sha256": "0719c256fdeeddbdd35f1f26c5fd53d07040104db2fe3255349a734b0c31b9f3"
+    }
+  ],
+  "textures": {
+    "coin_seg3_texture_03005780": {
+      "asset": "actors/coin/coin_front.ia16.png",
+      "width": 32,
+      "height": 32,
+      "format": "ia16",
+      "rom_mio0_offset": 2102288,
+      "source_offset": 22400,
+      "source_size": 2048,
+      "png": "coin_front.ia16.png",
+      "sha256": "0727216b2218074751670c3d5b468e3a33e9e4687dbdbe9f2da8b5bba026da09",
+      "relative_path": "textures/coin_front.ia16.png"
+    },
+    "coin_seg3_texture_03005F80": {
+      "asset": "actors/coin/coin_tilt_right.ia16.png",
+      "width": 32,
+      "height": 32,
+      "format": "ia16",
+      "rom_mio0_offset": 2102288,
+      "source_offset": 24448,
+      "source_size": 2048,
+      "png": "coin_tilt_right.ia16.png",
+      "sha256": "08fd8b4b169eef3f59088489d5621b632e2c560efe8ab3872c03456daa509035",
+      "relative_path": "textures/coin_tilt_right.ia16.png"
+    },
+    "coin_seg3_texture_03006780": {
+      "asset": "actors/coin/coin_side.ia16.png",
+      "width": 32,
+      "height": 32,
+      "format": "ia16",
+      "rom_mio0_offset": 2102288,
+      "source_offset": 26496,
+      "source_size": 2048,
+      "png": "coin_side.ia16.png",
+      "sha256": "0bbeb3a67bec0b52943e5bbd5f8446368f2d83d1f0688f0c55e20cd5fdc4dc98",
+      "relative_path": "textures/coin_side.ia16.png"
+    },
+    "coin_seg3_texture_03006F80": {
+      "asset": "actors/coin/coin_tilt_left.ia16.png",
+      "width": 32,
+      "height": 32,
+      "format": "ia16",
+      "rom_mio0_offset": 2102288,
+      "source_offset": 28544,
+      "source_size": 2048,
+      "png": "coin_tilt_left.ia16.png",
+      "sha256": "ed1a3028dd50310967939946226f51ea000e6fada35e0f8f78c45878491deec6",
+      "relative_path": "textures/coin_tilt_left.ia16.png"
+    }
+  },
+  "vertex_arrays": {
+    "coin_seg3_vertex_030056C0": [
+      {
+        "source_position": [
+          -32,
+          0,
+          0
+        ],
+        "blender_position": [
+          -0.32,
+          0.0,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          1984
+        ],
+        "rgba_bytes": [
+          255,
+          255,
+          0,
+          255
+        ],
+        "normal_s8": [
+          -1,
+          -1,
+          0
+        ],
+        "blender_normal": [
+          -0.7071067811865476,
+          -0.0,
+          -0.7071067811865476
+        ]
+      },
+      {
+        "source_position": [
+          32,
+          0,
+          0
+        ],
+        "blender_position": [
+          0.32,
+          0.0,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          1984,
+          1984
+        ],
+        "rgba_bytes": [
+          255,
+          255,
+          0,
+          255
+        ],
+        "normal_s8": [
+          -1,
+          -1,
+          0
+        ],
+        "blender_normal": [
+          -0.7071067811865476,
+          -0.0,
+          -0.7071067811865476
+        ]
+      },
+      {
+        "source_position": [
+          32,
+          64,
+          0
+        ],
+        "blender_position": [
+          0.32,
+          0.0,
+          0.64
+        ],
+        "flag": 0,
+        "raw_uv": [
+          1984,
+          0
+        ],
+        "rgba_bytes": [
+          255,
+          255,
+          0,
+          255
+        ],
+        "normal_s8": [
+          -1,
+          -1,
+          0
+        ],
+        "blender_normal": [
+          -0.7071067811865476,
+          -0.0,
+          -0.7071067811865476
+        ]
+      },
+      {
+        "source_position": [
+          -32,
+          64,
+          0
+        ],
+        "blender_position": [
+          -0.32,
+          0.0,
+          0.64
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          0
+        ],
+        "rgba_bytes": [
+          255,
+          255,
+          0,
+          255
+        ],
+        "normal_s8": [
+          -1,
+          -1,
+          0
+        ],
+        "blender_normal": [
+          -0.7071067811865476,
+          -0.0,
+          -0.7071067811865476
+        ]
+      }
+    ],
+    "coin_seg3_vertex_03005700": [
+      {
+        "source_position": [
+          -50,
+          0,
+          0
+        ],
+        "blender_position": [
+          -0.5,
+          0.0,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          1984
+        ],
+        "rgba_bytes": [
+          120,
+          120,
+          255,
+          255
+        ],
+        "normal_s8": [
+          120,
+          120,
+          -1
+        ],
+        "blender_normal": [
+          0.7070945053468344,
+          0.005892454211223619,
+          0.7070945053468344
+        ]
+      },
+      {
+        "source_position": [
+          50,
+          0,
+          0
+        ],
+        "blender_position": [
+          0.5,
+          0.0,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          1984,
+          1984
+        ],
+        "rgba_bytes": [
+          120,
+          120,
+          255,
+          255
+        ],
+        "normal_s8": [
+          120,
+          120,
+          -1
+        ],
+        "blender_normal": [
+          0.7070945053468344,
+          0.005892454211223619,
+          0.7070945053468344
+        ]
+      },
+      {
+        "source_position": [
+          50,
+          100,
+          0
+        ],
+        "blender_position": [
+          0.5,
+          0.0,
+          1.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          1984,
+          0
+        ],
+        "rgba_bytes": [
+          120,
+          120,
+          255,
+          255
+        ],
+        "normal_s8": [
+          120,
+          120,
+          -1
+        ],
+        "blender_normal": [
+          0.7070945053468344,
+          0.005892454211223619,
+          0.7070945053468344
+        ]
+      },
+      {
+        "source_position": [
+          -50,
+          100,
+          0
+        ],
+        "blender_position": [
+          -0.5,
+          0.0,
+          1.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          0
+        ],
+        "rgba_bytes": [
+          120,
+          120,
+          255,
+          255
+        ],
+        "normal_s8": [
+          120,
+          120,
+          -1
+        ],
+        "blender_normal": [
+          0.7070945053468344,
+          0.005892454211223619,
+          0.7070945053468344
+        ]
+      }
+    ],
+    "coin_seg3_vertex_03005740": [
+      {
+        "source_position": [
+          -35,
+          0,
+          0
+        ],
+        "blender_position": [
+          -0.35000000000000003,
+          0.0,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          1984
+        ],
+        "rgba_bytes": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "normal_s8": [
+          -1,
+          0,
+          0
+        ],
+        "blender_normal": [
+          -1.0,
+          -0.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          35,
+          0,
+          0
+        ],
+        "blender_position": [
+          0.35000000000000003,
+          0.0,
+          0.0
+        ],
+        "flag": 0,
+        "raw_uv": [
+          1984,
+          1984
+        ],
+        "rgba_bytes": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "normal_s8": [
+          -1,
+          0,
+          0
+        ],
+        "blender_normal": [
+          -1.0,
+          -0.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          35,
+          70,
+          0
+        ],
+        "blender_position": [
+          0.35000000000000003,
+          0.0,
+          0.7000000000000001
+        ],
+        "flag": 0,
+        "raw_uv": [
+          1984,
+          0
+        ],
+        "rgba_bytes": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "normal_s8": [
+          -1,
+          0,
+          0
+        ],
+        "blender_normal": [
+          -1.0,
+          -0.0,
+          0.0
+        ]
+      },
+      {
+        "source_position": [
+          -35,
+          70,
+          0
+        ],
+        "blender_position": [
+          -0.35000000000000003,
+          0.0,
+          0.7000000000000001
+        ],
+        "flag": 0,
+        "raw_uv": [
+          0,
+          0
+        ],
+        "rgba_bytes": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "normal_s8": [
+          -1,
+          0,
+          0
+        ],
+        "blender_normal": [
+          -1.0,
+          -0.0,
+          0.0
+        ]
+      }
+    ]
+  },
+  "display_lists": {
+    "coin_seg3_dl_03007780": [
+      {
+        "macro": "gsDPPipeSync",
+        "args": [],
+        "raw": "gsDPPipeSync()"
+      },
+      {
+        "macro": "gsSPClearGeometryMode",
+        "args": [
+          "G_LIGHTING"
+        ],
+        "raw": "gsSPClearGeometryMode(G_LIGHTING)"
+      },
+      {
+        "macro": "gsDPSetCombineMode",
+        "args": [
+          "G_CC_MODULATEIA",
+          "G_CC_MODULATEIA"
+        ],
+        "raw": "gsDPSetCombineMode(G_CC_MODULATEIA, G_CC_MODULATEIA)"
+      },
+      {
+        "macro": "gsSPTexture",
+        "args": [
+          "0x8000",
+          "0x8000",
+          "0",
+          "G_TX_RENDERTILE",
+          "G_ON"
+        ],
+        "raw": "gsSPTexture(0x8000, 0x8000, 0, G_TX_RENDERTILE, G_ON)"
+      },
+      {
+        "macro": "gsDPSetTile",
+        "args": [
+          "G_IM_FMT_IA",
+          "G_IM_SIZ_16b",
+          "0",
+          "0",
+          "G_TX_LOADTILE",
+          "0",
+          "G_TX_CLAMP",
+          "5",
+          "G_TX_NOLOD",
+          "G_TX_CLAMP",
+          "5",
+          "G_TX_NOLOD"
+        ],
+        "raw": "gsDPSetTile(G_IM_FMT_IA, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_CLAMP, 5, G_TX_NOLOD, G_TX_CLAMP, 5, G_TX_NOLOD)"
+      },
+      {
+        "macro": "gsDPLoadSync",
+        "args": [],
+        "raw": "gsDPLoadSync()"
+      },
+      {
+        "macro": "gsDPLoadBlock",
+        "args": [
+          "G_TX_LOADTILE",
+          "0",
+          "0",
+          "32 * 32 - 1",
+          "CALC_DXT(32, G_IM_SIZ_16b_BYTES)"
+        ],
+        "raw": "gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES))"
+      },
+      {
+        "macro": "gsDPSetTile",
+        "args": [
+          "G_IM_FMT_IA",
+          "G_IM_SIZ_16b",
+          "8",
+          "0",
+          "G_TX_RENDERTILE",
+          "0",
+          "G_TX_CLAMP",
+          "5",
+          "G_TX_NOLOD",
+          "G_TX_CLAMP",
+          "5",
+          "G_TX_NOLOD"
+        ],
+        "raw": "gsDPSetTile(G_IM_FMT_IA, G_IM_SIZ_16b, 8, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 5, G_TX_NOLOD, G_TX_CLAMP, 5, G_TX_NOLOD)"
+      },
+      {
+        "macro": "gsDPSetTileSize",
+        "args": [
+          "0",
+          "0",
+          "0",
+          "(32 - 1) << G_TEXTURE_IMAGE_FRAC",
+          "(32 - 1) << G_TEXTURE_IMAGE_FRAC"
+        ],
+        "raw": "gsDPSetTileSize(0, 0, 0, (32 - 1) << G_TEXTURE_IMAGE_FRAC, (32 - 1) << G_TEXTURE_IMAGE_FRAC)"
+      },
+      {
+        "macro": "gsSPEndDisplayList",
+        "args": [],
+        "raw": "gsSPEndDisplayList()"
+      }
+    ],
+    "coin_seg3_dl_030077D0": [
+      {
+        "macro": "gsSP2Triangles",
+        "args": [
+          "0",
+          "1",
+          "2",
+          "0x0",
+          "0",
+          "2",
+          "3",
+          "0x0"
+        ],
+        "raw": "gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0)"
+      },
+      {
+        "macro": "gsSPTexture",
+        "args": [
+          "0x0001",
+          "0x0001",
+          "0",
+          "G_TX_RENDERTILE",
+          "G_OFF"
+        ],
+        "raw": "gsSPTexture(0x0001, 0x0001, 0, G_TX_RENDERTILE, G_OFF)"
+      },
+      {
+        "macro": "gsDPSetCombineMode",
+        "args": [
+          "G_CC_SHADE",
+          "G_CC_SHADE"
+        ],
+        "raw": "gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE)"
+      },
+      {
+        "macro": "gsSPSetGeometryMode",
+        "args": [
+          "G_LIGHTING"
+        ],
+        "raw": "gsSPSetGeometryMode(G_LIGHTING)"
+      },
+      {
+        "macro": "gsSPEndDisplayList",
+        "args": [],
+        "raw": "gsSPEndDisplayList()"
+      }
+    ],
+    "coin_seg3_dl_03007800": [
+      {
+        "macro": "gsDPPipeSync",
+        "args": [],
+        "raw": "gsDPPipeSync()"
+      },
+      {
+        "macro": "gsDPSetTextureImage",
+        "args": [
+          "G_IM_FMT_IA",
+          "G_IM_SIZ_16b",
+          "1",
+          "coin_seg3_texture_03005780"
+        ],
+        "raw": "gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_16b, 1, coin_seg3_texture_03005780)"
+      },
+      {
+        "macro": "gsSPDisplayList",
+        "args": [
+          "coin_seg3_dl_03007780"
+        ],
+        "raw": "gsSPDisplayList(coin_seg3_dl_03007780)"
+      },
+      {
+        "macro": "gsSPVertex",
+        "args": [
+          "coin_seg3_vertex_030056C0",
+          "4",
+          "0"
+        ],
+        "raw": "gsSPVertex(coin_seg3_vertex_030056C0, 4, 0)"
+      },
+      {
+        "macro": "gsSPBranchList",
+        "args": [
+          "coin_seg3_dl_030077D0"
+        ],
+        "raw": "gsSPBranchList(coin_seg3_dl_030077D0)"
+      }
+    ],
+    "coin_seg3_dl_03007828": [
+      {
+        "macro": "gsDPPipeSync",
+        "args": [],
+        "raw": "gsDPPipeSync()"
+      },
+      {
+        "macro": "gsDPSetTextureImage",
+        "args": [
+          "G_IM_FMT_IA",
+          "G_IM_SIZ_16b",
+          "1",
+          "coin_seg3_texture_03005F80"
+        ],
+        "raw": "gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_16b, 1, coin_seg3_texture_03005F80)"
+      },
+      {
+        "macro": "gsSPDisplayList",
+        "args": [
+          "coin_seg3_dl_03007780"
+        ],
+        "raw": "gsSPDisplayList(coin_seg3_dl_03007780)"
+      },
+      {
+        "macro": "gsSPVertex",
+        "args": [
+          "coin_seg3_vertex_030056C0",
+          "4",
+          "0"
+        ],
+        "raw": "gsSPVertex(coin_seg3_vertex_030056C0, 4, 0)"
+      },
+      {
+        "macro": "gsSPBranchList",
+        "args": [
+          "coin_seg3_dl_030077D0"
+        ],
+        "raw": "gsSPBranchList(coin_seg3_dl_030077D0)"
+      }
+    ],
+    "coin_seg3_dl_03007850": [
+      {
+        "macro": "gsDPPipeSync",
+        "args": [],
+        "raw": "gsDPPipeSync()"
+      },
+      {
+        "macro": "gsDPSetTextureImage",
+        "args": [
+          "G_IM_FMT_IA",
+          "G_IM_SIZ_16b",
+          "1",
+          "coin_seg3_texture_03006780"
+        ],
+        "raw": "gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_16b, 1, coin_seg3_texture_03006780)"
+      },
+      {
+        "macro": "gsSPDisplayList",
+        "args": [
+          "coin_seg3_dl_03007780"
+        ],
+        "raw": "gsSPDisplayList(coin_seg3_dl_03007780)"
+      },
+      {
+        "macro": "gsSPVertex",
+        "args": [
+          "coin_seg3_vertex_030056C0",
+          "4",
+          "0"
+        ],
+        "raw": "gsSPVertex(coin_seg3_vertex_030056C0, 4, 0)"
+      },
+      {
+        "macro": "gsSPBranchList",
+        "args": [
+          "coin_seg3_dl_030077D0"
+        ],
+        "raw": "gsSPBranchList(coin_seg3_dl_030077D0)"
+      }
+    ],
+    "coin_seg3_dl_03007878": [
+      {
+        "macro": "gsDPPipeSync",
+        "args": [],
+        "raw": "gsDPPipeSync()"
+      },
+      {
+        "macro": "gsDPSetTextureImage",
+        "args": [
+          "G_IM_FMT_IA",
+          "G_IM_SIZ_16b",
+          "1",
+          "coin_seg3_texture_03006F80"
+        ],
+        "raw": "gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_16b, 1, coin_seg3_texture_03006F80)"
+      },
+      {
+        "macro": "gsSPDisplayList",
+        "args": [
+          "coin_seg3_dl_03007780"
+        ],
+        "raw": "gsSPDisplayList(coin_seg3_dl_03007780)"
+      },
+      {
+        "macro": "gsSPVertex",
+        "args": [
+          "coin_seg3_vertex_030056C0",
+          "4",
+          "0"
+        ],
+        "raw": "gsSPVertex(coin_seg3_vertex_030056C0, 4, 0)"
+      },
+      {
+        "macro": "gsSPBranchList",
+        "args": [
+          "coin_seg3_dl_030077D0"
+        ],
+        "raw": "gsSPBranchList(coin_seg3_dl_030077D0)"
+      }
+    ],
+    "coin_seg3_dl_030078A0": [
+      {
+        "macro": "gsDPPipeSync",
+        "args": [],
+        "raw": "gsDPPipeSync()"
+      },
+      {
+        "macro": "gsDPSetTextureImage",
+        "args": [
+          "G_IM_FMT_IA",
+          "G_IM_SIZ_16b",
+          "1",
+          "coin_seg3_texture_03005780"
+        ],
+        "raw": "gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_16b, 1, coin_seg3_texture_03005780)"
+      },
+      {
+        "macro": "gsSPDisplayList",
+        "args": [
+          "coin_seg3_dl_03007780"
+        ],
+        "raw": "gsSPDisplayList(coin_seg3_dl_03007780)"
+      },
+      {
+        "macro": "gsSPVertex",
+        "args": [
+          "coin_seg3_vertex_03005700",
+          "4",
+          "0"
+        ],
+        "raw": "gsSPVertex(coin_seg3_vertex_03005700, 4, 0)"
+      },
+      {
+        "macro": "gsSPBranchList",
+        "args": [
+          "coin_seg3_dl_030077D0"
+        ],
+        "raw": "gsSPBranchList(coin_seg3_dl_030077D0)"
+      }
+    ],
+    "coin_seg3_dl_030078C8": [
+      {
+        "macro": "gsDPPipeSync",
+        "args": [],
+        "raw": "gsDPPipeSync()"
+      },
+      {
+        "macro": "gsDPSetTextureImage",
+        "args": [
+          "G_IM_FMT_IA",
+          "G_IM_SIZ_16b",
+          "1",
+          "coin_seg3_texture_03005F80"
+        ],
+        "raw": "gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_16b, 1, coin_seg3_texture_03005F80)"
+      },
+      {
+        "macro": "gsSPDisplayList",
+        "args": [
+          "coin_seg3_dl_03007780"
+        ],
+        "raw": "gsSPDisplayList(coin_seg3_dl_03007780)"
+      },
+      {
+        "macro": "gsSPVertex",
+        "args": [
+          "coin_seg3_vertex_03005700",
+          "4",
+          "0"
+        ],
+        "raw": "gsSPVertex(coin_seg3_vertex_03005700, 4, 0)"
+      },
+      {
+        "macro": "gsSPBranchList",
+        "args": [
+          "coin_seg3_dl_030077D0"
+        ],
+        "raw": "gsSPBranchList(coin_seg3_dl_030077D0)"
+      }
+    ],
+    "coin_seg3_dl_030078F0": [
+      {
+        "macro": "gsDPPipeSync",
+        "args": [],
+        "raw": "gsDPPipeSync()"
+      },
+      {
+        "macro": "gsDPSetTextureImage",
+        "args": [
+          "G_IM_FMT_IA",
+          "G_IM_SIZ_16b",
+          "1",
+          "coin_seg3_texture_03006780"
+        ],
+        "raw": "gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_16b, 1, coin_seg3_texture_03006780)"
+      },
+      {
+        "macro": "gsSPDisplayList",
+        "args": [
+          "coin_seg3_dl_03007780"
+        ],
+        "raw": "gsSPDisplayList(coin_seg3_dl_03007780)"
+      },
+      {
+        "macro": "gsSPVertex",
+        "args": [
+          "coin_seg3_vertex_03005700",
+          "4",
+          "0"
+        ],
+        "raw": "gsSPVertex(coin_seg3_vertex_03005700, 4, 0)"
+      },
+      {
+        "macro": "gsSPBranchList",
+        "args": [
+          "coin_seg3_dl_030077D0"
+        ],
+        "raw": "gsSPBranchList(coin_seg3_dl_030077D0)"
+      }
+    ],
+    "coin_seg3_dl_03007918": [
+      {
+        "macro": "gsDPPipeSync",
+        "args": [],
+        "raw": "gsDPPipeSync()"
+      },
+      {
+        "macro": "gsDPSetTextureImage",
+        "args": [
+          "G_IM_FMT_IA",
+          "G_IM_SIZ_16b",
+          "1",
+          "coin_seg3_texture_03006F80"
+        ],
+        "raw": "gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_16b, 1, coin_seg3_texture_03006F80)"
+      },
+      {
+        "macro": "gsSPDisplayList",
+        "args": [
+          "coin_seg3_dl_03007780"
+        ],
+        "raw": "gsSPDisplayList(coin_seg3_dl_03007780)"
+      },
+      {
+        "macro": "gsSPVertex",
+        "args": [
+          "coin_seg3_vertex_03005700",
+          "4",
+          "0"
+        ],
+        "raw": "gsSPVertex(coin_seg3_vertex_03005700, 4, 0)"
+      },
+      {
+        "macro": "gsSPBranchList",
+        "args": [
+          "coin_seg3_dl_030077D0"
+        ],
+        "raw": "gsSPBranchList(coin_seg3_dl_030077D0)"
+      }
+    ],
+    "coin_seg3_dl_03007940": [
+      {
+        "macro": "gsDPPipeSync",
+        "args": [],
+        "raw": "gsDPPipeSync()"
+      },
+      {
+        "macro": "gsDPSetTextureImage",
+        "args": [
+          "G_IM_FMT_IA",
+          "G_IM_SIZ_16b",
+          "1",
+          "coin_seg3_texture_03005780"
+        ],
+        "raw": "gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_16b, 1, coin_seg3_texture_03005780)"
+      },
+      {
+        "macro": "gsSPDisplayList",
+        "args": [
+          "coin_seg3_dl_03007780"
+        ],
+        "raw": "gsSPDisplayList(coin_seg3_dl_03007780)"
+      },
+      {
+        "macro": "gsSPVertex",
+        "args": [
+          "coin_seg3_vertex_03005740",
+          "4",
+          "0"
+        ],
+        "raw": "gsSPVertex(coin_seg3_vertex_03005740, 4, 0)"
+      },
+      {
+        "macro": "gsSPBranchList",
+        "args": [
+          "coin_seg3_dl_030077D0"
+        ],
+        "raw": "gsSPBranchList(coin_seg3_dl_030077D0)"
+      }
+    ],
+    "coin_seg3_dl_03007968": [
+      {
+        "macro": "gsDPPipeSync",
+        "args": [],
+        "raw": "gsDPPipeSync()"
+      },
+      {
+        "macro": "gsDPSetTextureImage",
+        "args": [
+          "G_IM_FMT_IA",
+          "G_IM_SIZ_16b",
+          "1",
+          "coin_seg3_texture_03005F80"
+        ],
+        "raw": "gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_16b, 1, coin_seg3_texture_03005F80)"
+      },
+      {
+        "macro": "gsSPDisplayList",
+        "args": [
+          "coin_seg3_dl_03007780"
+        ],
+        "raw": "gsSPDisplayList(coin_seg3_dl_03007780)"
+      },
+      {
+        "macro": "gsSPVertex",
+        "args": [
+          "coin_seg3_vertex_03005740",
+          "4",
+          "0"
+        ],
+        "raw": "gsSPVertex(coin_seg3_vertex_03005740, 4, 0)"
+      },
+      {
+        "macro": "gsSPBranchList",
+        "args": [
+          "coin_seg3_dl_030077D0"
+        ],
+        "raw": "gsSPBranchList(coin_seg3_dl_030077D0)"
+      }
+    ],
+    "coin_seg3_dl_03007990": [
+      {
+        "macro": "gsDPPipeSync",
+        "args": [],
+        "raw": "gsDPPipeSync()"
+      },
+      {
+        "macro": "gsDPSetTextureImage",
+        "args": [
+          "G_IM_FMT_IA",
+          "G_IM_SIZ_16b",
+          "1",
+          "coin_seg3_texture_03006780"
+        ],
+        "raw": "gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_16b, 1, coin_seg3_texture_03006780)"
+      },
+      {
+        "macro": "gsSPDisplayList",
+        "args": [
+          "coin_seg3_dl_03007780"
+        ],
+        "raw": "gsSPDisplayList(coin_seg3_dl_03007780)"
+      },
+      {
+        "macro": "gsSPVertex",
+        "args": [
+          "coin_seg3_vertex_03005740",
+          "4",
+          "0"
+        ],
+        "raw": "gsSPVertex(coin_seg3_vertex_03005740, 4, 0)"
+      },
+      {
+        "macro": "gsSPBranchList",
+        "args": [
+          "coin_seg3_dl_030077D0"
+        ],
+        "raw": "gsSPBranchList(coin_seg3_dl_030077D0)"
+      }
+    ],
+    "coin_seg3_dl_030079B8": [
+      {
+        "macro": "gsDPPipeSync",
+        "args": [],
+        "raw": "gsDPPipeSync()"
+      },
+      {
+        "macro": "gsDPSetTextureImage",
+        "args": [
+          "G_IM_FMT_IA",
+          "G_IM_SIZ_16b",
+          "1",
+          "coin_seg3_texture_03006F80"
+        ],
+        "raw": "gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_16b, 1, coin_seg3_texture_03006F80)"
+      },
+      {
+        "macro": "gsSPDisplayList",
+        "args": [
+          "coin_seg3_dl_03007780"
+        ],
+        "raw": "gsSPDisplayList(coin_seg3_dl_03007780)"
+      },
+      {
+        "macro": "gsSPVertex",
+        "args": [
+          "coin_seg3_vertex_03005740",
+          "4",
+          "0"
+        ],
+        "raw": "gsSPVertex(coin_seg3_vertex_03005740, 4, 0)"
+      },
+      {
+        "macro": "gsSPBranchList",
+        "args": [
+          "coin_seg3_dl_030077D0"
+        ],
+        "raw": "gsSPBranchList(coin_seg3_dl_030077D0)"
+      }
+    ]
+  },
+  "geo": {
+    "type": "root",
+    "name": "yellow_coin_geo",
+    "children": [
+      {
+        "type": "shadow",
+        "args": [
+          "SHADOW_CIRCLE_4_VERTS",
+          "0xB4",
+          "50"
+        ],
+        "children": [
+          {
+            "type": "switch_case",
+            "case_count": 8,
+            "selector": "geo_switch_anim_state",
+            "children": [
+              {
+                "type": "display_list",
+                "layer": "LAYER_ALPHA",
+                "display_list": "coin_seg3_dl_03007800",
+                "children": []
+              },
+              {
+                "type": "display_list",
+                "layer": "LAYER_ALPHA",
+                "display_list": "coin_seg3_dl_03007800",
+                "children": []
+              },
+              {
+                "type": "display_list",
+                "layer": "LAYER_ALPHA",
+                "display_list": "coin_seg3_dl_03007828",
+                "children": []
+              },
+              {
+                "type": "display_list",
+                "layer": "LAYER_ALPHA",
+                "display_list": "coin_seg3_dl_03007828",
+                "children": []
+              },
+              {
+                "type": "display_list",
+                "layer": "LAYER_ALPHA",
+                "display_list": "coin_seg3_dl_03007850",
+                "children": []
+              },
+              {
+                "type": "display_list",
+                "layer": "LAYER_ALPHA",
+                "display_list": "coin_seg3_dl_03007850",
+                "children": []
+              },
+              {
+                "type": "display_list",
+                "layer": "LAYER_ALPHA",
+                "display_list": "coin_seg3_dl_03007878",
+                "children": []
+              },
+              {
+                "type": "display_list",
+                "layer": "LAYER_ALPHA",
+                "display_list": "coin_seg3_dl_03007878",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "joint_count": 0,
+    "unsupported_macros": [],
+    "excess_close_nodes": 0
+  },
+  "geo_flat": [
+    {
+      "path": "/root[0]/shadow[0]",
+      "type": "shadow",
+      "args": [
+        "SHADOW_CIRCLE_4_VERTS",
+        "0xB4",
+        "50"
+      ]
+    },
+    {
+      "path": "/root[0]/shadow[0]/switch_case[0]",
+      "type": "switch_case",
+      "case_count": 8,
+      "selector": "geo_switch_anim_state"
+    },
+    {
+      "path": "/root[0]/shadow[0]/switch_case[0]/display_list[0]",
+      "type": "display_list",
+      "layer": "LAYER_ALPHA",
+      "display_list": "coin_seg3_dl_03007800"
+    },
+    {
+      "path": "/root[0]/shadow[0]/switch_case[0]/display_list[1]",
+      "type": "display_list",
+      "layer": "LAYER_ALPHA",
+      "display_list": "coin_seg3_dl_03007800"
+    },
+    {
+      "path": "/root[0]/shadow[0]/switch_case[0]/display_list[2]",
+      "type": "display_list",
+      "layer": "LAYER_ALPHA",
+      "display_list": "coin_seg3_dl_03007828"
+    },
+    {
+      "path": "/root[0]/shadow[0]/switch_case[0]/display_list[3]",
+      "type": "display_list",
+      "layer": "LAYER_ALPHA",
+      "display_list": "coin_seg3_dl_03007828"
+    },
+    {
+      "path": "/root[0]/shadow[0]/switch_case[0]/display_list[4]",
+      "type": "display_list",
+      "layer": "LAYER_ALPHA",
+      "display_list": "coin_seg3_dl_03007850"
+    },
+    {
+      "path": "/root[0]/shadow[0]/switch_case[0]/display_list[5]",
+      "type": "display_list",
+      "layer": "LAYER_ALPHA",
+      "display_list": "coin_seg3_dl_03007850"
+    },
+    {
+      "path": "/root[0]/shadow[0]/switch_case[0]/display_list[6]",
+      "type": "display_list",
+      "layer": "LAYER_ALPHA",
+      "display_list": "coin_seg3_dl_03007878"
+    },
+    {
+      "path": "/root[0]/shadow[0]/switch_case[0]/display_list[7]",
+      "type": "display_list",
+      "layer": "LAYER_ALPHA",
+      "display_list": "coin_seg3_dl_03007878"
+    }
+  ],
+  "render_meshes": {
+    "LAYER_ALPHA|coin_seg3_dl_03007800": {
+      "root_display_list": "coin_seg3_dl_03007800",
+      "layer": "LAYER_ALPHA",
+      "draw_calls": [
+        {
+          "material": {
+            "texture_symbol": "coin_seg3_texture_03005780",
+            "texture_asset": "actors/coin/coin_front.ia16.png",
+            "texture_size": [
+              32,
+              32
+            ],
+            "texture_enabled": true,
+            "lighting": false,
+            "texture_gen": false,
+            "combine_mode": "G_CC_MODULATEIA, G_CC_MODULATEIA",
+            "wrap_s": "clamp",
+            "wrap_t": "clamp",
+            "env_color": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "layer": "LAYER_ALPHA"
+          },
+          "vertices": [
+            {
+              "source_position": [
+                -32,
+                0,
+                0
+              ],
+              "blender_position": [
+                -0.32,
+                0.0,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                1984
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                0,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                0
+              ],
+              "blender_normal": [
+                -0.7071067811865476,
+                -0.0,
+                -0.7071067811865476
+              ],
+              "source_array": "coin_seg3_vertex_030056C0",
+              "source_index": 0,
+              "uv": [
+                0.0,
+                -0.9375
+              ]
+            },
+            {
+              "source_position": [
+                32,
+                0,
+                0
+              ],
+              "blender_position": [
+                0.32,
+                0.0,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                1984,
+                1984
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                0,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                0
+              ],
+              "blender_normal": [
+                -0.7071067811865476,
+                -0.0,
+                -0.7071067811865476
+              ],
+              "source_array": "coin_seg3_vertex_030056C0",
+              "source_index": 1,
+              "uv": [
+                1.9375,
+                -0.9375
+              ]
+            },
+            {
+              "source_position": [
+                32,
+                64,
+                0
+              ],
+              "blender_position": [
+                0.32,
+                0.0,
+                0.64
+              ],
+              "flag": 0,
+              "raw_uv": [
+                1984,
+                0
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                0,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                0
+              ],
+              "blender_normal": [
+                -0.7071067811865476,
+                -0.0,
+                -0.7071067811865476
+              ],
+              "source_array": "coin_seg3_vertex_030056C0",
+              "source_index": 2,
+              "uv": [
+                1.9375,
+                1.0
+              ]
+            },
+            {
+              "source_position": [
+                -32,
+                64,
+                0
+              ],
+              "blender_position": [
+                -0.32,
+                0.0,
+                0.64
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                0
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                0,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                0
+              ],
+              "blender_normal": [
+                -0.7071067811865476,
+                -0.0,
+                -0.7071067811865476
+              ],
+              "source_array": "coin_seg3_vertex_030056C0",
+              "source_index": 3,
+              "uv": [
+                0.0,
+                1.0
+              ]
+            }
+          ],
+          "triangles": [
+            [
+              0,
+              1,
+              2
+            ],
+            [
+              0,
+              2,
+              3
+            ]
+          ]
+        }
+      ],
+      "triangle_count": 2
+    },
+    "LAYER_ALPHA|coin_seg3_dl_03007828": {
+      "root_display_list": "coin_seg3_dl_03007828",
+      "layer": "LAYER_ALPHA",
+      "draw_calls": [
+        {
+          "material": {
+            "texture_symbol": "coin_seg3_texture_03005F80",
+            "texture_asset": "actors/coin/coin_tilt_right.ia16.png",
+            "texture_size": [
+              32,
+              32
+            ],
+            "texture_enabled": true,
+            "lighting": false,
+            "texture_gen": false,
+            "combine_mode": "G_CC_MODULATEIA, G_CC_MODULATEIA",
+            "wrap_s": "clamp",
+            "wrap_t": "clamp",
+            "env_color": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "layer": "LAYER_ALPHA"
+          },
+          "vertices": [
+            {
+              "source_position": [
+                -32,
+                0,
+                0
+              ],
+              "blender_position": [
+                -0.32,
+                0.0,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                1984
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                0,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                0
+              ],
+              "blender_normal": [
+                -0.7071067811865476,
+                -0.0,
+                -0.7071067811865476
+              ],
+              "source_array": "coin_seg3_vertex_030056C0",
+              "source_index": 0,
+              "uv": [
+                0.0,
+                -0.9375
+              ]
+            },
+            {
+              "source_position": [
+                32,
+                0,
+                0
+              ],
+              "blender_position": [
+                0.32,
+                0.0,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                1984,
+                1984
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                0,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                0
+              ],
+              "blender_normal": [
+                -0.7071067811865476,
+                -0.0,
+                -0.7071067811865476
+              ],
+              "source_array": "coin_seg3_vertex_030056C0",
+              "source_index": 1,
+              "uv": [
+                1.9375,
+                -0.9375
+              ]
+            },
+            {
+              "source_position": [
+                32,
+                64,
+                0
+              ],
+              "blender_position": [
+                0.32,
+                0.0,
+                0.64
+              ],
+              "flag": 0,
+              "raw_uv": [
+                1984,
+                0
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                0,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                0
+              ],
+              "blender_normal": [
+                -0.7071067811865476,
+                -0.0,
+                -0.7071067811865476
+              ],
+              "source_array": "coin_seg3_vertex_030056C0",
+              "source_index": 2,
+              "uv": [
+                1.9375,
+                1.0
+              ]
+            },
+            {
+              "source_position": [
+                -32,
+                64,
+                0
+              ],
+              "blender_position": [
+                -0.32,
+                0.0,
+                0.64
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                0
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                0,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                0
+              ],
+              "blender_normal": [
+                -0.7071067811865476,
+                -0.0,
+                -0.7071067811865476
+              ],
+              "source_array": "coin_seg3_vertex_030056C0",
+              "source_index": 3,
+              "uv": [
+                0.0,
+                1.0
+              ]
+            }
+          ],
+          "triangles": [
+            [
+              0,
+              1,
+              2
+            ],
+            [
+              0,
+              2,
+              3
+            ]
+          ]
+        }
+      ],
+      "triangle_count": 2
+    },
+    "LAYER_ALPHA|coin_seg3_dl_03007850": {
+      "root_display_list": "coin_seg3_dl_03007850",
+      "layer": "LAYER_ALPHA",
+      "draw_calls": [
+        {
+          "material": {
+            "texture_symbol": "coin_seg3_texture_03006780",
+            "texture_asset": "actors/coin/coin_side.ia16.png",
+            "texture_size": [
+              32,
+              32
+            ],
+            "texture_enabled": true,
+            "lighting": false,
+            "texture_gen": false,
+            "combine_mode": "G_CC_MODULATEIA, G_CC_MODULATEIA",
+            "wrap_s": "clamp",
+            "wrap_t": "clamp",
+            "env_color": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "layer": "LAYER_ALPHA"
+          },
+          "vertices": [
+            {
+              "source_position": [
+                -32,
+                0,
+                0
+              ],
+              "blender_position": [
+                -0.32,
+                0.0,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                1984
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                0,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                0
+              ],
+              "blender_normal": [
+                -0.7071067811865476,
+                -0.0,
+                -0.7071067811865476
+              ],
+              "source_array": "coin_seg3_vertex_030056C0",
+              "source_index": 0,
+              "uv": [
+                0.0,
+                -0.9375
+              ]
+            },
+            {
+              "source_position": [
+                32,
+                0,
+                0
+              ],
+              "blender_position": [
+                0.32,
+                0.0,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                1984,
+                1984
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                0,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                0
+              ],
+              "blender_normal": [
+                -0.7071067811865476,
+                -0.0,
+                -0.7071067811865476
+              ],
+              "source_array": "coin_seg3_vertex_030056C0",
+              "source_index": 1,
+              "uv": [
+                1.9375,
+                -0.9375
+              ]
+            },
+            {
+              "source_position": [
+                32,
+                64,
+                0
+              ],
+              "blender_position": [
+                0.32,
+                0.0,
+                0.64
+              ],
+              "flag": 0,
+              "raw_uv": [
+                1984,
+                0
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                0,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                0
+              ],
+              "blender_normal": [
+                -0.7071067811865476,
+                -0.0,
+                -0.7071067811865476
+              ],
+              "source_array": "coin_seg3_vertex_030056C0",
+              "source_index": 2,
+              "uv": [
+                1.9375,
+                1.0
+              ]
+            },
+            {
+              "source_position": [
+                -32,
+                64,
+                0
+              ],
+              "blender_position": [
+                -0.32,
+                0.0,
+                0.64
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                0
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                0,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                0
+              ],
+              "blender_normal": [
+                -0.7071067811865476,
+                -0.0,
+                -0.7071067811865476
+              ],
+              "source_array": "coin_seg3_vertex_030056C0",
+              "source_index": 3,
+              "uv": [
+                0.0,
+                1.0
+              ]
+            }
+          ],
+          "triangles": [
+            [
+              0,
+              1,
+              2
+            ],
+            [
+              0,
+              2,
+              3
+            ]
+          ]
+        }
+      ],
+      "triangle_count": 2
+    },
+    "LAYER_ALPHA|coin_seg3_dl_03007878": {
+      "root_display_list": "coin_seg3_dl_03007878",
+      "layer": "LAYER_ALPHA",
+      "draw_calls": [
+        {
+          "material": {
+            "texture_symbol": "coin_seg3_texture_03006F80",
+            "texture_asset": "actors/coin/coin_tilt_left.ia16.png",
+            "texture_size": [
+              32,
+              32
+            ],
+            "texture_enabled": true,
+            "lighting": false,
+            "texture_gen": false,
+            "combine_mode": "G_CC_MODULATEIA, G_CC_MODULATEIA",
+            "wrap_s": "clamp",
+            "wrap_t": "clamp",
+            "env_color": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "layer": "LAYER_ALPHA"
+          },
+          "vertices": [
+            {
+              "source_position": [
+                -32,
+                0,
+                0
+              ],
+              "blender_position": [
+                -0.32,
+                0.0,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                1984
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                0,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                0
+              ],
+              "blender_normal": [
+                -0.7071067811865476,
+                -0.0,
+                -0.7071067811865476
+              ],
+              "source_array": "coin_seg3_vertex_030056C0",
+              "source_index": 0,
+              "uv": [
+                0.0,
+                -0.9375
+              ]
+            },
+            {
+              "source_position": [
+                32,
+                0,
+                0
+              ],
+              "blender_position": [
+                0.32,
+                0.0,
+                0.0
+              ],
+              "flag": 0,
+              "raw_uv": [
+                1984,
+                1984
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                0,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                0
+              ],
+              "blender_normal": [
+                -0.7071067811865476,
+                -0.0,
+                -0.7071067811865476
+              ],
+              "source_array": "coin_seg3_vertex_030056C0",
+              "source_index": 1,
+              "uv": [
+                1.9375,
+                -0.9375
+              ]
+            },
+            {
+              "source_position": [
+                32,
+                64,
+                0
+              ],
+              "blender_position": [
+                0.32,
+                0.0,
+                0.64
+              ],
+              "flag": 0,
+              "raw_uv": [
+                1984,
+                0
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                0,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                0
+              ],
+              "blender_normal": [
+                -0.7071067811865476,
+                -0.0,
+                -0.7071067811865476
+              ],
+              "source_array": "coin_seg3_vertex_030056C0",
+              "source_index": 2,
+              "uv": [
+                1.9375,
+                1.0
+              ]
+            },
+            {
+              "source_position": [
+                -32,
+                64,
+                0
+              ],
+              "blender_position": [
+                -0.32,
+                0.0,
+                0.64
+              ],
+              "flag": 0,
+              "raw_uv": [
+                0,
+                0
+              ],
+              "rgba_bytes": [
+                255,
+                255,
+                0,
+                255
+              ],
+              "normal_s8": [
+                -1,
+                -1,
+                0
+              ],
+              "blender_normal": [
+                -0.7071067811865476,
+                -0.0,
+                -0.7071067811865476
+              ],
+              "source_array": "coin_seg3_vertex_030056C0",
+              "source_index": 3,
+              "uv": [
+                0.0,
+                1.0
+              ]
+            }
+          ],
+          "triangles": [
+            [
+              0,
+              1,
+              2
+            ],
+            [
+              0,
+              2,
+              3
+            ]
+          ]
+        }
+      ],
+      "triangle_count": 2
+    }
+  },
+  "collisions": {},
+  "animations": [],
+  "validation": {
+    "vertex_array_count": 3,
+    "source_vertex_count": 12,
+    "display_list_count": 14,
+    "geo_display_list_use_count": 8,
+    "render_mesh_count": 4,
+    "render_triangle_count": 8,
+    "joint_count": 0,
+    "animation_count": 0,
+    "collision_mesh_count": 0,
+    "collision_triangle_count": 0,
+    "all_collision_counts_valid": true,
+    "warnings": []
+  }
+}

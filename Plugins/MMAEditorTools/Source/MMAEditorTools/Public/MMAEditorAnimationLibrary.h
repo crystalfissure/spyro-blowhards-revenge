@@ -48,6 +48,17 @@ public:
     UFUNCTION(BlueprintCallable, Category = "MMA|Blueprint")
     static bool CompileBlueprint(UBlueprint* Blueprint);
 
+    /**
+     * Prevents club-attack enemies from evaluating target-dependent Tick logic
+     * while their inherited alert-target array is empty.
+     */
+    UFUNCTION(BlueprintCallable, Category = "MMA|Blueprint")
+    static bool AddClubAttackAlertTargetGuard(UBlueprint* Blueprint);
+
+    /** Makes the shared nearest-alert-player function safe for an empty array. */
+    UFUNCTION(BlueprintCallable, Category = "MMA|Blueprint")
+    static bool AddNearestAlertPlayerEmptyArrayGuard(UBlueprint* Blueprint);
+
     UFUNCTION(BlueprintCallable, Category = "MMA|Blueprint")
     static bool ConfigureMMAHedgeTrimmerBehavior(
         UBlueprint* Blueprint,
