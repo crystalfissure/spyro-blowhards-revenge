@@ -66,10 +66,6 @@
 		{
 			"Name": "PS1IsoGate",
 			"Enabled": true
-		},
-		{
-			"Name": "PythonScriptPlugin",
-			"Enabled": true
 		}
 	]
 }
