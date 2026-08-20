@@ -18,6 +18,7 @@ public:
     virtual void OnConstruction(const FTransform& Transform) override;
     virtual void Tick(float DeltaSeconds) override;
     virtual void SetCurrentAct(int32 NewAct) override;
+    virtual void ResetForAct_Implementation() override;
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SM64|Components")
     USceneComponent* SceneRoot;
@@ -26,10 +27,16 @@ public:
     UStaticMeshComponent* PlatformMesh;
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SM64|Components")
+    UStaticMeshComponent* CollisionMesh;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SM64|Components")
     UBoxComponent* RiderSensor;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SM64|Visual")
     UStaticMesh* DefaultMesh = nullptr;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SM64|Collision")
+    UStaticMesh* DefaultCollisionMesh = nullptr;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SM64|Motion")
     ESM64PlatformMotion Motion = ESM64PlatformMotion::None;
@@ -96,6 +103,7 @@ protected:
         int32 OtherBodyIndex);
 
     FTransform HomeTransform;
+    bool bHomeTransformInitialized = false;
     double StepAccumulator = 0.0;
     int64 SimulationFrame = 0;
     int32 MotionAction = 0;
@@ -103,6 +111,8 @@ protected:
     float VerticalVelocity = 0.0f;
     float PitchVelocity = 0.0f;
     float RollVelocity = 0.0f;
+    float RollAcceleration = 0.0f;
+    float TumblingFloorHeight = 0.0f;
     float CurrentForwardSpeed = 0.0f;
     bool bInsideSimulationStep = false;
     TArray<TWeakObjectPtr<AActor>> Riders;

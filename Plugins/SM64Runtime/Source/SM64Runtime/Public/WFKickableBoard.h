@@ -16,6 +16,7 @@ public:
 
     virtual void OnConstruction(const FTransform& Transform) override;
     virtual void Tick(float DeltaSeconds) override;
+    virtual void ResetForAct_Implementation() override;
     virtual bool HandleSM64Attack_Implementation(
         ESM64AttackType AttackType,
         AActor* InstigatorActor,
@@ -25,11 +26,17 @@ public:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SM64|Components")
     UStaticMeshComponent* BoardMesh;
 
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SM64|Components")
+    UStaticMeshComponent* CollisionMesh;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SM64|Visual")
     UStaticMesh* UprightMesh = nullptr;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SM64|Visual")
     UStaticMesh* FelledMesh = nullptr;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SM64|Collision")
+    UStaticMesh* CollisionAsset = nullptr;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SM64|Motion")
     float SimulationHz = 30.0f;
@@ -50,5 +57,6 @@ protected:
     float RockAmplitudeUnits = 1600.0f;
     float PitchVelocityUnits = 0.0f;
     FRotator HomeRotation;
+    bool bHomeRotationInitialized = false;
     TWeakObjectPtr<AActor> LastInstigator;
 };

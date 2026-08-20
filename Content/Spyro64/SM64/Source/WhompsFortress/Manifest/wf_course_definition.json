@@ -1,0 +1,266 @@
+{
+  "format": "spyro64.sm64.course_definition",
+  "version": 1,
+  "course_id": "WF",
+  "sm64_course_symbol": "COURSE_WF",
+  "sm64_course_number": 2,
+  "spyro_level_index": 5,
+  "display_name": "Whomp's Fortress",
+  "level_package": "/Game/Spyro64/Levels/05_Level5",
+  "return_level": "/Game/Spyro64/Levels/00_Homeworld",
+  "fixed_step_hz": 30,
+  "missions": [
+    {
+      "star_index": 0,
+      "display_name": "Chip Off Whomp's Block",
+      "preferred_act": 1,
+      "visible_act_mask": 1,
+      "target_type": "whomp_king_dynamic",
+      "eject_on_collect": true,
+      "source_location_cm": [
+        180,
+        3880,
+        340
+      ],
+      "unreal_location_cm": [
+        180,
+        340,
+        3880
+      ]
+    },
+    {
+      "star_index": 1,
+      "display_name": "To the Top of the Fortress",
+      "preferred_act": 2,
+      "visible_act_mask": 62,
+      "target_type": "static",
+      "eject_on_collect": true,
+      "source_location_cm": [
+        300,
+        5550,
+        0
+      ],
+      "unreal_location_cm": [
+        300,
+        0,
+        5550
+      ]
+    },
+    {
+      "star_index": 2,
+      "display_name": "Shoot into the Wild Blue",
+      "preferred_act": 3,
+      "visible_act_mask": 63,
+      "target_type": "static",
+      "eject_on_collect": true,
+      "source_location_cm": [
+        -2500,
+        1500,
+        -750
+      ],
+      "unreal_location_cm": [
+        -2500,
+        -750,
+        1500
+      ]
+    },
+    {
+      "star_index": 3,
+      "display_name": "Red Coins on the Floating Isle",
+      "preferred_act": 4,
+      "visible_act_mask": 63,
+      "target_type": "red_coin_marker",
+      "eject_on_collect": true,
+      "source_location_cm": [
+        4600,
+        550,
+        2500
+      ],
+      "unreal_location_cm": [
+        4600,
+        2500,
+        550
+      ]
+    },
+    {
+      "star_index": 4,
+      "display_name": "Fall onto the Caged Island",
+      "preferred_act": 5,
+      "visible_act_mask": 63,
+      "target_type": "static",
+      "eject_on_collect": true,
+      "source_location_cm": [
+        2880,
+        4300,
+        190
+      ],
+      "unreal_location_cm": [
+        2880,
+        190,
+        4300
+      ]
+    },
+    {
+      "star_index": 5,
+      "display_name": "Blast Away the Wall",
+      "preferred_act": 6,
+      "visible_act_mask": 63,
+      "target_type": "cannon_wall_marker",
+      "eject_on_collect": true,
+      "source_location_cm": [
+        590,
+        2450,
+        2650
+      ],
+      "unreal_location_cm": [
+        590,
+        2650,
+        2450
+      ]
+    }
+  ],
+  "bonus_star": {
+    "star_index": 6,
+    "display_name": "100-Coin Star",
+    "coin_threshold": 100,
+    "eject_on_collect": false
+  },
+  "entrance": {
+    "mario_base_start": {
+      "source_location_cm": [
+        2600,
+        256,
+        5120
+      ],
+      "unreal_location_cm": [
+        2600,
+        5120,
+        256
+      ],
+      "source_yaw_deg": 90,
+      "unreal_yaw_deg": -90
+    },
+    "warp_0A": {
+      "source_location_cm": [
+        2600,
+        1256,
+        5120
+      ],
+      "unreal_location_cm": [
+        2600,
+        5120,
+        1256
+      ],
+      "source_yaw_deg": 90,
+      "unreal_yaw_deg": -90
+    }
+  },
+  "warps": [
+    {
+      "warp_id": "0B",
+      "destination_warp_id": "0C",
+      "source_location_cm": [
+        -2925,
+        2560,
+        -947
+      ],
+      "unreal_location_cm": [
+        -2925,
+        -947,
+        2560
+      ],
+      "source_yaw_deg": 19,
+      "unreal_yaw_deg": -19
+    },
+    {
+      "warp_id": "0C",
+      "destination_warp_id": "0B",
+      "source_location_cm": [
+        2548,
+        1075,
+        -3962
+      ],
+      "unreal_location_cm": [
+        2548,
+        -3962,
+        1075
+      ],
+      "source_yaw_deg": 51,
+      "unreal_yaw_deg": -51
+    }
+  ],
+  "water": {
+    "source_bounds_xz_cm": [
+      -1023,
+      1024,
+      3226,
+      4096
+    ],
+    "unreal_bounds_xy_cm": [
+      -1023,
+      1024,
+      3226,
+      4096
+    ],
+    "surface_height_cm": 973,
+    "alpha": 120,
+    "rotation_speed": 10,
+    "texture_scale": 10
+  },
+  "death_plane_height_cm": -3071,
+  "terrain_surface_mappings": [
+    {
+      "surface": "SURFACE_DEFAULT",
+      "triangles": 409,
+      "physical_material": "PM_SM64_Default"
+    },
+    {
+      "surface": "SURFACE_DEATH_PLANE",
+      "triangles": 2,
+      "hazard": true
+    },
+    {
+      "surface": "SURFACE_VERY_SLIPPERY",
+      "triangles": 14,
+      "physical_material": "PM_SM64_VerySlippery"
+    },
+    {
+      "surface": "SURFACE_SLIPPERY",
+      "triangles": 43,
+      "physical_material": "PM_SM64_Slippery"
+    },
+    {
+      "surface": "SURFACE_NOT_SLIPPERY",
+      "triangles": 4,
+      "physical_material": "PM_SM64_NotSlippery"
+    },
+    {
+      "surface": "SURFACE_WALL_MISC",
+      "triangles": 143,
+      "physical_material": "PM_SM64_WallMisc"
+    },
+    {
+      "surface": "SURFACE_NOISE_DEFAULT",
+      "triangles": 15,
+      "physical_material": "PM_SM64_NoiseDefault"
+    },
+    {
+      "surface": "SURFACE_BOSS_FIGHT_CAMERA",
+      "triangles": 5,
+      "camera_mode": "BossFight"
+    },
+    {
+      "surface": "SURFACE_CAMERA_MIDDLE",
+      "triangles": 5,
+      "camera_mode": "Middle"
+    }
+  ],
+  "canonical_fixed_coin_value": 100,
+  "red_coin_count": 8,
+  "act_rules": {
+    "whomp_king": 1,
+    "tower_systems": 62,
+    "buddy_cannon_hoot": 60,
+    "all_acts": 63
+  }
+}

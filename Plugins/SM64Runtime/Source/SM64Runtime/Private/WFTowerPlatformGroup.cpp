@@ -1,5 +1,6 @@
 #include "WFTowerPlatformGroup.h"
 
+#include "Components/SceneComponent.h"
 #include "Engine/World.h"
 #include "GameFramework/Pawn.h"
 #include "Kismet/GameplayStatics.h"
@@ -7,6 +8,7 @@
 AWFTowerPlatformGroup::AWFTowerPlatformGroup()
 {
     PrimaryActorTick.bCanEverTick = true;
+    RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("SceneRoot"));
     PlatformClass = ASM64MovingPlatformBase::StaticClass();
     ActMask = 0x3E;
 }
@@ -18,6 +20,11 @@ void AWFTowerPlatformGroup::SetCurrentAct(int32 NewAct)
     {
         DestroyPlatforms();
     }
+}
+
+void AWFTowerPlatformGroup::ResetForAct_Implementation()
+{
+    DestroyPlatforms();
 }
 
 void AWFTowerPlatformGroup::Tick(float DeltaSeconds)
@@ -73,6 +80,7 @@ void AWFTowerPlatformGroup::SpawnPlatforms()
         }
         Platform->StableId = FName(*FString::Printf(TEXT("WF_TowerPlatform_%02d"), Index));
         Platform->DefaultMesh = Index == 7 && ElevatorMesh ? ElevatorMesh : PlatformMesh;
+        Platform->DefaultCollisionMesh = PlatformCollisionMesh;
         Platform->InitialPhaseFrames = 0;
         if (Index == 7)
         {
@@ -83,7 +91,10 @@ void AWFTowerPlatformGroup::SpawnPlatforms()
             Platform->Motion = ESM64PlatformMotion::TowerSliding;
             Platform->TravelDistance = 380.0f;
             Platform->SpeedPerFrame = 3.0f;
-            Platform->MotionDirection = Rotation.Vector();
+            // SM64 forward velocity is (sin(yaw), cos(yaw)) in source X/Z.
+            // After source Z maps to UE Y this remains (sin, cos), while the
+            // visible mesh yaw itself is negated independently.
+            Platform->MotionDirection = FVector(FMath::Sin(Radians), FMath::Cos(Radians), 0.0f);
         }
         UGameplayStatics::FinishSpawningActor(Platform, SpawnTransform);
         Platforms.Add(Platform);

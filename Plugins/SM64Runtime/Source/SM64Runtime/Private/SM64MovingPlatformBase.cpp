@@ -1,8 +1,10 @@
 #include "SM64MovingPlatformBase.h"
 
 #include "Components/PrimitiveComponent.h"
+#include "Engine/World.h"
 #include "GameFramework/Pawn.h"
 #include "Misc/Crc.h"
+#include "SM64CourseManager.h"
 
 namespace
 {
@@ -21,8 +23,16 @@ ASM64MovingPlatformBase::ASM64MovingPlatformBase()
     PlatformMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("PlatformMesh"));
     PlatformMesh->SetupAttachment(SceneRoot);
     PlatformMesh->SetMobility(EComponentMobility::Movable);
-    PlatformMesh->SetCollisionProfileName(TEXT("BlockAllDynamic"));
+    PlatformMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
     PlatformMesh->SetGenerateOverlapEvents(false);
+
+    CollisionMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CollisionMesh"));
+    CollisionMesh->SetupAttachment(SceneRoot);
+    CollisionMesh->SetMobility(EComponentMobility::Movable);
+    CollisionMesh->SetCollisionProfileName(TEXT("BlockAllDynamic"));
+    CollisionMesh->SetGenerateOverlapEvents(false);
+    CollisionMesh->SetVisibility(false, true);
+    CollisionMesh->SetHiddenInGame(true, true);
 
     RiderSensor = CreateDefaultSubobject<UBoxComponent>(TEXT("RiderSensor"));
     RiderSensor->SetupAttachment(SceneRoot);
@@ -39,6 +49,10 @@ void ASM64MovingPlatformBase::OnConstruction(const FTransform& Transform)
     {
         PlatformMesh->SetStaticMesh(DefaultMesh);
     }
+    if (DefaultCollisionMesh)
+    {
+        CollisionMesh->SetStaticMesh(DefaultCollisionMesh);
+    }
     RiderSensor->SetBoxExtent(RiderSensorExtent);
     RiderSensor->SetRelativeLocation(RiderSensorOffset);
 }
@@ -46,30 +60,41 @@ void ASM64MovingPlatformBase::OnConstruction(const FTransform& Transform)
 void ASM64MovingPlatformBase::BeginPlay()
 {
     Super::BeginPlay();
+    if (const ASM64CourseManager* Manager = ASM64CourseManager::FindCourseManager(this))
+    {
+        SessionSeed = Manager->SessionSeed;
+    }
     RiderSensor->OnComponentBeginOverlap.AddDynamic(this, &ASM64MovingPlatformBase::OnRiderBeginOverlap);
     RiderSensor->OnComponentEndOverlap.AddDynamic(this, &ASM64MovingPlatformBase::OnRiderEndOverlap);
-    ResetMotion();
-}
-
-void ASM64MovingPlatformBase::SetCurrentAct(int32 NewAct)
-{
-    Super::SetCurrentAct(NewAct);
-    if (bActEnabled)
-    {
-        ResetMotion();
-    }
-}
-
-void ASM64MovingPlatformBase::ResetMotion()
-{
     HomeTransform = GetActorTransform();
     if (Motion == ESM64PlatformMotion::Sliding)
     {
         FVector Adjusted = HomeTransform.GetLocation();
         Adjusted.X += 2.0f;
         HomeTransform.SetLocation(Adjusted);
-        SetActorTransform(HomeTransform, false, nullptr, ETeleportType::TeleportPhysics);
     }
+    bHomeTransformInitialized = true;
+    ResetMotion();
+}
+
+void ASM64MovingPlatformBase::SetCurrentAct(int32 NewAct)
+{
+    Super::SetCurrentAct(NewAct);
+}
+
+void ASM64MovingPlatformBase::ResetForAct_Implementation()
+{
+    ResetMotion();
+}
+
+void ASM64MovingPlatformBase::ResetMotion()
+{
+    if (!bHomeTransformInitialized)
+    {
+        HomeTransform = GetActorTransform();
+        bHomeTransformInitialized = true;
+    }
+    SetActorTransform(HomeTransform, false, nullptr, ETeleportType::TeleportPhysics);
 
     const FString Identity = StableId.IsNone() ? GetPathName() : StableId.ToString();
     RandomStream.Initialize(SessionSeed ^ static_cast<int32>(FCrc::StrCrc32(*Identity)));
@@ -82,7 +107,10 @@ void ASM64MovingPlatformBase::ResetMotion()
     VerticalVelocity = 0.0f;
     PitchVelocity = 0.0f;
     RollVelocity = 0.0f;
+    RollAcceleration = 0.0f;
+    TumblingFloorHeight = HomeTransform.GetLocation().Z - 10000.0f;
     CurrentForwardSpeed = 0.0f;
+    Riders.Reset();
 }
 
 void ASM64MovingPlatformBase::Tick(float DeltaSeconds)
@@ -129,33 +157,39 @@ void ASM64MovingPlatformBase::StepSimulation()
         {
             if (ActionTimer > 100)
             {
+                CurrentForwardSpeed = SpeedPerFrame;
                 SetMotionAction(1);
             }
         }
         else if (MotionAction == 1)
         {
-            Location.X += SpeedPerFrame;
-            if (ActionTimer >= FMath::FloorToInt(500.0f / FMath::Max(1.0f, SpeedPerFrame)))
+            if (static_cast<float>(ActionTimer) >= 500.0f / FMath::Max(1.0f, SpeedPerFrame))
             {
                 Location.X = HomeTransform.GetLocation().X + TravelDistance;
+                CurrentForwardSpeed = 0.0f;
             }
             if (ActionTimer == 60)
             {
+                CurrentForwardSpeed = -SpeedPerFrame;
                 SetMotionAction(2);
             }
         }
         else
         {
-            Location.X -= SpeedPerFrame;
-            if (ActionTimer >= FMath::FloorToInt(500.0f / FMath::Max(1.0f, SpeedPerFrame)))
+            if (static_cast<float>(ActionTimer) >= 500.0f / FMath::Max(1.0f, SpeedPerFrame))
             {
                 Location.X = HomeTransform.GetLocation().X;
+                CurrentForwardSpeed = 0.0f;
             }
             if (ActionTimer == 90)
             {
+                CurrentForwardSpeed = SpeedPerFrame;
                 SetMotionAction(1);
             }
         }
+        // OBJ_FLAG_MOVE_XZ_USING_FVEL is evaluated after the behavior script,
+        // so a velocity/action change affects this same source frame.
+        Location.X += CurrentForwardSpeed;
         break;
 
     case ESM64PlatformMotion::SmallBomp:
@@ -170,32 +204,44 @@ void ASM64MovingPlatformBase::StepSimulation()
         }
         else if (MotionAction == 1)
         {
-            Location.X = FMath::Min(
-                Location.X + CurrentForwardSpeed,
-                HomeTransform.GetLocation().X + 150.0f);
+            if (Location.X > HomeTransform.GetLocation().X + 150.0f)
+            {
+                Location.X = HomeTransform.GetLocation().X + 150.0f;
+                CurrentForwardSpeed = 0.0f;
+            }
             if (ActionTimer == 15)
             {
+                CurrentForwardSpeed = Motion == ESM64PlatformMotion::SmallBomp ? 40.0f : 10.0f;
                 SetMotionAction(2);
             }
         }
         else if (MotionAction == 2)
         {
-            const float ExtendSpeed = Motion == ESM64PlatformMotion::SmallBomp ? 40.0f : 10.0f;
-            Location.X = FMath::Min(Location.X + ExtendSpeed, HomeTransform.GetLocation().X + 530.0f);
+            if (Location.X > HomeTransform.GetLocation().X + 530.0f)
+            {
+                Location.X = HomeTransform.GetLocation().X + 530.0f;
+                CurrentForwardSpeed = 0.0f;
+            }
             if (ActionTimer == 60)
             {
+                CurrentForwardSpeed = -10.0f;
                 SetMotionAction(3);
             }
         }
         else
         {
-            Location.X = FMath::Max(Location.X - 10.0f, HomeTransform.GetLocation().X + 30.0f);
+            if (Location.X < HomeTransform.GetLocation().X + 30.0f)
+            {
+                Location.X = HomeTransform.GetLocation().X + 30.0f;
+                CurrentForwardSpeed = 0.0f;
+            }
             if (ActionTimer == 90)
             {
                 CurrentForwardSpeed = 25.0f;
                 SetMotionAction(1);
             }
         }
+        Location.X += CurrentForwardSpeed;
         break;
 
     case ESM64PlatformMotion::RotatingWood:
@@ -217,7 +263,12 @@ void ASM64MovingPlatformBase::StepSimulation()
         break;
 
     case ESM64PlatformMotion::RotatingContinuous:
-        Rotation.Yaw += RotationDegreesPerFrame;
+        // Pure periodic movers derive their pose from the integer course frame,
+        // avoiding accumulated floating-point drift after long sessions/hitches.
+        Rotation = HomeTransform.Rotator();
+        Rotation.Yaw += FMath::Fmod(
+            RotationDegreesPerFrame * static_cast<float>(SimulationFrame + 1),
+            360.0f);
         break;
 
     case ESM64PlatformMotion::TowerSliding:
@@ -266,26 +317,45 @@ void ASM64MovingPlatformBase::StepSimulation()
         break;
 
     case ESM64PlatformMotion::TumblingPiece:
-        if (MotionAction == 1 && ActionTimer > 5)
+        if (MotionAction == 1)
         {
-            SetMotionAction(2);
-            RollVelocity = RandomStream.RandRange(0, 1) == 0
-                ? -0x80 * PlatformAngleUnitToDegrees
-                : 0x80 * PlatformAngleUnitToDegrees;
+            FHitResult FloorHit;
+            FCollisionQueryParams FloorQuery(SCENE_QUERY_STAT(SM64TumblingFloor), false, this);
+            if (GetWorld() && GetWorld()->LineTraceSingleByChannel(
+                FloorHit,
+                Location + FVector(0.0f, 0.0f, 10.0f),
+                Location - FVector(0.0f, 0.0f, 10000.0f),
+                ECC_WorldStatic,
+                FloorQuery))
+            {
+                TumblingFloorHeight = FloorHit.ImpactPoint.Z;
+            }
+            if (ActionTimer > 5)
+            {
+                SetMotionAction(2);
+                RollAcceleration = RandomStream.RandRange(0, 1) == 0
+                    ? -0x80 * PlatformAngleUnitToDegrees
+                    : 0x80 * PlatformAngleUnitToDegrees;
+            }
         }
         else if (MotionAction == 2)
         {
             PitchVelocity = FMath::Min(
                 PitchVelocity + 0x80 * PlatformAngleUnitToDegrees,
                 0x400 * PlatformAngleUnitToDegrees);
-            RollVelocity = FMath::Clamp(
-                RollVelocity + FMath::Sign(RollVelocity) * 0x80 * PlatformAngleUnitToDegrees,
-                -0x400 * PlatformAngleUnitToDegrees,
-                0x400 * PlatformAngleUnitToDegrees);
+            if (RollVelocity > -0x400 * PlatformAngleUnitToDegrees
+                && RollVelocity < 0x400 * PlatformAngleUnitToDegrees)
+            {
+                RollVelocity += RollAcceleration;
+            }
             VerticalVelocity -= 3.0f;
             Location.Z += VerticalVelocity;
             Rotation.Pitch += PitchVelocity;
             Rotation.Roll += RollVelocity;
+            if (Location.Z < TumblingFloorHeight - 300.0f)
+            {
+                SetMotionAction(3);
+            }
         }
         break;
 

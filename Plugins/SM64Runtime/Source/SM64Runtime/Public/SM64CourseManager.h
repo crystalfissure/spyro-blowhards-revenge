@@ -9,6 +9,8 @@
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSM64CountChanged, int32, NewCount);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FSM64StarCollected, int32, StarIndex, bool, bIs100CoinStar);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSM64ActChanged, int32, NewAct);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FSM64CourseGoalReached);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSM64OneUpCollected, int32, SessionOneUpCount);
 
 UCLASS()
 class SM64RUNTIME_API USM64ProgressSaveGame : public USaveGame
@@ -40,14 +42,33 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SM64|Save")
     bool bUseStandaloneSaveFallback = true;
 
+    /** Prefer the loaded Spyro64 SaveGame lineage when travelling from its title/homeworld flow. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SM64|Save")
+    bool bUseSpyroSaveLineage = true;
+
+    /** Additive Name->int map on 64_SaveData_S1 used for backwards-compatible SM64 keys. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SM64|Save")
+    FName SpyroProgressMapProperty = TEXT("SM64_CourseProgress");
+
+    UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = "SM64|Save")
+    bool bUsingSpyroSaveLineage = false;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SM64|Save")
     FString StandaloneSaveSlot = TEXT("Spyro64_SM64Progress");
+
+    /** Native fallback used when a course Blueprint does not override the exit event. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SM64|Course")
+    bool bAutoOpenReturnLevel = true;
 
     UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = "SM64|Course")
     int32 CoinCount = 0;
 
     UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = "SM64|Course")
     int32 RedCoinCount = 0;
+
+    /** Extra lives collected in this loaded course session. */
+    UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = "SM64|Course")
+    int32 SessionOneUpCount = 0;
 
     UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = "SM64|Course")
     FSM64CourseProgress Progress;
@@ -64,6 +85,15 @@ public:
     UPROPERTY(BlueprintAssignable, Category = "SM64|Events")
     FSM64ActChanged OnActChanged;
 
+    UPROPERTY(BlueprintAssignable, Category = "SM64|Events")
+    FSM64CourseGoalReached OnRedCoinGoalReached;
+
+    UPROPERTY(BlueprintAssignable, Category = "SM64|Events")
+    FSM64CourseGoalReached On100CoinGoalReached;
+
+    UPROPERTY(BlueprintAssignable, Category = "SM64|Events")
+    FSM64OneUpCollected OnOneUpCollected;
+
     UFUNCTION(BlueprintCallable, Category = "SM64|Course")
     void SetAct(int32 NewAct, bool bResetTransientState = true);
 
@@ -75,6 +105,16 @@ public:
 
     UFUNCTION(BlueprintCallable, Category = "SM64|Collectibles")
     void CollectStar(int32 StarIndex, bool bIs100CoinStar);
+
+    /** Native SM64 life accounting plus a Blueprint handoff to Spyro's life UI/save system. */
+    UFUNCTION(BlueprintCallable, Category = "SM64|Collectibles")
+    void AwardOneUp(AActor* Collector);
+
+    UFUNCTION(BlueprintCallable, Category = "SM64|Course")
+    void SetCannonUnlocked(bool bUnlocked = true);
+
+    UFUNCTION(BlueprintPure, Category = "SM64|Course")
+    bool HasMissionStar(int32 StarIndex) const { return Progress.HasMissionStar(StarIndex); }
 
     UFUNCTION(BlueprintCallable, Category = "SM64|Course")
     void RetryCurrentAct();
@@ -94,7 +134,19 @@ public:
     UFUNCTION(BlueprintImplementableEvent, Category = "SM64|Course")
     void OnRequestMissionExit(int32 CollectedStarIndex);
 
+    UFUNCTION(BlueprintImplementableEvent, Category = "SM64|Course")
+    void OnCannonUnlockChanged(bool bUnlocked);
+
+    UFUNCTION(BlueprintImplementableEvent, Category = "SM64|Collectibles")
+    void OnRequestSpyroOneUp(AActor* Collector, int32 NewSessionOneUpCount);
+
 protected:
     virtual void BeginPlay() override;
-    void ApplyActGating();
+    void ApplyActGating(bool bResetActors);
+    void RevealGoalStar(int32 StarIndex, bool bIs100CoinStar, bool bRedCoinStyle);
+    bool TryLoadProgressFromSpyroSave();
+    bool TryWriteProgressToSpyroSave();
+
+    bool bRedCoinGoalTriggered = false;
+    bool b100CoinGoalTriggered = false;
 };

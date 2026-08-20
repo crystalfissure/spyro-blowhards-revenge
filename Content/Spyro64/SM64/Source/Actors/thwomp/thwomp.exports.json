@@ -1,0 +1,47 @@
+{
+  "format": "spyro64.sm64_actor_ue_exports",
+  "format_version": 1,
+  "actor": "thwomp",
+  "fbx_coordinate_options": {
+    "axis_forward": "-Z",
+    "axis_up": "Y",
+    "apply_unit_scale": true,
+    "apply_scale_options": "FBX_SCALE_UNITS",
+    "source_units": "Blender metres; FBX unit metadata enabled for UE centimetres"
+  },
+  "rig": {
+    "type": "static",
+    "bone_count": 0,
+    "weight_policy": null,
+    "actions": []
+  },
+  "switches": [],
+  "exports": [
+    {
+      "role": "static",
+      "variant": "primary",
+      "path": "fbx/thwomp_static.fbx",
+      "sha256": "fdd0433051a967cf399e6a658cb53d7749a5b6db27af98e0b5244d69bf93b113",
+      "size": 21724,
+      "triangle_count": 44,
+      "vertex_count": 71,
+      "bone_count": 0,
+      "animation_count": 0,
+      "sample_rate": null,
+      "billboard_part_count": 0,
+      "missing_bone_vertex_count": 0
+    },
+    {
+      "role": "collision",
+      "variant": "exact_source_collision",
+      "path": "fbx/thwomp_collision.fbx",
+      "sha256": "475754f98df6f1c97936d3407270b25b560173932c7b872a7ab79b5c8241b5c8",
+      "size": 20316,
+      "triangle_count": 72,
+      "mesh_count": 2,
+      "surfaces": [
+        "SURFACE_NO_CAM_COLLISION"
+      ]
+    }
+  ]
+}

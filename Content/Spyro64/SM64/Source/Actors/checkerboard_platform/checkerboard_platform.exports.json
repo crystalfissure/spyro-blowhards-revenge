@@ -1,0 +1,47 @@
+{
+  "format": "spyro64.sm64_actor_ue_exports",
+  "format_version": 1,
+  "actor": "checkerboard_platform",
+  "fbx_coordinate_options": {
+    "axis_forward": "-Z",
+    "axis_up": "Y",
+    "apply_unit_scale": true,
+    "apply_scale_options": "FBX_SCALE_UNITS",
+    "source_units": "Blender metres; FBX unit metadata enabled for UE centimetres"
+  },
+  "rig": {
+    "type": "static",
+    "bone_count": 0,
+    "weight_policy": null,
+    "actions": []
+  },
+  "switches": [],
+  "exports": [
+    {
+      "role": "static",
+      "variant": "primary",
+      "path": "fbx/checkerboard_platform_static.fbx",
+      "sha256": "1966490c1fab87599dcc09778c0f190dc981dbad74388532711c6f2f921c1264",
+      "size": 19084,
+      "triangle_count": 12,
+      "vertex_count": 24,
+      "bone_count": 0,
+      "animation_count": 0,
+      "sample_rate": null,
+      "billboard_part_count": 0,
+      "missing_bone_vertex_count": 0
+    },
+    {
+      "role": "collision",
+      "variant": "exact_source_collision",
+      "path": "fbx/checkerboard_platform_collision.fbx",
+      "sha256": "8af4e35dcf5f502257c5e932e0ba45d365d4843914d66ae2e283d2cb057ef444",
+      "size": 15452,
+      "triangle_count": 12,
+      "mesh_count": 1,
+      "surfaces": [
+        "SURFACE_WALL_MISC"
+      ]
+    }
+  ]
+}

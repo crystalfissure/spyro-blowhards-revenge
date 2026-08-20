@@ -1,0 +1,50 @@
+{
+  "format": "spyro64.sm64_actor_ue_exports",
+  "format_version": 1,
+  "actor": "hoot",
+  "fbx_coordinate_options": {
+    "axis_forward": "-Z",
+    "axis_up": "Y",
+    "apply_unit_scale": true,
+    "apply_scale_options": "FBX_SCALE_UNITS",
+    "source_units": "Blender metres; FBX unit metadata enabled for UE centimetres"
+  },
+  "rig": {
+    "type": "rigid GeoLayout parts",
+    "bone_count": 27,
+    "weight_policy": "exactly one influence at weight 1.0 per vertex",
+    "actions": [
+      {
+        "name": "A_hoot_00_hoot_seg5_anim_050053EC",
+        "source_animation": "hoot_seg5_anim_050053EC",
+        "frame_count": 20,
+        "sample_rate": 30,
+        "flags": 0
+      },
+      {
+        "name": "A_hoot_01_hoot_seg5_anim_05005750",
+        "source_animation": "hoot_seg5_anim_05005750",
+        "frame_count": 10,
+        "sample_rate": 30,
+        "flags": 0
+      }
+    ]
+  },
+  "switches": [],
+  "exports": [
+    {
+      "role": "skeletal",
+      "variant": "primary",
+      "path": "fbx/hoot_skeletal.fbx",
+      "sha256": "6cff499cf1aefda80353a309c67ec7fb378d56505624c5e40efadd88a3df89db",
+      "size": 459628,
+      "triangle_count": 198,
+      "vertex_count": 481,
+      "bone_count": 27,
+      "animation_count": 2,
+      "sample_rate": 30,
+      "billboard_part_count": 0,
+      "missing_bone_vertex_count": 0
+    }
+  ]
+}

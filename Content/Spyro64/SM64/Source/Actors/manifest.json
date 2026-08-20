@@ -21,10 +21,7 @@
       "collision_mesh_count": 1,
       "collision_triangle_count": 12,
       "all_collision_counts_valid": true,
-      "warnings": [],
-      "blend": "whomp/whomp.blend",
-      "blend_sha256": "d15f6933c68730f175cca2c7e5a86ba70b321930466d74c37687182cb281d0b8",
-      "blend_size": 138425
+      "warnings": []
     },
     {
       "actor": "thwomp",
@@ -43,10 +40,7 @@
       "collision_mesh_count": 2,
       "collision_triangle_count": 72,
       "all_collision_counts_valid": true,
-      "warnings": [],
-      "blend": "thwomp/thwomp.blend",
-      "blend_sha256": "0caa1e6062b3bc0c572319e5e021e7ca1c38961e0f2747725ea473ea4c6c7db6",
-      "blend_size": 97604
+      "warnings": []
     },
     {
       "actor": "piranha_plant",
@@ -65,10 +59,7 @@
       "collision_mesh_count": 0,
       "collision_triangle_count": 0,
       "all_collision_counts_valid": true,
-      "warnings": [],
-      "blend": "piranha_plant/piranha_plant.blend",
-      "blend_sha256": "4ff3b0d30916aeb5df95e048e090c6f6809d88490a126827ad7c65396e3c378e",
-      "blend_size": 404555
+      "warnings": []
     },
     {
       "actor": "hoot",
@@ -97,10 +88,7 @@
         "hoot_seg5_dl_050034D8: hoot_seg5_vertex_05003418 requested 12 vertices but contains 6",
         "hoot_seg5_dl_05003600: hoot_seg5_vertex_05003540 requested 12 vertices but contains 6",
         "hoot_seg5_dl_05003728: hoot_seg5_vertex_05003668 requested 12 vertices but contains 6"
-      ],
-      "blend": "hoot/hoot.blend",
-      "blend_sha256": "81a440dc12cb88498c2c1f2053db994bdca21955c5152da8a79bdb2b65d5f5ca",
-      "blend_size": 153057
+      ]
     },
     {
       "actor": "bobomb",
@@ -119,10 +107,7 @@
       "collision_mesh_count": 0,
       "collision_triangle_count": 0,
       "all_collision_counts_valid": true,
-      "warnings": [],
-      "blend": "bobomb/bobomb.blend",
-      "blend_sha256": "978eb5b71c9da0b98caf5abe04bac181ab1e3f38d7961c81fdbd935920f605ee",
-      "blend_size": 123875
+      "warnings": []
     },
     {
       "actor": "bobomb_buddy",
@@ -141,10 +126,7 @@
       "collision_mesh_count": 0,
       "collision_triangle_count": 0,
       "all_collision_counts_valid": true,
-      "warnings": [],
-      "blend": "bobomb_buddy/bobomb_buddy.blend",
-      "blend_sha256": "4e3f95cbc2127d133c5fbc1cf25aa7f852f64ab5d2c356bdd84798e8f4212e76",
-      "blend_size": 123621
+      "warnings": []
     },
     {
       "actor": "bullet_bill",
@@ -163,10 +145,7 @@
       "collision_mesh_count": 0,
       "collision_triangle_count": 0,
       "all_collision_counts_valid": true,
-      "warnings": [],
-      "blend": "bullet_bill/bullet_bill.blend",
-      "blend_sha256": "5dc9c7ec6476427b4f4e7af6825c7e36e037691d5f435bb194a78855ee821e86",
-      "blend_size": 94973
+      "warnings": []
     },
     {
       "actor": "butterfly",
@@ -185,10 +164,7 @@
       "collision_mesh_count": 0,
       "collision_triangle_count": 0,
       "all_collision_counts_valid": true,
-      "warnings": [],
-      "blend": "butterfly/butterfly.blend",
-      "blend_sha256": "e461734931b02890f81554d73d64c21de786df969cbbf87da4df39e4472ed8a9",
-      "blend_size": 101424
+      "warnings": []
     },
     {
       "actor": "cannon_base",
@@ -207,10 +183,7 @@
       "collision_mesh_count": 0,
       "collision_triangle_count": 0,
       "all_collision_counts_valid": true,
-      "warnings": [],
-      "blend": "cannon_base/cannon_base.blend",
-      "blend_sha256": "629ca73978880dc46b44702aa5ab7126406475c1ddd13d991768f43a9e8882ef",
-      "blend_size": 91776
+      "warnings": []
     },
     {
       "actor": "cannon_barrel",
@@ -229,10 +202,7 @@
       "collision_mesh_count": 0,
       "collision_triangle_count": 0,
       "all_collision_counts_valid": true,
-      "warnings": [],
-      "blend": "cannon_barrel/cannon_barrel.blend",
-      "blend_sha256": "d6c63ce624a79f7b4d99a08047cbefd5613f5883be6e00e14d3d2cc4ba09363b",
-      "blend_size": 93273
+      "warnings": []
     },
     {
       "actor": "cannon_lid",
@@ -251,10 +221,7 @@
       "collision_mesh_count": 1,
       "collision_triangle_count": 2,
       "all_collision_counts_valid": true,
-      "warnings": [],
-      "blend": "cannon_lid/cannon_lid.blend",
-      "blend_sha256": "5331c5fad03d0e45ebb52d9d0932c5be9ce05554fb753cc93e14cd9613db7b54",
-      "blend_size": 92245
+      "warnings": []
     },
     {
       "actor": "checkerboard_platform",
@@ -273,10 +240,7 @@
       "collision_mesh_count": 1,
       "collision_triangle_count": 12,
       "all_collision_counts_valid": true,
-      "warnings": [],
-      "blend": "checkerboard_platform/checkerboard_platform.blend",
-      "blend_sha256": "705a138a83d3f7837fd74b091e8656d608a044dcffc47bd8873fa87dab64ec4f",
-      "blend_size": 93722
+      "warnings": []
     },
     {
       "actor": "yellow_coin",
@@ -295,10 +259,7 @@
       "collision_mesh_count": 0,
       "collision_triangle_count": 0,
       "all_collision_counts_valid": true,
-      "warnings": [],
-      "blend": "yellow_coin/yellow_coin.blend",
-      "blend_sha256": "0a23c5c05c7864a3c37447a4f249a9f5363a66151c684b753b29e2cbff016ca1",
-      "blend_size": 98371
+      "warnings": []
     },
     {
       "actor": "blue_coin",
@@ -317,10 +278,7 @@
       "collision_mesh_count": 0,
       "collision_triangle_count": 0,
       "all_collision_counts_valid": true,
-      "warnings": [],
-      "blend": "blue_coin/blue_coin.blend",
-      "blend_sha256": "93378da8a57d29e5085a269155a73d785da7856f4a78dedccfe31f8bb9ef5914",
-      "blend_size": 98376
+      "warnings": []
     },
     {
       "actor": "red_coin",
@@ -339,10 +297,7 @@
       "collision_mesh_count": 0,
       "collision_triangle_count": 0,
       "all_collision_counts_valid": true,
-      "warnings": [],
-      "blend": "red_coin/red_coin.blend",
-      "blend_sha256": "b2ca70de69bec5c472c76b58f8daa8916fc2912bcf01556d4a94388b247ec3b4",
-      "blend_size": 98324
+      "warnings": []
     },
     {
       "actor": "star",
@@ -361,10 +316,7 @@
       "collision_mesh_count": 0,
       "collision_triangle_count": 0,
       "all_collision_counts_valid": true,
-      "warnings": [],
-      "blend": "star/star.blend",
-      "blend_sha256": "3e3ffd70bb83752a374c35d3174148163b1669e43457fea70d1a3dac840bf4dc",
-      "blend_size": 93793
+      "warnings": []
     },
     {
       "actor": "blue_coin_switch",
@@ -383,10 +335,7 @@
       "collision_mesh_count": 1,
       "collision_triangle_count": 10,
       "all_collision_counts_valid": true,
-      "warnings": [],
-      "blend": "blue_coin_switch/blue_coin_switch.blend",
-      "blend_sha256": "ba0967d8953d69e557c93a4329c8b604cb26b2e6a205fe2f79aaf66fdb682b3d",
-      "blend_size": 93678
+      "warnings": []
     },
     {
       "actor": "purple_switch",
@@ -405,10 +354,7 @@
       "collision_mesh_count": 1,
       "collision_triangle_count": 10,
       "all_collision_counts_valid": true,
-      "warnings": [],
-      "blend": "purple_switch/purple_switch.blend",
-      "blend_sha256": "46477e6e051d9b498cc8d03d9bc5a3c1b446e828f5e68e02fef916e9563307cd",
-      "blend_size": 93834
+      "warnings": []
     },
     {
       "actor": "wooden_signpost",
@@ -427,10 +373,7 @@
       "collision_mesh_count": 1,
       "collision_triangle_count": 12,
       "all_collision_counts_valid": true,
-      "warnings": [],
-      "blend": "wooden_signpost/wooden_signpost.blend",
-      "blend_sha256": "aa35835c37661ba58b1570e2151e97b4a1ef7d17a30a5595ea4e34bd088c6305",
-      "blend_size": 96179
+      "warnings": []
     },
     {
       "actor": "breakable_box",
@@ -449,10 +392,7 @@
       "collision_mesh_count": 1,
       "collision_triangle_count": 12,
       "all_collision_counts_valid": true,
-      "warnings": [],
-      "blend": "breakable_box/breakable_box.blend",
-      "blend_sha256": "1237b4e2e781f395b9c207ff2115998ca3296d253f8a3fdde9d14e4d024d67df",
-      "blend_size": 94970
+      "warnings": []
     },
     {
       "actor": "exclamation_box",
@@ -471,10 +411,7 @@
       "collision_mesh_count": 0,
       "collision_triangle_count": 0,
       "all_collision_counts_valid": true,
-      "warnings": [],
-      "blend": "exclamation_box/exclamation_box.blend",
-      "blend_sha256": "6c0387f654d9dec57dc78abb347742215f8677132e7d8f88415256f6934829ec",
-      "blend_size": 99970
+      "warnings": []
     },
     {
       "actor": "mushroom_1up",
@@ -493,10 +430,7 @@
       "collision_mesh_count": 0,
       "collision_triangle_count": 0,
       "all_collision_counts_valid": true,
-      "warnings": [],
-      "blend": "mushroom_1up/mushroom_1up.blend",
-      "blend_sha256": "f444c67dbc22d557453bc4311377953b0b2ba555964f1264fc904738d629179b",
-      "blend_size": 90810
+      "warnings": []
     }
   ]
 }

@@ -1,0 +1,47 @@
+{
+  "format": "spyro64.sm64_actor_ue_exports",
+  "format_version": 1,
+  "actor": "wooden_signpost",
+  "fbx_coordinate_options": {
+    "axis_forward": "-Z",
+    "axis_up": "Y",
+    "apply_unit_scale": true,
+    "apply_scale_options": "FBX_SCALE_UNITS",
+    "source_units": "Blender metres; FBX unit metadata enabled for UE centimetres"
+  },
+  "rig": {
+    "type": "static",
+    "bone_count": 0,
+    "weight_policy": null,
+    "actions": []
+  },
+  "switches": [],
+  "exports": [
+    {
+      "role": "static",
+      "variant": "primary",
+      "path": "fbx/wooden_signpost_static.fbx",
+      "sha256": "1775d23235c2aab49b1af4424aa25e546fa7d0bcb8d854b24bedf443bf240764",
+      "size": 21596,
+      "triangle_count": 21,
+      "vertex_count": 31,
+      "bone_count": 0,
+      "animation_count": 0,
+      "sample_rate": null,
+      "billboard_part_count": 0,
+      "missing_bone_vertex_count": 0
+    },
+    {
+      "role": "collision",
+      "variant": "exact_source_collision",
+      "path": "fbx/wooden_signpost_collision.fbx",
+      "sha256": "3088f2a8dfa19f0a7611b8411242f90432aa2e722b5a547b80ac8349fe29adf7",
+      "size": 15436,
+      "triangle_count": 12,
+      "mesh_count": 1,
+      "surfaces": [
+        "SURFACE_DEFAULT"
+      ]
+    }
+  ]
+}

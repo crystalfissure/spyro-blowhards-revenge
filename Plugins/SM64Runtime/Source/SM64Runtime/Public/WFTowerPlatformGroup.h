@@ -14,12 +14,16 @@ public:
     AWFTowerPlatformGroup();
     virtual void Tick(float DeltaSeconds) override;
     virtual void SetCurrentAct(int32 NewAct) override;
+    virtual void ResetForAct_Implementation() override;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SM64|Tower")
     UStaticMesh* PlatformMesh = nullptr;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SM64|Tower")
     UStaticMesh* ElevatorMesh = nullptr;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SM64|Tower")
+    UStaticMesh* PlatformCollisionMesh = nullptr;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SM64|Tower")
     TSubclassOf<ASM64MovingPlatformBase> PlatformClass;

@@ -1,0 +1,70 @@
+{
+  "format": "spyro64.sm64_actor_ue_exports",
+  "format_version": 1,
+  "actor": "bobomb_buddy",
+  "fbx_coordinate_options": {
+    "axis_forward": "-Z",
+    "axis_up": "Y",
+    "apply_unit_scale": true,
+    "apply_scale_options": "FBX_SCALE_UNITS",
+    "source_units": "Blender metres; FBX unit metadata enabled for UE centimetres"
+  },
+  "rig": {
+    "type": "rigid GeoLayout parts",
+    "bone_count": 13,
+    "weight_policy": "exactly one influence at weight 1.0 per vertex",
+    "actions": [
+      {
+        "name": "A_bobomb_buddy_00_bobomb_seg8_anim_080237FC",
+        "source_animation": "bobomb_seg8_anim_080237FC",
+        "frame_count": 25,
+        "sample_rate": 30,
+        "flags": 0
+      },
+      {
+        "name": "A_bobomb_buddy_01_bobomb_seg8_anim_08023954",
+        "source_animation": "bobomb_seg8_anim_08023954",
+        "frame_count": 10,
+        "sample_rate": 30,
+        "flags": 0
+      }
+    ]
+  },
+  "switches": [
+    {
+      "id": 0,
+      "case_count": 2,
+      "path": "/root/shadow[0]/scale[0]/animated_part[0]/animated_part[0]/switch_case[4]"
+    }
+  ],
+  "exports": [
+    {
+      "role": "skeletal",
+      "variant": "primary",
+      "path": "fbx/bobomb_buddy_skeletal.fbx",
+      "sha256": "ede030e46c932f271f6f4616c0b9885a59fc9bd8dd725a9002d95f872f7dae52",
+      "size": 239996,
+      "triangle_count": 80,
+      "vertex_count": 82,
+      "bone_count": 13,
+      "animation_count": 2,
+      "sample_rate": 30,
+      "billboard_part_count": 1,
+      "missing_bone_vertex_count": 0
+    },
+    {
+      "role": "skeletal",
+      "variant": "switch_00_case_01",
+      "path": "fbx/bobomb_buddy_skeletal__switch_00_case_01.fbx",
+      "sha256": "1a28e229ca8f9a3bd9a513ba616f36b46c22adfba0879bd3f6107d75c41ee25f",
+      "size": 240060,
+      "triangle_count": 80,
+      "vertex_count": 82,
+      "bone_count": 13,
+      "animation_count": 2,
+      "sample_rate": 30,
+      "billboard_part_count": 1,
+      "missing_bone_vertex_count": 0
+    }
+  ]
+}

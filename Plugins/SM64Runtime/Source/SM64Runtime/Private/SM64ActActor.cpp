@@ -21,3 +21,7 @@ void ASM64ActActor::SetCurrentAct(int32 NewAct)
     SetActorEnableCollision(bActEnabled);
     SetActorTickEnabled(bActEnabled);
 }
+
+void ASM64ActActor::ResetForAct_Implementation()
+{
+}

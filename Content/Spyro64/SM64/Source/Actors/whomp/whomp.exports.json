@@ -1,0 +1,62 @@
+{
+  "format": "spyro64.sm64_actor_ue_exports",
+  "format_version": 1,
+  "actor": "whomp",
+  "fbx_coordinate_options": {
+    "axis_forward": "-Z",
+    "axis_up": "Y",
+    "apply_unit_scale": true,
+    "apply_scale_options": "FBX_SCALE_UNITS",
+    "source_units": "Blender metres; FBX unit metadata enabled for UE centimetres"
+  },
+  "rig": {
+    "type": "rigid GeoLayout parts",
+    "bone_count": 12,
+    "weight_policy": "exactly one influence at weight 1.0 per vertex",
+    "actions": [
+      {
+        "name": "A_whomp_00_whomp_seg6_anim_060209EC",
+        "source_animation": "whomp_seg6_anim_060209EC",
+        "frame_count": 50,
+        "sample_rate": 30,
+        "flags": 0
+      },
+      {
+        "name": "A_whomp_01_whomp_seg6_anim_060202DC",
+        "source_animation": "whomp_seg6_anim_060202DC",
+        "frame_count": 15,
+        "sample_rate": 30,
+        "flags": 1
+      }
+    ]
+  },
+  "switches": [],
+  "exports": [
+    {
+      "role": "skeletal",
+      "variant": "primary",
+      "path": "fbx/whomp_skeletal.fbx",
+      "sha256": "fb107fa9723f0fb3f5d50bdccdff9d84caaeba1073f39c978b6bc13092e67477",
+      "size": 254780,
+      "triangle_count": 60,
+      "vertex_count": 98,
+      "bone_count": 12,
+      "animation_count": 2,
+      "sample_rate": 30,
+      "billboard_part_count": 2,
+      "missing_bone_vertex_count": 0
+    },
+    {
+      "role": "collision",
+      "variant": "exact_source_collision",
+      "path": "fbx/whomp_collision.fbx",
+      "sha256": "05da405ff132f05a5a58990d1624bb4b04d674d98639d4612d311f5b376ed9eb",
+      "size": 15260,
+      "triangle_count": 12,
+      "mesh_count": 1,
+      "surfaces": [
+        "SURFACE_NO_CAM_COLLISION"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "format": "spyro64.sm64_actor_ue_exports",
+  "format_version": 1,
+  "actor": "breakable_box",
+  "fbx_coordinate_options": {
+    "axis_forward": "-Z",
+    "axis_up": "Y",
+    "apply_unit_scale": true,
+    "apply_scale_options": "FBX_SCALE_UNITS",
+    "source_units": "Blender metres; FBX unit metadata enabled for UE centimetres"
+  },
+  "rig": {
+    "type": "static",
+    "bone_count": 0,
+    "weight_policy": null,
+    "actions": []
+  },
+  "switches": [
+    {
+      "id": 0,
+      "case_count": 2,
+      "path": "/root/culling_radius[0]/shadow[0]/switch_case[0]"
+    }
+  ],
+  "exports": [
+    {
+      "role": "static",
+      "variant": "primary",
+      "path": "fbx/breakable_box_static.fbx",
+      "sha256": "ec9cc722b32a2c27bd5943977ac23b08689e39f9b607b46f84fedac47d113146",
+      "size": 17068,
+      "triangle_count": 12,
+      "vertex_count": 26,
+      "bone_count": 0,
+      "animation_count": 0,
+      "sample_rate": null,
+      "billboard_part_count": 0,
+      "missing_bone_vertex_count": 0
+    },
+    {
+      "role": "static",
+      "variant": "switch_00_case_01",
+      "path": "fbx/breakable_box_static__switch_00_case_01.fbx",
+      "sha256": "ce25d6319b5d0ea76b64fcbce70114b8dc17a80ba3812d7c668e03ac1189f901",
+      "size": 17100,
+      "triangle_count": 12,
+      "vertex_count": 26,
+      "bone_count": 0,
+      "animation_count": 0,
+      "sample_rate": null,
+      "billboard_part_count": 0,
+      "missing_bone_vertex_count": 0
+    },
+    {
+      "role": "collision",
+      "variant": "exact_source_collision",
+      "path": "fbx/breakable_box_collision.fbx",
+      "sha256": "078dd997a0dee109ff182e90fe72fe0a8391bae1126dd2173abbf892ba8f20f2",
+      "size": 15420,
+      "triangle_count": 12,
+      "mesh_count": 1,
+      "surfaces": [
+        "SURFACE_NO_CAM_COLLISION"
+      ]
+    }
+  ]
+}

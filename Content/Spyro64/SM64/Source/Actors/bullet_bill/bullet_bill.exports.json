@@ -1,0 +1,35 @@
+{
+  "format": "spyro64.sm64_actor_ue_exports",
+  "format_version": 1,
+  "actor": "bullet_bill",
+  "fbx_coordinate_options": {
+    "axis_forward": "-Z",
+    "axis_up": "Y",
+    "apply_unit_scale": true,
+    "apply_scale_options": "FBX_SCALE_UNITS",
+    "source_units": "Blender metres; FBX unit metadata enabled for UE centimetres"
+  },
+  "rig": {
+    "type": "static",
+    "bone_count": 0,
+    "weight_policy": null,
+    "actions": []
+  },
+  "switches": [],
+  "exports": [
+    {
+      "role": "static",
+      "variant": "primary",
+      "path": "fbx/bullet_bill_static.fbx",
+      "sha256": "6c75a7a758da302640dc92c3bf2b2e866791f893a6626bc31ff15faa7d0ceae5",
+      "size": 24940,
+      "triangle_count": 60,
+      "vertex_count": 180,
+      "bone_count": 0,
+      "animation_count": 0,
+      "sample_rate": null,
+      "billboard_part_count": 0,
+      "missing_bone_vertex_count": 0
+    }
+  ]
+}

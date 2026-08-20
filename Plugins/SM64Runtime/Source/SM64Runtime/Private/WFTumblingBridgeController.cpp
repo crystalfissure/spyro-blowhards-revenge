@@ -16,15 +16,20 @@ AWFTumblingBridgeController::AWFTumblingBridgeController()
 void AWFTumblingBridgeController::OnConstruction(const FTransform& Transform)
 {
     Super::OnConstruction(Transform);
-    if (WholeBridgeAsset)
-    {
-        WholeBridgeMesh->SetStaticMesh(WholeBridgeAsset);
-    }
+    WholeBridgeMesh->SetStaticMesh(WholeBridgeAsset ? WholeBridgeAsset : PieceMesh);
+    WholeBridgeMesh->SetVisibility(WholeBridgeAsset != nullptr, true);
+    WholeBridgeMesh->SetCollisionEnabled(
+        WholeBridgeAsset ? ECollisionEnabled::QueryAndPhysics : ECollisionEnabled::NoCollision);
 }
 
 void AWFTumblingBridgeController::BeginPlay()
 {
     Super::BeginPlay();
+    ResetBridge();
+}
+
+void AWFTumblingBridgeController::ResetForAct_Implementation()
+{
     ResetBridge();
 }
 
@@ -73,6 +78,7 @@ void AWFTumblingBridgeController::SpawnPieces()
         {
             Piece->Motion = ESM64PlatformMotion::TumblingPiece;
             Piece->DefaultMesh = PieceMesh;
+            Piece->DefaultCollisionMesh = PieceCollisionMesh;
             Piece->StableId = FName(*FString::Printf(TEXT("WF_TumblingBridge_%02d"), Index));
             Piece->InitialPhaseFrames = 0;
             UGameplayStatics::FinishSpawningActor(Piece, PieceTransform);

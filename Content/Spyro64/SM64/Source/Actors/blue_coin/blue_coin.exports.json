@@ -1,0 +1,139 @@
+{
+  "format": "spyro64.sm64_actor_ue_exports",
+  "format_version": 1,
+  "actor": "blue_coin",
+  "fbx_coordinate_options": {
+    "axis_forward": "-Z",
+    "axis_up": "Y",
+    "apply_unit_scale": true,
+    "apply_scale_options": "FBX_SCALE_UNITS",
+    "source_units": "Blender metres; FBX unit metadata enabled for UE centimetres"
+  },
+  "rig": {
+    "type": "static",
+    "bone_count": 0,
+    "weight_policy": null,
+    "actions": []
+  },
+  "switches": [
+    {
+      "id": 0,
+      "case_count": 8,
+      "path": "/root/shadow[0]/switch_case[0]"
+    }
+  ],
+  "exports": [
+    {
+      "role": "static",
+      "variant": "primary",
+      "path": "fbx/blue_coin_static.fbx",
+      "sha256": "d2c5ec2636ec2b224446b6b0d03b48ce600797424becf10187b8588b5d5388f9",
+      "size": 16780,
+      "triangle_count": 2,
+      "vertex_count": 4,
+      "bone_count": 0,
+      "animation_count": 0,
+      "sample_rate": null,
+      "billboard_part_count": 0,
+      "missing_bone_vertex_count": 0
+    },
+    {
+      "role": "static",
+      "variant": "switch_00_case_01",
+      "path": "fbx/blue_coin_static__switch_00_case_01.fbx",
+      "sha256": "d8cdd135b447b3e9aa59a5fb2c3016ca70068da3e8511bfe4f261931e34aeac8",
+      "size": 16812,
+      "triangle_count": 2,
+      "vertex_count": 4,
+      "bone_count": 0,
+      "animation_count": 0,
+      "sample_rate": null,
+      "billboard_part_count": 0,
+      "missing_bone_vertex_count": 0
+    },
+    {
+      "role": "static",
+      "variant": "switch_00_case_02",
+      "path": "fbx/blue_coin_static__switch_00_case_02.fbx",
+      "sha256": "25930038a3b6fb231e3d7bbc16291a4e32648352d9d0db347a1eebbc764f915b",
+      "size": 16812,
+      "triangle_count": 2,
+      "vertex_count": 4,
+      "bone_count": 0,
+      "animation_count": 0,
+      "sample_rate": null,
+      "billboard_part_count": 0,
+      "missing_bone_vertex_count": 0
+    },
+    {
+      "role": "static",
+      "variant": "switch_00_case_03",
+      "path": "fbx/blue_coin_static__switch_00_case_03.fbx",
+      "sha256": "5030434da4ab63a33c6fc139989113bbbe7204e6e349e20c09e2282d8a1c0560",
+      "size": 16812,
+      "triangle_count": 2,
+      "vertex_count": 4,
+      "bone_count": 0,
+      "animation_count": 0,
+      "sample_rate": null,
+      "billboard_part_count": 0,
+      "missing_bone_vertex_count": 0
+    },
+    {
+      "role": "static",
+      "variant": "switch_00_case_04",
+      "path": "fbx/blue_coin_static__switch_00_case_04.fbx",
+      "sha256": "84e3d130cce199885b74fbd40a1248d2780a628fcf57f37e2af8f17d19019167",
+      "size": 16812,
+      "triangle_count": 2,
+      "vertex_count": 4,
+      "bone_count": 0,
+      "animation_count": 0,
+      "sample_rate": null,
+      "billboard_part_count": 0,
+      "missing_bone_vertex_count": 0
+    },
+    {
+      "role": "static",
+      "variant": "switch_00_case_05",
+      "path": "fbx/blue_coin_static__switch_00_case_05.fbx",
+      "sha256": "b56c9d1914322dd71868cdc746d09d69fa1bb55a2457dcf9ab7219f2e6eba9db",
+      "size": 16812,
+      "triangle_count": 2,
+      "vertex_count": 4,
+      "bone_count": 0,
+      "animation_count": 0,
+      "sample_rate": null,
+      "billboard_part_count": 0,
+      "missing_bone_vertex_count": 0
+    },
+    {
+      "role": "static",
+      "variant": "switch_00_case_06",
+      "path": "fbx/blue_coin_static__switch_00_case_06.fbx",
+      "sha256": "64e5867cdebb32092db797007af3e991af81782dcbbeff1ce239331dc3da697c",
+      "size": 16812,
+      "triangle_count": 2,
+      "vertex_count": 4,
+      "bone_count": 0,
+      "animation_count": 0,
+      "sample_rate": null,
+      "billboard_part_count": 0,
+      "missing_bone_vertex_count": 0
+    },
+    {
+      "role": "static",
+      "variant": "switch_00_case_07",
+      "path": "fbx/blue_coin_static__switch_00_case_07.fbx",
+      "sha256": "db9f6de4a6feab35c17d400d33a19382e387001b76078d866b6697cd38273710",
+      "size": 16812,
+      "triangle_count": 2,
+      "vertex_count": 4,
+      "bone_count": 0,
+      "animation_count": 0,
+      "sample_rate": null,
+      "billboard_part_count": 0,
+      "missing_bone_vertex_count": 0
+    }
+  ]
+}

@@ -14,6 +14,7 @@ class SM64RUNTIME_API AWFTumblingBridgeController : public ASM64ActActor
 public:
     AWFTumblingBridgeController();
     virtual void Tick(float DeltaSeconds) override;
+    virtual void ResetForAct_Implementation() override;
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SM64|Components")
     UStaticMeshComponent* WholeBridgeMesh;
@@ -23,6 +24,9 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SM64|Bridge")
     UStaticMesh* PieceMesh = nullptr;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SM64|Bridge")
+    UStaticMesh* PieceCollisionMesh = nullptr;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SM64|Bridge")
     TSubclassOf<ASM64MovingPlatformBase> PieceClass;

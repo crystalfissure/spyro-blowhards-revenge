@@ -1,0 +1,47 @@
+{
+  "format": "spyro64.sm64_actor_ue_exports",
+  "format_version": 1,
+  "actor": "blue_coin_switch",
+  "fbx_coordinate_options": {
+    "axis_forward": "-Z",
+    "axis_up": "Y",
+    "apply_unit_scale": true,
+    "apply_scale_options": "FBX_SCALE_UNITS",
+    "source_units": "Blender metres; FBX unit metadata enabled for UE centimetres"
+  },
+  "rig": {
+    "type": "static",
+    "bone_count": 0,
+    "weight_policy": null,
+    "actions": []
+  },
+  "switches": [],
+  "exports": [
+    {
+      "role": "static",
+      "variant": "primary",
+      "path": "fbx/blue_coin_switch_static.fbx",
+      "sha256": "6a337a02316b0dadfd86342b52dc893572d8cf8ce366bd8044df345895fb4eee",
+      "size": 19276,
+      "triangle_count": 10,
+      "vertex_count": 20,
+      "bone_count": 0,
+      "animation_count": 0,
+      "sample_rate": null,
+      "billboard_part_count": 0,
+      "missing_bone_vertex_count": 0
+    },
+    {
+      "role": "collision",
+      "variant": "exact_source_collision",
+      "path": "fbx/blue_coin_switch_collision.fbx",
+      "sha256": "4fdcd6e793b630db5684a83700289997069bf10461a974d73c67b8277768879a",
+      "size": 15596,
+      "triangle_count": 10,
+      "mesh_count": 1,
+      "surfaces": [
+        "SURFACE_DEFAULT"
+      ]
+    }
+  ]
+}

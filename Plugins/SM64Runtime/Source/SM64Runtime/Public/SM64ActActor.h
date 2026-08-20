@@ -21,6 +21,10 @@ public:
     UFUNCTION(BlueprintCallable, Category = "SM64|Acts")
     virtual void SetCurrentAct(int32 NewAct);
 
+    UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "SM64|Acts")
+    void ResetForAct();
+    virtual void ResetForAct_Implementation();
+
     UFUNCTION(BlueprintPure, Category = "SM64|Acts")
     bool IsEnabledForAct(int32 TestAct) const;
 

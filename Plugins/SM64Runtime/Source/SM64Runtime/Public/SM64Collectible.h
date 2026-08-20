@@ -14,6 +14,8 @@ class SM64RUNTIME_API ASM64Collectible : public ASM64ActActor
 public:
     ASM64Collectible();
     virtual void OnConstruction(const FTransform& Transform) override;
+    virtual void SetCurrentAct(int32 NewAct) override;
+    virtual void ResetForAct_Implementation() override;
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SM64|Components")
     USphereComponent* Trigger;
@@ -36,11 +38,25 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SM64|Collectible")
     bool b100CoinStar = false;
 
+    /** Awards an extra life instead of contributing to the course coin count. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SM64|Collectible")
+    bool bOneUp = false;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SM64|Collectible")
     int32 StarIndex = 0;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SM64|Collectible")
     float SpinDegreesPerSecond = 90.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SM64|Collectible")
+    bool bRespawnOnActReset = true;
+
+    /** Runtime enemy/crate loot is removed before its source actor resets. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SM64|Collectible")
+    bool bDestroyOnActReset = false;
+
+    UFUNCTION(BlueprintCallable, Category = "SM64|Collectible")
+    void ResetCollectible();
 
 protected:
     virtual void Tick(float DeltaSeconds) override;
@@ -53,4 +69,6 @@ protected:
         int32 OtherBodyIndex,
         bool bFromSweep,
         const FHitResult& SweepResult);
+
+    bool bCollected = false;
 };

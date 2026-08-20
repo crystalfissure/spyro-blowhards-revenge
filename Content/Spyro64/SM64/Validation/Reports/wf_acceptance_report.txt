@@ -1,0 +1,20 @@
+Whomp's Fortress offline acceptance
+====================================
+Result: PASS
+Manifest/decomp/artifact checks: 25/25
+Mover schedule comparisons: 27/27
+Mover integer-frame checkpoints: 513/513
+Mover canonical invariants: 9/9
+
+Authoritative delivery counts
+-----------------------------
+Stable placements: 127/127 unique and decomp-exact
+Canonical missions: 6/6 names, masks, and source/UE targets
+Red coins: 8/8
+Terrain: 422 vertices, 640 semantic triangles across 9 surfaces
+FBX exports: 35/35 present with exact SHA-256 hashes
+Actor bridge: 22/22 actors, 20 animations, 142 collision triangles
+Runtime reflection: 3 enums, 3 structs, 14 classes, 1 native interface
+
+Rerun the validator for the full per-check report and a fresh timestamp:
+& 'C:\Users\adace\AppData\Local\Programs\Python\Python313\python.exe' '.\SM64\Validation\validate_wf_acceptance.py'

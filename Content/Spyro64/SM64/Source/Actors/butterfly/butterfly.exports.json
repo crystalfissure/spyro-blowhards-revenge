@@ -1,0 +1,50 @@
+{
+  "format": "spyro64.sm64_actor_ue_exports",
+  "format_version": 1,
+  "actor": "butterfly",
+  "fbx_coordinate_options": {
+    "axis_forward": "-Z",
+    "axis_up": "Y",
+    "apply_unit_scale": true,
+    "apply_scale_options": "FBX_SCALE_UNITS",
+    "source_units": "Blender metres; FBX unit metadata enabled for UE centimetres"
+  },
+  "rig": {
+    "type": "rigid GeoLayout parts",
+    "bone_count": 6,
+    "weight_policy": "exactly one influence at weight 1.0 per vertex",
+    "actions": [
+      {
+        "name": "A_butterfly_00_butterfly_seg3_anim_030055B0",
+        "source_animation": "butterfly_seg3_anim_030055B0",
+        "frame_count": 8,
+        "sample_rate": 30,
+        "flags": 0
+      },
+      {
+        "name": "A_butterfly_01_butterfly_seg3_anim_03005698",
+        "source_animation": "butterfly_seg3_anim_03005698",
+        "frame_count": 30,
+        "sample_rate": 30,
+        "flags": 0
+      }
+    ]
+  },
+  "switches": [],
+  "exports": [
+    {
+      "role": "skeletal",
+      "variant": "primary",
+      "path": "fbx/butterfly_skeletal.fbx",
+      "sha256": "938a4588883daf147d8f22489e63f2c7d2980421bd2174047fbb0680426d5c12",
+      "size": 126748,
+      "triangle_count": 4,
+      "vertex_count": 12,
+      "bone_count": 6,
+      "animation_count": 2,
+      "sample_rate": 30,
+      "billboard_part_count": 0,
+      "missing_bone_vertex_count": 0
+    }
+  ]
+}

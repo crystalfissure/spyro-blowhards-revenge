@@ -1,0 +1,83 @@
+{
+  "format": "spyro64.sm64_actor_ue_exports",
+  "format_version": 1,
+  "actor": "exclamation_box",
+  "fbx_coordinate_options": {
+    "axis_forward": "-Z",
+    "axis_up": "Y",
+    "apply_unit_scale": true,
+    "apply_scale_options": "FBX_SCALE_UNITS",
+    "source_units": "Blender metres; FBX unit metadata enabled for UE centimetres"
+  },
+  "rig": {
+    "type": "static",
+    "bone_count": 0,
+    "weight_policy": null,
+    "actions": []
+  },
+  "switches": [
+    {
+      "id": 0,
+      "case_count": 4,
+      "path": "/root/culling_radius[0]/shadow[0]/switch_case[0]"
+    }
+  ],
+  "exports": [
+    {
+      "role": "static",
+      "variant": "primary",
+      "path": "fbx/exclamation_box_static.fbx",
+      "sha256": "dc260f579454d75f81de5e0920c9e41638acc43f77b2753d725c642528a93a38",
+      "size": 18972,
+      "triangle_count": 12,
+      "vertex_count": 24,
+      "bone_count": 0,
+      "animation_count": 0,
+      "sample_rate": null,
+      "billboard_part_count": 0,
+      "missing_bone_vertex_count": 0
+    },
+    {
+      "role": "static",
+      "variant": "switch_00_case_01",
+      "path": "fbx/exclamation_box_static__switch_00_case_01.fbx",
+      "sha256": "c2817c2d6771f807d7c432e887af2ffc846e2e7e53fb05f28c9488779bdfe8ce",
+      "size": 19020,
+      "triangle_count": 12,
+      "vertex_count": 24,
+      "bone_count": 0,
+      "animation_count": 0,
+      "sample_rate": null,
+      "billboard_part_count": 0,
+      "missing_bone_vertex_count": 0
+    },
+    {
+      "role": "static",
+      "variant": "switch_00_case_02",
+      "path": "fbx/exclamation_box_static__switch_00_case_02.fbx",
+      "sha256": "a2839195bdba04e6b96553f05e56053977b84492826e6e8064792e766755c34b",
+      "size": 19020,
+      "triangle_count": 12,
+      "vertex_count": 24,
+      "bone_count": 0,
+      "animation_count": 0,
+      "sample_rate": null,
+      "billboard_part_count": 0,
+      "missing_bone_vertex_count": 0
+    },
+    {
+      "role": "static",
+      "variant": "switch_00_case_03",
+      "path": "fbx/exclamation_box_static__switch_00_case_03.fbx",
+      "sha256": "c55b02fe8d384d3e54bcbccdfbf025d138490efbdbba6732de1a41b3de5d5cab",
+      "size": 19020,
+      "triangle_count": 12,
+      "vertex_count": 24,
+      "bone_count": 0,
+      "animation_count": 0,
+      "sample_rate": null,
+      "billboard_part_count": 0,
+      "missing_bone_vertex_count": 0
+    }
+  ]
+}

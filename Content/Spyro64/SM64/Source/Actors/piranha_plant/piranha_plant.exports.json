@@ -1,0 +1,106 @@
+{
+  "format": "spyro64.sm64_actor_ue_exports",
+  "format_version": 1,
+  "actor": "piranha_plant",
+  "fbx_coordinate_options": {
+    "axis_forward": "-Z",
+    "axis_up": "Y",
+    "apply_unit_scale": true,
+    "apply_scale_options": "FBX_SCALE_UNITS",
+    "source_units": "Blender metres; FBX unit metadata enabled for UE centimetres"
+  },
+  "rig": {
+    "type": "rigid GeoLayout parts",
+    "bone_count": 13,
+    "weight_policy": "exactly one influence at weight 1.0 per vertex",
+    "actions": [
+      {
+        "name": "A_piranha_plant_00_piranha_plant_seg6_anim_06017C38",
+        "source_animation": "piranha_plant_seg6_anim_06017C38",
+        "frame_count": 90,
+        "sample_rate": 30,
+        "flags": 0
+      },
+      {
+        "name": "A_piranha_plant_01_piranha_plant_seg6_anim_06017D88",
+        "source_animation": "piranha_plant_seg6_anim_06017D88",
+        "frame_count": 4,
+        "sample_rate": 30,
+        "flags": 0
+      },
+      {
+        "name": "A_piranha_plant_02_piranha_plant_seg6_anim_060187B0",
+        "source_animation": "piranha_plant_seg6_anim_060187B0",
+        "frame_count": 70,
+        "sample_rate": 30,
+        "flags": 1
+      },
+      {
+        "name": "A_piranha_plant_03_piranha_plant_seg6_anim_06018BA8",
+        "source_animation": "piranha_plant_seg6_anim_06018BA8",
+        "frame_count": 19,
+        "sample_rate": 30,
+        "flags": 0
+      },
+      {
+        "name": "A_piranha_plant_04_piranha_plant_seg6_anim_06019854",
+        "source_animation": "piranha_plant_seg6_anim_06019854",
+        "frame_count": 72,
+        "sample_rate": 30,
+        "flags": 0
+      },
+      {
+        "name": "A_piranha_plant_05_piranha_plant_seg6_anim_0601A014",
+        "source_animation": "piranha_plant_seg6_anim_0601A014",
+        "frame_count": 42,
+        "sample_rate": 30,
+        "flags": 0
+      },
+      {
+        "name": "A_piranha_plant_06_piranha_plant_seg6_anim_0601AF34",
+        "source_animation": "piranha_plant_seg6_anim_0601AF34",
+        "frame_count": 26,
+        "sample_rate": 30,
+        "flags": 0
+      },
+      {
+        "name": "A_piranha_plant_07_piranha_plant_seg6_anim_0601AAE4",
+        "source_animation": "piranha_plant_seg6_anim_0601AAE4",
+        "frame_count": 75,
+        "sample_rate": 30,
+        "flags": 0
+      },
+      {
+        "name": "A_piranha_plant_08_piranha_plant_seg6_anim_0601B634",
+        "source_animation": "piranha_plant_seg6_anim_0601B634",
+        "frame_count": 56,
+        "sample_rate": 30,
+        "flags": 0
+      },
+      {
+        "name": "A_piranha_plant_09_piranha_plant_seg6_anim_0601C304",
+        "source_animation": "piranha_plant_seg6_anim_0601C304",
+        "frame_count": 90,
+        "sample_rate": 30,
+        "flags": 0
+      }
+    ]
+  },
+  "switches": [],
+  "exports": [
+    {
+      "role": "skeletal",
+      "variant": "primary",
+      "path": "fbx/piranha_plant_skeletal.fbx",
+      "sha256": "22d4ab6d913363d6e329ebb3d2a701770cdb44e697b49ed8157f6c63ef85a1ec",
+      "size": 1284636,
+      "triangle_count": 137,
+      "vertex_count": 252,
+      "bone_count": 13,
+      "animation_count": 10,
+      "sample_rate": 30,
+      "billboard_part_count": 0,
+      "missing_bone_vertex_count": 0
+    }
+  ]
+}

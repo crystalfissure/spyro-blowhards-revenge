@@ -14,6 +14,8 @@ class SM64RUNTIME_API ASM64PlayerAdapter : public AActor
 public:
     ASM64PlayerAdapter();
 
+    virtual void Tick(float DeltaSeconds) override;
+
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SM64|Components")
     USphereComponent* AttackProbe;
 
@@ -26,6 +28,10 @@ public:
     UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = "SM64|Player")
     bool bCannonLaunched = false;
 
+    /** Polls the established Spyro Blueprint state without modifying BP_Spyro. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SM64|Player")
+    bool bAutoDetectSpyroAttacks = true;
+
     UFUNCTION(BlueprintCallable, Category = "SM64|Player")
     void BindToPlayer(AActor* NewSpyroActor);
 
@@ -37,4 +43,9 @@ public:
 
 protected:
     virtual void BeginPlay() override;
+    FString ReadSpyroStateToken() const;
+    bool ReadSpyroBool(FName PropertyName) const;
+
+    float AttackDispatchCooldown = 0.0f;
+    int32 CannonAirFrames = 0;
 };

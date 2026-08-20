@@ -12,7 +12,14 @@ AWFKickableBoard::AWFKickableBoard()
     BoardMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BoardMesh"));
     RootComponent = BoardMesh;
     BoardMesh->SetMobility(EComponentMobility::Movable);
-    BoardMesh->SetCollisionProfileName(TEXT("BlockAllDynamic"));
+    BoardMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+    CollisionMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CollisionMesh"));
+    CollisionMesh->SetupAttachment(BoardMesh);
+    CollisionMesh->SetMobility(EComponentMobility::Movable);
+    CollisionMesh->SetCollisionProfileName(TEXT("BlockAllDynamic"));
+    CollisionMesh->SetVisibility(false, true);
+    CollisionMesh->SetHiddenInGame(true, true);
     ActMask = 0x3E;
 }
 
@@ -23,12 +30,41 @@ void AWFKickableBoard::OnConstruction(const FTransform& Transform)
     {
         BoardMesh->SetStaticMesh(UprightMesh);
     }
+    if (CollisionAsset)
+    {
+        CollisionMesh->SetStaticMesh(CollisionAsset);
+    }
 }
 
 void AWFKickableBoard::BeginPlay()
 {
     Super::BeginPlay();
-    HomeRotation = GetActorRotation();
+    if (!bHomeRotationInitialized)
+    {
+        HomeRotation = GetActorRotation();
+        bHomeRotationInitialized = true;
+    }
+}
+
+void AWFKickableBoard::ResetForAct_Implementation()
+{
+    if (!bHomeRotationInitialized)
+    {
+        HomeRotation = GetActorRotation();
+        bHomeRotationInitialized = true;
+    }
+    BoardState = 0;
+    StateTimer = 0;
+    StepAccumulator = 0.0;
+    RockPhaseUnits = 0.0f;
+    RockAmplitudeUnits = 1600.0f;
+    PitchVelocityUnits = 0.0f;
+    LastInstigator.Reset();
+    SetActorRotation(HomeRotation);
+    if (UprightMesh)
+    {
+        BoardMesh->SetStaticMesh(UprightMesh);
+    }
 }
 
 void AWFKickableBoard::Tick(float DeltaSeconds)
@@ -64,7 +100,7 @@ bool AWFKickableBoard::HandleSM64Attack_Implementation(
         return true;
     }
     if (BoardState == 1 && StateTimer > 30 && AttackType == ESM64AttackType::Headbash
-        && ImpactPoint.Z > GetActorLocation().Z + 160.0f)
+        && InstigatorActor && InstigatorActor->GetActorLocation().Z > GetActorLocation().Z + 160.0f)
     {
         BoardState = 2;
         StateTimer = 0;

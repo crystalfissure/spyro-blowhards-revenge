@@ -28,6 +28,35 @@ void ASM64Collectible::OnConstruction(const FTransform& Transform)
     }
 }
 
+void ASM64Collectible::SetCurrentAct(int32 NewAct)
+{
+    Super::SetCurrentAct(NewAct);
+    if (!bActEnabled)
+    {
+        Trigger->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+    }
+}
+
+void ASM64Collectible::ResetForAct_Implementation()
+{
+    if (bDestroyOnActReset)
+    {
+        Destroy();
+        return;
+    }
+    if (bRespawnOnActReset && bActEnabled)
+    {
+        ResetCollectible();
+    }
+}
+
+void ASM64Collectible::ResetCollectible()
+{
+    bCollected = false;
+    SetActorHiddenInGame(false);
+    Trigger->SetCollisionEnabled(bActEnabled ? ECollisionEnabled::QueryOnly : ECollisionEnabled::NoCollision);
+}
+
 void ASM64Collectible::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
@@ -42,13 +71,17 @@ void ASM64Collectible::OnCollected(
     bool bFromSweep,
     const FHitResult& SweepResult)
 {
-    if (!OtherActor || !OtherActor->IsA<APawn>())
+    if (bCollected || !OtherActor || !OtherActor->IsA<APawn>())
     {
         return;
     }
     if (ASM64CourseManager* Manager = ASM64CourseManager::FindCourseManager(this))
     {
-        if (bPowerStar)
+        if (bOneUp)
+        {
+            Manager->AwardOneUp(OtherActor);
+        }
+        else if (bPowerStar)
         {
             Manager->CollectStar(StarIndex, b100CoinStar);
         }
@@ -57,7 +90,7 @@ void ASM64Collectible::OnCollected(
             Manager->AddCoin(CoinValue, bRedCoin);
         }
     }
+    bCollected = true;
     SetActorEnableCollision(false);
     SetActorHiddenInGame(true);
-    SetLifeSpan(0.05f);
 }

@@ -1,0 +1,10 @@
+# Never source-control game ROM images.
+*.z64
+*.n64
+*.v64
+
+# Local editor diagnostics and Blender's rolling backup are reproducible.
+EditorScripts/Logs/
+Source/**/*.blend1
+**/__pycache__/
+*.pyc

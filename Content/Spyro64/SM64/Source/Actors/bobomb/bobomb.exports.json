@@ -1,0 +1,70 @@
+{
+  "format": "spyro64.sm64_actor_ue_exports",
+  "format_version": 1,
+  "actor": "bobomb",
+  "fbx_coordinate_options": {
+    "axis_forward": "-Z",
+    "axis_up": "Y",
+    "apply_unit_scale": true,
+    "apply_scale_options": "FBX_SCALE_UNITS",
+    "source_units": "Blender metres; FBX unit metadata enabled for UE centimetres"
+  },
+  "rig": {
+    "type": "rigid GeoLayout parts",
+    "bone_count": 13,
+    "weight_policy": "exactly one influence at weight 1.0 per vertex",
+    "actions": [
+      {
+        "name": "A_bobomb_00_bobomb_seg8_anim_080237FC",
+        "source_animation": "bobomb_seg8_anim_080237FC",
+        "frame_count": 25,
+        "sample_rate": 30,
+        "flags": 0
+      },
+      {
+        "name": "A_bobomb_01_bobomb_seg8_anim_08023954",
+        "source_animation": "bobomb_seg8_anim_08023954",
+        "frame_count": 10,
+        "sample_rate": 30,
+        "flags": 0
+      }
+    ]
+  },
+  "switches": [
+    {
+      "id": 0,
+      "case_count": 2,
+      "path": "/root/shadow[0]/scale[0]/animated_part[0]/animated_part[0]/switch_case[4]"
+    }
+  ],
+  "exports": [
+    {
+      "role": "skeletal",
+      "variant": "primary",
+      "path": "fbx/bobomb_skeletal.fbx",
+      "sha256": "ea873b7b43205736ce95b599f76a079494b12b6f22cead05782b51b2ecc13e33",
+      "size": 239804,
+      "triangle_count": 80,
+      "vertex_count": 82,
+      "bone_count": 13,
+      "animation_count": 2,
+      "sample_rate": 30,
+      "billboard_part_count": 1,
+      "missing_bone_vertex_count": 0
+    },
+    {
+      "role": "skeletal",
+      "variant": "switch_00_case_01",
+      "path": "fbx/bobomb_skeletal__switch_00_case_01.fbx",
+      "sha256": "73c62be8ae4c07d968ffdc5a51696d65f4f9377b611812f92b7b96e0bc85bfc1",
+      "size": 239868,
+      "triangle_count": 80,
+      "vertex_count": 82,
+      "bone_count": 13,
+      "animation_count": 2,
+      "sample_rate": 30,
+      "billboard_part_count": 1,
+      "missing_bone_vertex_count": 0
+    }
+  ]
+}

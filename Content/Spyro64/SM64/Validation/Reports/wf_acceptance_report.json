@@ -1,0 +1,32 @@
+{
+  "format": "spyro64.wf_acceptance_report",
+  "version": 1,
+  "generated_at_utc": "2026-08-18T12:39:00.0803499Z",
+  "passed": true,
+  "summary": {
+    "manifest_artifact_passes": 25,
+    "manifest_artifact_check_count": 25,
+    "mover_schedule_comparison_passes": 27,
+    "mover_schedule_comparison_count": 27,
+    "mover_checkpoint_passes": 513,
+    "mover_checkpoint_assertion_count": 513,
+    "mover_invariant_passes": 9,
+    "mover_invariant_count": 9
+  },
+  "authoritative_counts": {
+    "stable_placements": 127,
+    "red_coins": 8,
+    "terrain_vertices": 422,
+    "terrain_triangles": 640,
+    "terrain_surface_sections": 9,
+    "fbx_exports": 35,
+    "actor_catalog_entries": 22,
+    "actor_animations": 20,
+    "actor_collision_triangles": 142,
+    "runtime_reflected_enums": 3,
+    "runtime_reflected_structs": 3,
+    "runtime_reflected_classes": 14,
+    "runtime_native_interfaces": 1
+  },
+  "note": "Checked-in acceptance snapshot. Rerun validate_wf_acceptance.py for the full per-check JSON report and fresh timestamp."
+}

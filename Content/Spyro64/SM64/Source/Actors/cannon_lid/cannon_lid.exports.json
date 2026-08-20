@@ -1,0 +1,47 @@
+{
+  "format": "spyro64.sm64_actor_ue_exports",
+  "format_version": 1,
+  "actor": "cannon_lid",
+  "fbx_coordinate_options": {
+    "axis_forward": "-Z",
+    "axis_up": "Y",
+    "apply_unit_scale": true,
+    "apply_scale_options": "FBX_SCALE_UNITS",
+    "source_units": "Blender metres; FBX unit metadata enabled for UE centimetres"
+  },
+  "rig": {
+    "type": "static",
+    "bone_count": 0,
+    "weight_policy": null,
+    "actions": []
+  },
+  "switches": [],
+  "exports": [
+    {
+      "role": "static",
+      "variant": "primary",
+      "path": "fbx/cannon_lid_static.fbx",
+      "sha256": "0a57cb1ebf761c9d456a48ca6e600f8ecef904e5373fda347b39a14777765d95",
+      "size": 16764,
+      "triangle_count": 2,
+      "vertex_count": 4,
+      "bone_count": 0,
+      "animation_count": 0,
+      "sample_rate": null,
+      "billboard_part_count": 0,
+      "missing_bone_vertex_count": 0
+    },
+    {
+      "role": "collision",
+      "variant": "exact_source_collision",
+      "path": "fbx/cannon_lid_collision.fbx",
+      "sha256": "586e8b2436da7b6c2517b1145b14113bc09c887d40235fd017f1c0fa0a5bc23e",
+      "size": 15276,
+      "triangle_count": 2,
+      "mesh_count": 1,
+      "surfaces": [
+        "SURFACE_DEFAULT"
+      ]
+    }
+  ]
+}
