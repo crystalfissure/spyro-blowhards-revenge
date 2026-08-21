@@ -1,11 +1,60 @@
 {
   "format": "spyro64.wf_acceptance_report",
   "version": 1,
-  "generated_at_utc": "2026-08-18T12:39:00.0803499Z",
+  "generated_at_utc": "2026-08-21T10:44:57.158508+00:00",
   "passed": true,
+  "roots": {
+    "content": "C:\\Users\\adace\\Desktop\\spyro-blowhards-revenge\\Content\\Spyro64",
+    "decomp": "C:\\Users\\adace\\Downloads\\sm64-master\\sm64-master",
+    "dae": "C:\\Users\\adace\\Downloads\\Nintendo 64 - Super Mario 64 - Locations - Whomp's Fortress\\Whomp's Fortress",
+    "plugin": "C:\\Users\\adace\\Desktop\\spyro-blowhards-revenge\\Plugins\\SM64Runtime",
+    "truth": "C:\\Users\\adace\\Desktop\\spyro-blowhards-revenge\\Content\\Spyro64\\SM64\\Validation\\expected_truth.json"
+  },
   "summary": {
     "manifest_artifact_passes": 25,
     "manifest_artifact_check_count": 25,
+    "categories": {
+      "placements": {
+        "passed": 5,
+        "count": 5
+      },
+      "missions": {
+        "passed": 3,
+        "count": 3
+      },
+      "landmarks": {
+        "passed": 1,
+        "count": 1
+      },
+      "collision": {
+        "passed": 2,
+        "count": 2
+      },
+      "course_definition": {
+        "passed": 5,
+        "count": 5
+      },
+      "dae_policy": {
+        "passed": 1,
+        "count": 1
+      },
+      "fbx": {
+        "passed": 1,
+        "count": 1
+      },
+      "actors": {
+        "passed": 3,
+        "count": 3
+      },
+      "runtime": {
+        "passed": 4,
+        "count": 4
+      },
+      "mover_simulation": {
+        "passed": 1,
+        "count": 1
+      }
+    },
     "mover_schedule_comparison_passes": 27,
     "mover_schedule_comparison_count": 27,
     "mover_checkpoint_passes": 513,
@@ -13,20 +62,1189 @@
     "mover_invariant_passes": 9,
     "mover_invariant_count": 9
   },
-  "authoritative_counts": {
-    "stable_placements": 127,
-    "red_coins": 8,
-    "terrain_vertices": 422,
-    "terrain_triangles": 640,
-    "terrain_surface_sections": 9,
-    "fbx_exports": 35,
-    "actor_catalog_entries": 22,
-    "actor_animations": 20,
-    "actor_collision_triangles": 142,
-    "runtime_reflected_enums": 3,
-    "runtime_reflected_structs": 3,
-    "runtime_reflected_classes": 14,
-    "runtime_native_interfaces": 1
-  },
-  "note": "Checked-in acceptance snapshot. Rerun validate_wf_acceptance.py for the full per-check JSON report and fresh timestamp."
+  "checks": [
+    {
+      "name": "placement_manifest_format",
+      "category": "placements",
+      "passed": true,
+      "expected": {
+        "format": "spyro64.sm64.placements",
+        "fixed_step_hz": 30
+      },
+      "actual": {
+        "format": "spyro64.sm64.placements",
+        "fixed_step_hz": 30
+      },
+      "detail": ""
+    },
+    {
+      "name": "placement_count",
+      "category": "placements",
+      "passed": true,
+      "expected": 127,
+      "actual": 127,
+      "detail": ""
+    },
+    {
+      "name": "stable_id_uniqueness",
+      "category": "placements",
+      "passed": true,
+      "expected": "127 unique IDs",
+      "actual": {
+        "unique": 127,
+        "duplicates": []
+      },
+      "detail": ""
+    },
+    {
+      "name": "independent_decomp_placement_count",
+      "category": "placements",
+      "passed": true,
+      "expected": 127,
+      "actual": 127,
+      "detail": "Reconstructed without importing the generator package."
+    },
+    {
+      "name": "all_placement_ids_masks_and_transforms_match_decomp",
+      "category": "placements",
+      "passed": true,
+      "expected": "exact stable ID/model/behavior/act/parameter/source+UE transform match",
+      "actual": {
+        "missing": [],
+        "unexpected": [],
+        "mismatch_count": 0,
+        "first_mismatches": []
+      },
+      "detail": ""
+    },
+    {
+      "name": "eight_red_coins",
+      "category": "missions",
+      "passed": true,
+      "expected": {
+        "count": 8,
+        "positions": "decomp exact"
+      },
+      "actual": {
+        "manifest_count": 8,
+        "decomp_count": 8,
+        "positions_match": true
+      },
+      "detail": ""
+    },
+    {
+      "name": "canonical_course_and_mission_names",
+      "category": "missions",
+      "passed": true,
+      "expected": {
+        "course": "WHOMP'S FORTRESS",
+        "missions": [
+          "CHIP OFF WHOMP'S BLOCK",
+          "TO THE TOP OF THE FORTRESS",
+          "SHOOT INTO THE WILD BLUE",
+          "RED COINS ON THE FLOATING ISLE",
+          "FALL ONTO THE CAGED ISLAND",
+          "BLAST AWAY THE WALL"
+        ]
+      },
+      "actual": {
+        "course": "WHOMP'S FORTRESS",
+        "missions": [
+          "CHIP OFF WHOMP'S BLOCK",
+          "TO THE TOP OF THE FORTRESS",
+          "SHOOT INTO THE WILD BLUE",
+          "RED COINS ON THE FLOATING ISLE",
+          "FALL ONTO THE CAGED ISLAND",
+          "BLAST AWAY THE WALL"
+        ]
+      },
+      "detail": ""
+    },
+    {
+      "name": "canonical_mission_targets_masks_and_positions",
+      "category": "missions",
+      "passed": true,
+      "expected": "six exact mission target records",
+      "actual": [],
+      "detail": ""
+    },
+    {
+      "name": "start_and_warp_landmarks",
+      "category": "landmarks",
+      "passed": true,
+      "expected": "special start, entry warp, and both fading warps exact",
+      "actual": [],
+      "detail": ""
+    },
+    {
+      "name": "terrain_decomp_semantic_collision",
+      "category": "collision",
+      "passed": true,
+      "expected": {
+        "vertices": 422,
+        "triangles": 640,
+        "surfaces": {
+          "SURFACE_DEFAULT": 409,
+          "SURFACE_DEATH_PLANE": 2,
+          "SURFACE_VERY_SLIPPERY": 14,
+          "SURFACE_SLIPPERY": 43,
+          "SURFACE_NOT_SLIPPERY": 4,
+          "SURFACE_WALL_MISC": 143,
+          "SURFACE_NOISE_DEFAULT": 15,
+          "SURFACE_BOSS_FIGHT_CAMERA": 5,
+          "SURFACE_CAMERA_MIDDLE": 5
+        },
+        "water_box": {
+          "box_id": 0,
+          "min_x": -1023,
+          "min_z": 1024,
+          "max_x": 3226,
+          "max_z": 4096,
+          "height_y": 973
+        }
+      },
+      "actual": {
+        "vertices": 422,
+        "triangles": 640,
+        "surfaces": {
+          "SURFACE_DEFAULT": 409,
+          "SURFACE_DEATH_PLANE": 2,
+          "SURFACE_VERY_SLIPPERY": 14,
+          "SURFACE_SLIPPERY": 43,
+          "SURFACE_NOT_SLIPPERY": 4,
+          "SURFACE_WALL_MISC": 143,
+          "SURFACE_NOISE_DEFAULT": 15,
+          "SURFACE_BOSS_FIGHT_CAMERA": 5,
+          "SURFACE_CAMERA_MIDDLE": 5
+        },
+        "water_box": {
+          "box_id": 0,
+          "min_x": -1023,
+          "min_z": 1024,
+          "max_x": 3226,
+          "max_z": 4096,
+          "height_y": 973
+        }
+      },
+      "detail": "Nine semantic surface sections sum to exactly 640 triangles."
+    },
+    {
+      "name": "terrain_manifest_matches_decomp",
+      "category": "collision",
+      "passed": true,
+      "expected": {
+        "name": "wf_seg7_collision_070102D8",
+        "vertices": 422,
+        "triangles": 640,
+        "surfaces": {
+          "SURFACE_DEFAULT": 409,
+          "SURFACE_DEATH_PLANE": 2,
+          "SURFACE_VERY_SLIPPERY": 14,
+          "SURFACE_SLIPPERY": 43,
+          "SURFACE_NOT_SLIPPERY": 4,
+          "SURFACE_WALL_MISC": 143,
+          "SURFACE_NOISE_DEFAULT": 15,
+          "SURFACE_BOSS_FIGHT_CAMERA": 5,
+          "SURFACE_CAMERA_MIDDLE": 5
+        },
+        "water_box": {
+          "box_id": 0,
+          "min_x": -1023,
+          "min_z": 1024,
+          "max_x": 3226,
+          "max_z": 4096,
+          "height_y": 973
+        },
+        "source_sha256": "66dc34faf6ee0cc93f080f06bdea60b3940704cdd5e431e4aeae64933184d421"
+      },
+      "actual": {
+        "name": "wf_seg7_collision_070102D8",
+        "vertices": 422,
+        "triangles": 640,
+        "surfaces": {
+          "SURFACE_DEFAULT": 409,
+          "SURFACE_DEATH_PLANE": 2,
+          "SURFACE_VERY_SLIPPERY": 14,
+          "SURFACE_SLIPPERY": 43,
+          "SURFACE_NOT_SLIPPERY": 4,
+          "SURFACE_WALL_MISC": 143,
+          "SURFACE_NOISE_DEFAULT": 15,
+          "SURFACE_BOSS_FIGHT_CAMERA": 5,
+          "SURFACE_CAMERA_MIDDLE": 5
+        },
+        "water_box": {
+          "box_id": 0,
+          "min_x": -1023,
+          "min_z": 1024,
+          "max_x": 3226,
+          "max_z": 4096,
+          "height_y": 973
+        },
+        "source_sha256": "66dc34faf6ee0cc93f080f06bdea60b3940704cdd5e431e4aeae64933184d421"
+      },
+      "detail": ""
+    },
+    {
+      "name": "course_definition_identity",
+      "category": "course_definition",
+      "passed": true,
+      "expected": {
+        "format": "spyro64.sm64.course_definition",
+        "course_id": "WF",
+        "sm64_course_symbol": "COURSE_WF",
+        "sm64_course_number": 2,
+        "spyro_level_index": 5,
+        "level_package": "/Game/Spyro64/Levels/05_Level5",
+        "return_level": "/Game/Spyro64/Levels/00_Homeworld",
+        "fixed_step_hz": 30,
+        "display_name_from_decomp": "WHOMP'S FORTRESS"
+      },
+      "actual": {
+        "format": "spyro64.sm64.course_definition",
+        "course_id": "WF",
+        "sm64_course_symbol": "COURSE_WF",
+        "sm64_course_number": 2,
+        "spyro_level_index": 5,
+        "level_package": "/Game/Spyro64/Levels/05_Level5",
+        "return_level": "/Game/Spyro64/Levels/00_Homeworld",
+        "fixed_step_hz": 30,
+        "display_name": "Whomp's Fortress"
+      },
+      "detail": ""
+    },
+    {
+      "name": "course_definition_six_missions",
+      "category": "course_definition",
+      "passed": true,
+      "expected": "decomp names, masks, source/UE positions, and eject semantics",
+      "actual": [],
+      "detail": ""
+    },
+    {
+      "name": "course_definition_entrance_and_warps",
+      "category": "course_definition",
+      "passed": true,
+      "expected": "decomp start/0A and reciprocal 0B/0C transforms",
+      "actual": {
+        "entrance": {
+          "mario_base_start": {
+            "source_location_cm": [
+              2600,
+              256,
+              5120
+            ],
+            "unreal_location_cm": [
+              2600,
+              5120,
+              256
+            ],
+            "source_yaw_deg": 90,
+            "unreal_yaw_deg": -90
+          },
+          "warp_0A": {
+            "source_location_cm": [
+              2600,
+              1256,
+              5120
+            ],
+            "unreal_location_cm": [
+              2600,
+              5120,
+              1256
+            ],
+            "source_yaw_deg": 90,
+            "unreal_yaw_deg": -90
+          }
+        },
+        "warps": [
+          {
+            "warp_id": "0B",
+            "destination_warp_id": "0C",
+            "source_location_cm": [
+              -2925,
+              2560,
+              -947
+            ],
+            "unreal_location_cm": [
+              -2925,
+              -947,
+              2560
+            ],
+            "source_yaw_deg": 19,
+            "unreal_yaw_deg": -19
+          },
+          {
+            "warp_id": "0C",
+            "destination_warp_id": "0B",
+            "source_location_cm": [
+              2548,
+              1075,
+              -3962
+            ],
+            "unreal_location_cm": [
+              2548,
+              -3962,
+              1075
+            ],
+            "source_yaw_deg": 51,
+            "unreal_yaw_deg": -51
+          }
+        ]
+      },
+      "detail": ""
+    },
+    {
+      "name": "course_definition_water_death_and_surfaces",
+      "category": "course_definition",
+      "passed": true,
+      "expected": {
+        "water_box": {
+          "box_id": 0,
+          "min_x": -1023,
+          "min_z": 1024,
+          "max_x": 3226,
+          "max_z": 4096,
+          "height_y": 973
+        },
+        "death_plane_y": [
+          -3071
+        ],
+        "surfaces": {
+          "SURFACE_DEFAULT": 409,
+          "SURFACE_DEATH_PLANE": 2,
+          "SURFACE_VERY_SLIPPERY": 14,
+          "SURFACE_SLIPPERY": 43,
+          "SURFACE_NOT_SLIPPERY": 4,
+          "SURFACE_WALL_MISC": 143,
+          "SURFACE_NOISE_DEFAULT": 15,
+          "SURFACE_BOSS_FIGHT_CAMERA": 5,
+          "SURFACE_CAMERA_MIDDLE": 5
+        }
+      },
+      "actual": {
+        "water": {
+          "source_bounds_xz_cm": [
+            -1023,
+            1024,
+            3226,
+            4096
+          ],
+          "unreal_bounds_xy_cm": [
+            -1023,
+            1024,
+            3226,
+            4096
+          ],
+          "surface_height_cm": 973,
+          "alpha": 120,
+          "rotation_speed": 10,
+          "texture_scale": 10
+        },
+        "death_plane_height_cm": -3071,
+        "surfaces": {
+          "SURFACE_DEFAULT": 409,
+          "SURFACE_DEATH_PLANE": 2,
+          "SURFACE_VERY_SLIPPERY": 14,
+          "SURFACE_SLIPPERY": 43,
+          "SURFACE_NOT_SLIPPERY": 4,
+          "SURFACE_WALL_MISC": 143,
+          "SURFACE_NOISE_DEFAULT": 15,
+          "SURFACE_BOSS_FIGHT_CAMERA": 5,
+          "SURFACE_CAMERA_MIDDLE": 5
+        }
+      },
+      "detail": ""
+    },
+    {
+      "name": "course_definition_coin_totals_bonus_and_act_rules",
+      "category": "course_definition",
+      "passed": true,
+      "expected": {
+        "canonical_fixed_coin_value": 100,
+        "red_coin_count": 8,
+        "bonus_threshold": 100,
+        "bonus_eject": false,
+        "act_rules": {
+          "whomp_king": 1,
+          "tower_systems": 62,
+          "buddy_cannon_hoot": 60,
+          "all_acts": 63
+        }
+      },
+      "actual": {
+        "canonical_fixed_coin_value": 100,
+        "red_coin_count": 8,
+        "bonus": {
+          "star_index": 6,
+          "display_name": "100-Coin Star",
+          "coin_threshold": 100,
+          "eject_on_collect": false
+        },
+        "act_rules": {
+          "whomp_king": 1,
+          "tower_systems": 62,
+          "buddy_cannon_hoot": 60,
+          "all_acts": 63
+        }
+      },
+      "detail": ""
+    },
+    {
+      "name": "excluded_dae_policy_and_hashes",
+      "category": "dae_policy",
+      "passed": true,
+      "expected": [
+        "Area1_bake.dae",
+        "BridgeWhole.dae",
+        "KickWood_bake.dae",
+        "TowerPlatformWide.dae"
+      ],
+      "actual": {
+        "recorded": [
+          "Area1_bake.dae",
+          "BridgeWhole.dae",
+          "KickWood_bake.dae",
+          "TowerPlatformWide.dae"
+        ],
+        "mismatches": []
+      },
+      "detail": "Area1/KickWood baked overlays, unused wide tower platform, and BridgeWhole LOD remain excluded."
+    },
+    {
+      "name": "required_fbx_inventory_and_hashes",
+      "category": "fbx",
+      "passed": true,
+      "expected": {
+        "count": 35,
+        "files": [
+          "Collision/SM_WF_COL_Area1_WaterBox.fbx",
+          "Collision/SM_WF_COL_Area1_wf_seg7_collision_070102D8.fbx",
+          "Collision/SM_WF_COL_BillBlaster_wf_seg7_collision_bullet_bill_cannon.fbx",
+          "Collision/SM_WF_COL_BridgePiece_wf_seg7_collision_tumbling_bridge.fbx",
+          "Collision/SM_WF_COL_CheckerboardPlatform_checkerboard_platform_seg8_collision_0800D710.fbx",
+          "Collision/SM_WF_COL_CornerBreak_wf_seg7_collision_breakable_wall_2.fbx",
+          "Collision/SM_WF_COL_CornerStar_wf_seg7_collision_breakable_wall.fbx",
+          "Collision/SM_WF_COL_GrassPlatform_wf_seg7_collision_rotating_platform.fbx",
+          "Collision/SM_WF_COL_KickWood_wf_seg7_collision_kickable_board.fbx",
+          "Collision/SM_WF_COL_PushyRockBig_wf_seg7_collision_large_bomp.fbx",
+          "Collision/SM_WF_COL_PushyRock_wf_seg7_collision_small_bomp.fbx",
+          "Collision/SM_WF_COL_RotatingBridge_wf_seg7_collision_clocklike_rotation.fbx",
+          "Collision/SM_WF_COL_SlidingPlatform_wf_seg7_collision_sliding_brick_platform.fbx",
+          "Collision/SM_WF_COL_TowerPlatform_wf_seg7_collision_platform.fbx",
+          "Collision/SM_WF_COL_TowerWall_wf_seg7_collision_tower_door.fbx",
+          "Collision/SM_WF_COL_Tower_wf_seg7_collision_tower.fbx",
+          "Conditional/SM_WF_BillBlaster.fbx",
+          "Conditional/SM_WF_CornerBreak.fbx",
+          "Conditional/SM_WF_CornerStar.fbx",
+          "Conditional/SM_WF_Pole.fbx",
+          "Conditional/SM_WF_Tower.fbx",
+          "Conditional/SM_WF_TowerWall.fbx",
+          "Conditional/SM_WF_Tree.fbx",
+          "Movers/SM_WF_BridgePiece.fbx",
+          "Movers/SM_WF_GrassPlatform.fbx",
+          "Movers/SM_WF_KickWood.fbx",
+          "Movers/SM_WF_KickWoodDown.fbx",
+          "Movers/SM_WF_PushyRock.fbx",
+          "Movers/SM_WF_PushyRockBig.fbx",
+          "Movers/SM_WF_RotatingBridge.fbx",
+          "Movers/SM_WF_SlidingPlatform.fbx",
+          "Movers/SM_WF_TowerPlatform.fbx",
+          "Static/SM_WF_Static_Base.fbx",
+          "Static/SM_WF_Static_Props.fbx",
+          "Water/SM_WF_Water.fbx"
+        ]
+      },
+      "actual": {
+        "actual_count": 35,
+        "reported_count": 35,
+        "sets_exact": true,
+        "duplicates": [],
+        "mismatches": []
+      },
+      "detail": ""
+    },
+    {
+      "name": "actor_catalog_inventory",
+      "category": "actors",
+      "passed": true,
+      "expected": {
+        "count": 22,
+        "actors": [
+          "blue_coin",
+          "blue_coin_switch",
+          "bobomb",
+          "bobomb_buddy",
+          "breakable_box",
+          "bullet_bill",
+          "butterfly",
+          "cannon_barrel",
+          "cannon_base",
+          "cannon_lid",
+          "checkerboard_platform",
+          "exclamation_box",
+          "hoot",
+          "mushroom_1up",
+          "piranha_plant",
+          "purple_switch",
+          "red_coin",
+          "star",
+          "thwomp",
+          "whomp",
+          "wooden_signpost",
+          "yellow_coin"
+        ]
+      },
+      "actual": {
+        "catalog_count": 22,
+        "manifest_count": 22,
+        "actors": [
+          "blue_coin",
+          "blue_coin_switch",
+          "bobomb",
+          "bobomb_buddy",
+          "breakable_box",
+          "bullet_bill",
+          "butterfly",
+          "cannon_barrel",
+          "cannon_base",
+          "cannon_lid",
+          "checkerboard_platform",
+          "exclamation_box",
+          "hoot",
+          "mushroom_1up",
+          "piranha_plant",
+          "purple_switch",
+          "red_coin",
+          "star",
+          "thwomp",
+          "whomp",
+          "wooden_signpost",
+          "yellow_coin"
+        ]
+      },
+      "detail": ""
+    },
+    {
+      "name": "actor_source_rom_provenance",
+      "category": "actors",
+      "passed": true,
+      "expected": "9bef1128717f958171a4afac3ed78ee2bb4e86ce",
+      "actual": "9bef1128717f958171a4afac3ed78ee2bb4e86ce",
+      "detail": ""
+    },
+    {
+      "name": "actor_animation_collision_totals_and_artifact_hashes",
+      "category": "actors",
+      "passed": true,
+      "expected": {
+        "animations": 20,
+        "collision_triangles": 142,
+        "artifact_hashes": "manifest exact"
+      },
+      "actual": {
+        "animations": 20,
+        "collision_triangles": 142,
+        "mismatches": []
+      },
+      "detail": ""
+    },
+    {
+      "name": "runtime_source_inventory",
+      "category": "runtime",
+      "passed": true,
+      "expected": {
+        "headers": [
+          "SM64ActActor.h",
+          "SM64BreakableActor.h",
+          "SM64Collectible.h",
+          "SM64CourseManager.h",
+          "SM64Interactable.h",
+          "SM64MovingPlatformBase.h",
+          "SM64PlayerAdapter.h",
+          "SM64Runtime.h",
+          "SM64Types.h",
+          "SM64Warp.h",
+          "SM64WaterVolume.h",
+          "WFKickableBoard.h",
+          "WFTowerPlatformGroup.h",
+          "WFTumblingBridgeController.h"
+        ],
+        "sources": [
+          "SM64ActActor.cpp",
+          "SM64BreakableActor.cpp",
+          "SM64Collectible.cpp",
+          "SM64CourseManager.cpp",
+          "SM64MovingPlatformBase.cpp",
+          "SM64PlayerAdapter.cpp",
+          "SM64Runtime.cpp",
+          "SM64Warp.cpp",
+          "SM64WaterVolume.cpp",
+          "WFKickableBoard.cpp",
+          "WFTowerPlatformGroup.cpp",
+          "WFTumblingBridgeController.cpp"
+        ]
+      },
+      "actual": {
+        "headers": [
+          "SM64ActActor.h",
+          "SM64BlueCoinChallenge.h",
+          "SM64BreakableActor.h",
+          "SM64CameraSurfaceVolume.h",
+          "SM64ClimbableActor.h",
+          "SM64CoinFormation.h",
+          "SM64Collectible.h",
+          "SM64CourseManager.h",
+          "SM64CoursePortal.h",
+          "SM64CourseTrigger.h",
+          "SM64FixedStepActor.h",
+          "SM64HiddenOneUp.h",
+          "SM64Interactable.h",
+          "SM64MovingPlatformBase.h",
+          "SM64PlayerAdapter.h",
+          "SM64PowerStar.h",
+          "SM64Runtime.h",
+          "SM64SessionSubsystem.h",
+          "SM64SignActor.h",
+          "SM64StarMarker.h",
+          "SM64StarSelectWidget.h",
+          "SM64StaticCourseActor.h",
+          "SM64Types.h",
+          "SM64Warp.h",
+          "SM64WaterVolume.h",
+          "WFBobombBuddy.h",
+          "WFBulletBill.h",
+          "WFButterfly.h",
+          "WFCannon.h",
+          "WFCheckerboardElevatorPair.h",
+          "WFHoot.h",
+          "WFKickableBoard.h",
+          "WFPiranhaPlant.h",
+          "WFThwomp.h",
+          "WFTowerPlatformGroup.h",
+          "WFTumblingBridgeController.h",
+          "WFWhomp.h"
+        ],
+        "sources": [
+          "SM64ActActor.cpp",
+          "SM64BlueCoinChallenge.cpp",
+          "SM64BreakableActor.cpp",
+          "SM64CameraSurfaceVolume.cpp",
+          "SM64ClimbableActor.cpp",
+          "SM64CoinFormation.cpp",
+          "SM64Collectible.cpp",
+          "SM64CourseManager.cpp",
+          "SM64CoursePortal.cpp",
+          "SM64CourseTrigger.cpp",
+          "SM64FixedStepActor.cpp",
+          "SM64HiddenOneUp.cpp",
+          "SM64MovingPlatformBase.cpp",
+          "SM64PlayerAdapter.cpp",
+          "SM64PowerStar.cpp",
+          "SM64Runtime.cpp",
+          "SM64SessionSubsystem.cpp",
+          "SM64SignActor.cpp",
+          "SM64StarMarker.cpp",
+          "SM64StarSelectWidget.cpp",
+          "SM64StaticCourseActor.cpp",
+          "SM64Warp.cpp",
+          "SM64WaterVolume.cpp",
+          "WFBobombBuddy.cpp",
+          "WFBulletBill.cpp",
+          "WFButterfly.cpp",
+          "WFCannon.cpp",
+          "WFCheckerboardElevatorPair.cpp",
+          "WFHoot.cpp",
+          "WFKickableBoard.cpp",
+          "WFPiranhaPlant.cpp",
+          "WFThwomp.cpp",
+          "WFTowerPlatformGroup.cpp",
+          "WFTumblingBridgeController.cpp",
+          "WFWhomp.cpp"
+        ]
+      },
+      "detail": ""
+    },
+    {
+      "name": "runtime_reflected_type_inventory",
+      "category": "runtime",
+      "passed": true,
+      "expected": {
+        "enums": [
+          "ESM64AttackType",
+          "ESM64PlatformMotion",
+          "ESM64SurfaceType"
+        ],
+        "structs": [
+          "FSM64CourseProgress",
+          "FSM64MissionDefinition",
+          "FSM64Placement"
+        ],
+        "classes": [
+          "ASM64ActActor",
+          "ASM64BreakableActor",
+          "ASM64Collectible",
+          "ASM64CourseManager",
+          "ASM64MovingPlatformBase",
+          "ASM64PlayerAdapter",
+          "ASM64Warp",
+          "ASM64WaterVolume",
+          "AWFKickableBoard",
+          "AWFTowerPlatformGroup",
+          "AWFTumblingBridgeController",
+          "USM64CourseDefinition",
+          "USM64Interactable",
+          "USM64ProgressSaveGame"
+        ],
+        "native_interfaces": [
+          "ISM64Interactable"
+        ]
+      },
+      "actual": {
+        "enums": [
+          "ESM64AttackType",
+          "ESM64BlueCoinSwitchState",
+          "ESM64CameraSurfaceMode",
+          "ESM64ClimbState",
+          "ESM64ClimbableType",
+          "ESM64CoinFormationType",
+          "ESM64CourseTriggerType",
+          "ESM64PlatformMotion",
+          "ESM64PowerStarState",
+          "ESM64StarMarkerGoal",
+          "ESM64SurfaceType",
+          "ESM64TimedBlueCoinState",
+          "EWFBobombBuddyAction",
+          "EWFBuddyCannonStatus",
+          "EWFBulletBillAction",
+          "EWFButterflyState",
+          "EWFCannonState",
+          "EWFHootState",
+          "EWFPiranhaAction",
+          "EWFThwompAction",
+          "EWFWhompAction"
+        ],
+        "structs": [
+          "FSM64CourseProgress",
+          "FSM64MissionDefinition",
+          "FSM64Placement",
+          "FSM64SurfaceMapping",
+          "FSM64WarpDefinition"
+        ],
+        "classes": [
+          "ASM64ActActor",
+          "ASM64BlueCoinSwitch",
+          "ASM64BreakableActor",
+          "ASM64CameraSurfaceVolume",
+          "ASM64ClimbableActor",
+          "ASM64CoinFormation",
+          "ASM64Collectible",
+          "ASM64CourseManager",
+          "ASM64CoursePortal",
+          "ASM64CourseTrigger",
+          "ASM64FixedStepActor",
+          "ASM64HiddenOneUp",
+          "ASM64HiddenOneUpTrigger",
+          "ASM64MovingPlatformBase",
+          "ASM64PlayerAdapter",
+          "ASM64PowerStar",
+          "ASM64SignActor",
+          "ASM64StarMarker",
+          "ASM64StaticCourseActor",
+          "ASM64TimedBlueCoin",
+          "ASM64Warp",
+          "ASM64WaterVolume",
+          "AWFBobombBuddy",
+          "AWFBulletBill",
+          "AWFButterfly",
+          "AWFCannon",
+          "AWFCheckerboardElevatorPair",
+          "AWFHoot",
+          "AWFKickableBoard",
+          "AWFPiranhaPlant",
+          "AWFThwomp",
+          "AWFTowerPlatformGroup",
+          "AWFTumblingBridgeController",
+          "AWFWhomp",
+          "USM64CourseDefinition",
+          "USM64Interactable",
+          "USM64ProgressSaveGame",
+          "USM64SessionSubsystem",
+          "USM64StarSelectWidget"
+        ],
+        "native_interfaces": [
+          "ISM64Interactable"
+        ]
+      },
+      "detail": ""
+    },
+    {
+      "name": "runtime_plugin_descriptor",
+      "category": "runtime",
+      "passed": true,
+      "expected": "enabled native Runtime module",
+      "actual": {
+        "FileVersion": 3,
+        "Version": 1,
+        "VersionName": "1.0.0",
+        "FriendlyName": "Spyro 64 Runtime",
+        "Description": "Reusable Super Mario 64 course systems and Whomp's Fortress movers.",
+        "Category": "Gameplay",
+        "CreatedBy": "Spyro 64",
+        "EnabledByDefault": true,
+        "CanContainContent": false,
+        "Installed": false,
+        "Modules": [
+          {
+            "Name": "SM64Runtime",
+            "Type": "Runtime",
+            "LoadingPhase": "Default"
+          },
+          {
+            "Name": "SM64RuntimeEditor",
+            "Type": "Editor",
+            "LoadingPhase": "Default"
+          }
+        ]
+      },
+      "detail": ""
+    },
+    {
+      "name": "native_fixed_step_mover_contract",
+      "category": "runtime",
+      "passed": true,
+      "expected": [
+        "StepAccumulator += FMath::Max(0.0f, DeltaSeconds)",
+        "while (StepAccumulator + SMALL_NUMBER >= StepSeconds && CatchUpSteps < 240)",
+        "case ESM64PlatformMotion::Sliding:",
+        "case ESM64PlatformMotion::SmallBomp:",
+        "case ESM64PlatformMotion::LargeBomp:",
+        "case ESM64PlatformMotion::RotatingWood:",
+        "case ESM64PlatformMotion::RotatingContinuous:",
+        "case ESM64PlatformMotion::TowerSliding:",
+        "case ESM64PlatformMotion::TowerElevator:",
+        "CurrentForwardSpeed = 30.0f",
+        "CurrentForwardSpeed = 25.0f",
+        "float SimulationHz = 30.0f",
+        "float RotationDegreesPerFrame = 0.703125f"
+      ],
+      "actual": {
+        "missing_tokens": []
+      },
+      "detail": ""
+    },
+    {
+      "name": "fixed_step_schedule_equivalence",
+      "category": "mover_simulation",
+      "passed": true,
+      "expected": {
+        "schedule_comparisons": "27/27",
+        "checkpoint_assertions": "513/513",
+        "motion_invariants": "9/9"
+      },
+      "actual": {
+        "schedule_comparisons": "27/27",
+        "checkpoint_assertions": "513/513",
+        "motion_invariants": "9/9"
+      },
+      "detail": "Nine mover scenarios are fed equal elapsed time at 30/60/120 FPS and through a repeatable hitch mix."
+    }
+  ],
+  "mover_simulation": {
+    "passed": true,
+    "simulation_hz": 30,
+    "simulation_frames": 420,
+    "scenario_count": 9,
+    "schedule_comparison_passes": 27,
+    "schedule_comparison_count": 27,
+    "checkpoint_passes": 513,
+    "checkpoint_assertion_count": 513,
+    "invariant_passes": 9,
+    "invariant_count": 9,
+    "checkpoints": [
+      1,
+      30,
+      60,
+      61,
+      62,
+      100,
+      101,
+      102,
+      117,
+      118,
+      150,
+      180,
+      204,
+      240,
+      270,
+      300,
+      346,
+      360,
+      420
+    ],
+    "comparisons": [
+      {
+        "scenario": "sliding_10",
+        "schedule": "60_fps",
+        "passed": true,
+        "checkpoint_count": 19,
+        "mismatches": [],
+        "full_history_equal": true
+      },
+      {
+        "scenario": "sliding_10",
+        "schedule": "120_fps",
+        "passed": true,
+        "checkpoint_count": 19,
+        "mismatches": [],
+        "full_history_equal": true
+      },
+      {
+        "scenario": "sliding_10",
+        "schedule": "hitch_mix",
+        "passed": true,
+        "checkpoint_count": 19,
+        "mismatches": [],
+        "full_history_equal": true
+      },
+      {
+        "scenario": "sliding_15",
+        "schedule": "60_fps",
+        "passed": true,
+        "checkpoint_count": 19,
+        "mismatches": [],
+        "full_history_equal": true
+      },
+      {
+        "scenario": "sliding_15",
+        "schedule": "120_fps",
+        "passed": true,
+        "checkpoint_count": 19,
+        "mismatches": [],
+        "full_history_equal": true
+      },
+      {
+        "scenario": "sliding_15",
+        "schedule": "hitch_mix",
+        "passed": true,
+        "checkpoint_count": 19,
+        "mismatches": [],
+        "full_history_equal": true
+      },
+      {
+        "scenario": "sliding_20",
+        "schedule": "60_fps",
+        "passed": true,
+        "checkpoint_count": 19,
+        "mismatches": [],
+        "full_history_equal": true
+      },
+      {
+        "scenario": "sliding_20",
+        "schedule": "120_fps",
+        "passed": true,
+        "checkpoint_count": 19,
+        "mismatches": [],
+        "full_history_equal": true
+      },
+      {
+        "scenario": "sliding_20",
+        "schedule": "hitch_mix",
+        "passed": true,
+        "checkpoint_count": 19,
+        "mismatches": [],
+        "full_history_equal": true
+      },
+      {
+        "scenario": "small_bomp",
+        "schedule": "60_fps",
+        "passed": true,
+        "checkpoint_count": 19,
+        "mismatches": [],
+        "full_history_equal": true
+      },
+      {
+        "scenario": "small_bomp",
+        "schedule": "120_fps",
+        "passed": true,
+        "checkpoint_count": 19,
+        "mismatches": [],
+        "full_history_equal": true
+      },
+      {
+        "scenario": "small_bomp",
+        "schedule": "hitch_mix",
+        "passed": true,
+        "checkpoint_count": 19,
+        "mismatches": [],
+        "full_history_equal": true
+      },
+      {
+        "scenario": "large_bomp",
+        "schedule": "60_fps",
+        "passed": true,
+        "checkpoint_count": 19,
+        "mismatches": [],
+        "full_history_equal": true
+      },
+      {
+        "scenario": "large_bomp",
+        "schedule": "120_fps",
+        "passed": true,
+        "checkpoint_count": 19,
+        "mismatches": [],
+        "full_history_equal": true
+      },
+      {
+        "scenario": "large_bomp",
+        "schedule": "hitch_mix",
+        "passed": true,
+        "checkpoint_count": 19,
+        "mismatches": [],
+        "full_history_equal": true
+      },
+      {
+        "scenario": "rotating_wood",
+        "schedule": "60_fps",
+        "passed": true,
+        "checkpoint_count": 19,
+        "mismatches": [],
+        "full_history_equal": true
+      },
+      {
+        "scenario": "rotating_wood",
+        "schedule": "120_fps",
+        "passed": true,
+        "checkpoint_count": 19,
+        "mismatches": [],
+        "full_history_equal": true
+      },
+      {
+        "scenario": "rotating_wood",
+        "schedule": "hitch_mix",
+        "passed": true,
+        "checkpoint_count": 19,
+        "mismatches": [],
+        "full_history_equal": true
+      },
+      {
+        "scenario": "rotating_continuous",
+        "schedule": "60_fps",
+        "passed": true,
+        "checkpoint_count": 19,
+        "mismatches": [],
+        "full_history_equal": true
+      },
+      {
+        "scenario": "rotating_continuous",
+        "schedule": "120_fps",
+        "passed": true,
+        "checkpoint_count": 19,
+        "mismatches": [],
+        "full_history_equal": true
+      },
+      {
+        "scenario": "rotating_continuous",
+        "schedule": "hitch_mix",
+        "passed": true,
+        "checkpoint_count": 19,
+        "mismatches": [],
+        "full_history_equal": true
+      },
+      {
+        "scenario": "tower_sliding",
+        "schedule": "60_fps",
+        "passed": true,
+        "checkpoint_count": 19,
+        "mismatches": [],
+        "full_history_equal": true
+      },
+      {
+        "scenario": "tower_sliding",
+        "schedule": "120_fps",
+        "passed": true,
+        "checkpoint_count": 19,
+        "mismatches": [],
+        "full_history_equal": true
+      },
+      {
+        "scenario": "tower_sliding",
+        "schedule": "hitch_mix",
+        "passed": true,
+        "checkpoint_count": 19,
+        "mismatches": [],
+        "full_history_equal": true
+      },
+      {
+        "scenario": "tower_elevator",
+        "schedule": "60_fps",
+        "passed": true,
+        "checkpoint_count": 19,
+        "mismatches": [],
+        "full_history_equal": true
+      },
+      {
+        "scenario": "tower_elevator",
+        "schedule": "120_fps",
+        "passed": true,
+        "checkpoint_count": 19,
+        "mismatches": [],
+        "full_history_equal": true
+      },
+      {
+        "scenario": "tower_elevator",
+        "schedule": "hitch_mix",
+        "passed": true,
+        "checkpoint_count": 19,
+        "mismatches": [],
+        "full_history_equal": true
+      }
+    ],
+    "invariants": [
+      {
+        "scenario": "sliding_10",
+        "passed": true,
+        "detail": "bounded at source-init X=2 and source-init+510"
+      },
+      {
+        "scenario": "sliding_15",
+        "passed": true,
+        "detail": "bounded at source-init X=2 and source-init+510"
+      },
+      {
+        "scenario": "sliding_20",
+        "passed": true,
+        "detail": "bounded at source-init X=2 and source-init+510"
+      },
+      {
+        "scenario": "small_bomp",
+        "passed": true,
+        "detail": "reaches the exact 530-unit extension without crossing home"
+      },
+      {
+        "scenario": "large_bomp",
+        "passed": true,
+        "detail": "reaches the exact 530-unit extension without crossing home"
+      },
+      {
+        "scenario": "rotating_wood",
+        "passed": true,
+        "detail": "enters the 0x100 angle-unit rotation action after the 60-frame wait"
+      },
+      {
+        "scenario": "rotating_continuous",
+        "passed": true,
+        "detail": "0x80 angle units/frame reaches 90 degrees at frame 128"
+      },
+      {
+        "scenario": "tower_sliding",
+        "passed": true,
+        "detail": "alternates deterministically using the decomp 380/3 half-cycle"
+      },
+      {
+        "scenario": "tower_elevator",
+        "passed": true,
+        "detail": "rider-triggered elevator rises 141x5 and returns to home"
+      }
+    ]
+  }
 }

@@ -6,15 +6,39 @@ Mover schedule comparisons: 27/27
 Mover integer-frame checkpoints: 513/513
 Mover canonical invariants: 9/9
 
-Authoritative delivery counts
------------------------------
-Stable placements: 127/127 unique and decomp-exact
-Canonical missions: 6/6 names, masks, and source/UE targets
-Red coins: 8/8
-Terrain: 422 vertices, 640 semantic triangles across 9 surfaces
-FBX exports: 35/35 present with exact SHA-256 hashes
-Actor bridge: 22/22 actors, 20 animations, 142 collision triangles
-Runtime reflection: 3 enums, 3 structs, 14 classes, 1 native interface
+Check results
+-------------
+[PASS] placements/placement_manifest_format: 
+[PASS] placements/placement_count: 
+[PASS] placements/stable_id_uniqueness: 
+[PASS] placements/independent_decomp_placement_count: Reconstructed without importing the generator package.
+[PASS] placements/all_placement_ids_masks_and_transforms_match_decomp: 
+[PASS] missions/eight_red_coins: 
+[PASS] missions/canonical_course_and_mission_names: 
+[PASS] missions/canonical_mission_targets_masks_and_positions: 
+[PASS] landmarks/start_and_warp_landmarks: 
+[PASS] collision/terrain_decomp_semantic_collision: Nine semantic surface sections sum to exactly 640 triangles.
+[PASS] collision/terrain_manifest_matches_decomp: 
+[PASS] course_definition/course_definition_identity: 
+[PASS] course_definition/course_definition_six_missions: 
+[PASS] course_definition/course_definition_entrance_and_warps: 
+[PASS] course_definition/course_definition_water_death_and_surfaces: 
+[PASS] course_definition/course_definition_coin_totals_bonus_and_act_rules: 
+[PASS] dae_policy/excluded_dae_policy_and_hashes: Area1/KickWood baked overlays, unused wide tower platform, and BridgeWhole LOD remain excluded.
+[PASS] fbx/required_fbx_inventory_and_hashes: 
+[PASS] actors/actor_catalog_inventory: 
+[PASS] actors/actor_source_rom_provenance: 
+[PASS] actors/actor_animation_collision_totals_and_artifact_hashes: 
+[PASS] runtime/runtime_source_inventory: 
+[PASS] runtime/runtime_reflected_type_inventory: 
+[PASS] runtime/runtime_plugin_descriptor: 
+[PASS] runtime/native_fixed_step_mover_contract: 
+[PASS] mover_simulation/fixed_step_schedule_equivalence: Nine mover scenarios are fed equal elapsed time at 30/60/120 FPS and through a repeatable hitch mix.
 
-Rerun the validator for the full per-check report and a fresh timestamp:
-& 'C:\Users\adace\AppData\Local\Programs\Python\Python313\python.exe' '.\SM64\Validation\validate_wf_acceptance.py'
+Authoritative inputs
+--------------------
+Decomp: C:\Users\adace\Downloads\sm64-master\sm64-master
+Location DAEs: C:\Users\adace\Downloads\Nintendo 64 - Super Mario 64 - Locations - Whomp's Fortress\Whomp's Fortress
+Generated source: C:\Users\adace\Desktop\spyro-blowhards-revenge\Content\Spyro64\SM64\Source
+Runtime plugin: C:\Users\adace\Desktop\spyro-blowhards-revenge\Plugins\SM64Runtime
+Truth snapshot: C:\Users\adace\Desktop\spyro-blowhards-revenge\Content\Spyro64\SM64\Validation\expected_truth.json

@@ -60,14 +60,15 @@ void AWFTowerPlatformGroup::SpawnPlatforms()
     Platforms.Reset();
     for (int32 Index = 0; Index < 8; ++Index)
     {
+        const float CourseScale = FMath::Max(KINDA_SMALL_NUMBER, GetActorScale3D().GetAbsMax());
         const float SourceYaw = Index * 45.0f;
         const float Radians = FMath::DegreesToRadians(SourceYaw);
         FVector Location = GetActorLocation();
         Location.X += Radius * FMath::Sin(Radians);
         Location.Y += Radius * FMath::Cos(Radians);
-        Location.Z += 300.0f + PlatformHeightStep * Index;
+        Location.Z += 300.0f * CourseScale + PlatformHeightStep * Index;
         const FRotator Rotation(0.0f, -SourceYaw, 0.0f);
-        const FTransform SpawnTransform(Rotation, Location);
+        const FTransform SpawnTransform(Rotation, Location, FVector(CourseScale));
         ASM64MovingPlatformBase* Platform = GetWorld()->SpawnActorDeferred<ASM64MovingPlatformBase>(
             PlatformClass,
             SpawnTransform,
@@ -89,8 +90,8 @@ void AWFTowerPlatformGroup::SpawnPlatforms()
         else if (Index == 1 || Index == 3 || Index == 5)
         {
             Platform->Motion = ESM64PlatformMotion::TowerSliding;
-            Platform->TravelDistance = 380.0f;
-            Platform->SpeedPerFrame = 3.0f;
+            Platform->TravelDistance = 380.0f * CourseScale;
+            Platform->SpeedPerFrame = 3.0f * CourseScale;
             // SM64 forward velocity is (sin(yaw), cos(yaw)) in source X/Z.
             // After source Z maps to UE Y this remains (sin, cos), while the
             // visible mesh yaw itself is negated independently.

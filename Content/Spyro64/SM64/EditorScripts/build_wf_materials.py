@@ -50,8 +50,14 @@ def build_master(name, blend_mode, two_sided=False, animated_uv=False):
     color_mul = expression(material, unreal.MaterialExpressionMultiply, -320, -20)
     unreal.MaterialEditingLibrary.connect_material_expressions(texture, "RGB", color_mul, "A")
     unreal.MaterialEditingLibrary.connect_material_expressions(vertex, "RGB", color_mul, "B")
+    tint = expression(material, unreal.MaterialExpressionVectorParameter, -320, 120)
+    tint.set_editor_property("parameter_name", "Tint")
+    tint.set_editor_property("default_value", unreal.LinearColor(1.0, 1.0, 1.0, 1.0))
+    tinted_color = expression(material, unreal.MaterialExpressionMultiply, -40, -20)
+    unreal.MaterialEditingLibrary.connect_material_expressions(color_mul, "", tinted_color, "A")
+    unreal.MaterialEditingLibrary.connect_material_expressions(tint, "", tinted_color, "B")
     unreal.MaterialEditingLibrary.connect_material_property(
-        color_mul, "", unreal.MaterialProperty.MP_EMISSIVE_COLOR
+        tinted_color, "", unreal.MaterialProperty.MP_EMISSIVE_COLOR
     )
 
     if animated_uv:

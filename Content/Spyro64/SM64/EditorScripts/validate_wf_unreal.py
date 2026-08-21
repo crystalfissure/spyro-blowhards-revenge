@@ -17,6 +17,16 @@ SOURCE_ROOT = os.path.normpath(
 )
 PLACEMENTS_FILE = os.path.join(SOURCE_ROOT, "Manifest", "wf_placements.json")
 TAG_PREFIX = "SM64StableId="
+COURSE_SCALE = 0.80
+COURSE_SCALED_PREFIXES = (
+    "wf/render/",
+    "wf/collision/",
+    "wf/object/",
+    "wf/macro/",
+    "wf/special/",
+    "wf/collectible/",
+    "wf/star/",
+)
 
 SHELL_PATHS = {
     "BP_Spyro_C": LEVEL + ".05_Level5:PersistentLevel.BP_S3_Spyro_2",
@@ -168,7 +178,10 @@ def vector_tuple(value):
 
 
 def assert_transform(actor, record):
-    expected_location = record["unreal_transform"]["location_cm"]
+    expected_location = [
+        float(value) * COURSE_SCALE
+        for value in record["unreal_transform"]["location_cm"]
+    ]
     actual_location = vector_tuple(actor.get_actor_location())
     if not all(close(actual_location[index], expected_location[index]) for index in range(3)):
         raise AssertionError(
@@ -183,6 +196,12 @@ def assert_transform(actor, record):
             raise AssertionError(
                 "{} rotation {} != {}".format(stable_id(actor), actual_rotation, expected_rotation)
             )
+    expected_scale = COURSE_SCALE if stable_id(actor).startswith(COURSE_SCALED_PREFIXES) else 1.0
+    actual_scale = vector_tuple(actor.get_actor_scale3d())
+    if not all(close(value, expected_scale) for value in actual_scale):
+        raise AssertionError(
+            "{} scale {} != {}".format(stable_id(actor), actual_scale, expected_scale)
+        )
 
 
 def require_component_mesh(actor, component_property, require_simple=False, require_complex_as_simple=False):
@@ -374,7 +393,10 @@ def validate():
     death = by_id["wf/system/death_surface"]
     if death.get_editor_property("trigger_type") != unreal.SM64CourseTriggerType.DEATH:
         raise AssertionError("decomp death surface is not a death trigger")
-    if vector_tuple(death.get_editor_property("box_extent")) != (8191.5, 8191.5, 32.0):
+    expected_death_extent = tuple(value * COURSE_SCALE for value in (8191.5, 8191.5, 32.0))
+    if not all(close(a, b) for a, b in zip(
+        vector_tuple(death.get_editor_property("box_extent")), expected_death_extent
+    )):
         raise AssertionError("decomp death trigger bounds changed")
     if not death.get_editor_property("auto_retry_act_on_death"):
         raise AssertionError("fatal falls do not retry the selected act")
@@ -457,7 +479,14 @@ def validate():
         value != unreal.CollisionEnabled.NO_COLLISION for value in legacy_pawn_surfaces.values()
     ):
         raise AssertionError("legacy kill-plane pawn surfaces were not safely superseded")
-    if not all(close(a, b) for a, b in zip(vector_tuple(spyro.get_actor_location()), (2600, 5120, 304))):
+    expected_spyro_entrance = (
+        2600.0 * COURSE_SCALE,
+        5120.0 * COURSE_SCALE,
+        256.0 * COURSE_SCALE + 48.0,
+    )
+    if not all(close(a, b) for a, b in zip(
+        vector_tuple(spyro.get_actor_location()), expected_spyro_entrance
+    )):
         raise AssertionError("Spyro course entrance is incorrect")
 
     decorations = []

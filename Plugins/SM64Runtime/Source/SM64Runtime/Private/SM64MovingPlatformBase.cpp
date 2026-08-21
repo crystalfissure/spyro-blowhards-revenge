@@ -70,7 +70,7 @@ void ASM64MovingPlatformBase::BeginPlay()
     if (Motion == ESM64PlatformMotion::Sliding)
     {
         FVector Adjusted = HomeTransform.GetLocation();
-        Adjusted.X += 2.0f;
+        Adjusted.X += 2.0f * GetActorScale3D().GetAbsMax();
         HomeTransform.SetLocation(Adjusted);
     }
     bHomeTransformInitialized = true;
@@ -149,6 +149,7 @@ void ASM64MovingPlatformBase::StepSimulation()
     const FVector Direction = MotionDirection.IsNearlyZero()
         ? FVector::ForwardVector
         : MotionDirection.GetSafeNormal();
+    const float LinearScale = FMath::Max(KINDA_SMALL_NUMBER, GetActorScale3D().GetAbsMax());
 
     switch (Motion)
     {
@@ -198,46 +199,47 @@ void ASM64MovingPlatformBase::StepSimulation()
         {
             if (ActionTimer > 100)
             {
-                CurrentForwardSpeed = 30.0f;
+                CurrentForwardSpeed = 30.0f * LinearScale;
                 SetMotionAction(1);
             }
         }
         else if (MotionAction == 1)
         {
-            if (Location.X > HomeTransform.GetLocation().X + 150.0f)
+            if (Location.X > HomeTransform.GetLocation().X + 150.0f * LinearScale)
             {
-                Location.X = HomeTransform.GetLocation().X + 150.0f;
+                Location.X = HomeTransform.GetLocation().X + 150.0f * LinearScale;
                 CurrentForwardSpeed = 0.0f;
             }
             if (ActionTimer == 15)
             {
-                CurrentForwardSpeed = Motion == ESM64PlatformMotion::SmallBomp ? 40.0f : 10.0f;
+                CurrentForwardSpeed = (Motion == ESM64PlatformMotion::SmallBomp ? 40.0f : 10.0f)
+                    * LinearScale;
                 SetMotionAction(2);
             }
         }
         else if (MotionAction == 2)
         {
-            if (Location.X > HomeTransform.GetLocation().X + 530.0f)
+            if (Location.X > HomeTransform.GetLocation().X + 530.0f * LinearScale)
             {
-                Location.X = HomeTransform.GetLocation().X + 530.0f;
+                Location.X = HomeTransform.GetLocation().X + 530.0f * LinearScale;
                 CurrentForwardSpeed = 0.0f;
             }
             if (ActionTimer == 60)
             {
-                CurrentForwardSpeed = -10.0f;
+                CurrentForwardSpeed = -10.0f * LinearScale;
                 SetMotionAction(3);
             }
         }
         else
         {
-            if (Location.X < HomeTransform.GetLocation().X + 30.0f)
+            if (Location.X < HomeTransform.GetLocation().X + 30.0f * LinearScale)
             {
-                Location.X = HomeTransform.GetLocation().X + 30.0f;
+                Location.X = HomeTransform.GetLocation().X + 30.0f * LinearScale;
                 CurrentForwardSpeed = 0.0f;
             }
             if (ActionTimer == 90)
             {
-                CurrentForwardSpeed = 25.0f;
+                CurrentForwardSpeed = 25.0f * LinearScale;
                 SetMotionAction(1);
             }
         }
@@ -292,7 +294,7 @@ void ASM64MovingPlatformBase::StepSimulation()
             }
             else
             {
-                Location.Z += 5.0f;
+                Location.Z += 5.0f * LinearScale;
             }
         }
         else if (MotionAction == 2)
@@ -311,7 +313,7 @@ void ASM64MovingPlatformBase::StepSimulation()
             }
             else
             {
-                Location.Z -= 5.0f;
+                Location.Z -= 5.0f * LinearScale;
             }
         }
         break;
@@ -323,8 +325,8 @@ void ASM64MovingPlatformBase::StepSimulation()
             FCollisionQueryParams FloorQuery(SCENE_QUERY_STAT(SM64TumblingFloor), false, this);
             if (GetWorld() && GetWorld()->LineTraceSingleByChannel(
                 FloorHit,
-                Location + FVector(0.0f, 0.0f, 10.0f),
-                Location - FVector(0.0f, 0.0f, 10000.0f),
+                Location + FVector(0.0f, 0.0f, 10.0f * LinearScale),
+                Location - FVector(0.0f, 0.0f, 10000.0f * LinearScale),
                 ECC_WorldStatic,
                 FloorQuery))
             {
@@ -348,11 +350,11 @@ void ASM64MovingPlatformBase::StepSimulation()
             {
                 RollVelocity += RollAcceleration;
             }
-            VerticalVelocity -= 3.0f;
+            VerticalVelocity -= 3.0f * LinearScale;
             Location.Z += VerticalVelocity;
             Rotation.Pitch += PitchVelocity;
             Rotation.Roll += RollVelocity;
-            if (Location.Z < TumblingFloorHeight - 300.0f)
+            if (Location.Z < TumblingFloorHeight - 300.0f * LinearScale)
             {
                 SetMotionAction(3);
             }

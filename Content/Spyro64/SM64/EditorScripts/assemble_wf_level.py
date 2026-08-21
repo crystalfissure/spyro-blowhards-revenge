@@ -27,6 +27,16 @@ WATER = CONTENT + "/Meshes/Water"
 COMMON_ACTORS = "/Game/Spyro64/SM64/Common/Actors"
 TAG_PREFIX = "SM64StableId="
 GENERATED_TAG = "SM64Generated"
+COURSE_SCALE = 0.80
+COURSE_SCALED_PREFIXES = (
+    "wf/render/",
+    "wf/collision/",
+    "wf/object/",
+    "wf/macro/",
+    "wf/special/",
+    "wf/collectible/",
+    "wf/star/",
+)
 
 
 STATIC_RENDER = {
@@ -148,7 +158,17 @@ def act_mask(item):
 
 def location(item):
     xyz = item["unreal_transform"]["location_cm"]
-    return unreal.Vector(float(xyz[0]), float(xyz[1]), float(xyz[2]))
+    return course_vector(*xyz)
+
+
+def course_distance(value):
+    return float(value) * COURSE_SCALE
+
+
+def course_vector(x, y, z):
+    return unreal.Vector(
+        course_distance(x), course_distance(y), course_distance(z)
+    )
 
 
 def rotation(item):
@@ -161,8 +181,13 @@ def transform_from(record, unreal_space=True):
     loc_key = "location_cm"
     xyz = record[key][loc_key]
     angles = record[key]["rotation_deg"]
+    output_location = (
+        course_vector(*xyz)
+        if unreal_space
+        else unreal.Vector(float(xyz[0]), float(xyz[1]), float(xyz[2]))
+    )
     return unreal.Transform(
-        location=unreal.Vector(float(xyz[0]), float(xyz[1]), float(xyz[2])),
+        location=output_location,
         rotation=unreal.Rotator(
             pitch=float(angles[0]), yaw=float(angles[1]), roll=float(angles[2])
         ),
@@ -252,6 +277,10 @@ def ensure_actor(stable_id, actor_class, actor_location=None, actor_rotation=Non
         REPORT["updated"].append(stable_id)
     unreal.log_warning("SM64_WF_STEP identity " + stable_id)
     add_identity(actor, stable_id)
+    if stable_id.startswith(COURSE_SCALED_PREFIXES):
+        actor.set_actor_scale3d(unreal.Vector(COURSE_SCALE, COURSE_SCALE, COURSE_SCALE))
+    else:
+        actor.set_actor_scale3d(unreal.Vector(1.0, 1.0, 1.0))
     unreal.log_warning("SM64_WF_STEP ensured " + stable_id)
     return actor
 
@@ -336,15 +365,15 @@ def ensure_course_definition():
     asset.set_editor_property("warp_key", COURSE_DATA["course_id"])
     asset.set_editor_property("course_name", unreal.Text(COURSE_DATA["display_name"]))
     asset.set_editor_property("canonical_course_coin_total", 100)
-    asset.set_editor_property("death_plane_height", float(COURSE_DATA["death_plane_height_cm"]))
-    asset.set_editor_property("water_surface_height", float(COURSE_DATA["water"]["surface_height_cm"]))
+    asset.set_editor_property("death_plane_height", course_distance(COURSE_DATA["death_plane_height_cm"]))
+    asset.set_editor_property("water_surface_height", course_distance(COURSE_DATA["water"]["surface_height_cm"]))
     start = COURSE_DATA["entrance"]["mario_base_start"]
     entrance = COURSE_DATA["entrance"]["warp_0A"]
-    asset.set_editor_property("course_start", unreal.Vector(*start["unreal_location_cm"]))
+    asset.set_editor_property("course_start", course_vector(*start["unreal_location_cm"]))
     asset.set_editor_property(
         "course_start_rotation", unreal.Rotator(pitch=0.0, yaw=float(start["unreal_yaw_deg"]), roll=0.0)
     )
-    asset.set_editor_property("entrance_warp_location", unreal.Vector(*entrance["unreal_location_cm"]))
+    asset.set_editor_property("entrance_warp_location", course_vector(*entrance["unreal_location_cm"]))
     asset.set_editor_property(
         "entrance_warp_rotation",
         unreal.Rotator(pitch=0.0, yaw=float(entrance["unreal_yaw_deg"]), roll=0.0),
@@ -359,7 +388,7 @@ def ensure_course_definition():
         mission.set_editor_property("display_name", unreal.Text(item["display_name"]))
         mission.set_editor_property("preferred_act", int(item["preferred_act"]))
         mission.set_editor_property("visible_act_mask", int(item["visible_act_mask"]))
-        mission.set_editor_property("star_location", unreal.Vector(*item["unreal_location_cm"]))
+        mission.set_editor_property("star_location", course_vector(*item["unreal_location_cm"]))
         mission.set_editor_property("eject_player_on_collect", bool(item["eject_on_collect"]))
         missions.append(mission)
     asset.set_editor_property("missions", missions)
@@ -374,7 +403,7 @@ def ensure_course_definition():
         warp.set_editor_property(
             "transform",
             unreal.Transform(
-                location=unreal.Vector(*item["unreal_location_cm"]),
+                location=course_vector(*item["unreal_location_cm"]),
                 rotation=unreal.Rotator(
                     pitch=0.0, yaw=float(item["unreal_yaw_deg"]), roll=0.0
                 ),
@@ -443,10 +472,11 @@ def configure_mover(actor, item, motion, speed=15.0, travel=510.0, degrees=0.703
     actor.set_editor_property("act_mask", act_mask(item))
     actor.set_editor_property("motion", motion)
     actor.set_editor_property("simulation_hz", 30.0)
-    actor.set_editor_property("speed_per_frame", float(speed))
-    actor.set_editor_property("travel_distance", float(travel))
+    actor.set_editor_property("speed_per_frame", course_distance(speed))
+    actor.set_editor_property("travel_distance", course_distance(travel))
     actor.set_editor_property("rotation_degrees_per_frame", float(degrees))
     actor.set_editor_property("manual_rider_conveyance", True)
+    # Local component dimensions inherit the actor's course scale.
     actor.set_editor_property("rider_sensor_extent", unreal.Vector(420.0, 420.0, 120.0))
     actor.set_editor_property("rider_sensor_offset", unreal.Vector(0.0, 0.0, 100.0))
     rerun(actor)
@@ -470,7 +500,7 @@ def verify_shell():
         REPORT["shell"][name] = actor.get_path_name()
     spyro = requirements["BP_Spyro_C"]
     spyro.set_actor_location_and_rotation(
-        unreal.Vector(2600.0, 5120.0, 304.0),
+        course_vector(2600.0, 5120.0, 256.0) + unreal.Vector(0.0, 0.0, 48.0),
         unreal.Rotator(pitch=0.0, yaw=-90.0, roll=0.0),
         False,
         False,
@@ -518,7 +548,7 @@ def assemble():
         shell["BP_Spyro_C"].get_actor_rotation(),
     )
     adapter.set_editor_property("spyro_actor", shell["BP_Spyro_C"])
-    adapter.set_editor_property("attack_radius", 180.0)
+    adapter.set_editor_property("attack_radius", course_distance(180.0))
     adapter.set_editor_property("auto_detect_spyro_attacks", True)
 
     # Preserve the shell kill-plane actor because the Level Blueprint owns a
@@ -532,12 +562,12 @@ def assemble():
     death_surface = ensure_actor(
         "wf/system/death_surface",
         unreal.SM64CourseTrigger,
-        unreal.Vector(0.5, 0.5, -3103.0),
+        course_vector(0.5, 0.5, -3103.0),
         unreal.Rotator(),
     )
     death_surface.set_editor_property("act_mask", 0x3F)
     death_surface.set_editor_property("trigger_type", unreal.SM64CourseTriggerType.DEATH)
-    death_surface.set_editor_property("box_extent", unreal.Vector(8191.5, 8191.5, 32.0))
+    death_surface.set_editor_property("box_extent", course_vector(8191.5, 8191.5, 32.0))
     death_surface.set_editor_property("auto_retry_act_on_death", True)
     death_surface.set_editor_property("use_latest_checkpoint", False)
     rerun(death_surface)
@@ -548,24 +578,24 @@ def assemble():
     camera_specs = (
         (
             "wf/system/camera/boss_fight",
-            unreal.Vector(256.5, -211.5, 3834.0),
-            unreal.Vector(1279.5, 1747.5, 250.0),
+            course_vector(256.5, -211.5, 3834.0),
+            course_vector(1279.5, 1747.5, 250.0),
             unreal.SM64CameraSurfaceMode.BOSS_CAMERA,
             "WF_BossFight",
             10,
         ),
         (
             "wf/system/camera/middle_lower",
-            unreal.Vector(3277.0, -3583.0, 1325.0),
-            unreal.Vector(819.0, 512.0, 250.0),
+            course_vector(3277.0, -3583.0, 1325.0),
+            course_vector(819.0, 512.0, 250.0),
             unreal.SM64CameraSurfaceMode.CAMERA_MIDDLE,
             "WF_Middle",
             5,
         ),
         (
             "wf/system/camera/middle_upper",
-            unreal.Vector(3405.0, -255.5, 2554.0),
-            unreal.Vector(179.0, 255.5, 250.0),
+            course_vector(3405.0, -255.5, 2554.0),
+            course_vector(179.0, 255.5, 250.0),
             unreal.SM64CameraSurfaceMode.CAMERA_MIDDLE,
             "WF_Middle",
             5,
@@ -606,10 +636,10 @@ def assemble():
     bridge.set_editor_property("piece_mesh", require_asset(RENDER["BridgePiece"]))
     bridge.set_editor_property("piece_collision_mesh", require_asset(DYNAMIC_COLLISION["BridgePiece"]))
     bridge.set_editor_property("piece_count", 9)
-    bridge.set_editor_property("first_piece_offset", -512.0)
-    bridge.set_editor_property("piece_spacing", 128.0)
-    bridge.set_editor_property("spawn_distance", 1000.0)
-    bridge.set_editor_property("reset_distance", 1200.0)
+    bridge.set_editor_property("first_piece_offset", course_distance(-512.0))
+    bridge.set_editor_property("piece_spacing", course_distance(128.0))
+    bridge.set_editor_property("spawn_distance", course_distance(1000.0))
+    bridge.set_editor_property("reset_distance", course_distance(1200.0))
     rerun(bridge)
 
     tower_group_item = PLACEMENTS["wf/object/bhvtowerplatformgroup/000"]
@@ -625,9 +655,9 @@ def assemble():
     tower_group.set_editor_property(
         "platform_collision_mesh", require_asset(DYNAMIC_COLLISION["TowerPlatform"])
     )
-    tower_group.set_editor_property("radius", 704.0)
-    tower_group.set_editor_property("platform_height_step", 100.0)
-    tower_group.set_editor_property("activation_height_below_root", 700.0)
+    tower_group.set_editor_property("radius", course_distance(704.0))
+    tower_group.set_editor_property("platform_height_step", course_distance(100.0))
+    tower_group.set_editor_property("activation_height_below_root", course_distance(700.0))
 
     board_item = PLACEMENTS["wf/object/bhvkickableboard/000"]
     board = ensure_actor(board_item["stable_id"], unreal.WFKickableBoard, location(board_item), rotation(board_item))
@@ -677,9 +707,9 @@ def assemble():
     water_render = ensure_actor("wf/render/water", unreal.SM64StaticCourseActor)
     configure_static_actor(water_render, WATER + "/SM_WF_Water", None)
     bounds = COURSE_DATA["water"]["unreal_bounds_xy_cm"]
-    min_x, min_y, max_x, max_y = [float(value) for value in bounds]
-    surface_z = float(COURSE_DATA["water"]["surface_height_cm"])
-    bottom_z = float(COURSE_DATA["death_plane_height_cm"])
+    min_x, min_y, max_x, max_y = [course_distance(value) for value in bounds]
+    surface_z = course_distance(COURSE_DATA["water"]["surface_height_cm"])
+    bottom_z = course_distance(COURSE_DATA["death_plane_height_cm"])
     water_center = unreal.Vector(
         (min_x + max_x) * 0.5,
         (min_y + max_y) * 0.5,
@@ -702,7 +732,7 @@ def assemble():
         actor = ensure_actor(
             stable_id,
             unreal.SM64Warp,
-            unreal.Vector(*warp_data["unreal_location_cm"]),
+            course_vector(*warp_data["unreal_location_cm"]),
             unreal.Rotator(pitch=0.0, yaw=float(warp_data["unreal_yaw_deg"]), roll=0.0),
         )
         actor.set_editor_property("warp_id", warp_data["warp_id"])
@@ -752,8 +782,13 @@ def assemble():
         actor.set_editor_property("prepare_jump_animation", whomp_animations[1])
         actor.set_editor_property("drop_coin_class", yellow_coin_class)
         actor.set_editor_property("king_whomp", item["behavior"] == "bhvWhompKingBoss")
+        actor.set_editor_property("small_activation_distance", course_distance(500.0))
+        actor.set_editor_property("boss_activation_distance", course_distance(600.0))
+        actor.set_editor_property("patrol_distance", course_distance(700.0))
+        actor.set_editor_property("notice_distance", course_distance(1500.0))
+        actor.set_editor_property("attack_distance", course_distance(300.0))
         actor.set_editor_property("boss_star_index", 0)
-        actor.set_editor_property("boss_star_location", unreal.Vector(180.0, 340.0, 3880.0))
+        actor.set_editor_property("boss_star_location", course_vector(180.0, 340.0, 3880.0))
         rerun(actor)
 
     thwomp_mesh = require_asset(common_actor_asset("thwomp"))
@@ -876,7 +911,7 @@ def assemble():
 
     star_mesh = require_asset(common_actor_asset("star"))
     star_specs = (
-        ("wf/star/mission_01_boss", unreal.Vector(180.0, 340.0, 3880.0), unreal.Rotator(), 0x01, 0, False),
+        ("wf/star/mission_01_boss", course_vector(180.0, 340.0, 3880.0), unreal.Rotator(), 0x01, 0, False),
         ("wf/object/bhvstar/000", None, None, act_mask(PLACEMENTS["wf/object/bhvstar/000"]), 1, True),
         ("wf/object/bhvstar/001", None, None, act_mask(PLACEMENTS["wf/object/bhvstar/001"]), 2, True),
         ("wf/object/bhvhiddenredcoinstar/000", None, None, 0x3F, 3, False),
@@ -896,7 +931,7 @@ def assemble():
         actor.set_editor_property("home_location", star_location)
         rerun(actor)
 
-    hundred_coin_location = unreal.Vector(2600.0, 5120.0, 504.0)
+    hundred_coin_location = course_vector(2600.0, 5120.0, 504.0)
     hundred_coin_star = ensure_actor(
         "wf/star/100_coin", unreal.SM64PowerStar, hundred_coin_location, unreal.Rotator()
     )
@@ -1053,7 +1088,7 @@ def assemble():
         trigger.set_editor_property("act_mask", act_mask(item))
         trigger.set_editor_property("trigger_group", "WF_HiddenPair")
         trigger.set_editor_property("trigger_index", index)
-        trigger.set_editor_property("box_extent", unreal.Vector(100.0, 100.0, 50.0))
+        trigger.set_editor_property("box_extent", course_vector(100.0, 100.0, 50.0))
         rerun(trigger)
 
     pole_item = PLACEMENTS["wf/macro/macro_hidden_1up_in_pole/000"]
@@ -1066,11 +1101,11 @@ def assemble():
     pole_reward.set_editor_property("required_trigger_count", 2)
     pole_reward.set_editor_property("home_toward_player", True)
     pole_reward.set_editor_property("home_location", location(pole_item))
-    pole_reward.set_editor_property("reveal_offset", unreal.Vector(0.0, 0.0, 50.0))
+    pole_reward.set_editor_property("reveal_offset", course_vector(0.0, 0.0, 50.0))
     pole_reward.set_editor_property("one_up", True)
     rerun(pole_reward)
     pole_base = location(pole_item)
-    for index, height_offset in enumerate((0.0, -200.0)):
+    for index, height_offset in enumerate((0.0, course_distance(-200.0))):
         trigger = ensure_actor(
             "wf/runtime/hidden_1up_pole_trigger/{:03d}".format(index),
             unreal.SM64HiddenOneUpTrigger,
@@ -1080,7 +1115,7 @@ def assemble():
         trigger.set_editor_property("act_mask", 0x3F)
         trigger.set_editor_property("trigger_group", "WF_PoleOneUp")
         trigger.set_editor_property("trigger_index", index)
-        trigger.set_editor_property("box_extent", unreal.Vector(100.0, 100.0, 50.0))
+        trigger.set_editor_property("box_extent", course_vector(100.0, 100.0, 50.0))
         rerun(trigger)
 
     # The preserved template skybox and kill-plane use large movable helper

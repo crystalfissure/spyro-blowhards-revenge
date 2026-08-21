@@ -30,6 +30,7 @@
         "Mesh12_dark",
         "Mesh13_dark"
       ],
+      "excluded_render_range_variants": [],
       "uv_values": 874,
       "color_values": 874,
       "source_normals": 0,
@@ -90,6 +91,7 @@
       "uv0_wraps_outside_zero_one": true,
       "pivot_policy": "preserve_source_origin",
       "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "render_range_policy": "Keep only the configured gameplay render range when a DAE flattens mutually-exclusive GeoLayout ranges",
       "role": "static_world",
       "collision_source": "levels/wf/areas/1/collision.inc.c",
       "act_mask": [
@@ -114,6 +116,7 @@
       "triangles": 42,
       "gameplay_selected_triangles": 42,
       "excluded_coincident_dark_variants": [],
+      "excluded_render_range_variants": [],
       "uv_values": 84,
       "color_values": 84,
       "source_normals": 0,
@@ -159,6 +162,7 @@
       "uv0_wraps_outside_zero_one": true,
       "pivot_policy": "preserve_source_origin",
       "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "render_range_policy": "Keep only the configured gameplay render range when a DAE flattens mutually-exclusive GeoLayout ranges",
       "role": "static_world",
       "collision_source": null,
       "act_mask": [
@@ -183,6 +187,7 @@
       "triangles": 32,
       "gameplay_selected_triangles": 32,
       "excluded_coincident_dark_variants": [],
+      "excluded_render_range_variants": [],
       "uv_values": 65,
       "color_values": 65,
       "source_normals": 0,
@@ -228,6 +233,7 @@
       "uv0_wraps_outside_zero_one": true,
       "pivot_policy": "preserve_source_origin",
       "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "render_range_policy": "Keep only the configured gameplay render range when a DAE flattens mutually-exclusive GeoLayout ranges",
       "role": "static_world",
       "collision_source": null,
       "act_mask": [
@@ -252,6 +258,7 @@
       "triangles": 8,
       "gameplay_selected_triangles": 8,
       "excluded_coincident_dark_variants": [],
+      "excluded_render_range_variants": [],
       "uv_values": 16,
       "color_values": 16,
       "source_normals": 0,
@@ -298,6 +305,7 @@
       "uv0_wraps_outside_zero_one": true,
       "pivot_policy": "preserve_source_origin",
       "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "render_range_policy": "Keep only the configured gameplay render range when a DAE flattens mutually-exclusive GeoLayout ranges",
       "role": "static_world",
       "collision_source": null,
       "act_mask": [
@@ -322,6 +330,7 @@
       "triangles": 60,
       "gameplay_selected_triangles": 60,
       "excluded_coincident_dark_variants": [],
+      "excluded_render_range_variants": [],
       "uv_values": 106,
       "color_values": 106,
       "source_normals": 0,
@@ -368,6 +377,7 @@
       "uv0_wraps_outside_zero_one": true,
       "pivot_policy": "preserve_source_origin",
       "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "render_range_policy": "Keep only the configured gameplay render range when a DAE flattens mutually-exclusive GeoLayout ranges",
       "role": "static_world",
       "collision_source": null,
       "act_mask": [
@@ -392,6 +402,7 @@
       "triangles": 12,
       "gameplay_selected_triangles": 12,
       "excluded_coincident_dark_variants": [],
+      "excluded_render_range_variants": [],
       "uv_values": 24,
       "color_values": 24,
       "source_normals": 0,
@@ -438,6 +449,7 @@
       "uv0_wraps_outside_zero_one": true,
       "pivot_policy": "preserve_source_origin",
       "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "render_range_policy": "Keep only the configured gameplay render range when a DAE flattens mutually-exclusive GeoLayout ranges",
       "role": "static_world",
       "collision_source": null,
       "act_mask": [
@@ -462,6 +474,7 @@
       "triangles": 21,
       "gameplay_selected_triangles": 21,
       "excluded_coincident_dark_variants": [],
+      "excluded_render_range_variants": [],
       "uv_values": 17,
       "color_values": 17,
       "source_normals": 0,
@@ -507,6 +520,7 @@
       "uv0_wraps_outside_zero_one": true,
       "pivot_policy": "preserve_source_origin",
       "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "render_range_policy": "Keep only the configured gameplay render range when a DAE flattens mutually-exclusive GeoLayout ranges",
       "role": "static_world",
       "collision_source": null,
       "act_mask": [
@@ -531,6 +545,7 @@
       "triangles": 24,
       "gameplay_selected_triangles": 24,
       "excluded_coincident_dark_variants": [],
+      "excluded_render_range_variants": [],
       "uv_values": 47,
       "color_values": 47,
       "source_normals": 0,
@@ -578,6 +593,7 @@
       "uv0_wraps_outside_zero_one": true,
       "pivot_policy": "preserve_source_origin",
       "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "render_range_policy": "Keep only the configured gameplay render range when a DAE flattens mutually-exclusive GeoLayout ranges",
       "role": "static_world",
       "collision_source": null,
       "act_mask": [
@@ -609,6 +625,7 @@
         "Mesh5_dark",
         "Mesh6_dark"
       ],
+      "excluded_render_range_variants": [],
       "uv_values": 256,
       "color_values": 256,
       "source_normals": 0,
@@ -658,6 +675,7 @@
       "uv0_wraps_outside_zero_one": true,
       "pivot_policy": "preserve_source_origin",
       "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "render_range_policy": "Keep only the configured gameplay render range when a DAE flattens mutually-exclusive GeoLayout ranges",
       "role": "static_world",
       "collision_source": null,
       "act_mask": [
@@ -682,6 +700,7 @@
       "triangles": 59,
       "gameplay_selected_triangles": 59,
       "excluded_coincident_dark_variants": [],
+      "excluded_render_range_variants": [],
       "uv_values": 109,
       "color_values": 109,
       "source_normals": 0,
@@ -731,6 +750,7 @@
       "uv0_wraps_outside_zero_one": true,
       "pivot_policy": "preserve_source_origin",
       "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "render_range_policy": "Keep only the configured gameplay render range when a DAE flattens mutually-exclusive GeoLayout ranges",
       "role": "static_world",
       "collision_source": null,
       "act_mask": [
@@ -755,6 +775,7 @@
       "triangles": 98,
       "gameplay_selected_triangles": 98,
       "excluded_coincident_dark_variants": [],
+      "excluded_render_range_variants": [],
       "uv_values": 172,
       "color_values": 172,
       "source_normals": 0,
@@ -802,6 +823,7 @@
       "uv0_wraps_outside_zero_one": true,
       "pivot_policy": "preserve_source_origin",
       "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "render_range_policy": "Keep only the configured gameplay render range when a DAE flattens mutually-exclusive GeoLayout ranges",
       "role": "static_world",
       "collision_source": null,
       "act_mask": [
@@ -826,6 +848,7 @@
       "triangles": 12,
       "gameplay_selected_triangles": 12,
       "excluded_coincident_dark_variants": [],
+      "excluded_render_range_variants": [],
       "uv_values": 24,
       "color_values": 24,
       "source_normals": 0,
@@ -871,6 +894,7 @@
       "uv0_wraps_outside_zero_one": true,
       "pivot_policy": "preserve_source_origin",
       "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "render_range_policy": "Keep only the configured gameplay render range when a DAE flattens mutually-exclusive GeoLayout ranges",
       "role": "static_world",
       "collision_source": null,
       "act_mask": [
@@ -895,6 +919,7 @@
       "triangles": 2,
       "gameplay_selected_triangles": 2,
       "excluded_coincident_dark_variants": [],
+      "excluded_render_range_variants": [],
       "uv_values": 6,
       "color_values": 6,
       "source_normals": 0,
@@ -941,6 +966,7 @@
       "uv0_wraps_outside_zero_one": true,
       "pivot_policy": "preserve_source_origin",
       "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "render_range_policy": "Keep only the configured gameplay render range when a DAE flattens mutually-exclusive GeoLayout ranges",
       "role": "interactive",
       "collision_source": null,
       "act_mask": [
@@ -965,6 +991,7 @@
       "triangles": 16,
       "gameplay_selected_triangles": 16,
       "excluded_coincident_dark_variants": [],
+      "excluded_render_range_variants": [],
       "uv_values": 20,
       "color_values": 20,
       "source_normals": 0,
@@ -1010,6 +1037,7 @@
       "uv0_wraps_outside_zero_one": true,
       "pivot_policy": "preserve_source_origin",
       "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "render_range_policy": "Keep only the configured gameplay render range when a DAE flattens mutually-exclusive GeoLayout ranges",
       "role": "interactive",
       "collision_source": null,
       "act_mask": [
@@ -1032,8 +1060,12 @@
       "instance_count": 4,
       "vertices_with_split_attributes": 62,
       "triangles": 28,
-      "gameplay_selected_triangles": 28,
+      "gameplay_selected_triangles": 18,
       "excluded_coincident_dark_variants": [],
+      "excluded_render_range_variants": [
+        "Mesh2",
+        "Mesh3"
+      ],
       "uv_values": 62,
       "color_values": 62,
       "source_normals": 0,
@@ -1080,6 +1112,7 @@
       "uv0_wraps_outside_zero_one": true,
       "pivot_policy": "preserve_source_origin",
       "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "render_range_policy": "Keep only the configured gameplay render range when a DAE flattens mutually-exclusive GeoLayout ranges",
       "role": "moving",
       "collision_source": "levels/wf/small_bomp/collision.inc.c",
       "act_mask": [
@@ -1104,6 +1137,7 @@
       "triangles": 18,
       "gameplay_selected_triangles": 18,
       "excluded_coincident_dark_variants": [],
+      "excluded_render_range_variants": [],
       "uv_values": 40,
       "color_values": 40,
       "source_normals": 0,
@@ -1150,6 +1184,7 @@
       "uv0_wraps_outside_zero_one": true,
       "pivot_policy": "preserve_source_origin",
       "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "render_range_policy": "Keep only the configured gameplay render range when a DAE flattens mutually-exclusive GeoLayout ranges",
       "role": "moving",
       "collision_source": "levels/wf/large_bomp/collision.inc.c",
       "act_mask": [
@@ -1174,6 +1209,7 @@
       "triangles": 28,
       "gameplay_selected_triangles": 28,
       "excluded_coincident_dark_variants": [],
+      "excluded_render_range_variants": [],
       "uv_values": 39,
       "color_values": 39,
       "source_normals": 0,
@@ -1219,6 +1255,7 @@
       "uv0_wraps_outside_zero_one": true,
       "pivot_policy": "preserve_source_origin",
       "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "render_range_policy": "Keep only the configured gameplay render range when a DAE flattens mutually-exclusive GeoLayout ranges",
       "role": "moving",
       "collision_source": "levels/wf/rotating_wooden_platform/collision.inc.c",
       "act_mask": [
@@ -1243,6 +1280,7 @@
       "triangles": 4,
       "gameplay_selected_triangles": 4,
       "excluded_coincident_dark_variants": [],
+      "excluded_render_range_variants": [],
       "uv_values": 8,
       "color_values": 8,
       "source_normals": 0,
@@ -1289,6 +1327,7 @@
       "uv0_wraps_outside_zero_one": true,
       "pivot_policy": "preserve_source_origin",
       "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "render_range_policy": "Keep only the configured gameplay render range when a DAE flattens mutually-exclusive GeoLayout ranges",
       "role": "moving",
       "collision_source": "levels/wf/sliding_platform/collision.inc.c",
       "act_mask": [
@@ -1313,6 +1352,7 @@
       "triangles": 12,
       "gameplay_selected_triangles": 12,
       "excluded_coincident_dark_variants": [],
+      "excluded_render_range_variants": [],
       "uv_values": 24,
       "color_values": 24,
       "source_normals": 0,
@@ -1358,6 +1398,7 @@
       "uv0_wraps_outside_zero_one": true,
       "pivot_policy": "preserve_source_origin",
       "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "render_range_policy": "Keep only the configured gameplay render range when a DAE flattens mutually-exclusive GeoLayout ranges",
       "role": "moving",
       "collision_source": "levels/wf/tumbling_bridge_near/collision.inc.c",
       "act_mask": [
@@ -1382,6 +1423,7 @@
       "triangles": 22,
       "gameplay_selected_triangles": 22,
       "excluded_coincident_dark_variants": [],
+      "excluded_render_range_variants": [],
       "uv_values": 38,
       "color_values": 38,
       "source_normals": 0,
@@ -1428,6 +1470,7 @@
       "uv0_wraps_outside_zero_one": true,
       "pivot_policy": "preserve_source_origin",
       "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "render_range_policy": "Keep only the configured gameplay render range when a DAE flattens mutually-exclusive GeoLayout ranges",
       "role": "moving",
       "collision_source": "levels/wf/rotating_platform/collision.inc.c",
       "act_mask": [
@@ -1452,6 +1495,7 @@
       "triangles": 10,
       "gameplay_selected_triangles": 10,
       "excluded_coincident_dark_variants": [],
+      "excluded_render_range_variants": [],
       "uv_values": 19,
       "color_values": 19,
       "source_normals": 0,
@@ -1497,6 +1541,7 @@
       "uv0_wraps_outside_zero_one": true,
       "pivot_policy": "preserve_source_origin",
       "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "render_range_policy": "Keep only the configured gameplay render range when a DAE flattens mutually-exclusive GeoLayout ranges",
       "role": "moving",
       "collision_source": "levels/wf/extending_platform/collision.inc.c",
       "act_mask": [
@@ -1522,6 +1567,7 @@
       "excluded_coincident_dark_variants": [
         "Mesh0_dark"
       ],
+      "excluded_render_range_variants": [],
       "uv_values": 44,
       "color_values": 44,
       "source_normals": 0,
@@ -1568,6 +1614,7 @@
       "uv0_wraps_outside_zero_one": true,
       "pivot_policy": "preserve_source_origin",
       "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "render_range_policy": "Keep only the configured gameplay render range when a DAE flattens mutually-exclusive GeoLayout ranges",
       "role": "moving",
       "collision_source": "levels/wf/kickable_board/collision.inc.c",
       "act_mask": [
@@ -1591,6 +1638,7 @@
       "triangles": 12,
       "gameplay_selected_triangles": 12,
       "excluded_coincident_dark_variants": [],
+      "excluded_render_range_variants": [],
       "uv_values": 20,
       "color_values": 20,
       "source_normals": 0,
@@ -1636,6 +1684,7 @@
       "uv0_wraps_outside_zero_one": true,
       "pivot_policy": "preserve_source_origin",
       "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "render_range_policy": "Keep only the configured gameplay render range when a DAE flattens mutually-exclusive GeoLayout ranges",
       "role": "state_mesh",
       "collision_source": null,
       "act_mask": [
@@ -1659,6 +1708,7 @@
       "triangles": 3,
       "gameplay_selected_triangles": 3,
       "excluded_coincident_dark_variants": [],
+      "excluded_render_range_variants": [],
       "uv_values": 9,
       "color_values": 9,
       "source_normals": 0,
@@ -1705,6 +1755,7 @@
       "uv0_wraps_outside_zero_one": true,
       "pivot_policy": "preserve_source_origin",
       "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "render_range_policy": "Keep only the configured gameplay render range when a DAE flattens mutually-exclusive GeoLayout ranges",
       "role": "breakable",
       "collision_source": "levels/wf/breakable_wall_right/collision.inc.c",
       "act_mask": [
@@ -1729,6 +1780,7 @@
       "triangles": 3,
       "gameplay_selected_triangles": 3,
       "excluded_coincident_dark_variants": [],
+      "excluded_render_range_variants": [],
       "uv_values": 9,
       "color_values": 9,
       "source_normals": 0,
@@ -1775,6 +1827,7 @@
       "uv0_wraps_outside_zero_one": true,
       "pivot_policy": "preserve_source_origin",
       "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "render_range_policy": "Keep only the configured gameplay render range when a DAE flattens mutually-exclusive GeoLayout ranges",
       "role": "breakable",
       "collision_source": "levels/wf/breakable_wall_left/collision.inc.c",
       "act_mask": [
@@ -1799,6 +1852,7 @@
       "triangles": 146,
       "gameplay_selected_triangles": 146,
       "excluded_coincident_dark_variants": [],
+      "excluded_render_range_variants": [],
       "uv_values": 288,
       "color_values": 288,
       "source_normals": 0,
@@ -1847,6 +1901,7 @@
       "uv0_wraps_outside_zero_one": true,
       "pivot_policy": "preserve_source_origin",
       "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "render_range_policy": "Keep only the configured gameplay render range when a DAE flattens mutually-exclusive GeoLayout ranges",
       "role": "conditional",
       "collision_source": "levels/wf/areas/1/10/collision.inc.c",
       "act_mask": [
@@ -1870,6 +1925,7 @@
       "triangles": 10,
       "gameplay_selected_triangles": 10,
       "excluded_coincident_dark_variants": [],
+      "excluded_render_range_variants": [],
       "uv_values": 19,
       "color_values": 19,
       "source_normals": 0,
@@ -1916,6 +1972,7 @@
       "uv0_wraps_outside_zero_one": true,
       "pivot_policy": "preserve_source_origin",
       "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "render_range_policy": "Keep only the configured gameplay render range when a DAE flattens mutually-exclusive GeoLayout ranges",
       "role": "conditional",
       "collision_source": "levels/wf/areas/1/11/collision.inc.c",
       "act_mask": [
@@ -1939,6 +1996,7 @@
       "triangles": 2,
       "gameplay_selected_triangles": 2,
       "excluded_coincident_dark_variants": [],
+      "excluded_render_range_variants": [],
       "uv_values": 4,
       "color_values": 4,
       "source_normals": 0,
@@ -1984,6 +2042,7 @@
       "uv0_wraps_outside_zero_one": false,
       "pivot_policy": "preserve_source_origin",
       "lighting_variant_policy": "Keep the _light branch when an identical _dark branch exists; never render both coincident variants",
+      "render_range_policy": "Keep only the configured gameplay render range when a DAE flattens mutually-exclusive GeoLayout ranges",
       "role": "breakable",
       "collision_source": "levels/wf/tower_door/collision.inc.c",
       "act_mask": [

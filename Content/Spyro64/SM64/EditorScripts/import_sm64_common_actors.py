@@ -17,6 +17,11 @@ ACTOR_ROOT = CONTENT_ROOT + "/Actors"
 MASTER_ROOT = CONTENT_ROOT + "/Materials/Masters"
 INSTANCE_ROOT = CONTENT_ROOT + "/Materials/Instances"
 WHITE_TEXTURE = "/Engine/EngineResources/WhiteSquareTexture"
+ACTOR_TINTS = {
+    "yellow_coin": unreal.LinearColor(1.0, 0.82, 0.0, 1.0),
+    "blue_coin": unreal.LinearColor(0.10, 0.35, 1.0, 1.0),
+    "red_coin": unreal.LinearColor(1.0, 0.12, 0.08, 1.0),
+}
 
 
 def safe_name(value):
@@ -226,6 +231,11 @@ def ensure_instance(actor, material_index, state, textures):
         texture = require_asset(WHITE_TEXTURE)
     unreal.MaterialEditingLibrary.set_material_instance_texture_parameter_value(
         instance, "Texture", texture
+    )
+    unreal.MaterialEditingLibrary.set_material_instance_vector_parameter_value(
+        instance,
+        "Tint",
+        ACTOR_TINTS.get(actor, unreal.LinearColor(1.0, 1.0, 1.0, 1.0)),
     )
     instance.modify()
     unreal.EditorAssetLibrary.save_loaded_asset(instance, only_if_is_dirty=False)

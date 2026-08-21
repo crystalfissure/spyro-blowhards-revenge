@@ -45,6 +45,16 @@ void AWFWhomp::OnConstruction(const FTransform& Transform)
     {
         CharacterMesh->SetSkeletalMesh(DefaultSkeletalMesh);
     }
+    // Whomp geometry is authored in an animation-driven reference pose.  A
+    // bare skeletal reference pose leaves the slab rotated within its own
+    // plane and centred through the floor.  Seed the first canonical walk
+    // frame during construction so editor instances and runtime startup use
+    // the same upright pose before the course manager performs its act reset.
+    if (WalkAnimation)
+    {
+        CharacterMesh->OverrideAnimationData(WalkAnimation, true, false, 0.0f, 1.0f);
+        CharacterMesh->RefreshBoneTransforms();
+    }
     ExactCollisionMesh->SetStaticMesh(DefaultCollisionMesh);
     ExactCollisionMesh->SetCollisionEnabled(DefaultCollisionMesh
         ? ECollisionEnabled::QueryAndPhysics : ECollisionEnabled::NoCollision);
@@ -128,7 +138,8 @@ void AWFWhomp::EnterWhompAction(EWFWhompAction NewAction, float AnimationRate)
 
 void AWFWhomp::MoveForwardPerFrame(float Distance)
 {
-    AddActorWorldOffset(GetSM64ForwardVector() * Distance, true);
+    AddActorWorldOffset(
+        GetSM64ForwardVector() * Distance * GetActorScale3D().GetAbsMax(), true);
 }
 
 void AWFWhomp::TurnTowardPlayer(float MaxDegreesPerFrame)
@@ -162,14 +173,16 @@ bool AWFWhomp::PlayerWithinForwardCone(float Distance, float HalfAngleDegrees) c
 
 bool AWFWhomp::ApplyVerticalMovementAndCheckFloor()
 {
-    VerticalVelocityPerFrame = FMath::Max(-78.0f, VerticalVelocityPerFrame - 4.0f);
+    const float LinearScale = FMath::Max(KINDA_SMALL_NUMBER, GetActorScale3D().GetAbsMax());
+    VerticalVelocityPerFrame = FMath::Max(
+        -78.0f * LinearScale, VerticalVelocityPerFrame - 4.0f * LinearScale);
     FVector NextLocation = GetActorLocation();
     NextLocation.Z += VerticalVelocityPerFrame;
 
     FHitResult FloorHit;
     FCollisionQueryParams QueryParams(SCENE_QUERY_STAT(WFWhompFloor), false, this);
-    const FVector TraceStart(NextLocation.X, NextLocation.Y, NextLocation.Z + 50.0f);
-    const FVector TraceEnd(NextLocation.X, NextLocation.Y, NextLocation.Z - 250.0f);
+    const FVector TraceStart(NextLocation.X, NextLocation.Y, NextLocation.Z + 50.0f * LinearScale);
+    const FVector TraceEnd(NextLocation.X, NextLocation.Y, NextLocation.Z - 250.0f * LinearScale);
     const bool bHasFloor = GetWorld() && GetWorld()->LineTraceSingleByChannel(
         FloorHit, TraceStart, TraceEnd, FloorTraceChannel, QueryParams);
 
@@ -247,7 +260,8 @@ void AWFWhomp::SimulateSM64Frame_Implementation()
             {
                 EnterWhompAction(EWFWhompAction::PrepareJump, 1.0f);
             }
-            if (Player && Player->GetActorLocation().Z < GetActorLocation().Z - 1000.0f)
+            if (Player && Player->GetActorLocation().Z
+                < GetActorLocation().Z - 1000.0f * GetActorScale3D().GetAbsMax())
             {
                 SetActorLocationAndRotation(HomeLocation, HomeRotation, false, nullptr, ETeleportType::TeleportPhysics);
                 EnterWhompAction(EWFWhompAction::Initialize, 1.0f);
@@ -265,7 +279,7 @@ void AWFWhomp::SimulateSM64Frame_Implementation()
         case EWFWhompAction::Jump:
             if (ActionTimer == 0)
             {
-                VerticalVelocityPerFrame = 40.0f;
+                VerticalVelocityPerFrame = 40.0f * GetActorScale3D().GetAbsMax();
                 PitchVelocityDegreesPerFrame = 0.0f;
             }
             if (ActionTimer >= 8)
@@ -322,7 +336,8 @@ void AWFWhomp::SimulateSM64Frame_Implementation()
 
             if (!bRecovering && bKingWhomp && Health < 3 && ShakeFrame < 10)
             {
-                AddActorWorldOffset(FVector(0.0f, 0.0f, (ShakeFrame & 1) ? 8.0f : -8.0f));
+                const float Shake = 8.0f * GetActorScale3D().GetAbsMax();
+                AddActorWorldOffset(FVector(0.0f, 0.0f, (ShakeFrame & 1) ? Shake : -Shake));
                 ++ShakeFrame;
                 if (ShakeFrame >= 10)
                 {
@@ -402,12 +417,17 @@ void AWFWhomp::SpawnYellowCoinDrops(int32 Count)
     }
     for (int32 Index = 0; Index < Count; ++Index)
     {
+        const float LinearScale = FMath::Max(KINDA_SMALL_NUMBER, GetActorScale3D().GetAbsMax());
         const float Angle = 2.0f * PI * static_cast<float>(Index) / static_cast<float>(Count);
-        const FVector Offset(FMath::Cos(Angle) * 120.0f, FMath::Sin(Angle) * 120.0f, 90.0f);
+        const FVector Offset(
+            FMath::Cos(Angle) * 120.0f * LinearScale,
+            FMath::Sin(Angle) * 120.0f * LinearScale,
+            90.0f * LinearScale);
         ASM64Collectible* Coin = GetWorld()->SpawnActor<ASM64Collectible>(
             DropCoinClass, GetActorLocation() + Offset, FRotator::ZeroRotator);
         if (Coin)
         {
+            Coin->SetActorScale3D(FVector(LinearScale));
             Coin->StableId = FName(*(StableId.ToString() + FString::Printf(TEXT("_Drop_%02d"), Index)));
             Coin->CoinValue = 1;
             Coin->bDestroyOnActReset = true;
