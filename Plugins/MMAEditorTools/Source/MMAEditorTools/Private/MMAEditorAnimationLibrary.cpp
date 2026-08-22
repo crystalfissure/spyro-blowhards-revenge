@@ -2,10 +2,13 @@
 
 #include "MMAChaseLeashComponent.h"
 #include "MMAHedgeTrimmerBehaviorComponent.h"
+#include "MMAGreenDruidBehaviorComponent.h"
+#include "MMAGreenDruidPlatform.h"
 #include "MMAShieldGuardBehaviorComponent.h"
 
 #include "Animation/AnimSequence.h"
 #include "Animation/AnimTypes.h"
+#include "Components/BoxComponent.h"
 #include "Components/PrimitiveComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "EdGraph/EdGraph.h"
@@ -315,6 +318,36 @@ bool UMMAEditorAnimationLibrary::CompileBlueprint(UBlueprint* Blueprint)
     }
     FKismetEditorUtilities::CompileBlueprint(Blueprint);
     return Blueprint->Status != BS_Error;
+}
+
+bool UMMAEditorAnimationLibrary::AddMMAGreenDruidBehaviorComponent(
+    UBlueprint* Blueprint,
+    FName ComponentVariableName)
+{
+    if (!Blueprint || !Blueprint->SimpleConstructionScript)
+    {
+        return false;
+    }
+    for (USCS_Node* ExistingNode : Blueprint->SimpleConstructionScript->GetAllNodes())
+    {
+        if (ExistingNode &&
+            (ExistingNode->GetVariableName() == ComponentVariableName ||
+             ExistingNode->ComponentClass == UMMAGreenDruidBehaviorComponent::StaticClass()))
+        {
+            return true;
+        }
+    }
+    Blueprint->Modify();
+    USCS_Node* NewNode = Blueprint->SimpleConstructionScript->CreateNode(
+        UMMAGreenDruidBehaviorComponent::StaticClass(), ComponentVariableName);
+    if (!NewNode)
+    {
+        return false;
+    }
+    Blueprint->SimpleConstructionScript->AddNode(NewNode);
+    FBlueprintEditorUtils::MarkBlueprintAsStructurallyModified(Blueprint);
+    Blueprint->MarkPackageDirty();
+    return true;
 }
 
 bool UMMAEditorAnimationLibrary::AddClubAttackAlertTargetGuard(UBlueprint* Blueprint)
@@ -972,6 +1005,258 @@ bool UMMAEditorAnimationLibrary::ConfigureMMAHedgeTrimmerMesh(
     FBlueprintEditorUtils::MarkBlueprintAsModified(Blueprint);
     Blueprint->MarkPackageDirty();
     return true;
+}
+
+bool UMMAEditorAnimationLibrary::ConfigureMMAGreenDruidBehavior(
+    UBlueprint* Blueprint,
+    UAnimSequence* IdleAnimation,
+    UAnimSequence* RaiseAnimation,
+    UAnimSequence* LowerAnimation,
+    UAnimSequence* DeathAnimation,
+    TSubclassOf<AActor> DefaultDropClass)
+{
+    if (!Blueprint || !Blueprint->SimpleConstructionScript)
+    {
+        return false;
+    }
+    bool bConfigured = false;
+    Blueprint->Modify();
+    for (USCS_Node* Node : Blueprint->SimpleConstructionScript->GetAllNodes())
+    {
+        UMMAGreenDruidBehaviorComponent* Behavior = Node
+            ? Cast<UMMAGreenDruidBehaviorComponent>(Node->ComponentTemplate) : nullptr;
+        if (!Behavior)
+        {
+            continue;
+        }
+        Node->Modify();
+        Behavior->Modify();
+        Behavior->IdleAnimation = IdleAnimation;
+        Behavior->RaiseAnimation = RaiseAnimation;
+        Behavior->LowerAnimation = LowerAnimation ? LowerAnimation : RaiseAnimation;
+        Behavior->DeathAnimation = DeathAnimation;
+        Behavior->DefaultDropClass = DefaultDropClass;
+        Behavior->ActivationRadius = 1000.0f;
+        Behavior->DeactivationRadius = 1200.0f;
+        Behavior->TransitionDuration = 1.25f;
+        Behavior->RaisedHoldDuration = 2.0f;
+        Behavior->FlatHoldDuration = 1.5f;
+        Behavior->InitialHitPoints = 1.0f;
+        Behavior->bPlayLowerAnimationReversed = true;
+        bConfigured = true;
+    }
+    if (bConfigured)
+    {
+        FBlueprintEditorUtils::MarkBlueprintAsModified(Blueprint);
+        Blueprint->MarkPackageDirty();
+    }
+    return bConfigured;
+}
+
+namespace
+{
+float TranslationRange(const FRawAnimSequenceTrack& Track)
+{
+    if (Track.PosKeys.Num() < 2)
+    {
+        return 0.0f;
+    }
+    FBox Bounds(ForceInit);
+    for (const FVector& Position : Track.PosKeys)
+    {
+        Bounds += Position;
+    }
+    return Bounds.IsValid ? Bounds.GetExtent().Size() * 2.0f : 0.0f;
+}
+
+float RawTrackMotionScore(const FRawAnimSequenceTrack& Track)
+{
+    float Score = TranslationRange(Track);
+    if (Track.RotKeys.Num() > 1)
+    {
+        const FQuat First = Track.RotKeys[0];
+        for (const FQuat& Rotation : Track.RotKeys)
+        {
+            Score += FMath::RadiansToDegrees(First.AngularDistance(Rotation));
+        }
+    }
+    return Score;
+}
+}
+
+bool UMMAEditorAnimationLibrary::MergeAnimationTracks(
+    UAnimSequence* Destination,
+    UAnimSequence* AdditionalTracks)
+{
+    if (!Destination || !AdditionalTracks ||
+        Destination == AdditionalTracks ||
+        Destination->GetSkeleton() != AdditionalTracks->GetSkeleton())
+    {
+        return false;
+    }
+    Destination->Modify();
+    bool bChanged = false;
+    for (int32 SourceIndex = 0;
+        SourceIndex < AdditionalTracks->GetAnimationTrackNames().Num() &&
+        SourceIndex < AdditionalTracks->GetRawAnimationData().Num();
+        ++SourceIndex)
+    {
+        const FName TrackName = AdditionalTracks->GetAnimationTrackNames()[SourceIndex];
+        const FRawAnimSequenceTrack& SourceTrack = AdditionalTracks->GetRawAnimationTrack(SourceIndex);
+        const int32 DestinationIndex = Destination->GetAnimationTrackNames().Find(TrackName);
+        if (DestinationIndex == INDEX_NONE)
+        {
+            FRawAnimSequenceTrack Copy = SourceTrack;
+            Destination->AddNewRawTrack(TrackName, &Copy);
+            bChanged = true;
+        }
+        else if (Destination->GetRawAnimationData().IsValidIndex(DestinationIndex) &&
+            RawTrackMotionScore(SourceTrack) >
+                RawTrackMotionScore(Destination->GetRawAnimationTrack(DestinationIndex)) + KINDA_SMALL_NUMBER)
+        {
+            Destination->GetRawAnimationTrack(DestinationIndex) = SourceTrack;
+            bChanged = true;
+        }
+    }
+    if (bChanged)
+    {
+        Destination->MarkRawDataAsModified();
+        Destination->PostProcessSequence();
+        Destination->MarkPackageDirty();
+        Destination->PostEditChange();
+    }
+    return bChanged;
+}
+
+FName UMMAEditorAnimationLibrary::FindLargestTranslationTrackBone(UAnimSequence* Animation)
+{
+    if (!Animation)
+    {
+        return NAME_None;
+    }
+    FName BestName = NAME_None;
+    float BestRange = 0.0f;
+    for (int32 Index = 0;
+        Index < Animation->GetAnimationTrackNames().Num() && Index < Animation->GetRawAnimationData().Num();
+        ++Index)
+    {
+        const float Range = TranslationRange(Animation->GetRawAnimationTrack(Index));
+        if (Range > BestRange)
+        {
+            BestRange = Range;
+            BestName = Animation->GetAnimationTrackNames()[Index];
+        }
+    }
+    return BestName;
+}
+
+bool UMMAEditorAnimationLibrary::ConfigureMMAGreenDruidPlatform(
+    UBlueprint* Blueprint,
+    USkeletalMesh* SkeletalMesh,
+    UAnimSequence* LiftAnimation,
+    FName LiftBoneName)
+{
+    if (!Blueprint || !Blueprint->GeneratedClass || !SkeletalMesh || !LiftAnimation)
+    {
+        return false;
+    }
+    AMMAGreenDruidPlatform* CDO = Cast<AMMAGreenDruidPlatform>(
+        Blueprint->GeneratedClass->GetDefaultObject());
+    if (!CDO || !CDO->PlatformVisual || !CDO->RideSurface || !CDO->ColumnBlocker)
+    {
+        return false;
+    }
+    Blueprint->Modify();
+    CDO->Modify();
+    CDO->PlatformVisual->Modify();
+    CDO->PlatformVisual->SetSkeletalMesh(SkeletalMesh);
+    CDO->PlatformVisual->SetAnimationMode(EAnimationMode::AnimationSingleNode);
+    CDO->PlatformVisual->AnimationData.AnimToPlay = LiftAnimation;
+    CDO->PlatformVisual->AnimationData.bSavedLooping = false;
+    CDO->PlatformVisual->AnimationData.bSavedPlaying = false;
+    CDO->LiftAnimation = LiftAnimation;
+    CDO->LiftBoneName = LiftBoneName;
+
+    const FBoxSphereBounds Bounds = SkeletalMesh->GetBounds();
+    CDO->FlatSurfaceRelativeLocation = FVector(
+        Bounds.Origin.X,
+        Bounds.Origin.Y,
+        Bounds.Origin.Z + Bounds.BoxExtent.Z);
+    CDO->RideSurfaceBoxExtent = FVector(
+        FMath::Max(10.0f, Bounds.BoxExtent.X),
+        FMath::Max(10.0f, Bounds.BoxExtent.Y),
+        12.0f);
+
+    float LiftRange = 0.0f;
+    const int32 TrackIndex = LiftAnimation->GetAnimationTrackNames().Find(LiftBoneName);
+    if (LiftAnimation->GetRawAnimationData().IsValidIndex(TrackIndex))
+    {
+        LiftRange = TranslationRange(LiftAnimation->GetRawAnimationTrack(TrackIndex));
+    }
+    CDO->FallbackLiftHeight = FMath::Max(1.0f, LiftRange);
+    CDO->RideSurface->SetBoxExtent(CDO->RideSurfaceBoxExtent);
+    CDO->RideSurface->SetRelativeLocation(CDO->FlatSurfaceRelativeLocation);
+    CDO->PayloadRoot->SetRelativeLocation(CDO->FlatSurfaceRelativeLocation);
+    CDO->PlatformVisual->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+    FBlueprintEditorUtils::MarkBlueprintAsModified(Blueprint);
+    Blueprint->MarkPackageDirty();
+    return true;
+}
+
+FString UMMAEditorAnimationLibrary::DescribeMMAGreenDruidBlueprint(UBlueprint* Blueprint)
+{
+    TSharedRef<FJsonObject> Root = MakeShared<FJsonObject>();
+    if (!Blueprint)
+    {
+        Root->SetStringField(TEXT("error"), TEXT("null blueprint"));
+    }
+    else
+    {
+        Root->SetStringField(TEXT("blueprint"), Blueprint->GetPathName());
+        Root->SetStringField(TEXT("status"), UEnum::GetValueAsString(Blueprint->Status));
+        Root->SetStringField(TEXT("parent_class"),
+            Blueprint->ParentClass ? Blueprint->ParentClass->GetPathName() : FString());
+        if (Blueprint->GeneratedClass)
+        {
+            if (AMMAGreenDruidPlatform* Platform = Cast<AMMAGreenDruidPlatform>(
+                Blueprint->GeneratedClass->GetDefaultObject()))
+            {
+                Root->SetStringField(TEXT("kind"), TEXT("platform"));
+                Root->SetStringField(TEXT("mesh"), Platform->PlatformVisual && Platform->PlatformVisual->SkeletalMesh
+                    ? Platform->PlatformVisual->SkeletalMesh->GetPathName() : FString());
+                Root->SetStringField(TEXT("lift_animation"),
+                    Platform->LiftAnimation ? Platform->LiftAnimation->GetPathName() : FString());
+                Root->SetStringField(TEXT("lift_bone"), Platform->LiftBoneName.ToString());
+                Root->SetNumberField(TEXT("fallback_lift_height"), Platform->FallbackLiftHeight);
+            }
+        }
+        if (Blueprint->SimpleConstructionScript)
+        {
+            for (USCS_Node* Node : Blueprint->SimpleConstructionScript->GetAllNodes())
+            {
+                UMMAGreenDruidBehaviorComponent* Behavior = Node
+                    ? Cast<UMMAGreenDruidBehaviorComponent>(Node->ComponentTemplate) : nullptr;
+                if (!Behavior)
+                {
+                    continue;
+                }
+                Root->SetStringField(TEXT("kind"), TEXT("enemy"));
+                Root->SetNumberField(TEXT("activation_radius"), Behavior->ActivationRadius);
+                Root->SetNumberField(TEXT("deactivation_radius"), Behavior->DeactivationRadius);
+                Root->SetNumberField(TEXT("transition_duration"), Behavior->TransitionDuration);
+                Root->SetNumberField(TEXT("raised_hold_duration"), Behavior->RaisedHoldDuration);
+                Root->SetNumberField(TEXT("flat_hold_duration"), Behavior->FlatHoldDuration);
+                Root->SetStringField(TEXT("idle"), Behavior->IdleAnimation ? Behavior->IdleAnimation->GetPathName() : FString());
+                Root->SetStringField(TEXT("raise"), Behavior->RaiseAnimation ? Behavior->RaiseAnimation->GetPathName() : FString());
+                Root->SetStringField(TEXT("lower"), Behavior->LowerAnimation ? Behavior->LowerAnimation->GetPathName() : FString());
+                Root->SetStringField(TEXT("death"), Behavior->DeathAnimation ? Behavior->DeathAnimation->GetPathName() : FString());
+            }
+        }
+    }
+    FString Output;
+    TSharedRef<TJsonWriter<>> Writer = TJsonWriterFactory<>::Create(&Output);
+    FJsonSerializer::Serialize(Root, Writer);
+    return Output;
 }
 
 FString UMMAEditorAnimationLibrary::DescribeMMAHedgeTrimmerBlueprint(UBlueprint* Blueprint)

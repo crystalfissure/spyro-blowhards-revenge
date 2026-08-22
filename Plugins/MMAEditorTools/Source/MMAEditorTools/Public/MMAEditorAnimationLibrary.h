@@ -46,6 +46,11 @@ public:
         FName ComponentVariableName = TEXT("MMA Shield Guard State Machine"));
 
     UFUNCTION(BlueprintCallable, Category = "MMA|Blueprint")
+    static bool AddMMAGreenDruidBehaviorComponent(
+        UBlueprint* Blueprint,
+        FName ComponentVariableName = TEXT("Green Druid Behavior"));
+
+    UFUNCTION(BlueprintCallable, Category = "MMA|Blueprint")
     static bool CompileBlueprint(UBlueprint* Blueprint);
 
     /**
@@ -105,6 +110,32 @@ public:
         FVector RelativeLocation,
         FRotator RelativeRotation,
         FVector RelativeScale);
+
+    UFUNCTION(BlueprintCallable, Category = "MMA|Blueprint")
+    static bool ConfigureMMAGreenDruidBehavior(
+        UBlueprint* Blueprint,
+        UAnimSequence* IdleAnimation,
+        UAnimSequence* RaiseAnimation,
+        UAnimSequence* LowerAnimation,
+        UAnimSequence* DeathAnimation,
+        TSubclassOf<AActor> DefaultDropClass);
+
+    UFUNCTION(BlueprintCallable, Category = "MMA|Blueprint")
+    static bool ConfigureMMAGreenDruidPlatform(
+        UBlueprint* Blueprint,
+        USkeletalMesh* SkeletalMesh,
+        UAnimSequence* LiftAnimation,
+        FName LiftBoneName);
+
+    /** Merges non-overlapping or more strongly animated raw tracks into a deterministic lift clip. */
+    UFUNCTION(BlueprintCallable, Category = "MMA|Animation")
+    static bool MergeAnimationTracks(UAnimSequence* Destination, UAnimSequence* AdditionalTracks);
+
+    UFUNCTION(BlueprintPure, Category = "MMA|Animation")
+    static FName FindLargestTranslationTrackBone(UAnimSequence* Animation);
+
+    UFUNCTION(BlueprintCallable, Category = "MMA|Blueprint")
+    static FString DescribeMMAGreenDruidBlueprint(UBlueprint* Blueprint);
 
     UFUNCTION(BlueprintCallable, Category = "MMA|Blueprint")
     static FString DescribeMMAHedgeTrimmerBlueprint(UBlueprint* Blueprint);
