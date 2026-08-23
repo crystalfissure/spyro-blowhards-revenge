@@ -15,8 +15,10 @@
 
 namespace
 {
-constexpr uint8 DeadAIState = 3;
-constexpr int32 MaximumLocalPlayersToCheck = 8;
+// These names must remain unique across MMAGameplay .cpp files because UE4's
+// unity build concatenates translation units into Module.MMAGameplay.cpp.
+constexpr uint8 GreenDruidDeadAIState = 3;
+constexpr int32 GreenDruidMaximumLocalPlayersToCheck = 8;
 }
 
 UMMAGreenDruidBehaviorComponent::UMMAGreenDruidBehaviorComponent()
@@ -390,7 +392,7 @@ bool UMMAGreenDruidBehaviorComponent::IsOwnerDefeated() const
     uint8 State = 0;
     if (TryReadAIState(GetOwner(), State) || TryReadAIState(FindWalkingAIObject(GetOwner()), State))
     {
-        if (State == DeadAIState)
+        if (State == GreenDruidDeadAIState)
         {
             return true;
         }
@@ -408,7 +410,7 @@ bool UMMAGreenDruidBehaviorComponent::HasPlayerWithin(float Radius) const
         return false;
     }
     const float RadiusSquared = FMath::Square(FMath::Max(0.0f, Radius));
-    for (int32 PlayerIndex = 0; PlayerIndex < MaximumLocalPlayersToCheck; ++PlayerIndex)
+    for (int32 PlayerIndex = 0; PlayerIndex < GreenDruidMaximumLocalPlayersToCheck; ++PlayerIndex)
     {
         APawn* Player = UGameplayStatics::GetPlayerPawn(this, PlayerIndex);
         if (Player && Player != Owner && !Player->IsActorBeingDestroyed() && !Player->IsHidden() &&
