@@ -78,3 +78,7 @@ Config/DefaultEditorPerProjectUserSettings.ini
 
 # blend1 Files (used by blender for backups)
 *.blend1
+
+# Level meshes exported from blender
+Blends/*.fbx
+
