@@ -1,0 +1,48 @@
+{
+  "mesh": "/Game/_CF_Project/Meshes/Levels/Dream_Weavers_Edit",
+  "exists": true,
+  "import_source": [
+    "C:/Users/adace/Downloads/Spyro OT Asset Dump/Spyro OT Assets 2026-01-02/S1/Levels/Home_04_Dream_Weavers/Dream Weavers Edit.fbx"
+  ],
+  "lods": 1,
+  "uv_channels": 1,
+  "build_settings": {
+    "use_full_precision_u_vs": "False",
+    "recompute_normals": "False",
+    "recompute_tangents": "True",
+    "remove_degenerates": "True",
+    "generate_lightmap_u_vs": "True",
+    "src_lightmap_index": "0",
+    "dst_lightmap_index": "1"
+  },
+  "materials": [
+    {
+      "slot": "Spyro_GigaAtlas_V2_7_DreamWeavers",
+      "material": "/Game/_CF_Project/Materials/Dream_Weavers_Material.Dream_Weavers_Material",
+      "texture_parameters": [
+        {
+          "name": "Texture",
+          "texture": "/Game/_CF_Project/Textures/Spyro_Giga_Texture_Atlas_V2_7.Spyro_Giga_Texture_Atlas_V2_7"
+        }
+      ],
+      "dependencies": [
+        "/Game/_CF_Project/Textures/Spyro_Giga_Texture_Atlas_V2_7",
+        "/Game/qtdergContent/Materials/Level_Geometry_Mat_qtdergs_Edit",
+        "/Engine/EngineMaterials/DefaultDiffuse",
+        "/Engine/ArtTools/RenderToTexture/Textures/127grey"
+      ]
+    }
+  ],
+  "texture": {
+    "path": "/Game/_CF_Project/Textures/Spyro_Giga_Texture_Atlas_V2_7.Spyro_Giga_Texture_Atlas_V2_7",
+    "source": [
+      "C:/Users/adace/Downloads/Spyro OT Asset Dump/Spyro_Giga_Texture_Atlas_V2.7.png"
+    ],
+    "mips": "<TextureMipGenSettings.TMGS_NO_MIPMAPS: 13>",
+    "filter": "<TextureFilter.TF_DEFAULT: 3>",
+    "size": [
+      4096,
+      8192
+    ]
+  }
+}

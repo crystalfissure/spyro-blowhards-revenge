@@ -1,0 +1,76 @@
+[2026.09.05-05.41.50:421][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'AllDesktop'
+[2026.09.05-05.41.50:439][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android'
+[2026.09.05-05.41.50:439][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ASTC'
+[2026.09.05-05.41.50:439][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_DXT'
+[2026.09.05-05.41.50:439][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ETC2'
+[2026.09.05-05.41.50:439][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'AndroidClient'
+[2026.09.05-05.41.50:439][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ASTCClient'
+[2026.09.05-05.41.50:439][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_DXTClient'
+[2026.09.05-05.41.50:439][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ETC2Client'
+[2026.09.05-05.41.50:439][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_Multi'
+[2026.09.05-05.41.50:439][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_MultiClient'
+[2026.09.05-05.41.50:453][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'IOSClient'
+[2026.09.05-05.41.50:453][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'IOS'
+[2026.09.05-05.41.50:461][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Linux'
+[2026.09.05-05.41.50:465][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxNoEditor'
+[2026.09.05-05.41.50:469][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxClient'
+[2026.09.05-05.41.50:472][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxServer'
+[2026.09.05-05.41.50:479][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxAArch64NoEditor'
+[2026.09.05-05.41.50:482][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxAArch64Client'
+[2026.09.05-05.41.50:486][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxAArch64Server'
+[2026.09.05-05.41.50:504][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Lumin'
+[2026.09.05-05.41.50:504][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LuminClient'
+[2026.09.05-05.41.50:509][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'MacNoEditor'
+[2026.09.05-05.41.50:513][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Mac'
+[2026.09.05-05.41.50:517][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'MacClient'
+[2026.09.05-05.41.50:522][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'MacServer'
+[2026.09.05-05.41.50:529][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'TVOSClient'
+[2026.09.05-05.41.50:529][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'TVOS'
+[2026.09.05-05.41.50:536][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'WindowsNoEditor'
+[2026.09.05-05.41.50:540][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Windows'
+[2026.09.05-05.41.50:544][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'WindowsClient'
+[2026.09.05-05.41.50:548][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'WindowsServer'
+[2026.09.05-05.41.50:548][  0]LogTargetPlatformManager: Display: Building Assets For Windows
+[2026.09.05-05.41.50:555][  0]LogAudioDebug: Display: Lib vorbis DLL was dynamically loaded.
+[2026.09.05-05.41.50:583][  0]LogTextureFormatOodle: Display: Oodle Texture 2.9.0 init RDO Off
+[2026.09.05-05.41.50:612][  0]LogShaderCompilers: Display: Using Local Shader Compiler.
+[2026.09.05-05.41.51:049][  0]LogDerivedDataCache: Display: Max Cache Size: 512 MB
+[2026.09.05-05.41.51:093][  0]LogDerivedDataCache: Display: Loaded Boot cache: C:/Users/adace/AppData/Local/UnrealEngine/4.27/DerivedDataCache/Boot.ddc
+[2026.09.05-05.41.51:106][  0]LogDerivedDataCache: Display: Pak cache opened for reading ../../../Engine/DerivedDataCache/Compressed.ddp.
+[2026.09.05-05.41.51:108][  0]LogDerivedDataCache: Warning: Fail to write to C:/Users/adace/AppData/Local/UnrealEngine/Common/DerivedDataCache/TestData/1BE4608F4D0D3F2D777EB4AE0062C63C/TestData/0/TestData_4kb.dat, derived data cache will be disabled. ReadError: 3 (The system cannot find the path specified.)
+[2026.09.05-05.41.51:108][  0]LogDerivedDataCache: Display: Performance to C:/Users/adace/AppData/Local/UnrealEngine/Common/DerivedDataCache: Latency=0.02ms. RandomReadSpeed=888.46MBs, RandomWriteSpeed=0.00MBs. Assigned SpeedClass 'Local'
+[2026.09.05-05.41.52:317][  0]LogAudioCaptureCore: Display: No Audio Capture implementations found. Audio input will be silent.
+[2026.09.05-05.41.52:317][  0]LogAudioCaptureCore: Display: No Audio Capture implementations found. Audio input will be silent.
+[2026.09.05-05.41.53:429][  0]LogDerivedDataCache: Error: Could not save memory cache C:/Users/adace/AppData/Local/UnrealEngine/4.27/DerivedDataCache/Boot.ddc.
+[2026.09.05-05.41.53:639][  0]LogClass: Display: Int8Property FMTSJson::version is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.09.05-05.41.53:639][  0]LogClass: Display: Int16Property FMTSJson::resolutionValue is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.09.05-05.41.53:639][  0]LogClass: Display: BoolProperty FMTSJson::isExternal is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.09.05-05.41.53:639][  0]LogClass: Display: Int8Property FMTSJson::meshVersion is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.09.05-05.41.53:639][  0]LogClass: Display: BoolProperty FMTSJson::isCustom is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.09.05-05.41.53:639][  0]LogClass: Display: BoolProperty FMTSJson::isModularAsset is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.09.05-05.41.53:639][  0]LogClass: Display: Int8Property FLodList::variation is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.09.05-05.41.53:640][  0]LogClass: Display: Int16Property FMeshList::resolution is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.09.05-05.41.53:640][  0]LogClass: Display: Int16Property FComponents::resolution is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.09.05-05.41.53:640][  0]LogClass: Display: BoolProperty FTextureSets::isUdim is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.09.05-05.41.53:640][  0]LogClass: Display: BoolProperty FMeta::value is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.09.05-05.41.53:640][  0]LogClass: Display: 11 Uninitialized script struct members found including 0 object properties
+[2026.09.05-05.41.53:641][  0]LogPythonScriptCommandlet: Display: Running Python script: C:\Users\adace\Desktop\spyro-blowhards-revenge\Tools\MeshReview\audit_import_transform.py
+[2026.09.05-05.41.53:656][  0]LogInit: Display: 
+[2026.09.05-05.41.53:656][  0]LogInit: Display: Warning/Error Summary (Unique only)
+[2026.09.05-05.41.53:656][  0]LogInit: Display: -----------------------------------
+[2026.09.05-05.41.53:656][  0]LogInit: Display: LogDerivedDataCache: Error: Could not save memory cache C:/Users/adace/AppData/Local/UnrealEngine/4.27/DerivedDataCache/Boot.ddc.
+[2026.09.05-05.41.53:657][  0]LogInit: Display: LogSsl: Warning: Unable to open ROOT certificate store. Platform provided certificates will not be used
+[2026.09.05-05.41.53:657][  0]LogInit: Display: LogDerivedDataCache: Warning: Fail to write to C:/Users/adace/AppData/Local/UnrealEngine/Common/DerivedDataCache/TestData/1BE4608F4D0D3F2D777EB4AE0062C63C/TestData/0/TestData_4kb.dat, derived data cache will be disabled. ReadError: 3 (The system cannot find the path specified.)
+[2026.09.05-05.41.53:657][  0]LogInit: Display: 
+[2026.09.05-05.41.53:657][  0]LogInit: Display: Failure - 1 error(s), 2 warning(s)
+[2026.09.05-05.41.53:657][  0]LogInit: Display: 
+
+Execution of commandlet took:  0.02 seconds
+[2026.09.05-05.41.53:747][  0]LogShaderCompilers: Display: === FShaderJobCache stats ===
+[2026.09.05-05.41.53:747][  0]LogShaderCompilers: Display: Total job queries 0, among them cache hits 0 (0.00%)
+[2026.09.05-05.41.53:747][  0]LogShaderCompilers: Display: Tracking 0 distinct input hashes that result in 0 distinct outputs (0.00%)
+[2026.09.05-05.41.53:747][  0]LogShaderCompilers: Display: RAM used: 0.00 MB (0.00 GB) of 1638.40 MB (1.60 GB) budget. Usage: 0.00%
+[2026.09.05-05.41.53:747][  0]LogShaderCompilers: Display: ================================================
+[2026.09.05-05.41.53:756][  0]LogShaderCompilers: Display: Shaders left to compile 0
+[2026.09.05-05.41.53:796][  0]LogHttp: Display: cleaning up 0 outstanding Http requests.
+[2026.09.05-05.41.54:302][  0]LogContentStreaming: Display: There are 1 unreleased StreamingManagers

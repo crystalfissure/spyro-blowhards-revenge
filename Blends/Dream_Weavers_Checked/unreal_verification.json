@@ -1,0 +1,48 @@
+{
+  "mesh_updated": "/Game/_CF_Project/Meshes/Levels/Dream_Weavers_Edit.Dream_Weavers_Edit",
+  "checked_copy": "/Game/_CF_Project/Meshes/Levels/Dream_Weavers_Edit_Checked.Dream_Weavers_Edit_Checked",
+  "material_updated": "/Game/_CF_Project/Materials/Dream_Weavers_Material.Dream_Weavers_Material",
+  "texture": "/Game/_CF_Project/Textures/Spyro_Giga_Texture_Atlas_V2_7_DreamWeavers_Extended.Spyro_Giga_Texture_Atlas_V2_7_DreamWeavers_Extended",
+  "full_precision_uvs": true,
+  "triangles": 29667,
+  "scale_to_preserve_existing_unreal_bounds": 1.2200001301390753,
+  "bounds_before": [
+    [
+      -28164.607421875,
+      -7285.94677734375,
+      -1150.12353515625
+    ],
+    [
+      17163.685546875,
+      13414.4716796875,
+      6378.6435546875
+    ]
+  ],
+  "bounds_after": [
+    [
+      -28164.61328125,
+      -7285.94677734375,
+      -1150.1221923828125
+    ],
+    [
+      17163.685546875,
+      13414.4736328125,
+      6378.64306640625
+    ]
+  ],
+  "collision_preserved": {
+    "simple": 0,
+    "convex": 1,
+    "trace": "<CollisionTraceFlag.CTF_USE_COMPLEX_AS_SIMPLE: 3>"
+  },
+  "backups": "C:\\Users\\adace\\Desktop\\spyro-blowhards-revenge\\Blends\\Dream_Weavers_Checked\\Unreal_Backup",
+  "saved_assets_reloaded_and_verified": true,
+  "uv_corners_in_unreal": 89001,
+  "minimum_normal_length": 0.9935310881467851,
+  "maximum_normal_length": 1.0060268616899417,
+  "reimport_source": [
+    "C:/Users/adace/Desktop/spyro-blowhards-revenge/Blends/Dream_Weavers_Checked/Dream Weavers Edit - Checked.fbx"
+  ],
+  "maximum_uv_distance_to_blender": 0.0,
+  "maximum_uv_distance_in_atlas_pixels_upper_bound": 0.0
+}

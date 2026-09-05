@@ -1,0 +1,118 @@
+[2026.09.05-05.46.48:240][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'AllDesktop'
+[2026.09.05-05.46.48:256][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android'
+[2026.09.05-05.46.48:256][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ASTC'
+[2026.09.05-05.46.48:256][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_DXT'
+[2026.09.05-05.46.48:256][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ETC2'
+[2026.09.05-05.46.48:256][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'AndroidClient'
+[2026.09.05-05.46.48:256][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ASTCClient'
+[2026.09.05-05.46.48:256][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_DXTClient'
+[2026.09.05-05.46.48:256][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ETC2Client'
+[2026.09.05-05.46.48:256][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_Multi'
+[2026.09.05-05.46.48:256][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_MultiClient'
+[2026.09.05-05.46.48:269][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'IOSClient'
+[2026.09.05-05.46.48:269][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'IOS'
+[2026.09.05-05.46.48:277][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Linux'
+[2026.09.05-05.46.48:282][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxNoEditor'
+[2026.09.05-05.46.48:285][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxClient'
+[2026.09.05-05.46.48:288][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxServer'
+[2026.09.05-05.46.48:296][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxAArch64NoEditor'
+[2026.09.05-05.46.48:300][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxAArch64Client'
+[2026.09.05-05.46.48:303][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxAArch64Server'
+[2026.09.05-05.46.48:321][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Lumin'
+[2026.09.05-05.46.48:321][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LuminClient'
+[2026.09.05-05.46.48:327][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'MacNoEditor'
+[2026.09.05-05.46.48:330][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Mac'
+[2026.09.05-05.46.48:333][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'MacClient'
+[2026.09.05-05.46.48:337][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'MacServer'
+[2026.09.05-05.46.48:346][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'TVOSClient'
+[2026.09.05-05.46.48:346][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'TVOS'
+[2026.09.05-05.46.48:352][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'WindowsNoEditor'
+[2026.09.05-05.46.48:356][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Windows'
+[2026.09.05-05.46.48:360][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'WindowsClient'
+[2026.09.05-05.46.48:364][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'WindowsServer'
+[2026.09.05-05.46.48:364][  0]LogTargetPlatformManager: Display: Building Assets For Windows
+[2026.09.05-05.46.48:369][  0]LogAudioDebug: Display: Lib vorbis DLL was dynamically loaded.
+[2026.09.05-05.46.48:394][  0]LogTextureFormatOodle: Display: Oodle Texture 2.9.0 init RDO Off
+[2026.09.05-05.46.48:421][  0]LogShaderCompilers: Display: Using Local Shader Compiler.
+[2026.09.05-05.46.48:850][  0]LogDerivedDataCache: Display: Max Cache Size: 512 MB
+[2026.09.05-05.46.48:889][  0]LogDerivedDataCache: Display: Loaded Boot cache: C:/Users/adace/AppData/Local/UnrealEngine/4.27/DerivedDataCache/Boot.ddc
+[2026.09.05-05.46.48:903][  0]LogDerivedDataCache: Display: Pak cache opened for reading ../../../Engine/DerivedDataCache/Compressed.ddp.
+[2026.09.05-05.46.48:906][  0]LogDerivedDataCache: Warning: Fail to write to C:/Users/adace/AppData/Local/UnrealEngine/Common/DerivedDataCache/TestData/4449FF1F443D219590E2198D648639A3/TestData/0/TestData_4kb.dat, derived data cache will be disabled. ReadError: 3 (The system cannot find the path specified.)
+[2026.09.05-05.46.48:906][  0]LogDerivedDataCache: Display: Performance to C:/Users/adace/AppData/Local/UnrealEngine/Common/DerivedDataCache: Latency=0.02ms. RandomReadSpeed=894.96MBs, RandomWriteSpeed=0.00MBs. Assigned SpeedClass 'Local'
+[2026.09.05-05.46.50:103][  0]LogAudioCaptureCore: Display: No Audio Capture implementations found. Audio input will be silent.
+[2026.09.05-05.46.50:103][  0]LogAudioCaptureCore: Display: No Audio Capture implementations found. Audio input will be silent.
+[2026.09.05-05.46.51:257][  0]LogDerivedDataCache: Error: Could not save memory cache C:/Users/adace/AppData/Local/UnrealEngine/4.27/DerivedDataCache/Boot.ddc.
+[2026.09.05-05.46.51:475][  0]LogClass: Display: Int8Property FMTSJson::version is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.09.05-05.46.51:475][  0]LogClass: Display: Int16Property FMTSJson::resolutionValue is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.09.05-05.46.51:476][  0]LogClass: Display: BoolProperty FMTSJson::isExternal is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.09.05-05.46.51:476][  0]LogClass: Display: Int8Property FMTSJson::meshVersion is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.09.05-05.46.51:476][  0]LogClass: Display: BoolProperty FMTSJson::isCustom is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.09.05-05.46.51:476][  0]LogClass: Display: BoolProperty FMTSJson::isModularAsset is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.09.05-05.46.51:476][  0]LogClass: Display: Int8Property FLodList::variation is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.09.05-05.46.51:476][  0]LogClass: Display: Int16Property FMeshList::resolution is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.09.05-05.46.51:476][  0]LogClass: Display: Int16Property FComponents::resolution is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.09.05-05.46.51:476][  0]LogClass: Display: BoolProperty FTextureSets::isUdim is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.09.05-05.46.51:478][  0]LogClass: Display: BoolProperty FMeta::value is not initialized properly. Module:MegascansPlugin File:Private/Utilities/MTSReader.h
+[2026.09.05-05.46.51:478][  0]LogClass: Display: 11 Uninitialized script struct members found including 0 object properties
+[2026.09.05-05.46.51:479][  0]LogPythonScriptCommandlet: Display: Running Python script: C:\Users\adace\Desktop\spyro-blowhards-revenge\Tools\MeshReview\apply_unreal_repairs.py
+[2026.09.05-05.46.52:541][  0]PIE: Warning: Calling GetSectionFromStaticMesh on Dream_Weavers_Edit but 'Allow CPU Access' is not enabled. This is required for converting StaticMesh to ProceduralMeshComponent in cooked builds.
+[2026.09.05-05.46.52:546][  0]PIE: Warning: Calling GetSectionFromStaticMesh on Dream_Weavers_Edit_Checked but 'Allow CPU Access' is not enabled. This is required for converting StaticMesh to ProceduralMeshComponent in cooked builds.
+[2026.09.05-05.46.53:274][  0]LogDerivedDataCache: Display: HierarchicalDerivedDataBackend: Put failed, keeping in memory copy STATICMESH_9CE2B6FB46754B699726C4AA1515F12E_228332BAE0224DD294E232B87D83948FQu__8289562E49446B8B624D2706EE9BC9C1A089288A.
+[2026.09.05-05.46.53:275][  0]LogDerivedDataCache: Display: Failed to write STATICMESH_9CE2B6FB46754B699726C4AA1515F12E_228332BAE0224DD294E232B87D83948FQu__8289562E49446B8B624D2706EE9BC9C1A089288A to HierarchicalDerivedDataBackend. Error: 0 (The operation completed successfully.)
+[2026.09.05-05.46.53:275][  0]LogDerivedDataCache: Display: HierarchicalDerivedDataBackend: Put failed, keeping in memory copy PhysX_A08609EF508D460CBB6710540B03AACF_PhysXPC_DD51D41D43C3CBADA38984B4AA882DC__D1C1FD94EA817B44AD16830BD0E48DD069869B55.
+[2026.09.05-05.46.53:275][  0]LogDerivedDataCache: Display: Failed to write PhysX_A08609EF508D460CBB6710540B03AACF_PhysXPC_DD51D41D43C3CBADA38984B4AA882DC__D1C1FD94EA817B44AD16830BD0E48DD069869B55 to HierarchicalDerivedDataBackend. Error: 0 (The operation completed successfully.)
+[2026.09.05-05.46.53:276][  0]LogDerivedDataCache: Display: HierarchicalDerivedDataBackend: Put failed, keeping in memory copy NavCollision_2983273BE5D6425391E8C0B3D1C0A55D_NavCollision_X_DD51D41D43C3CBADA__2337000A24313F043383C6E871D78AB6883C5492.
+[2026.09.05-05.46.53:276][  0]LogDerivedDataCache: Display: Failed to write NavCollision_2983273BE5D6425391E8C0B3D1C0A55D_NavCollision_X_DD51D41D43C3CBADA__2337000A24313F043383C6E871D78AB6883C5492 to HierarchicalDerivedDataBackend. Error: 0 (The operation completed successfully.)
+[2026.09.05-05.46.54:937][  0]LogStaticMesh: Display: Main thread blocked for 0.649s for async distance field build of Dream_Weavers_Edit_Checked to complete!  This can happen if the mesh is rebuilt excessively.
+[2026.09.05-05.46.55:972][  0]LogDerivedDataCache: Display: HierarchicalDerivedDataBackend: Put failed, keeping in memory copy DIST_STATICMESH_9CE2B6FB46754B699726C4AA1515F12E_228332BAE0224DD294E232B87D839__1EC2AC16AE451CA8CCE86BD1454D6B837027BE4F.
+[2026.09.05-05.46.55:972][  0]LogDerivedDataCache: Display: Failed to write DIST_STATICMESH_9CE2B6FB46754B699726C4AA1515F12E_228332BAE0224DD294E232B87D839__1EC2AC16AE451CA8CCE86BD1454D6B837027BE4F to HierarchicalDerivedDataBackend. Error: 0 (The operation completed successfully.)
+[2026.09.05-05.46.55:972][  0]LogDerivedDataCache: Display: HierarchicalDerivedDataBackend: Put failed, keeping in memory copy PhysX_A08609EF508D460CBB6710540B03AACF_PhysXPC_D22A70444416ECFAF70FF6A9E978FA1__583203C2409B0DCD5CF2A0BC9B40AD43DC3AA5B9.
+[2026.09.05-05.46.55:973][  0]LogDerivedDataCache: Display: Failed to write PhysX_A08609EF508D460CBB6710540B03AACF_PhysXPC_D22A70444416ECFAF70FF6A9E978FA1__583203C2409B0DCD5CF2A0BC9B40AD43DC3AA5B9 to HierarchicalDerivedDataBackend. Error: 0 (The operation completed successfully.)
+[2026.09.05-05.46.56:040][  0]LogStaticMesh: Display: Dream_Weavers_Edit has some nearly zero tangents which can create some issues. (Tolerance of 1E-4)
+[2026.09.05-05.46.56:040][  0]LogStaticMesh: Display: Dream_Weavers_Edit has some nearly zero bi-normals which can create some issues. (Tolerance of 1E-4)
+[2026.09.05-05.46.58:357][  0]LogDerivedDataCache: Display: HierarchicalDerivedDataBackend: Put failed, keeping in memory copy STATICMESH_9CE2B6FB46754B699726C4AA1515F12E_228332BAE0224DD294E232B87D83948FQu__CED61C79F18BF1DA6D75A885BA2C60843407E27F.
+[2026.09.05-05.46.58:357][  0]LogDerivedDataCache: Display: Failed to write STATICMESH_9CE2B6FB46754B699726C4AA1515F12E_228332BAE0224DD294E232B87D83948FQu__CED61C79F18BF1DA6D75A885BA2C60843407E27F to HierarchicalDerivedDataBackend. Error: 0 (The operation completed successfully.)
+[2026.09.05-05.46.58:358][  0]LogDerivedDataCache: Display: HierarchicalDerivedDataBackend: Put failed, keeping in memory copy PhysX_A08609EF508D460CBB6710540B03AACF_PhysXPC_074605184AA475E84E3E518A51E6579__6983CA9B6C568D976CD763BCA05FFC927E21A4B9.
+[2026.09.05-05.46.58:358][  0]LogDerivedDataCache: Display: Failed to write PhysX_A08609EF508D460CBB6710540B03AACF_PhysXPC_074605184AA475E84E3E518A51E6579__6983CA9B6C568D976CD763BCA05FFC927E21A4B9 to HierarchicalDerivedDataBackend. Error: 0 (The operation completed successfully.)
+[2026.09.05-05.46.58:358][  0]LogStaticMesh: Display: Main thread blocked for 2.313s for async distance field build of Dream_Weavers_Edit to complete!  This can happen if the mesh is rebuilt excessively.
+[2026.09.05-05.46.59:298][  0]LogDerivedDataCache: Display: HierarchicalDerivedDataBackend: Put failed, keeping in memory copy DIST_STATICMESH_9CE2B6FB46754B699726C4AA1515F12E_228332BAE0224DD294E232B87D839__E4B0C9EFC0447D363702E4C011594E84DAC11EF7.
+[2026.09.05-05.46.59:298][  0]LogDerivedDataCache: Display: Failed to write DIST_STATICMESH_9CE2B6FB46754B699726C4AA1515F12E_228332BAE0224DD294E232B87D839__E4B0C9EFC0447D363702E4C011594E84DAC11EF7 to HierarchicalDerivedDataBackend. Error: 0 (The operation completed successfully.)
+[2026.09.05-05.46.59:368][  0]LogStaticMesh: Display: Dream_Weavers_Edit has some nearly zero tangents which can create some issues. (Tolerance of 1E-4)
+[2026.09.05-05.46.59:369][  0]LogStaticMesh: Display: Dream_Weavers_Edit has some nearly zero bi-normals which can create some issues. (Tolerance of 1E-4)
+[2026.09.05-05.47.01:723][  0]LogDerivedDataCache: Display: HierarchicalDerivedDataBackend: Put failed, keeping in memory copy STATICMESH_9CE2B6FB46754B699726C4AA1515F12E_228332BAE0224DD294E232B87D83948FQu__20D835D080C0D3ACCEEBD817749BA1F897D562A3.
+[2026.09.05-05.47.01:723][  0]LogDerivedDataCache: Display: Failed to write STATICMESH_9CE2B6FB46754B699726C4AA1515F12E_228332BAE0224DD294E232B87D83948FQu__20D835D080C0D3ACCEEBD817749BA1F897D562A3 to HierarchicalDerivedDataBackend. Error: 0 (The operation completed successfully.)
+[2026.09.05-05.47.01:723][  0]LogDerivedDataCache: Display: HierarchicalDerivedDataBackend: Put failed, keeping in memory copy PhysX_A08609EF508D460CBB6710540B03AACF_PhysXPC_4B8ED6544A841D517E6EE181A349C75__D49D60D28EC54E2CB54308B2273B533D47C49FB3.
+[2026.09.05-05.47.01:723][  0]LogDerivedDataCache: Display: Failed to write PhysX_A08609EF508D460CBB6710540B03AACF_PhysXPC_4B8ED6544A841D517E6EE181A349C75__D49D60D28EC54E2CB54308B2273B533D47C49FB3 to HierarchicalDerivedDataBackend. Error: 0 (The operation completed successfully.)
+[2026.09.05-05.47.01:724][  0]LogStaticMesh: Display: Main thread blocked for 2.351s for async distance field build of Dream_Weavers_Edit to complete!  This can happen if the mesh is rebuilt excessively.
+[2026.09.05-05.47.02:707][  0]LogDerivedDataCache: Display: HierarchicalDerivedDataBackend: Put failed, keeping in memory copy DIST_STATICMESH_9CE2B6FB46754B699726C4AA1515F12E_228332BAE0224DD294E232B87D839__1D7515E911B90F085718F6864E447FD0499E0965.
+[2026.09.05-05.47.02:707][  0]LogDerivedDataCache: Display: Failed to write DIST_STATICMESH_9CE2B6FB46754B699726C4AA1515F12E_228332BAE0224DD294E232B87D839__1D7515E911B90F085718F6864E447FD0499E0965 to HierarchicalDerivedDataBackend. Error: 0 (The operation completed successfully.)
+[2026.09.05-05.47.02:708][  0]LogDerivedDataCache: Display: HierarchicalDerivedDataBackend: Put failed, keeping in memory copy PhysX_A08609EF508D460CBB6710540B03AACF_PhysXPC_50877CE445094051C7CF969E0200F57__2C836562C0E71D4FC9B820D547A3C195FEDF69CE.
+[2026.09.05-05.47.02:708][  0]LogDerivedDataCache: Display: Failed to write PhysX_A08609EF508D460CBB6710540B03AACF_PhysXPC_50877CE445094051C7CF969E0200F57__2C836562C0E71D4FC9B820D547A3C195FEDF69CE to HierarchicalDerivedDataBackend. Error: 0 (The operation completed successfully.)
+[2026.09.05-05.47.02:781][  0]LogStaticMesh: Display: Dream_Weavers_Edit_Checked has some nearly zero tangents which can create some issues. (Tolerance of 1E-4)
+[2026.09.05-05.47.02:781][  0]LogStaticMesh: Display: Dream_Weavers_Edit_Checked has some nearly zero bi-normals which can create some issues. (Tolerance of 1E-4)
+[2026.09.05-05.47.02:783][  0]PIE: Warning: Calling GetSectionFromStaticMesh on Dream_Weavers_Edit but 'Allow CPU Access' is not enabled. This is required for converting StaticMesh to ProceduralMeshComponent in cooked builds.
+[2026.09.05-05.47.03:169][  0]LogDerivedDataCache: Display: HierarchicalDerivedDataBackend: Put failed, keeping in memory copy STATICMESH_9CE2B6FB46754B699726C4AA1515F12E_228332BAE0224DD294E232B87D83948FQu__68930F86EC074D6459EB719FE0C6A96D9AB41F15.
+[2026.09.05-05.47.03:170][  0]LogDerivedDataCache: Display: Failed to write STATICMESH_9CE2B6FB46754B699726C4AA1515F12E_228332BAE0224DD294E232B87D83948FQu__68930F86EC074D6459EB719FE0C6A96D9AB41F15 to HierarchicalDerivedDataBackend. Error: 0 (The operation completed successfully.)
+[2026.09.05-05.47.03:170][  0]LogDerivedDataCache: Display: HierarchicalDerivedDataBackend: Put failed, keeping in memory copy PhysX_A08609EF508D460CBB6710540B03AACF_PhysXPC_B1E22EEB4A0A6959F7F68191D6BBE46__959AFDE66C3887125696757319F486AEFFC54533.
+[2026.09.05-05.47.03:170][  0]LogDerivedDataCache: Display: Failed to write PhysX_A08609EF508D460CBB6710540B03AACF_PhysXPC_B1E22EEB4A0A6959F7F68191D6BBE46__959AFDE66C3887125696757319F486AEFFC54533 to HierarchicalDerivedDataBackend. Error: 0 (The operation completed successfully.)
+[2026.09.05-05.47.05:897][  0]LogInit: Display: 
+[2026.09.05-05.47.05:897][  0]LogInit: Display: Warning/Error Summary (Unique only)
+[2026.09.05-05.47.05:897][  0]LogInit: Display: -----------------------------------
+[2026.09.05-05.47.05:897][  0]LogInit: Display: LogDerivedDataCache: Error: Could not save memory cache C:/Users/adace/AppData/Local/UnrealEngine/4.27/DerivedDataCache/Boot.ddc.
+[2026.09.05-05.47.05:897][  0]LogInit: Display: LogSsl: Warning: Unable to open ROOT certificate store. Platform provided certificates will not be used
+[2026.09.05-05.47.05:897][  0]LogInit: Display: LogDerivedDataCache: Warning: Fail to write to C:/Users/adace/AppData/Local/UnrealEngine/Common/DerivedDataCache/TestData/4449FF1F443D219590E2198D648639A3/TestData/0/TestData_4kb.dat, derived data cache will be disabled. ReadError: 3 (The system cannot find the path specified.)
+[2026.09.05-05.47.05:898][  0]LogInit: Display: PIE: Warning: Calling GetSectionFromStaticMesh on Dream_Weavers_Edit but 'Allow CPU Access' is not enabled. This is required for converting StaticMesh to ProceduralMeshComponent in cooked builds.
+[2026.09.05-05.47.05:898][  0]LogInit: Display: PIE: Warning: Calling GetSectionFromStaticMesh on Dream_Weavers_Edit_Checked but 'Allow CPU Access' is not enabled. This is required for converting StaticMesh to ProceduralMeshComponent in cooked builds.
+[2026.09.05-05.47.05:898][  0]LogInit: Display: 
+[2026.09.05-05.47.05:898][  0]LogInit: Display: Failure - 1 error(s), 5 warning(s)
+[2026.09.05-05.47.05:898][  0]LogInit: Display: 
+
+Execution of commandlet took:  14.42 seconds
+[2026.09.05-05.47.06:115][  0]LogShaderCompilers: Display: === FShaderJobCache stats ===
+[2026.09.05-05.47.06:115][  0]LogShaderCompilers: Display: Total job queries 0, among them cache hits 0 (0.00%)
+[2026.09.05-05.47.06:115][  0]LogShaderCompilers: Display: Tracking 0 distinct input hashes that result in 0 distinct outputs (0.00%)
+[2026.09.05-05.47.06:117][  0]LogShaderCompilers: Display: RAM used: 0.00 MB (0.00 GB) of 1638.40 MB (1.60 GB) budget. Usage: 0.00%
+[2026.09.05-05.47.06:117][  0]LogShaderCompilers: Display: ================================================
+[2026.09.05-05.47.06:124][  0]LogShaderCompilers: Display: Shaders left to compile 0
+[2026.09.05-05.47.06:177][  0]LogHttp: Display: cleaning up 0 outstanding Http requests.
+[2026.09.05-05.47.06:602][  0]LogContentStreaming: Display: There are 1 unreleased StreamingManagers
