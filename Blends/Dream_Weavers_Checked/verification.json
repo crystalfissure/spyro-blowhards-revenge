@@ -1,0 +1,43 @@
+{
+  "source": "C:\\Users\\adace\\Downloads\\Spyro OT Asset Dump\\Spyro OT Assets 2026-01-02\\S1\\Levels\\Home_04_Dream_Weavers\\Dream Weavers Edit.blend",
+  "source_sha256": "36d1421a42651048b68e5d6db480530673b81c71eb153ff89e59f82451d021b9",
+  "blend": "C:\\Users\\adace\\Desktop\\spyro-blowhards-revenge\\Blends\\Dream_Weavers_Checked\\Dream Weavers Edit - Checked.blend",
+  "fbx": "C:\\Users\\adace\\Desktop\\spyro-blowhards-revenge\\Blends\\Dream_Weavers_Checked\\Dream Weavers Edit - Checked.fbx",
+  "atlas": "C:\\Users\\adace\\Desktop\\spyro-blowhards-revenge\\Blends\\Dream_Weavers_Checked\\Spyro_Giga_Texture_Atlas_V2.7_Dream_Weavers_Extended.png",
+  "faces_before": 16637,
+  "triangles_before": 29678,
+  "triangles_after": 29667,
+  "removed_zero_area_triangles": [
+    3714,
+    3715,
+    3717,
+    5460,
+    8479,
+    8618,
+    8773,
+    15273,
+    29170,
+    29178,
+    29218
+  ],
+  "split_coincident_triangles_to_preserve_both_uv_mappings": [
+    6098,
+    8652,
+    8680,
+    8681,
+    12726,
+    28954
+  ],
+  "uv_corners_after": 89001,
+  "face_winding_preserved": true,
+  "normals": "Flat face normals regenerated from explicit triangles; all finite and unit length. Inward cave ceilings and cliff walls retained.",
+  "uv_coordinates_and_vertex_colors_copied_per_corner": true,
+  "fbx_roundtrip": {
+    "triangles": 29667,
+    "uv_channels": 1,
+    "max_position_error_blender_units": 3.0517578125e-05,
+    "max_uv_error": 0.0,
+    "minimum_normal_dot": 0.9999997828965279,
+    "all_corners_preserved": true
+  }
+}
