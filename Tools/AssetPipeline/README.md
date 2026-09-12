@@ -201,3 +201,7 @@ retro rips in this project are meant to look.
   a `json.loads(encoding=...)` argument that Python 3.9 removed; the script
   patches around it at import time rather than editing the engine file.
 
+
+## Interactive and animated props
+
+See [Unreal prop import skill](skills/unreal-prop-import/SKILL.md) for the repeatable workflow covering static versus skeletal assets, animation-only imports, reimport settings, hit reactions, and validation. The references include the Dark Hollow lantern edge cases and a compact import record template.
