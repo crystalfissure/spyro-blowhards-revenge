@@ -1,4 +1,0 @@
-interface:
-  display_name: "Unreal Prop Import"
-  short_description: "Import animated props and verify their hit reactions"
-  default_prompt: "Use $unreal-prop-import to inspect and import this prop into our Unreal project, including its animations and interaction logic."
