@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "MMADeathLaunch.h"
 #include "MMAHedgeTrimmerBehaviorComponent.generated.h"
 
 class ACharacter;
@@ -95,10 +96,14 @@ public:
     float TargetRearmRadius = 750.0f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Movement", meta = (ClampMin = "0.0"))
-    float ChaseSpeed = 220.0f;
+    float ChaseSpeed = 380.0f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Movement", meta = (ClampMin = "0.0"))
-    float ReturnHomeSpeed = 180.0f;
+    float ReturnHomeSpeed = 300.0f;
+
+    /** Playback multiplier for chase and return-home loops so feet keep up with MaxWalkSpeed. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Movement", meta = (ClampMin = "0.01"))
+    float WalkPlaybackRate = 1.65f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Movement", meta = (ClampMin = "0.0"))
     float MaximumDistanceFromHome = 900.0f;
@@ -151,6 +156,25 @@ public:
     /** Populates the inherited Drops_Items component only when its list is empty. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Drop")
     TSubclassOf<AActor> DefaultDropClass;
+
+    /** World-space shove away from Spyro on death. Complements the death clip's hop. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Death", meta = (ClampMin = "0.0"))
+    float DeathKnockbackHorizontalSpeed = 480.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Death", meta = (ClampMin = "0.0"))
+    float DeathKnockbackVerticalSpeed = 360.0f;
+
+    /** GravityScale while the corpse is in the air. 1.0 with Z=80 lands almost immediately. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Death", meta = (ClampMin = "0.05"))
+    float DeathKnockbackGravityScale = 0.4f;
+
+    /** Hold XY launch speed for this fraction of the death clip so floor snap cannot eat it. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Death", meta = (ClampMin = "0.0", ClampMax = "2.0"))
+    float DeathKnockbackHoldClipFraction = 0.85f;
+
+    /** Lift off the floor before LaunchCharacter so Walking mode cannot cancel Z. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Death", meta = (ClampMin = "0.0"))
+    float DeathKnockbackUnstickHeight = 12.0f;
 
     /** Extra time after the configured death animation before the inherited poof removes the mesh. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Death", meta = (ClampMin = "0.0"))
@@ -208,6 +232,7 @@ private:
     bool bDeathSequenceFinished = false;
     FVector DeathTerminalStartWorldLocation = FVector::ZeroVector;
     FVector DeathTerminalStartRelativeScale = FVector::OneVector;
+    FMMADeathLaunch DeathLaunch;
 
     void EnterState(EMMAHedgeTrimmerState NewState);
     void PlayStateAnimation();
@@ -215,6 +240,8 @@ private:
     void TickDeathSequence(float DeltaTime);
     void StartDeathTerminalPhase();
     void SpawnDeathPoof() const;
+    void ApplyDeathKnockback();
+    bool UsesDeathLaunch() const;
     float GetStateDuration() const;
     float GetDeathAnimationDuration() const;
     bool IsOwnerDefeated() const;
