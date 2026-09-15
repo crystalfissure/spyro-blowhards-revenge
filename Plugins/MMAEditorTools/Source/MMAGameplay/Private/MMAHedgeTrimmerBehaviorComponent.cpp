@@ -1,4 +1,5 @@
 #include "MMAHedgeTrimmerBehaviorComponent.h"
+#include "MMADeathLaunch.h"
 
 #include "AIController.h"
 #include "Animation/AnimSingleNodeInstance.h"
@@ -259,7 +260,7 @@ void UMMAHedgeTrimmerBehaviorComponent::ConfigureNativeEnemyContract()
     }
     if (DeathAnimation)
     {
-        const float TerminalDuration = DeathTerminalAnimation
+        const float TerminalDuration = (!UsesDeathLaunch() && DeathTerminalAnimation)
             ? DeathTerminalDurationSeconds
             : 0.0f;
         const float PoofDelay = GetDeathAnimationDuration() +
@@ -605,6 +606,47 @@ void UMMAHedgeTrimmerBehaviorComponent::ApplyHitRecoil(AActor* Target) const
     TargetCharacter->LaunchCharacter(LaunchVelocity, true, true);
 }
 
+bool UMMAHedgeTrimmerBehaviorComponent::UsesDeathLaunch() const
+{
+    return DeathKnockbackHorizontalSpeed > 0.0f || DeathKnockbackVerticalSpeed > 0.0f;
+}
+
+void UMMAHedgeTrimmerBehaviorComponent::ApplyDeathKnockback()
+{
+    ACharacter* Character = CharacterOwner.Get();
+    AActor* Owner = GetOwner();
+    if (!Character || !Owner || !UsesDeathLaunch())
+    {
+        return;
+    }
+    APawn* Source = TargetPawn.Get();
+    if (!Source)
+    {
+        Source = FindNearestPlayer(FMath::Max(LoseInterestRadius, 1200.0f));
+    }
+    const FVector Away = FMMADeathLaunch::AwayFromActor(Owner, Source);
+    float HoldSeconds = 0.45f;
+    if (DeathAnimation)
+    {
+        HoldSeconds = DeathAnimation->GetPlayLength() * DeathKnockbackHoldClipFraction
+            / FMath::Max(DeathPlaybackRate, KINDA_SMALL_NUMBER);
+    }
+    FVector Velocity = Away * DeathKnockbackHorizontalSpeed;
+    Velocity.Z = DeathKnockbackVerticalSpeed;
+    DeathLaunch.Begin(
+        Character,
+        Velocity,
+        DeathKnockbackGravityScale,
+        HoldSeconds,
+        DeathKnockbackUnstickHeight);
+    ShowDebugMessage(FString::Printf(
+        TEXT("Hedge_Trimmer death: launch XY=%.0f Z=%.0f hold=%.2fs g=%.2f"),
+        DeathKnockbackHorizontalSpeed,
+        DeathKnockbackVerticalSpeed,
+        HoldSeconds,
+        DeathKnockbackGravityScale), FColor::Yellow);
+}
+
 float UMMAHedgeTrimmerBehaviorComponent::GetAttackDistanceThreshold(
     const AActor* Target,
     float BaseDistance) const
@@ -798,11 +840,16 @@ void UMMAHedgeTrimmerBehaviorComponent::PlayStateAnimation()
     if (Animation)
     {
         Mesh->PlayAnimation(Animation, bLoop);
-        if (CurrentState == EMMAHedgeTrimmerState::Dead)
+        if (UAnimSingleNodeInstance* SingleNode = Mesh->GetSingleNodeInstance())
         {
-            if (UAnimSingleNodeInstance* SingleNode = Mesh->GetSingleNodeInstance())
+            if (CurrentState == EMMAHedgeTrimmerState::Dead)
             {
                 SingleNode->SetPlayRate(FMath::Max(DeathPlaybackRate, KINDA_SMALL_NUMBER));
+            }
+            else if (CurrentState == EMMAHedgeTrimmerState::Chase ||
+                CurrentState == EMMAHedgeTrimmerState::ReturnHome)
+            {
+                SingleNode->SetPlayRate(FMath::Max(WalkPlaybackRate, KINDA_SMALL_NUMBER));
             }
         }
     }
@@ -882,12 +929,16 @@ void UMMAHedgeTrimmerBehaviorComponent::TickDeathSequence(float DeltaTime)
         return;
     }
 
+    DeathLaunch.Tick(CharacterOwner.Get(), DeltaTime);
     StateElapsedSeconds += DeltaTime;
-    if (!DeathTerminalAnimation)
+
+    const bool bLaunching = UsesDeathLaunch();
+    if (bLaunching || !DeathTerminalAnimation)
     {
         MaintainDeathAnimation(DeathAnimation);
         if (StateElapsedSeconds >= GetDeathAnimationDuration() + DeathPoofPaddingSeconds)
         {
+            DeathLaunch.End(CharacterOwner.Get());
             bDeathSequenceFinished = true;
             SpawnDeathPoof();
             Mesh->SetVisibility(false, true);
@@ -901,6 +952,7 @@ void UMMAHedgeTrimmerBehaviorComponent::TickDeathSequence(float DeltaTime)
         const float KnockbackDuration = GetDeathAnimationDuration();
         if (StateElapsedSeconds >= KnockbackDuration)
         {
+            DeathLaunch.End(CharacterOwner.Get());
             StartDeathTerminalPhase();
         }
         return;
@@ -951,18 +1003,15 @@ void UMMAHedgeTrimmerBehaviorComponent::EnterState(EMMAHedgeTrimmerState NewStat
         break;
     case EMMAHedgeTrimmerState::Dead:
         SetInheritedBool(GetOwner(), TEXT("WeaponHitboxActive"), false);
-        TargetPawn.Reset();
         bDeathTerminalStarted = false;
         bDeathSequenceFinished = false;
         if (ACharacter* Character = CharacterOwner.Get())
         {
-            if (UCharacterMovementComponent* Movement = Character->GetCharacterMovement())
-            {
-                Movement->DisableMovement();
-            }
             if (UCapsuleComponent* Capsule = Character->GetCapsuleComponent())
             {
-                Capsule->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+                // Keep world collision so the launched corpse can land. Only
+                // ignore pawns so the body does not block Spyro.
+                Capsule->SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
             }
         }
         break;
@@ -970,11 +1019,16 @@ void UMMAHedgeTrimmerBehaviorComponent::EnterState(EMMAHedgeTrimmerState NewStat
     if (NewState == EMMAHedgeTrimmerState::Idle ||
         NewState == EMMAHedgeTrimmerState::Notice ||
         NewState == EMMAHedgeTrimmerState::Attack ||
-        NewState == EMMAHedgeTrimmerState::Dead)
+        (NewState == EMMAHedgeTrimmerState::Dead && !UsesDeathLaunch()))
     {
         StopMovement();
     }
     PlayStateAnimation();
+    if (NewState == EMMAHedgeTrimmerState::Dead)
+    {
+        ApplyDeathKnockback();
+        TargetPawn.Reset();
+    }
     ShowDebugMessage(FString::Printf(
         TEXT("Hedge_Trimmer state: %s"),
         *UEnum::GetValueAsString(NewState)));

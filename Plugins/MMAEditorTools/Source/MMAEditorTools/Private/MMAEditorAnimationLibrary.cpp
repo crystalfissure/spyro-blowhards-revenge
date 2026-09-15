@@ -773,6 +773,7 @@ bool UMMAEditorAnimationLibrary::ConfigureMMAEnemyStateMachineSettings(
         SetNumber(TEXT("attack_target_clearance"), Behavior->AttackTargetClearance);
         SetNumber(TEXT("chase_speed"), Behavior->ChaseSpeed);
         SetNumber(TEXT("return_home_speed"), Behavior->ReturnHomeSpeed);
+        SetNumber(TEXT("walk_playback_rate"), Behavior->WalkPlaybackRate);
         SetNumber(TEXT("maximum_distance_from_home"), Behavior->MaximumDistanceFromHome);
         SetNumber(TEXT("home_acceptance_radius"), Behavior->HomeAcceptanceRadius);
         SetNumber(TEXT("rotation_speed_degrees"), Behavior->RotationSpeedDegrees);
@@ -784,6 +785,11 @@ bool UMMAEditorAnimationLibrary::ConfigureMMAEnemyStateMachineSettings(
         SetNumber(TEXT("hit_points"), Behavior->InitialHitPoints);
         SetNumber(TEXT("recoil_horizontal_speed"), Behavior->RecoilHorizontalSpeed);
         SetNumber(TEXT("recoil_vertical_speed"), Behavior->RecoilVerticalSpeed);
+        SetNumber(TEXT("death_knockback_horizontal_speed"), Behavior->DeathKnockbackHorizontalSpeed);
+        SetNumber(TEXT("death_knockback_vertical_speed"), Behavior->DeathKnockbackVerticalSpeed);
+        SetNumber(TEXT("death_knockback_gravity_scale"), Behavior->DeathKnockbackGravityScale);
+        SetNumber(TEXT("death_knockback_hold_clip_fraction"), Behavior->DeathKnockbackHoldClipFraction);
+        SetNumber(TEXT("death_knockback_unstick_height"), Behavior->DeathKnockbackUnstickHeight);
         SetNumber(TEXT("death_poof_padding_seconds"), Behavior->DeathPoofPaddingSeconds);
         SetNumber(TEXT("death_playback_rate"), Behavior->DeathPlaybackRate);
         SetNumber(TEXT("death_animation_end_fraction"), Behavior->DeathAnimationEndFraction);
@@ -1331,6 +1337,7 @@ FString UMMAEditorAnimationLibrary::DescribeMMAHedgeTrimmerBlueprint(UBlueprint*
                     Contract->SetNumberField(TEXT("attack_target_clearance"), Behavior->AttackTargetClearance);
                     Contract->SetNumberField(TEXT("chase_speed"), Behavior->ChaseSpeed);
                     Contract->SetNumberField(TEXT("return_home_speed"), Behavior->ReturnHomeSpeed);
+                    Contract->SetNumberField(TEXT("walk_playback_rate"), Behavior->WalkPlaybackRate);
                     Contract->SetNumberField(TEXT("maximum_distance_from_home"), Behavior->MaximumDistanceFromHome);
                     Contract->SetNumberField(TEXT("attack_range"), Behavior->AttackRange);
                     Contract->SetNumberField(TEXT("attack_hit_range"), Behavior->AttackHitRange);
@@ -1341,6 +1348,16 @@ FString UMMAEditorAnimationLibrary::DescribeMMAHedgeTrimmerBlueprint(UBlueprint*
                     Contract->SetNumberField(TEXT("outgoing_damage_type"), Behavior->OutgoingDamageType);
                     Contract->SetNumberField(TEXT("recoil_horizontal_speed"), Behavior->RecoilHorizontalSpeed);
                     Contract->SetNumberField(TEXT("recoil_vertical_speed"), Behavior->RecoilVerticalSpeed);
+                    Contract->SetNumberField(
+                        TEXT("death_knockback_horizontal_speed"), Behavior->DeathKnockbackHorizontalSpeed);
+                    Contract->SetNumberField(
+                        TEXT("death_knockback_vertical_speed"), Behavior->DeathKnockbackVerticalSpeed);
+                    Contract->SetNumberField(
+                        TEXT("death_knockback_gravity_scale"), Behavior->DeathKnockbackGravityScale);
+                    Contract->SetNumberField(
+                        TEXT("death_knockback_hold_clip_fraction"), Behavior->DeathKnockbackHoldClipFraction);
+                    Contract->SetNumberField(
+                        TEXT("death_knockback_unstick_height"), Behavior->DeathKnockbackUnstickHeight);
                     Contract->SetNumberField(TEXT("death_poof_padding_seconds"), Behavior->DeathPoofPaddingSeconds);
                     Contract->SetNumberField(TEXT("death_playback_rate"), Behavior->DeathPlaybackRate);
                     Contract->SetNumberField(
