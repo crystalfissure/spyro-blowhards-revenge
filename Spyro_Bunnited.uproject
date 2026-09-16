@@ -70,6 +70,10 @@
 		{
 			"Name": "PythonScriptPlugin",
 			"Enabled": true
+		},
+		{
+			"Name": "SpyroGameplay",
+			"Enabled": true
 		}
 	]
 }
