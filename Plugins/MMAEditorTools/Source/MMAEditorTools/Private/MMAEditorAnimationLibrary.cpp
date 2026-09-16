@@ -790,6 +790,7 @@ bool UMMAEditorAnimationLibrary::ConfigureMMAEnemyStateMachineSettings(
         SetNumber(TEXT("death_knockback_gravity_scale"), Behavior->DeathKnockbackGravityScale);
         SetNumber(TEXT("death_knockback_hold_clip_fraction"), Behavior->DeathKnockbackHoldClipFraction);
         SetNumber(TEXT("death_knockback_unstick_height"), Behavior->DeathKnockbackUnstickHeight);
+        SetNumber(TEXT("death_knockback_tumble_degrees"), Behavior->DeathKnockbackTumbleDegrees);
         SetNumber(TEXT("death_poof_padding_seconds"), Behavior->DeathPoofPaddingSeconds);
         SetNumber(TEXT("death_playback_rate"), Behavior->DeathPlaybackRate);
         SetNumber(TEXT("death_animation_end_fraction"), Behavior->DeathAnimationEndFraction);
@@ -1358,6 +1359,8 @@ FString UMMAEditorAnimationLibrary::DescribeMMAHedgeTrimmerBlueprint(UBlueprint*
                         TEXT("death_knockback_hold_clip_fraction"), Behavior->DeathKnockbackHoldClipFraction);
                     Contract->SetNumberField(
                         TEXT("death_knockback_unstick_height"), Behavior->DeathKnockbackUnstickHeight);
+                    Contract->SetNumberField(
+                        TEXT("death_knockback_tumble_degrees"), Behavior->DeathKnockbackTumbleDegrees);
                     Contract->SetNumberField(TEXT("death_poof_padding_seconds"), Behavior->DeathPoofPaddingSeconds);
                     Contract->SetNumberField(TEXT("death_playback_rate"), Behavior->DeathPlaybackRate);
                     Contract->SetNumberField(

@@ -638,13 +638,15 @@ void UMMAHedgeTrimmerBehaviorComponent::ApplyDeathKnockback()
         Velocity,
         DeathKnockbackGravityScale,
         HoldSeconds,
-        DeathKnockbackUnstickHeight);
+        DeathKnockbackUnstickHeight,
+        DeathKnockbackTumbleDegrees);
     ShowDebugMessage(FString::Printf(
-        TEXT("Hedge_Trimmer death: launch XY=%.0f Z=%.0f hold=%.2fs g=%.2f"),
+        TEXT("Hedge_Trimmer death: launch XY=%.0f Z=%.0f hold=%.2fs g=%.2f tumble=%.0f"),
         DeathKnockbackHorizontalSpeed,
         DeathKnockbackVerticalSpeed,
         HoldSeconds,
-        DeathKnockbackGravityScale), FColor::Yellow);
+        DeathKnockbackGravityScale,
+        DeathKnockbackTumbleDegrees), FColor::Yellow);
 }
 
 float UMMAHedgeTrimmerBehaviorComponent::GetAttackDistanceThreshold(

@@ -159,26 +159,30 @@ public:
 
     /** World-space shove away from Spyro on death. Complements the death clip's hop. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Death", meta = (ClampMin = "0.0"))
-    float DeathKnockbackHorizontalSpeed = 480.0f;
+    float DeathKnockbackHorizontalSpeed = 1145.0f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Death", meta = (ClampMin = "0.0"))
-    float DeathKnockbackVerticalSpeed = 360.0f;
+    float DeathKnockbackVerticalSpeed = 562.0f;
 
-    /** GravityScale while the corpse is in the air. 1.0 with Z=80 lands almost immediately. */
+    /** GravityScale while the corpse is in the air. 1.38 matches CASTLE1 RAM (~-3 source u/tick^2 at 30 Hz). */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Death", meta = (ClampMin = "0.05"))
-    float DeathKnockbackGravityScale = 0.4f;
+    float DeathKnockbackGravityScale = 1.38f;
 
-    /** Hold XY launch speed for this fraction of the death clip so floor snap cannot eat it. */
+    /** Hold XY until landing (~0.83s). 1.57 * 0.53s death clip. Floor snap still cannot eat the launch. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Death", meta = (ClampMin = "0.0", ClampMax = "2.0"))
-    float DeathKnockbackHoldClipFraction = 0.85f;
+    float DeathKnockbackHoldClipFraction = 1.57f;
 
     /** Lift off the floor before LaunchCharacter so Walking mode cannot cancel Z. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Death", meta = (ClampMin = "0.0"))
     float DeathKnockbackUnstickHeight = 12.0f;
 
+    /** Mesh pitch onto the back during fly-back. Capsule stays upright (CharacterMovement is yaw-only). 0 disables. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Death", meta = (ClampMin = "0.0", ClampMax = "180.0"))
+    float DeathKnockbackTumbleDegrees = 90.0f;
+
     /** Extra time after the configured death animation before the inherited poof removes the mesh. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Death", meta = (ClampMin = "0.0"))
-    float DeathPoofPaddingSeconds = 0.25f;
+    float DeathPoofPaddingSeconds = 0.40f;
 
     /** Playback multiplier for the defeat animation. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Death", meta = (ClampMin = "0.01"))

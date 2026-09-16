@@ -1,6 +1,7 @@
 #include "MMADeathLaunch.h"
 
 #include "Components/CapsuleComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "GameFramework/Actor.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -67,7 +68,8 @@ void FMMADeathLaunch::Begin(
     const FVector& Velocity,
     float GravityScale,
     float InHoldSeconds,
-    float UnstickHeight)
+    float UnstickHeight,
+    float InTumbleDegrees)
 {
     if (!Character)
     {
@@ -102,6 +104,21 @@ void FMMADeathLaunch::Begin(
     LaunchVelocity = Velocity;
     HoldSeconds = FMath::Max(InHoldSeconds, 0.0f);
     Elapsed = 0.0f;
+    TumbleDegrees = InTumbleDegrees;
+    TumbleAxis = FVector::ZeroVector;
+    bHasSavedMeshRotation = false;
+    if (USkeletalMeshComponent* Mesh = Character->GetMesh())
+    {
+        SavedMeshRotation = Mesh->GetRelativeRotation();
+        bHasSavedMeshRotation = true;
+        FVector Away = Velocity;
+        Away.Z = 0.0f;
+        if (Away.Normalize())
+        {
+            TumbleAxis = FVector::CrossProduct(FVector::UpVector, Away);
+            TumbleAxis.Normalize();
+        }
+    }
     bActive = true;
 }
 
@@ -135,6 +152,18 @@ void FMMADeathLaunch::Tick(ACharacter* Character, float DeltaTime)
     }
     Movement->Velocity = Velocity;
     Movement->UpdateComponentVelocity();
+
+    if (bHasSavedMeshRotation && !TumbleAxis.IsNearlyZero() && !FMath::IsNearlyZero(TumbleDegrees))
+    {
+        if (USkeletalMeshComponent* Mesh = Character->GetMesh())
+        {
+            const float Alpha = HoldSeconds > KINDA_SMALL_NUMBER
+                ? FMath::Clamp(Elapsed / HoldSeconds, 0.0f, 1.0f)
+                : 1.0f;
+            const FQuat Tumble(TumbleAxis, FMath::DegreesToRadians(TumbleDegrees * Alpha));
+            Mesh->SetRelativeRotation((Tumble * SavedMeshRotation.Quaternion()).Rotator());
+        }
+    }
 }
 
 void FMMADeathLaunch::End(ACharacter* Character)
@@ -151,6 +180,14 @@ void FMMADeathLaunch::End(ACharacter* Character)
         Movement->BrakingDecelerationFalling = SavedBrakingDecelerationFalling;
         Movement->AirControl = SavedAirControl;
         Movement->bOrientRotationToMovement = bSavedOrientRotationToMovement;
+    }
+    if (bHasSavedMeshRotation)
+    {
+        if (USkeletalMeshComponent* Mesh = Character->GetMesh())
+        {
+            Mesh->SetRelativeRotation(SavedMeshRotation);
+        }
+        bHasSavedMeshRotation = false;
     }
 }
 

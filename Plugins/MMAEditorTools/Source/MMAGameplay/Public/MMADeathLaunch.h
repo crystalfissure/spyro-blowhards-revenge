@@ -13,6 +13,10 @@ class ACharacter;
  * can StopMovement / return to Walking on later ticks. Holding XY, forcing
  * Falling, unsticking from the floor, and dropping gravity for the clip
  * length is what actually throws the actor across the room.
+ *
+ * CharacterMovement only yaws the capsule, so the original onto-the-back
+ * tumble is applied as mesh-relative rotation around the horizontal axis
+ * perpendicular to the fly-back (not as capsule pitch).
  */
 struct FMMADeathLaunch
 {
@@ -23,7 +27,11 @@ struct FMMADeathLaunch
     float SavedBrakingDecelerationFalling = 0.0f;
     float SavedAirControl = 0.05f;
     bool bSavedOrientRotationToMovement = true;
+    bool bHasSavedMeshRotation = false;
+    FRotator SavedMeshRotation = FRotator::ZeroRotator;
     FVector LaunchVelocity = FVector::ZeroVector;
+    FVector TumbleAxis = FVector::ZeroVector;
+    float TumbleDegrees = 0.0f;
     float HoldSeconds = 0.0f;
     float Elapsed = 0.0f;
 
@@ -34,7 +42,8 @@ struct FMMADeathLaunch
         const FVector& Velocity,
         float GravityScale,
         float HoldSeconds,
-        float UnstickHeight);
+        float UnstickHeight,
+        float TumbleDegrees = 0.0f);
 
     void Tick(ACharacter* Character, float DeltaTime);
 
