@@ -73,6 +73,28 @@ DerivedDataCache/*
 **/Plugins/**/Binaries/*
 **/Plugins/**/Saved/*
 
+# Redistributable Win64 editor modules (UE 4.27.2). Keep this allowlist exact:
+# PDBs, hot-reload DLLs, build receipts and Intermediate remain local.
+!/Plugins/MMAEditorTools/Binaries/Win64/
+/Plugins/MMAEditorTools/Binaries/Win64/*
+!/Plugins/MMAEditorTools/Binaries/Win64/UE4Editor-MMAEditorTools.dll
+!/Plugins/MMAEditorTools/Binaries/Win64/UE4Editor-MMAGameplay.dll
+!/Plugins/MMAEditorTools/Binaries/Win64/UE4Editor.modules
+!/Plugins/PS1IsoGate/Binaries/Win64/
+/Plugins/PS1IsoGate/Binaries/Win64/*
+!/Plugins/PS1IsoGate/Binaries/Win64/UE4Editor-PS1IsoGate.dll
+!/Plugins/PS1IsoGate/Binaries/Win64/UE4Editor.modules
+!/Plugins/SM64Runtime/Binaries/Win64/
+/Plugins/SM64Runtime/Binaries/Win64/*
+!/Plugins/SM64Runtime/Binaries/Win64/UE4Editor-SM64Runtime.dll
+!/Plugins/SM64Runtime/Binaries/Win64/UE4Editor-SM64RuntimeEditor.dll
+!/Plugins/SM64Runtime/Binaries/Win64/UE4Editor.modules
+!/Plugins/SpyroGameplay/Binaries/Win64/
+/Plugins/SpyroGameplay/Binaries/Win64/*
+!/Plugins/SpyroGameplay/Binaries/Win64/UE4Editor-SpyroGameplay.dll
+!/Plugins/SpyroGameplay/Binaries/Win64/UE4Editor-SpyroEditor.dll
+!/Plugins/SpyroGameplay/Binaries/Win64/UE4Editor.modules
+
 # Temp Files
 Config/DefaultEditorPerProjectUserSettings.ini
 
