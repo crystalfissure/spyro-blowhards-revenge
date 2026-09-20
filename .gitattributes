@@ -6,5 +6,5 @@
 *.png filter=lfs diff=lfs merge=lfs -text
 *.7z filter=lfs diff=lfs merge=lfs -text
 
-# Project plugin editor binaries; .modules stays ordinary reviewable JSON.
-/Plugins/*/Binaries/Win64/*.dll filter=lfs diff=lfs merge=lfs -text
+# Project plugin DLLs stay as ordinary Git blobs so a normal clone or pull
+# receives runnable editor plugins without a separate Git LFS recovery step.
