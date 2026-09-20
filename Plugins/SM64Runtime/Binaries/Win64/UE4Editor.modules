@@ -1,6 +1,6 @@
 {
 	"BuildId": "17155196",
-	"Modules":
+	"Modules": 
 	{
 		"SM64Runtime": "UE4Editor-SM64Runtime.dll",
 		"SM64RuntimeEditor": "UE4Editor-SM64RuntimeEditor.dll"

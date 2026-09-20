@@ -14,9 +14,9 @@ class ACharacter;
  * Falling, unsticking from the floor, and dropping gravity for the clip
  * length is what actually throws the actor across the room.
  *
- * CharacterMovement only yaws the capsule, so the original onto-the-back
- * tumble is applied as mesh-relative rotation around the horizontal axis
- * perpendicular to the fly-back (not as capsule pitch).
+ * CharacterMovement only yaws the capsule. Onto-the-back tumble is a
+ * parent-space mesh Pitch (same axis he walks). Roll is a Blueprint fallback
+ * when the skeletal mesh is 90° off that axis. Never use Up×fly-away.
  */
 struct FMMADeathLaunch
 {
@@ -30,8 +30,8 @@ struct FMMADeathLaunch
     bool bHasSavedMeshRotation = false;
     FRotator SavedMeshRotation = FRotator::ZeroRotator;
     FVector LaunchVelocity = FVector::ZeroVector;
-    FVector TumbleAxis = FVector::ZeroVector;
     float TumbleDegrees = 0.0f;
+    bool bTumbleAsRoll = false;
     float HoldSeconds = 0.0f;
     float Elapsed = 0.0f;
 
@@ -43,7 +43,8 @@ struct FMMADeathLaunch
         float GravityScale,
         float HoldSeconds,
         float UnstickHeight,
-        float TumbleDegrees = 0.0f);
+        float TumbleDegrees = 0.0f,
+        bool bTumbleAsRoll = false);
 
     void Tick(ACharacter* Character, float DeltaTime);
 
