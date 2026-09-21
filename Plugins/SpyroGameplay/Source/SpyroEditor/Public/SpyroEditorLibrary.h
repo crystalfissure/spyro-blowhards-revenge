@@ -23,32 +23,5 @@ public:
     static bool PrepareGnorcThiefTest(AActor* Actor);
 
     UFUNCTION(BlueprintCallable, Category = "Spyro|Blueprint")
-    static bool AddChargeWobbleComponent(
-        UBlueprint* Blueprint,
-        FName ComponentVariableName = TEXT("ChargeWobble"));
-
-    UFUNCTION(BlueprintCallable, Category = "Spyro|Blueprint")
-    static bool ConfigureChargeWobble(
-        UBlueprint* Blueprint,
-        UAnimSequence* RestAnimation,
-        UAnimSequence* ReactionAnimation);
-
-    UFUNCTION(BlueprintCallable, Category = "Spyro|Blueprint")
     static bool CompileBlueprint(UBlueprint* Blueprint);
-
-    /** Builds the project-native Blueprint base used by non-destructible
-     * skeletal props that play a one-shot reaction when Damageable_Com
-     * reports a resisted Ram or Burn attempt. The saved Blueprint contains
-     * no SpyroGameplay runtime class. */
-    UFUNCTION(BlueprintCallable, Category = "Spyro|Blueprint")
-    static bool ConfigureProjectHitReactionBase(UBlueprint* Blueprint);
-
-    /** Reparents an existing skeletal prop to the project-native hit-reaction
-     * base, removes ChargeWobbleComponent, and preserves its mesh/materials. */
-    UFUNCTION(BlueprintCallable, Category = "Spyro|Blueprint")
-    static bool MigrateLanternToProjectHitReactionBase(
-        UBlueprint* Blueprint,
-        UBlueprint* BaseBlueprint,
-        UAnimSequence* RestAnimation,
-        UAnimSequence* ReactionAnimation);
 };

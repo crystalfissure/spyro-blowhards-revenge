@@ -1,143 +1,22 @@
 #include "SpyroEditorLibrary.h"
 
-#include "ChargeWobbleComponent.h"
 #include "GnorcThiefBehaviorComponent.h"
 
 #include "Animation/AnimSequence.h"
-#include "Animation/AnimSequenceBase.h"
 #include "Components/ActorComponent.h"
-#include "Components/BoxComponent.h"
-#include "Components/SkeletalMeshComponent.h"
-#include "EdGraph/EdGraph.h"
-#include "EdGraph/EdGraphPin.h"
 #include "Engine/Blueprint.h"
 #include "Engine/BlueprintGeneratedClass.h"
-#include "Engine/MemberReference.h"
 #include "Engine/SCS_Node.h"
 #include "Engine/SimpleConstructionScript.h"
 #include "Engine/InheritableComponentHandler.h"
 #include "Engine/World.h"
 #include "GameFramework/Actor.h"
-#include "Animation/SkeletalMeshActor.h"
 #include "GameFramework/SaveGame.h"
 #include "Engine/GameInstance.h"
 #include "Kismet/GameplayStatics.h"
-#include "Kismet/KismetSystemLibrary.h"
-#include "Materials/MaterialInterface.h"
 #include "UObject/UnrealType.h"
 #include "Kismet2/BlueprintEditorUtils.h"
 #include "Kismet2/KismetEditorUtilities.h"
-#include "K2Node_CallFunction.h"
-#include "K2Node_ComponentBoundEvent.h"
-#include "K2Node_IfThenElse.h"
-#include "K2Node_VariableGet.h"
-#include "K2Node_VariableSet.h"
-#include "EdGraphSchema_K2.h"
-
-namespace SpyroHitReactionEditor
-{
-FString Key(FString Name)
-{
-    Name = Name.ToLower();
-    Name.ReplaceInline(TEXT(" "), TEXT(""));
-    Name.ReplaceInline(TEXT("_"), TEXT(""));
-    Name.ReplaceInline(TEXT("'"), TEXT(""));
-    return Name;
-}
-
-FProperty* PropertyByKey(UClass* Class, const TCHAR* Name)
-{
-    if (!Class) return nullptr;
-    const FString Wanted = Key(Name);
-    for (TFieldIterator<FProperty> It(Class); It; ++It)
-        if (Key(It->GetName()) == Wanted) return *It;
-    return nullptr;
-}
-
-int64 EnumValueByDisplayName(UEnum* Enum, const TCHAR* Name)
-{
-    if (!Enum) return INDEX_NONE;
-    const FString Wanted = Key(Name);
-    for (int32 Index = 0; Index < Enum->NumEnums(); ++Index)
-    {
-        if (Key(Enum->GetNameStringByIndex(Index)) == Wanted ||
-            Key(Enum->GetDisplayNameTextByIndex(Index).ToString()) == Wanted)
-            return Enum->GetValueByIndex(Index);
-    }
-    return INDEX_NONE;
-}
-
-bool ConfigureDamageable(UActorComponent* Damageable, UBoxComponent* Hitbox)
-{
-    if (!Damageable || !Hitbox) return false;
-    auto* HitboxProperty = CastField<FObjectPropertyBase>(
-        PropertyByKey(Damageable->GetClass(), TEXT("Object's Hitbox Component")));
-    auto* Resistances = CastField<FArrayProperty>(
-        PropertyByKey(Damageable->GetClass(), TEXT("Damage Resistances")));
-    auto* Inner = Resistances ? CastField<FByteProperty>(Resistances->Inner) : nullptr;
-    if (!HitboxProperty || !Resistances || !Inner ||
-        !Hitbox->IsA(HitboxProperty->PropertyClass)) return false;
-
-    HitboxProperty->SetObjectPropertyValue_InContainer(Damageable, Hitbox);
-    UEnum* DamageTypes = LoadObject<UEnum>(nullptr,
-        TEXT("/Game/SpyroContent/Global_Assets/Global_Characters/Damage_Types.Damage_Types"));
-    const int64 Ram = EnumValueByDisplayName(DamageTypes, TEXT("Ram"));
-    const int64 Burn = EnumValueByDisplayName(DamageTypes, TEXT("Burn"));
-    if (Ram == INDEX_NONE || Burn == INDEX_NONE) return false;
-
-    FScriptArrayHelper Values(Resistances, Resistances->ContainerPtrToValuePtr<void>(Damageable));
-    Values.EmptyValues();
-    Values.AddValues(2);
-    *reinterpret_cast<uint8*>(Values.GetRawPtr(0)) = static_cast<uint8>(Ram);
-    *reinterpret_cast<uint8*>(Values.GetRawPtr(1)) = static_cast<uint8>(Burn);
-    return true;
-}
-
-UK2Node_CallFunction* CallNode(UEdGraph* Graph, UFunction* Function, int32 X, int32 Y)
-{
-    if (!Graph || !Function) return nullptr;
-    FGraphNodeCreator<UK2Node_CallFunction> Creator(*Graph);
-    UK2Node_CallFunction* Node = Creator.CreateNode();
-    Node->SetFromFunction(Function);
-    Node->NodePosX = X;
-    Node->NodePosY = Y;
-    Creator.Finalize();
-    return Node;
-}
-
-UK2Node_VariableGet* GetNode(UEdGraph* Graph, FName Name, int32 X, int32 Y)
-{
-    FGraphNodeCreator<UK2Node_VariableGet> Creator(*Graph);
-    UK2Node_VariableGet* Node = Creator.CreateNode();
-    Node->VariableReference.SetSelfMember(Name);
-    Node->NodePosX = X;
-    Node->NodePosY = Y;
-    Creator.Finalize();
-    return Node;
-}
-
-UK2Node_VariableSet* SetNode(UEdGraph* Graph, FName Name, bool Value, int32 X, int32 Y)
-{
-    FGraphNodeCreator<UK2Node_VariableSet> Creator(*Graph);
-    UK2Node_VariableSet* Node = Creator.CreateNode();
-    Node->VariableReference.SetSelfMember(Name);
-    Node->NodePosX = X;
-    Node->NodePosY = Y;
-    Creator.Finalize();
-    if (UEdGraphPin* Pin = Node->FindPin(Name)) Pin->DefaultValue = Value ? TEXT("true") : TEXT("false");
-    return Node;
-}
-
-UEdGraphPin* ThenPin(UK2Node* Node)
-{
-    return Node ? Node->FindPin(UEdGraphSchema_K2::PN_Then) : nullptr;
-}
-
-bool Connect(const UEdGraphSchema_K2* Schema, UEdGraphPin* A, UEdGraphPin* B)
-{
-    return Schema && A && B && Schema->TryCreateConnection(A, B);
-}
-}
 
 bool USpyroEditorLibrary::ConfigureGnorcThief(UBlueprint* Blueprint, const TArray<UAnimSequence*>& Animations, USkeletalMesh* FinalMesh)
 {
@@ -225,69 +104,6 @@ bool USpyroEditorLibrary::PrepareGnorcThiefTest(AActor* Actor)
     return false;
 }
 
-bool USpyroEditorLibrary::AddChargeWobbleComponent(
-    UBlueprint* Blueprint,
-    FName ComponentVariableName)
-{
-    if (!Blueprint || !Blueprint->SimpleConstructionScript)
-    {
-        return false;
-    }
-    for (USCS_Node* ExistingNode : Blueprint->SimpleConstructionScript->GetAllNodes())
-    {
-        if (ExistingNode &&
-            (ExistingNode->GetVariableName() == ComponentVariableName ||
-             ExistingNode->ComponentClass == UChargeWobbleComponent::StaticClass()))
-        {
-            return true;
-        }
-    }
-    Blueprint->Modify();
-    USCS_Node* NewNode = Blueprint->SimpleConstructionScript->CreateNode(
-        UChargeWobbleComponent::StaticClass(), ComponentVariableName);
-    if (!NewNode)
-    {
-        return false;
-    }
-    Blueprint->SimpleConstructionScript->AddNode(NewNode);
-    FBlueprintEditorUtils::MarkBlueprintAsStructurallyModified(Blueprint);
-    Blueprint->MarkPackageDirty();
-    return true;
-}
-
-bool USpyroEditorLibrary::ConfigureChargeWobble(
-    UBlueprint* Blueprint,
-    UAnimSequence* RestAnimation,
-    UAnimSequence* ReactionAnimation)
-{
-    if (!Blueprint || !Blueprint->SimpleConstructionScript || !RestAnimation || !ReactionAnimation)
-    {
-        return false;
-    }
-    bool bConfigured = false;
-    Blueprint->Modify();
-    for (USCS_Node* Node : Blueprint->SimpleConstructionScript->GetAllNodes())
-    {
-        UChargeWobbleComponent* Wobble = Node
-            ? Cast<UChargeWobbleComponent>(Node->ComponentTemplate) : nullptr;
-        if (!Wobble)
-        {
-            continue;
-        }
-        Node->Modify();
-        Wobble->Modify();
-        Wobble->RestAnimation = RestAnimation;
-        Wobble->ReactionAnimation = ReactionAnimation;
-        bConfigured = true;
-    }
-    if (bConfigured)
-    {
-        FBlueprintEditorUtils::MarkBlueprintAsModified(Blueprint);
-        Blueprint->MarkPackageDirty();
-    }
-    return bConfigured;
-}
-
 bool USpyroEditorLibrary::CompileBlueprint(UBlueprint* Blueprint)
 {
     if (!Blueprint)
@@ -298,6 +114,11 @@ bool USpyroEditorLibrary::CompileBlueprint(UBlueprint* Blueprint)
     return Blueprint->Status != BS_Error;
 }
 
+#if 0
+// Historical one-shot lantern migration implementation. The production
+// lanterns now own this behavior entirely in /Game Blueprint assets, and the
+// public editor API has been removed. Retained disabled only as migration
+// provenance until the docs-workspace archive is consolidated.
 bool USpyroEditorLibrary::ConfigureProjectHitReactionBase(UBlueprint* Blueprint)
 {
     using namespace SpyroHitReactionEditor;
@@ -548,3 +369,4 @@ bool USpyroEditorLibrary::MigrateLanternToProjectHitReactionBase(
     Blueprint->MarkPackageDirty();
     return true;
 }
+#endif
