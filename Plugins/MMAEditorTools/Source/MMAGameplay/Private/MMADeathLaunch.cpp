@@ -69,7 +69,8 @@ void FMMADeathLaunch::Begin(
     float GravityScale,
     float InHoldSeconds,
     float UnstickHeight,
-    float InTumbleDegrees)
+    float InTumbleDegrees,
+    bool bInTumbleAsRoll)
 {
     if (!Character)
     {
@@ -105,19 +106,12 @@ void FMMADeathLaunch::Begin(
     HoldSeconds = FMath::Max(InHoldSeconds, 0.0f);
     Elapsed = 0.0f;
     TumbleDegrees = InTumbleDegrees;
-    TumbleAxis = FVector::ZeroVector;
+    bTumbleAsRoll = bInTumbleAsRoll;
     bHasSavedMeshRotation = false;
     if (USkeletalMeshComponent* Mesh = Character->GetMesh())
     {
         SavedMeshRotation = Mesh->GetRelativeRotation();
         bHasSavedMeshRotation = true;
-        FVector Away = Velocity;
-        Away.Z = 0.0f;
-        if (Away.Normalize())
-        {
-            TumbleAxis = FVector::CrossProduct(FVector::UpVector, Away);
-            TumbleAxis.Normalize();
-        }
     }
     bActive = true;
 }
@@ -153,15 +147,18 @@ void FMMADeathLaunch::Tick(ACharacter* Character, float DeltaTime)
     Movement->Velocity = Velocity;
     Movement->UpdateComponentVelocity();
 
-    if (bHasSavedMeshRotation && !TumbleAxis.IsNearlyZero() && !FMath::IsNearlyZero(TumbleDegrees))
+    if (bHasSavedMeshRotation && !FMath::IsNearlyZero(TumbleDegrees))
     {
         if (USkeletalMeshComponent* Mesh = Character->GetMesh())
         {
             const float Alpha = HoldSeconds > KINDA_SMALL_NUMBER
                 ? FMath::Clamp(Elapsed / HoldSeconds, 0.0f, 1.0f)
                 : 1.0f;
-            const FQuat Tumble(TumbleAxis, FMath::DegreesToRadians(TumbleDegrees * Alpha));
-            Mesh->SetRelativeRotation((Tumble * SavedMeshRotation.Quaternion()).Rotator());
+            const float Degrees = TumbleDegrees * Alpha;
+            const FRotator Delta = bTumbleAsRoll
+                ? FRotator(0.0f, 0.0f, Degrees)
+                : FRotator(Degrees, 0.0f, 0.0f);
+            Mesh->SetRelativeRotation((Delta.Quaternion() * SavedMeshRotation.Quaternion()).Rotator());
         }
     }
 }

@@ -24,6 +24,13 @@ enum class EMMAHedgeTrimmerState : uint8
     Dead UMETA(DisplayName = "Dead")
 };
 
+UENUM(BlueprintType)
+enum class EMMADeathTumbleMode : uint8
+{
+    PitchOntoBack UMETA(DisplayName = "Pitch onto back"),
+    RollOntoBack UMETA(DisplayName = "Roll onto back")
+};
+
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
     FMMAHedgeTrimmerStateChanged,
     EMMAHedgeTrimmerState,
@@ -176,9 +183,13 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Death", meta = (ClampMin = "0.0"))
     float DeathKnockbackUnstickHeight = 12.0f;
 
-    /** Mesh pitch onto the back during fly-back. Capsule stays upright (CharacterMovement is yaw-only). 0 disables. */
+    /** Mesh rotation onto the back during fly-back. Capsule stays upright. 0 disables. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Death", meta = (ClampMin = "0.0", ClampMax = "180.0"))
     float DeathKnockbackTumbleDegrees = 90.0f;
+
+    /** Pitch follows the walk/facing axis. If 90° pitch still looks like a side flop, switch to Roll. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Death")
+    EMMADeathTumbleMode DeathKnockbackTumbleMode = EMMADeathTumbleMode::PitchOntoBack;
 
     /** Extra time after the configured death animation before the inherited poof removes the mesh. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Hedge Trimmer|Death", meta = (ClampMin = "0.0"))

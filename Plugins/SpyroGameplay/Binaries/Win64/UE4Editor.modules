@@ -1,6 +1,6 @@
 {
 	"BuildId": "17155196",
-	"Modules":
+	"Modules": 
 	{
 		"SpyroEditor": "UE4Editor-SpyroEditor.dll",
 		"SpyroGameplay": "UE4Editor-SpyroGameplay.dll"
