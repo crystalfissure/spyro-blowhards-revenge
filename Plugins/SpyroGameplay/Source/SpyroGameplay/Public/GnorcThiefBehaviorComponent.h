@@ -11,6 +11,7 @@ class USoundAttenuation;
 class UAudioComponent;
 class UBoxComponent;
 class UPrimitiveComponent;
+class USphereComponent;
 UENUM(BlueprintType)
 enum class EGnorcThiefState : uint8 { Idle, Alert, Flee, HitRoll, FinalRoll, Dead };
 
@@ -57,6 +58,11 @@ public:
     virtual void BeginPlay() override;
     virtual void EndPlay(const EEndPlayReason::Type Reason) override;
     virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* TickFunction) override;
+    virtual void OnRegister() override;
+    virtual void OnUnregister() override;
+#if WITH_EDITOR
+    virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
+#endif
 private:
     UFUNCTION() void OnAcceptedDamage();
     UFUNCTION() void OnDropperReset();
@@ -73,6 +79,9 @@ private:
     void GroundMove(float OriginalDistance, float Direction);
     FVector FloorPosition(AActor* Actor) const;
     FVector RoutePosition(int32 Index) const;
+    float RoamCenterLimit() const;
+    FVector ConstrainRoamMove(const FVector& Start, const FVector& Delta) const;
+    void UpdateRoamPreview();
     float OriginalDistanceTo(const FVector& Position) const;
     void FaceSpyro();
     void DropGemRange(int32 First, int32 Count);
@@ -92,4 +101,14 @@ private:
     int32 RunPhase = 2;
     bool bFirstTick = true;
     TSet<int32> ReleasedGemIndices;
+public:
+    /** Horizontal outer boundary in centimetres, centered on the starting position. Applies to running and both hit rolls; does not change alert distance or speed. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Thief|Roaming", meta=(ClampMin="300.0", UIMin="300.0", Units="cm")) float RoamRadius = 1200.f;
+    /** Enable the spawn-centered boundary and fit the original route inside it. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Thief|Roaming") bool bLimitRoaming = true;
+    UFUNCTION(BlueprintPure, Category="Thief|Roaming") FVector GetRoamCenter() const;
+private:
+#if WITH_EDITORONLY_DATA
+    UPROPERTY(Transient) USphereComponent* RoamPreview = nullptr;
+#endif
 };

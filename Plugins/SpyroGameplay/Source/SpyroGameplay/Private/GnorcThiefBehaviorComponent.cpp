@@ -5,6 +5,7 @@
 #include "Animation/AnimSequence.h"
 #include "Components/AudioComponent.h"
 #include "Components/BoxComponent.h"
+#include "Components/SphereComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Sound/SoundBase.h"
@@ -107,6 +108,72 @@ UGnorcThiefBehaviorComponent::UGnorcThiefBehaviorComponent()
     RoutePoints = {FVector(0,0,0), FVector(-6083,-4096,-123), FVector(6144,-8479,-472),
         FVector(8192,-2048,-267), FVector(18268,-6134,-359), FVector(16179,819,-318),
         FVector(8397,6175,829), FVector(809,8192,-461), FVector(-8192,6144,-441)};
+}
+
+void UGnorcThiefBehaviorComponent::OnRegister()
+{
+    Super::OnRegister();
+    UpdateRoamPreview();
+}
+void UGnorcThiefBehaviorComponent::OnUnregister()
+{
+#if WITH_EDITORONLY_DATA
+    if (RoamPreview) { RoamPreview->DestroyComponent(); RoamPreview = nullptr; }
+#endif
+    Super::OnUnregister();
+}
+#if WITH_EDITOR
+void UGnorcThiefBehaviorComponent::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
+{
+    UpdateRoamPreview();
+    Super::PostEditChangeProperty(PropertyChangedEvent);
+}
+#endif
+void UGnorcThiefBehaviorComponent::UpdateRoamPreview()
+{
+#if WITH_EDITORONLY_DATA
+    AActor* Owner = GetOwner();
+    if (!Owner || !Owner->GetRootComponent() || !GetWorld() ||
+        (GetWorld()->WorldType != EWorldType::Editor && GetWorld()->WorldType != EWorldType::EditorPreview)) return;
+    if (!RoamPreview)
+    {
+        RoamPreview = NewObject<USphereComponent>(Owner, NAME_None, RF_Transient);
+        RoamPreview->SetupAttachment(Owner->GetRootComponent());
+        RoamPreview->SetAbsolute(false, false, true);
+        RoamPreview->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+        RoamPreview->SetGenerateOverlapEvents(false);
+        RoamPreview->SetCanEverAffectNavigation(false);
+        RoamPreview->SetHiddenInGame(true);
+        RoamPreview->bIsEditorOnly = true;
+        RoamPreview->bDrawOnlyIfSelected = true;
+        RoamPreview->ShapeColor = FColor(50, 210, 255);
+        RoamPreview->RegisterComponent();
+    }
+    RoamPreview->SetSphereRadius(FMath::Max(300.f, RoamRadius), false);
+    RoamPreview->SetVisibility(bLimitRoaming);
+#endif
+}
+FVector UGnorcThiefBehaviorComponent::GetRoamCenter() const
+{
+    return HasBegunPlay() ? RouteOrigin.GetLocation() : (GetOwner() ? GetOwner()->GetActorLocation() : FVector::ZeroVector);
+}
+float UGnorcThiefBehaviorComponent::RoamCenterLimit() const
+{
+    const float Margin = BodyCollision ? BodyCollision->GetScaledBoxExtent().Size2D() : Character->GetCapsuleComponent()->GetScaledCapsuleRadius();
+    return FMath::Max(1.f, FMath::Max(300.f, RoamRadius) - Margin - 2.f);
+}
+FVector UGnorcThiefBehaviorComponent::ConstrainRoamMove(const FVector& Start, const FVector& Delta) const
+{
+    if (!bLimitRoaming) return Delta;
+    const FVector Offset(Start.X - RouteOrigin.GetLocation().X, Start.Y - RouteOrigin.GetLocation().Y, 0);
+    const FVector Travel(Delta.X, Delta.Y, 0);
+    const float Radius = RoamCenterLimit();
+    if ((Offset + Travel).SizeSquared() <= FMath::Square(Radius)) return Delta;
+    const float A = Travel.SizeSquared(), C = Offset.SizeSquared() - FMath::Square(Radius);
+    if (A < SMALL_NUMBER || C > 0.1f) return FVector::ZeroVector;
+    const float B = FVector::DotProduct(Offset, Travel);
+    const float ExitTime = (-B + FMath::Sqrt(FMath::Max(0.f, B * B - A * C))) / A;
+    return Delta * FMath::Clamp(ExitTime, 0.f, 1.f);
 }
 
 void UGnorcThiefBehaviorComponent::BeginPlay()
@@ -263,7 +330,16 @@ FVector UGnorcThiefBehaviorComponent::FloorPosition(AActor* Actor) const
 }
 FVector UGnorcThiefBehaviorComponent::RoutePosition(int32 Index) const
 {
-    return RouteOrigin.TransformPosition(RoutePoints[Index] * WorldUnitsPerOriginalUnit);
+    FVector Point = RoutePoints[Index] * WorldUnitsPerOriginalUnit;
+    if (bLimitRoaming)
+    {
+        float Extent = 1.f;
+        for (const FVector& Node : RoutePoints) Extent = FMath::Max(Extent, Node.Size2D() * WorldUnitsPerOriginalUnit);
+        // Leave steering room inside the hard boundary for the faster traveling roll.
+        const float Fit = FMath::Min(1.f, RoamCenterLimit() * 0.8f / Extent);
+        Point.X *= Fit; Point.Y *= Fit;
+    }
+    return RouteOrigin.TransformPosition(Point);
 }
 float UGnorcThiefBehaviorComponent::OriginalDistanceTo(const FVector& Position) const
 {
@@ -300,6 +376,7 @@ void UGnorcThiefBehaviorComponent::GroundMove(float OriginalDistance, float Dire
 {
     const FVector Before = Character->GetActorLocation();
     FVector Delta = FRotator(0, Direction, 0).Vector() * OriginalDistance * WorldUnitsPerOriginalUnit;
+    Delta = ConstrainRoamMove(Before, Delta);
     // Sweep the solid body's footprint against players as well: attached boxes alone are not swept by CharacterMovement.
     FCollisionQueryParams Query(SCENE_QUERY_STAT(GnorcThiefMovement), false, Character);
     if (BodyCollision && !Delta.IsNearlyZero())
@@ -323,8 +400,13 @@ void UGnorcThiefBehaviorComponent::GroundMove(float OriginalDistance, float Dire
         FMath::Sign(Difference) * 250.f * WorldUnitsPerOriginalUnit : Difference;
     auto* Movement = Character->GetCharacterMovement();
     FHitResult Hit;
+    FScopedMovementUpdate ScopedMove(Character->GetCapsuleComponent(), EScopedUpdate::DeferredUpdates);
     Movement->SafeMoveUpdatedComponent(Delta, Character->GetActorQuat(), true, Hit);
     if (Hit.IsValidBlockingHit()) static_cast<UMovementComponent*>(Movement)->SlideAlongSurface(Delta, 1.f - Hit.Time, Hit.Normal, Hit, true);
+    // Wall sliding or depenetration can deflect a swept move. Reject an escaping result
+    // before overlap callbacks fire, instead of teleporting back through level geometry.
+    if (bLimitRoaming && FVector::DistSquared2D(Character->GetActorLocation(), RouteOrigin.GetLocation()) > FMath::Square(RoamCenterLimit() + 0.01f))
+        ScopedMove.RevertMove();
     LastStepDelta = Character->GetActorLocation() - Before;
     Movement->Velocity = LastStepDelta / OriginalStep;
 }
