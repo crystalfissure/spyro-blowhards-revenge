@@ -41,6 +41,8 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Thief|Audio") USoundAttenuation* AlertSoundAttenuation = nullptr;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Thief|Audio") float AlertVolumeMultiplier = 1.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Thief|Audio") float SoundVolume = 1.f;
+    /** Existing project cleanup sound; the original final mesh supplies the death visual. */
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Thief|Audio") USoundBase* DeathFinishSound = nullptr;
     UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Thief|Debug") EGnorcThiefState State = EGnorcThiefState::Idle;
     UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Thief|Debug") int32 RemainingHits = 3;
     UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Thief|Debug") int32 GemsSpawned = 0;
@@ -52,6 +54,23 @@ public:
     UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Thief|Debug") float HeadingDegrees = 0.f;
     UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Thief|Debug") float SlideDisplacement = 0.f;
     UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Thief|Debug") FVector LastStepDelta = FVector::ZeroVector;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Thief|Debug") FVector RequestedStepDelta = FVector::ZeroVector;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Thief|Debug") FVector LastPlayerContactNormal = FVector::ZeroVector;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Thief|Debug") FName LastPlayerContactComponent = NAME_None;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Thief|Debug") FName LastFloorActor = NAME_None;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Thief|Debug") FName LastFloorComponent = NAME_None;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Thief|Debug") float LastFloorHeight = 0.f;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Thief|Debug") bool bPlayerBlocked = false;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Thief|Debug") bool bStartedOverlappingPlayer = false;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Thief|Debug") bool bBoundaryClipped = false;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Thief|Debug") bool bTerrainBlocked = false;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Thief|Debug") bool bFloorRejected = false;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Thief|Debug") int32 BlockedTicks = 0;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Thief|Debug") int32 RecoveryCount = 0;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Thief|Debug") int32 LastReachedRouteNode = 0;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Thief|Debug") float RouteFitScale = 1.f;
+    /** Draw the fitted route, body, requested/achieved movement and obstruction reason during play. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Thief|Debug") bool bDrawMovementDebug = false;
     UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Thief|Debug") UAudioComponent* VoiceAudio = nullptr;
     UAnimSequence* AnimationForClip(int32 Clip) const;
     void GetPoseInputs(UAnimSequence*& A, UAnimSequence*& B, float& TimeA, float& TimeB, float& Alpha) const;
@@ -74,11 +93,20 @@ private:
     bool AdvanceAnimation();
     void EmitFrameSound();
     void StopSounds();
+    void FinishCorpse();
     void StepOriginal();
     bool FollowRoute();
     void GroundMove(float OriginalDistance, float Direction);
+    bool SweepPlayerBody(const FVector& Delta, FHitResult& Contact, bool& bInitialOverlap) const;
+    bool ProjectGroundMove(const FVector& HorizontalDelta, FVector& GroundDelta);
+    bool RecoveryDirectionIsClear(const FVector& Direction);
+    void UpdateBlockedRoute();
+    void ClearMovementDiagnostics();
+    void DrawMovementDebug() const;
     FVector FloorPosition(AActor* Actor) const;
     FVector RoutePosition(int32 Index) const;
+    float CalculateRouteFit() const;
+    float ArrivalDistance(int32 Index) const;
     float RoamCenterLimit() const;
     FVector ConstrainRoamMove(const FVector& Start, const FVector& Delta) const;
     void UpdateRoamPreview();
@@ -99,7 +127,11 @@ private:
     float FinalSlideHeading = 0.f;
     int32 NextClip = 0, NextFrame = 1, Progress = 0, ProgressPerStep = 32;
     int32 RunPhase = 2;
+    int32 BlockedLegFrom = INDEX_NONE, BlockedLegTo = INDEX_NONE, BlockedLegTicks = 0;
+    int32 RecoveryRetryTicks = 0;
+    bool bRecoveryAwaitingDeparture = false;
     bool bFirstTick = true;
+    bool bCorpseFinished = false;
     TSet<int32> ReleasedGemIndices;
 public:
     /** Horizontal outer boundary in centimetres, centered on the starting position. Applies to running and both hit rolls; does not change alert distance or speed. */

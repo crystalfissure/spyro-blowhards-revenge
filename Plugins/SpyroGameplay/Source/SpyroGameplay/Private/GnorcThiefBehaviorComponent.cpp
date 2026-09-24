@@ -14,10 +14,12 @@
 #include "Components/StaticMeshComponent.h"
 #include "Engine/SkeletalMesh.h"
 #include "Engine/World.h"
+#include "DrawDebugHelpers.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "UObject/StructOnScope.h"
 #include "UObject/UnrealType.h"
+#include "UObject/ConstructorHelpers.h"
 
 namespace GnorcThief
 {
@@ -103,6 +105,8 @@ float Angle(const FVector& Delta)
 
 UGnorcThiefBehaviorComponent::UGnorcThiefBehaviorComponent()
 {
+    static ConstructorHelpers::FObjectFinder<USoundBase> FinishSound(TEXT("/Game/SpyroContent/Global_Assets/Global_Characters/AI_Characters/death_poof_s1.death_poof_s1"));
+    DeathFinishSound = FinishSound.Object;
     PrimaryComponentTick.bCanEverTick = true;
     PrimaryComponentTick.TickGroup = TG_PrePhysics;
     RoutePoints = {FVector(0,0,0), FVector(-6083,-4096,-123), FVector(6144,-8479,-472),
@@ -159,7 +163,16 @@ FVector UGnorcThiefBehaviorComponent::GetRoamCenter() const
 }
 float UGnorcThiefBehaviorComponent::RoamCenterLimit() const
 {
-    const float Margin = BodyCollision ? BodyCollision->GetScaledBoxExtent().Size2D() : Character->GetCapsuleComponent()->GetScaledCapsuleRadius();
+    float Margin = Character->GetCapsuleComponent()->GetScaledCapsuleRadius();
+    if (BodyCollision)
+    {
+        // Include attachment offsets and rotation, not just an actor-centered box.
+        const FVector Extent = BodyCollision->GetScaledBoxExtent();
+        const FVector Offset = BodyCollision->GetComponentLocation() - Character->GetActorLocation();
+        for (int32 X : {-1, 1}) for (int32 Y : {-1, 1}) for (int32 Z : {-1, 1})
+            Margin = FMath::Max(Margin, (Offset + BodyCollision->GetComponentQuat().RotateVector(
+                Extent * FVector(X, Y, Z))).Size2D());
+    }
     return FMath::Max(1.f, FMath::Max(300.f, RoamRadius) - Margin - 2.f);
 }
 FVector UGnorcThiefBehaviorComponent::ConstrainRoamMove(const FVector& Start, const FVector& Delta) const
@@ -170,9 +183,14 @@ FVector UGnorcThiefBehaviorComponent::ConstrainRoamMove(const FVector& Start, co
     const float Radius = RoamCenterLimit();
     if ((Offset + Travel).SizeSquared() <= FMath::Square(Radius)) return Delta;
     const float A = Travel.SizeSquared(), C = Offset.SizeSquared() - FMath::Square(Radius);
-    if (A < SMALL_NUMBER || C > 0.1f) return FVector::ZeroVector;
+    if (A < SMALL_NUMBER) return FVector::ZeroVector;
     const float B = FVector::DotProduct(Offset, Travel);
-    const float ExitTime = (-B + FMath::Sqrt(FMath::Max(0.f, B * B - A * C))) / A;
+    const float Discriminant = B * B - A * C;
+    // An external teleport/reset can put the actor outside its territory. Permit
+    // only inward recovery, rather than trapping it there with every step zeroed.
+    if (C > 0.f && B >= 0.f) return FVector::ZeroVector;
+    if (C > 0.f && Discriminant < 0.f) return Delta * FMath::Clamp(-B / A, 0.f, 1.f);
+    const float ExitTime = (-B + FMath::Sqrt(FMath::Max(0.f, Discriminant))) / A;
     return Delta * FMath::Clamp(ExitTime, 0.f, 1.f);
 }
 
@@ -202,12 +220,14 @@ void UGnorcThiefBehaviorComponent::BeginPlay()
         SetComponentTickEnabled(false); return;
     }
     RouteOrigin = FTransform(FRotator(0, Character->GetActorRotation().Yaw, 0), Character->GetActorLocation());
+    RouteFitScale = CalculateRouteFit();
     HeadingDegrees = Character->GetActorRotation().Yaw;
     Mesh->AddTickPrerequisiteComponent(this);
     BindContracts();
     if (ChargeSensor) ChargeSensor->OnComponentBeginOverlap.AddUniqueDynamic(this, &UGnorcThiefBehaviorComponent::OnChargeSensorOverlap);
     GnorcThief::SetNumber(Damageable, TEXT("Hit Points"), RemainingHits);
     GnorcThief::SetNumber(Character, TEXT("Corpse Poof Delay"), 10.f);
+    GnorcThief::SetBool(WalkingAI, TEXT("Poofs_On_Death"), false);
     GnorcThief::SetNumber(WalkingAI, TEXT("Death Launch Upwards Force"), 0);
     GnorcThief::SetNumber(WalkingAI, TEXT("Death Launch Forwards Force"), 0);
     TakeMovementControl();
@@ -304,6 +324,12 @@ void UGnorcThiefBehaviorComponent::StopSounds()
 }
 void UGnorcThiefBehaviorComponent::EnterState(EGnorcThiefState NewState)
 {
+    if (State != NewState)
+    {
+        BlockedTicks = BlockedLegTicks = RecoveryRetryTicks = 0;
+        BlockedLegFrom = BlockedLegTo = INDEX_NONE;
+        bRecoveryAwaitingDeparture = false;
+    }
     State = NewState;
     if (BodyCollision) BodyCollision->SetCollisionEnabled(State == EGnorcThiefState::Dead ? ECollisionEnabled::NoCollision : ECollisionEnabled::QueryOnly);
     if (ChargeSensor) ChargeSensor->SetCollisionEnabled(State == EGnorcThiefState::Dead ? ECollisionEnabled::NoCollision : ECollisionEnabled::QueryOnly);
@@ -331,15 +357,26 @@ FVector UGnorcThiefBehaviorComponent::FloorPosition(AActor* Actor) const
 FVector UGnorcThiefBehaviorComponent::RoutePosition(int32 Index) const
 {
     FVector Point = RoutePoints[Index] * WorldUnitsPerOriginalUnit;
-    if (bLimitRoaming)
-    {
-        float Extent = 1.f;
-        for (const FVector& Node : RoutePoints) Extent = FMath::Max(Extent, Node.Size2D() * WorldUnitsPerOriginalUnit);
-        // Leave steering room inside the hard boundary for the faster traveling roll.
-        const float Fit = FMath::Min(1.f, RoamCenterLimit() * 0.8f / Extent);
-        Point.X *= Fit; Point.Y *= Fit;
-    }
+    const float Fit = CalculateRouteFit();
+    Point.X *= Fit; Point.Y *= Fit;
     return RouteOrigin.TransformPosition(Point);
+}
+float UGnorcThiefBehaviorComponent::CalculateRouteFit() const
+{
+    if (!bLimitRoaming) return 1.f;
+    float Extent = 1.f;
+    for (const FVector& Node : RoutePoints) Extent = FMath::Max(Extent, Node.Size2D() * WorldUnitsPerOriginalUnit);
+    // Leave steering room inside the hard boundary for the faster traveling roll.
+    return FMath::Min(1.f, RoamCenterLimit() * 0.8f / Extent);
+}
+float UGnorcThiefBehaviorComponent::ArrivalDistance(int32 Index) const
+{
+    if (RouteFitScale >= 1.f) return 1024.f;
+    const int32 Previous = (Index + RoutePoints.Num() - 1) % RoutePoints.Num();
+    const int32 Next = (Index + 1) % RoutePoints.Num();
+    const float ShorterLeg = FMath::Min((RoutePoints[Previous] - RoutePoints[Index]).Size2D(),
+        (RoutePoints[Next] - RoutePoints[Index]).Size2D()) * RouteFitScale;
+    return FMath::Min(1024.f, FMath::Max(1.f, ShorterLeg * 0.25f));
 }
 float UGnorcThiefBehaviorComponent::OriginalDistanceTo(const FVector& Position) const
 {
@@ -354,8 +391,9 @@ void UGnorcThiefBehaviorComponent::FaceSpyro()
 bool UGnorcThiefBehaviorComponent::FollowRoute()
 {
     CurrentRouteNode = FMath::Clamp(CurrentRouteNode, 0, RoutePoints.Num() - 1);
-    if (OriginalDistanceTo(RoutePosition(CurrentRouteNode)) < 1024.f)
+    if (OriginalDistanceTo(RoutePosition(CurrentRouteNode)) < ArrivalDistance(CurrentRouteNode))
     {
+        LastReachedRouteNode = CurrentRouteNode;
         if (!IsValid(Pursuer) || OriginalDistanceTo(Pursuer->GetActorLocation()) > 5120.f ||
             FMath::Abs(FloorPosition(Pursuer).Z - FloorPosition(Character).Z) > 2048.f * WorldUnitsPerOriginalUnit)
         { EnterState(EGnorcThiefState::Idle); return false; }
@@ -366,49 +404,262 @@ bool UGnorcThiefBehaviorComponent::FollowRoute()
         const float ForwardSeparation = FMath::Abs(FMath::FindDeltaAngleDegrees(PlayerAngle, Angle(RoutePosition(Forward) - Location)));
         const float BackwardSeparation = FMath::Abs(FMath::FindDeltaAngleDegrees(PlayerAngle, Angle(RoutePosition(Backward) - Location)));
         CurrentRouteNode = BackwardSeparation < ForwardSeparation ? Forward : Backward;
+        if (State == EGnorcThiefState::Flee && BlockedLegTicks > 0 && LastReachedRouteNode == BlockedLegFrom && CurrentRouteNode == BlockedLegTo)
+            CurrentRouteNode = CurrentRouteNode == Forward ? Backward : Forward;
     }
     const float Error = FMath::FindDeltaAngleDegrees(HeadingDegrees, Angle(RoutePosition(CurrentRouteNode) - Character->GetActorLocation()));
     HeadingDegrees = FMath::UnwindDegrees(HeadingDegrees + FMath::Clamp(Error, -11.25f, 11.25f));
     if (FMath::Abs(Error) < 45.f) GroundMove(State == EGnorcThiefState::HitRoll ? 210.f : 96.f, HeadingDegrees);
+    if (State == EGnorcThiefState::Flee) UpdateBlockedRoute();
+    return true;
+}
+bool UGnorcThiefBehaviorComponent::SweepPlayerBody(const FVector& Delta, FHitResult& Contact, bool& bInitialOverlap) const
+{
+    Contact = FHitResult(1.f);
+    bInitialOverlap = false;
+    if (!BodyCollision || Delta.IsNearlyZero()) return false;
+    const FVector Center = BodyCollision->GetComponentLocation();
+    const FQuat Rotation = BodyCollision->GetComponentQuat();
+    const FCollisionShape Shape = FCollisionShape::MakeBox(BodyCollision->GetScaledBoxExtent());
+    FCollisionQueryParams Query(SCENE_QUERY_STAT(GnorcThiefMovement), false, Character);
+    FCollisionObjectQueryParams Players;
+    Players.AddObjectTypesToQuery(ECC_Pawn);
+    Players.AddObjectTypesToQuery(ECC_GameTraceChannel4);
+    TArray<FHitResult> Contacts;
+    GetWorld()->SweepMultiByObjectType(Contacts, Center, Center + Delta, Rotation, Players, Shape, Query);
+    bool bBlocked = false;
+    for (const FHitResult& Hit : Contacts)
+    {
+        UPrimitiveComponent* Other = Hit.GetComponent();
+        // Object queries include overlap-only collection/damage sensors. Only the
+        // two components' real blocking responses should stop the solid body.
+        if (!Other || BodyCollision->GetCollisionResponseToChannel(Other->GetCollisionObjectType()) != ECR_Block ||
+            Other->GetCollisionResponseToChannel(BodyCollision->GetCollisionObjectType()) != ECR_Block) continue;
+        if (Hit.bStartPenetrating || Hit.Time <= KINDA_SMALL_NUMBER)
+        {
+            bInitialOverlap |= Hit.bStartPenetrating;
+            FVector Outward = Hit.Normal.GetSafeNormal2D();
+            if (Outward.IsNearlyZero()) Outward = (Center - Other->GetComponentLocation()).GetSafeNormal2D();
+            if (Outward.IsNearlyZero()) Outward = Delta.GetSafeNormal2D();
+            FMTDResult StartMTD, EndMTD;
+            const bool bStart = Other->ComputePenetration(StartMTD, Shape, Center, Rotation);
+            const bool bEnd = Other->ComputePenetration(EndMTD, Shape, Center + Delta, Rotation);
+            // Do not zero every time-zero hit: a swept horizontal step away from
+            // an existing overlap is safe if it cannot deepen that penetration.
+            if (FVector::DotProduct(Delta, Outward) > KINDA_SMALL_NUMBER &&
+                (!bEnd || (bStart && EndMTD.Distance <= StartMTD.Distance + KINDA_SMALL_NUMBER))) continue;
+        }
+        if (!bBlocked || Hit.Time < Contact.Time) { Contact = Hit; bBlocked = true; }
+    }
+    return bBlocked;
+}
+bool UGnorcThiefBehaviorComponent::ProjectGroundMove(const FVector& HorizontalDelta, FVector& GroundDelta)
+{
+    const FVector Before = Character->GetActorLocation();
+    FCollisionQueryParams Query(SCENE_QUERY_STAT(GnorcThiefFloor), false, Character);
+    // A player must never become this enemy's floor, even if its object channel changes.
+    if (IsValid(Pursuer)) Query.AddIgnoredActor(Pursuer);
+    // A roll drops a gem directly above the actor before moving. That gem must
+    // never become temporary terrain when player contact shortens the first step.
+    if (auto* Items = CastField<FArrayProperty>(GnorcThief::Property(Dropper, TEXT("Items_I_Dropped"))))
+    {
+        if (auto* Item = CastField<FObjectPropertyBase>(Items->Inner))
+        {
+            FScriptArrayHelper Array(Items, Items->ContainerPtrToValuePtr<void>(Dropper));
+            for (int32 I = 0; I < Array.Num(); ++I)
+                if (AActor* DroppedActor = Cast<AActor>(Item->GetObjectPropertyValue(Array.GetRawPtr(I))))
+                    Query.AddIgnoredActor(DroppedActor);
+        }
+    }
+    FCollisionObjectQueryParams GroundTypes;
+    GroundTypes.AddObjectTypesToQuery(ECC_WorldStatic); GroundTypes.AddObjectTypesToQuery(ECC_WorldDynamic);
+    const UCapsuleComponent* Capsule = Character->GetCapsuleComponent();
+    const float HalfHeight = Capsule->GetScaledCapsuleHalfHeight();
+    const FVector Probe = Before + HorizontalDelta - FVector(0,0,HalfHeight);
+    TArray<FHitResult> Floors;
+    GetWorld()->LineTraceMultiByObjectType(Floors, Probe + FVector(0,0,1024.f * WorldUnitsPerOriginalUnit),
+        Probe - FVector(0,0,5000.f * WorldUnitsPerOriginalUnit), GroundTypes, Query);
+    const FHitResult* Floor = Floors.FindByPredicate([Capsule](const FHitResult& Hit)
+    {
+        const UPrimitiveComponent* Surface = Hit.GetComponent();
+        return Surface && !Cast<APawn>(Hit.GetActor()) && Hit.ImpactNormal.Z >= 0.5f &&
+            Capsule->GetCollisionResponseToChannel(Surface->GetCollisionObjectType()) == ECR_Block &&
+            Surface->GetCollisionResponseToChannel(Capsule->GetCollisionObjectType()) == ECR_Block;
+    });
+    if (!Floor) return false;
+    LastFloorActor = Floor->GetActor() ? Floor->GetActor()->GetFName() : NAME_None;
+    LastFloorComponent = Floor->GetComponent()->GetFName();
+    LastFloorHeight = Floor->ImpactPoint.Z;
+    // The bottom hemisphere touches a sloped plane away from the centerline.
+    // For an upright capsule, plane support is H-R+R/NormalZ, not simply H.
+    // Without this clearance even shallow seams leave the swept capsule embedded.
+    const float SlopeClearance = Capsule->GetScaledCapsuleRadius() *
+        (1.f / FMath::Max(0.5f, Floor->ImpactNormal.Z) - 1.f);
+    const float Difference = Floor->ImpactPoint.Z + HalfHeight + SlopeClearance + 2.f - Before.Z;
+    GroundDelta = HorizontalDelta;
+    GroundDelta.Z = FMath::Abs(Difference) > 600.f * WorldUnitsPerOriginalUnit ?
+        FMath::Sign(Difference) * 250.f * WorldUnitsPerOriginalUnit : Difference;
     return true;
 }
 void UGnorcThiefBehaviorComponent::GroundMove(float OriginalDistance, float Direction)
 {
     const FVector Before = Character->GetActorLocation();
-    FVector Delta = FRotator(0, Direction, 0).Vector() * OriginalDistance * WorldUnitsPerOriginalUnit;
-    Delta = ConstrainRoamMove(Before, Delta);
-    // Sweep the solid body's footprint against players as well: attached boxes alone are not swept by CharacterMovement.
-    FCollisionQueryParams Query(SCENE_QUERY_STAT(GnorcThiefMovement), false, Character);
-    if (BodyCollision && !Delta.IsNearlyZero())
-    {
-        FCollisionObjectQueryParams Pawns;
-        Pawns.AddObjectTypesToQuery(ECC_Pawn); Pawns.AddObjectTypesToQuery(ECC_GameTraceChannel4);
-        FHitResult Contact;
-        if (GetWorld()->SweepSingleByObjectType(Contact, Before, Before + Delta, FQuat::Identity, Pawns,
-            FCollisionShape::MakeBox(BodyCollision->GetScaledBoxExtent()), Query))
-            Delta *= FMath::Max(0.f, Contact.Time - 0.01f);
-    }
-    FCollisionObjectQueryParams GroundTypes;
-    GroundTypes.AddObjectTypesToQuery(ECC_WorldStatic); GroundTypes.AddObjectTypesToQuery(ECC_WorldDynamic);
-    const float HalfHeight = Character->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
-    const FVector Probe = Before + Delta - FVector(0,0,HalfHeight);
-    FHitResult Floor;
-    if (!GetWorld()->LineTraceSingleByObjectType(Floor, Probe + FVector(0,0,1024.f * WorldUnitsPerOriginalUnit),
-        Probe - FVector(0,0,5000.f * WorldUnitsPerOriginalUnit), GroundTypes, Query) || Floor.ImpactNormal.Z < 0.5f) return;
-    const float Difference = Floor.ImpactPoint.Z + HalfHeight + 2.f - Before.Z;
-    Delta.Z = FMath::Abs(Difference) > 600.f * WorldUnitsPerOriginalUnit ?
-        FMath::Sign(Difference) * 250.f * WorldUnitsPerOriginalUnit : Difference;
+    RequestedStepDelta = FRotator(0, Direction, 0).Vector() * OriginalDistance * WorldUnitsPerOriginalUnit;
+    FVector Pending = RequestedStepDelta;
+    float RemainingDistance = Pending.Size2D();
     auto* Movement = Character->GetCharacterMovement();
-    FHitResult Hit;
-    FScopedMovementUpdate ScopedMove(Character->GetCapsuleComponent(), EScopedUpdate::DeferredUpdates);
-    Movement->SafeMoveUpdatedComponent(Delta, Character->GetActorQuat(), true, Hit);
-    if (Hit.IsValidBlockingHit()) static_cast<UMovementComponent*>(Movement)->SlideAlongSurface(Delta, 1.f - Hit.Time, Hit.Normal, Hit, true);
-    // Wall sliding or depenetration can deflect a swept move. Reject an escaping result
-    // before overlap callbacks fire, instead of teleporting back through level geometry.
-    if (bLimitRoaming && FVector::DistSquared2D(Character->GetActorLocation(), RouteOrigin.GetLocation()) > FMath::Square(RoamCenterLimit() + 0.01f))
-        ScopedMove.RevertMove();
+    // Bound collision work and total travel by this original 30Hz step. Every slide
+    // is separately checked against players, floor, world geometry and territory.
+    for (int32 Iteration = 0; Iteration < 3; ++Iteration)
+    {
+        const FVector SegmentStart = Character->GetActorLocation();
+        const FVector Contained = ConstrainRoamMove(SegmentStart, Pending);
+        bBoundaryClipped |= !Contained.Equals(Pending, 0.01f);
+        Pending = Contained;
+        FVector ProjectedPending;
+        if (!ProjectGroundMove(Pending, ProjectedPending)) { bFloorRejected = true; break; }
+        FHitResult PlayerContact;
+        bool bInitialOverlap = false;
+        const bool bHitPlayer = SweepPlayerBody(ProjectedPending, PlayerContact, bInitialOverlap);
+        bStartedOverlappingPlayer |= bInitialOverlap;
+        FVector Allowed = Pending;
+        if (bHitPlayer)
+        {
+            bPlayerBlocked = true;
+            LastPlayerContactNormal = PlayerContact.Normal;
+            LastPlayerContactComponent = PlayerContact.GetComponent() ? PlayerContact.GetComponent()->GetFName() : NAME_None;
+            // A small world-space skin is independent of frame rate and step length.
+            Allowed *= FMath::Max(0.f, PlayerContact.Time - 0.1f / FMath::Max(0.1f, Pending.Size2D()));
+        }
+        FVector GroundDelta;
+        if (!ProjectGroundMove(Allowed, GroundDelta)) { bFloorRejected = true; break; }
+        // Floor projection may change the vertical part after contact clipping.
+        // Check that actual path too, including sloped ground beneath a player.
+        FHitResult ProjectedContact;
+        bool bProjectedOverlap = false;
+        const bool bProjectedPlayerHit = SweepPlayerBody(GroundDelta, ProjectedContact, bProjectedOverlap);
+        if (bProjectedPlayerHit)
+        {
+            bPlayerBlocked = true;
+            LastPlayerContactNormal = ProjectedContact.Normal;
+            LastPlayerContactComponent = ProjectedContact.GetComponent() ? ProjectedContact.GetComponent()->GetFName() : NAME_None;
+            GroundDelta *= FMath::Max(0.f, ProjectedContact.Time - 0.1f / FMath::Max(0.1f, GroundDelta.Size()));
+            PlayerContact = ProjectedContact;
+            FVector SupportedDelta;
+            // Clipping a 3D move does not necessarily preserve floor height on
+            // slopes. Reject rather than applying an unswept vertical correction
+            // or retaining an unsupported/intersecting end position.
+            if (!ProjectGroundMove(FVector(GroundDelta.X, GroundDelta.Y, 0), SupportedDelta) ||
+                !FMath::IsNearlyEqual(SupportedDelta.Z, GroundDelta.Z, 0.1f))
+            { bFloorRejected = true; break; }
+        }
+        bStartedOverlappingPlayer |= bProjectedOverlap;
+        FHitResult WorldContact;
+        {
+            FScopedMovementUpdate ScopedMove(Character->GetCapsuleComponent(), EScopedUpdate::DeferredUpdates);
+            // An explicit sweep avoids SafeMove's unscheduled depenetration/launch.
+            // MoveComponent already permits movement out of a root overlap.
+            Movement->MoveUpdatedComponent(GroundDelta, Character->GetActorQuat(), true, &WorldContact);
+            const float DistanceBefore = FVector::DistSquared2D(SegmentStart, RouteOrigin.GetLocation());
+            const float DistanceAfter = FVector::DistSquared2D(Character->GetActorLocation(), RouteOrigin.GetLocation());
+            const float LimitSquared = FMath::Square(RoamCenterLimit() + 0.01f);
+            if (bLimitRoaming && DistanceAfter > LimitSquared && DistanceAfter >= DistanceBefore - 0.01f)
+            { ScopedMove.RevertMove(); bBoundaryClipped = true; break; }
+        }
+        const FVector Achieved = Character->GetActorLocation() - SegmentStart;
+        RemainingDistance = FMath::Max(0.f, RemainingDistance - Achieved.Size2D());
+        FVector Normal = FVector::ZeroVector;
+        if (WorldContact.bBlockingHit)
+        { bTerrainBlocked = true; Normal = WorldContact.Normal.GetSafeNormal2D(); }
+        else if (bHitPlayer || bProjectedPlayerHit) Normal = PlayerContact.Normal.GetSafeNormal2D();
+        else break;
+        if (Normal.IsNearlyZero() || RemainingDistance < 0.01f) break;
+        FVector Remainder = Pending - FVector(Achieved.X, Achieved.Y, 0);
+        Remainder -= Normal * FMath::Min(0.f, FVector::DotProduct(Remainder, Normal));
+        Pending = Remainder.GetClampedToMaxSize(RemainingDistance);
+        if (Pending.IsNearlyZero(0.01f)) break;
+    }
     LastStepDelta = Character->GetActorLocation() - Before;
     Movement->Velocity = LastStepDelta / OriginalStep;
+}
+bool UGnorcThiefBehaviorComponent::RecoveryDirectionIsClear(const FVector& Direction)
+{
+    const FVector Delta = Direction.GetSafeNormal2D() * 96.f * WorldUnitsPerOriginalUnit;
+    if (Delta.IsNearlyZero() || !ConstrainRoamMove(Character->GetActorLocation(), Delta).Equals(Delta, 0.01f)) return false;
+    FHitResult PlayerContact;
+    bool bInitialOverlap = false;
+    if (SweepPlayerBody(Delta, PlayerContact, bInitialOverlap) && PlayerContact.Time < 0.9f) return false;
+    FVector GroundDelta;
+    if (!ProjectGroundMove(Delta, GroundDelta)) return false;
+    const UCapsuleComponent* Capsule = Character->GetCapsuleComponent();
+    FCollisionQueryParams Query(SCENE_QUERY_STAT(GnorcThiefRecovery), false, Character);
+    FHitResult WorldContact;
+    return !GetWorld()->SweepSingleByChannel(WorldContact, Capsule->GetComponentLocation(), Capsule->GetComponentLocation() + GroundDelta,
+        Capsule->GetComponentQuat(), Capsule->GetCollisionObjectType(), Capsule->GetCollisionShape(), Query,
+        FCollisionResponseParams(Capsule->GetCollisionResponseToChannels())) ||
+        (WorldContact.bStartPenetrating && FVector::DotProduct(Delta, WorldContact.Normal.GetSafeNormal2D()) > 0.f);
+}
+void UGnorcThiefBehaviorComponent::UpdateBlockedRoute()
+{
+    const float Requested = RequestedStepDelta.Size2D();
+    // Retain the blocked leg throughout the turn and return trip. Start its
+    // short cooldown only after making progress on the alternative departure.
+    if (bRecoveryAwaitingDeparture && LastReachedRouteNode == BlockedLegFrom &&
+        CurrentRouteNode != BlockedLegFrom && CurrentRouteNode != BlockedLegTo &&
+        LastStepDelta.Size2D() >= FMath::Max(0.5f, Requested * 0.1f))
+        bRecoveryAwaitingDeparture = false;
+    if (Requested < KINDA_SMALL_NUMBER || LastStepDelta.Size2D() >= FMath::Max(0.5f, Requested * 0.1f))
+    { BlockedTicks = 0; return; }
+    BlockedTicks = FMath::Min(BlockedTicks + 1, 300);
+    if (BlockedTicks < 8 || RecoveryRetryTicks > 0) return;
+    int32 ReturnNode = LastReachedRouteNode;
+    if (ReturnNode == CurrentRouteNode)
+    {
+        // Spyro can intercept the return trip too. In that case the other
+        // endpoint remains the destination of the same traversed leg.
+        if (!bRecoveryAwaitingDeparture || BlockedLegFrom != CurrentRouteNode) return;
+        ReturnNode = BlockedLegTo;
+    }
+    if (!RoutePoints.IsValidIndex(ReturnNode) || ReturnNode == CurrentRouteNode) return;
+    const FVector ReturnDirection = RoutePosition(ReturnNode) - Character->GetActorLocation();
+    if (!RecoveryDirectionIsClear(ReturnDirection)) return;
+    // Retrace the leg actually traversed. Choosing neighbours of the blocked
+    // destination would cut across authored terrain and could oscillate each tick.
+    BlockedLegFrom = ReturnNode;
+    BlockedLegTo = CurrentRouteNode;
+    BlockedLegTicks = 15;
+    RecoveryRetryTicks = 15;
+    bRecoveryAwaitingDeparture = true;
+    CurrentRouteNode = ReturnNode;
+    BlockedTicks = 0;
+    ++RecoveryCount;
+}
+void UGnorcThiefBehaviorComponent::ClearMovementDiagnostics()
+{
+    LastStepDelta = RequestedStepDelta = LastPlayerContactNormal = FVector::ZeroVector;
+    LastPlayerContactComponent = NAME_None;
+    LastFloorActor = LastFloorComponent = NAME_None;
+    LastFloorHeight = 0.f;
+    bPlayerBlocked = bStartedOverlappingPlayer = bBoundaryClipped = bTerrainBlocked = bFloorRejected = false;
+}
+void UGnorcThiefBehaviorComponent::DrawMovementDebug() const
+{
+#if ENABLE_DRAW_DEBUG
+    if (!bDrawMovementDebug) return;
+    const FVector Lift(0, 0, 15);
+    if (bLimitRoaming) DrawDebugCircle(GetWorld(), GetRoamCenter() + Lift, FMath::Max(300.f, RoamRadius), 64,
+        FColor::Cyan, false, 0.f, 0, 2.f, FVector::ForwardVector, FVector::RightVector, false);
+    for (int32 I = 0; I < RoutePoints.Num(); ++I)
+        DrawDebugLine(GetWorld(), RoutePosition(I) + Lift, RoutePosition((I + 1) % RoutePoints.Num()) + Lift, FColor::Cyan);
+    if (BodyCollision) DrawDebugBox(GetWorld(), BodyCollision->GetComponentLocation(), BodyCollision->GetScaledBoxExtent(),
+        BodyCollision->GetComponentQuat(), bPlayerBlocked ? FColor::Red : FColor::Green);
+    const FVector Location = Character->GetActorLocation();
+    DrawDebugDirectionalArrow(GetWorld(), Location + Lift, Location + Lift + RequestedStepDelta * 5.f, 10.f, FColor::Yellow);
+    DrawDebugDirectionalArrow(GetWorld(), Location + Lift, Location + Lift + LastStepDelta * 5.f, 10.f, FColor::Green);
+    DrawDebugString(GetWorld(), Location + FVector(0, 0, 150), FString::Printf(TEXT("Route %d->%d fit %.2f | blocked %d recoveries %d\nPlayer %d overlap %d world %d floor %d boundary %d"),
+        LastReachedRouteNode, CurrentRouteNode, RouteFitScale, BlockedTicks, RecoveryCount, bPlayerBlocked,
+        bStartedOverlappingPlayer, bTerrainBlocked, bFloorRejected, bBoundaryClipped), nullptr, FColor::White, 0.f, true);
+#endif
 }
 void UGnorcThiefBehaviorComponent::OnAcceptedDamage()
 {
@@ -448,7 +699,10 @@ void UGnorcThiefBehaviorComponent::OnAcceptedDamage()
 void UGnorcThiefBehaviorComponent::StepOriginal()
 {
     ++SimulationTicks;
-    LastStepDelta = FVector::ZeroVector;
+    ClearMovementDiagnostics();
+    RouteFitScale = CalculateRouteFit();
+    if (BlockedLegTicks > 0 && !bRecoveryAwaitingDeparture) --BlockedLegTicks;
+    if (RecoveryRetryTicks > 0) --RecoveryRetryTicks;
     Character->GetCharacterMovement()->Velocity = FVector::ZeroVector;
     if (State == EGnorcThiefState::Dead) return;
     const bool Complete = AdvanceAnimation();
@@ -481,7 +735,7 @@ void UGnorcThiefBehaviorComponent::StepOriginal()
         {
             EnterState(EGnorcThiefState::Dead);
             GnorcThief::Call(WalkingAI, TEXT("Disable Collission Due to Death"));
-            if (!Character->IsHidden()) GnorcThief::Call(WalkingAI, TEXT("Poof Away Corpse"));
+            FinishCorpse();
         }
         else if (SlideDisplacement > 0.f)
         { GroundMove(SlideDisplacement, FinalSlideHeading); SlideDisplacement = FMath::Max(0.f, SlideDisplacement - 12.f); }
@@ -505,6 +759,7 @@ void UGnorcThiefBehaviorComponent::TickComponent(float DeltaTime, ELevelTick Tic
     while (Accumulator + KINDA_SMALL_NUMBER >= OriginalStep && Steps++ < 30)
     { Accumulator = FMath::Max(0.f, Accumulator - OriginalStep); StepOriginal(); }
     Accumulator = FMath::Min(Accumulator, OriginalStep);
+    DrawMovementDebug();
 }
 
 void UGnorcThiefBehaviorComponent::BindContracts()
@@ -513,6 +768,19 @@ void UGnorcThiefBehaviorComponent::BindContracts()
     GnorcThief::Bind(Damageable, TEXT("Call Deal_Damage"), WalkingAI, TEXT("On Damaged"), true);
     GnorcThief::Bind(Damageable, TEXT("Call Deal_Damage"), this, GET_FUNCTION_NAME_CHECKED(UGnorcThiefBehaviorComponent, OnAcceptedDamage));
     GnorcThief::Bind(Dropper, TEXT("Item Dropper Successfully Reset"), this, GET_FUNCTION_NAME_CHECKED(UGnorcThiefBehaviorComponent, OnDropperReset));
+}
+
+void UGnorcThiefBehaviorComponent::FinishCorpse()
+{
+    if (bCorpseFinished) return;
+    bCorpseFinished = true;
+    // Preserve the shared corpse lifecycle without its extra dust-ring visual.
+    // Hiding rather than destroying allows the existing checkpoint reset to work.
+    Character->SetActorHiddenInGame(true);
+    if (DeathFinishSound) UGameplayStatics::PlaySoundAtLocation(this, DeathFinishSound, Character->GetActorLocation());
+    if (auto* P = CastField<FMulticastDelegateProperty>(GnorcThief::Property(WalkingAI, TEXT("Corpse Poofed"))))
+        if (const auto* Delegate = P->GetMulticastDelegate(P->ContainerPtrToValuePtr<void>(WalkingAI)))
+            Delegate->ProcessMulticastDelegate<UObject>(nullptr);
 }
 
 void UGnorcThiefBehaviorComponent::EndPlay(const EEndPlayReason::Type Reason)
@@ -539,9 +807,14 @@ void UGnorcThiefBehaviorComponent::OnChargeSensorOverlap(UPrimitiveComponent* Ov
 
 void UGnorcThiefBehaviorComponent::OnDropperReset()
 {
+    bCorpseFinished = false;
     StopSounds();
     SoundCueHistory.Reset();
-    CurrentRouteNode = 0;
+    CurrentRouteNode = LastReachedRouteNode = 0;
+    BlockedTicks = RecoveryCount = BlockedLegTicks = RecoveryRetryTicks = 0;
+    BlockedLegFrom = BlockedLegTo = INDEX_NONE;
+    bRecoveryAwaitingDeparture = false;
+    ClearMovementDiagnostics();
     Accumulator = 0.f;
     SlideDisplacement = 0.f;
     // The legacy reset removes entries while iterating its array and can leave survivors.

@@ -27,7 +27,7 @@ public:
     UFUNCTION(BlueprintCallable, Category = "Spyro|Blueprint")
     static bool ConfigureGnorcThief(UBlueprint* Blueprint, const TArray<UAnimSequence*>& Animations, USkeletalMesh* FinalMesh);
 
-    /** Isolated automation fixture. Refuses editor-world and non-thief actors. Never saves assets. */
+    /** Isolated PIE fixture: prototype map or an explicitly tagged automation thief. Never saves assets. */
     UFUNCTION(BlueprintCallable, Category = "Spyro|Tests")
     static bool PrepareGnorcThiefTest(AActor* Actor);
     /** Sets the Blueprint charge enum without Python's PlayerState/Player_State name collision. */

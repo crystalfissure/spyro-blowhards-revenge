@@ -173,10 +173,12 @@ bool USpyroEditorLibrary::PrepareGnorcThiefChargeTest(AActor* Actor)
 bool USpyroEditorLibrary::PrepareGnorcThiefTest(AActor* Actor)
 {
     if (!Actor || !Actor->GetWorld() || Actor->GetWorld()->WorldType != EWorldType::PIE ||
-        !Actor->GetWorld()->GetMapName().Contains(TEXT("Gnorc_Thief_Test")) || !Actor->FindComponentByClass<UGnorcThiefBehaviorComponent>()) return false;
+        (!Actor->GetWorld()->GetMapName().Contains(TEXT("Gnorc_Thief_Test")) &&
+         !Actor->ActorHasTag(TEXT("GnorcThief_Automation_Only"))) ||
+        !Actor->FindComponentByClass<UGnorcThiefBehaviorComponent>()) return false;
     UGameInstance* Instance = Actor->GetWorld()->GetGameInstance();
     // Offscreen simulation otherwise leaves the editor's audio device active/muted.
-    // This fixture is restricted above to the disposable thief PIE test world.
+    // Explicit tagging also permits isolated tests against the real level terrain.
     if (FAudioDevice* Audio = Actor->GetWorld()->GetAudioDeviceRaw())
     {
         Audio->SetTransientMasterVolume(1.f);
