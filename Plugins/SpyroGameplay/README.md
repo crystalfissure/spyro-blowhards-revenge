@@ -10,6 +10,8 @@ No Marketplace plugin, Codex addon, emulator, OpenPete checkout, Blender install
 
 The project's other plugins support other project features. In particular, shared assets reference `PS1IsoGate` and `MMAGameplay`; removing those plugins as part of a thief cleanup would break existing references.
 
+The separate [Bull and Toreador guide](TOWN_SQUARE.md) covers Town Square enemy placement, explicit pairing, route settings, reference evidence and validation limits.
+
 ## Gnorc Thief
 
 Blueprint: `/Game/OT_Ports/S1/S1_Enemies/Home_00_Artisans/00_Artisans/Gnorc_Thief/Gnorc_Thief_BP`.

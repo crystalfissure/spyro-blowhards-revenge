@@ -1,6 +1,10 @@
 #include "SpyroEditorLibrary.h"
 
 #include "GnorcThiefBehaviorComponent.h"
+#include "TownSquareEnemyBehaviorComponent.h"
+#include "TownSquareEnemyAnimInstance.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "Engine/SkeletalMesh.h"
 
 #include "Animation/AnimSequence.h"
 #include "Sound/SoundBase.h"
@@ -26,6 +30,108 @@
 #include "UObject/UnrealType.h"
 #include "Kismet2/BlueprintEditorUtils.h"
 #include "Kismet2/KismetEditorUtilities.h"
+#include "Misc/PackageName.h"
+#include "Misc/Paths.h"
+
+bool USpyroEditorLibrary::MountTownSquareTestContent(const FString& Directory)
+{
+    if (!FPaths::DirectoryExists(Directory)) return false;
+    FString Path=FPaths::ConvertRelativePathToFull(Directory); FPaths::NormalizeDirectoryName(Path);
+    FPackageName::RegisterMountPoint(TEXT("/TownSquareTests/"),Path+TEXT("/")); return true;
+}
+FString USpyroEditorLibrary::DescribeTownSquareDamageTypes()
+{
+    auto* E=LoadObject<UEnum>(nullptr,TEXT("/Game/SpyroContent/Global_Assets/Global_Characters/Damage_Types.Damage_Types"));
+    FString Out;
+    if (E) for (int32 I=0;I<E->NumEnums();++I) Out+=FString::Printf(TEXT("%lld=%s\n"),E->GetValueByIndex(I),*E->GetDisplayNameTextByIndex(I).ToString());
+    return Out;
+}
+bool USpyroEditorLibrary::PrepareTownSquareTest(AActor* Actor)
+{
+    if (!Actor || !Actor->GetWorld() || Actor->GetWorld()->WorldType!=EWorldType::PIE || !Actor->GetWorld()->GetMapName().Contains(TEXT("Bull_Toreador_Test"))) return false;
+    auto* Instance=Actor->GetWorld()->GetGameInstance();
+    if (auto* Name=Instance?FindFProperty<FStrProperty>(Instance->GetClass(),TEXT("Current_Level_Name")):nullptr)
+    {
+        const FString Slot(TEXT("Bull_Toreador_Automation_Only")); Name->SetPropertyValue_InContainer(Instance,Slot);
+        auto* Save=LoadClass<USaveGame>(nullptr,TEXT("/Game/SpyroContent/Global_Assets/Global_SaveData/Individual_Level_SaveData.Individual_Level_SaveData_C"));
+        if (!Save) return false;
+        if (!UGameplayStatics::DoesSaveGameExist(Slot,0)) UGameplayStatics::SaveGameToSlot(UGameplayStatics::CreateSaveGameObject(Save),Slot,0);
+    }
+    TArray<UActorComponent*> Components;Actor->GetComponents(Components);
+    for (auto* C:Components) if (C->GetClass()->GetName()==TEXT("Drops_Items_C"))
+        if (auto* P=FindFProperty<FBoolProperty>(C->GetClass(),TEXT("Safe to Destroy"))) { P->SetPropertyValue_InContainer(C,true);return true; }
+    return false;
+}
+bool USpyroEditorLibrary::PrepareTownSquareChargeTest(AActor* Actor)
+{
+    auto* Player=Cast<ACharacter>(Actor);
+    if (!Player || !Player->GetWorld() || Player->GetWorld()->WorldType!=EWorldType::PIE || !Player->GetWorld()->GetMapName().Contains(TEXT("Bull_Toreador_Test")) || Player->GetClass()->GetName()!=TEXT("BP_Spyro_C")) return false;
+    auto* P=FindFProperty<FByteProperty>(Player->GetClass(),TEXT("Player_State"));
+    if (!P || !P->Enum) return false;
+    const int64 Charging=P->Enum->GetValueByNameString(TEXT("NewEnumerator4")); if (Charging==INDEX_NONE) return false;
+    P->SetPropertyValue_InContainer(Player,uint8(Charging)); Player->GetCapsuleComponent()->SetCollisionObjectType(ECC_GameTraceChannel4); return true;
+}
+
+bool USpyroEditorLibrary::ConfigureTownSquareEnemy(UBlueprint* Blueprint,bool Bull,USkeletalMesh* Mesh,const TArray<UAnimSequence*>& Animations,const TArray<USoundBase*>& Sounds,USoundAttenuation* Attenuation)
+{
+    if (!Blueprint || !Blueprint->SimpleConstructionScript || !Mesh || Animations.Num()!=10 || Animations.Contains(nullptr)) return false;
+    auto* CDO=Blueprint->GeneratedClass ? Cast<ACharacter>(Blueprint->GeneratedClass->GetDefaultObject()) : nullptr;
+    if (!CDO) return false;
+    Blueprint->Modify(); CDO->Modify();
+    auto* SCS=Blueprint->SimpleConstructionScript;
+    const FName BehaviorName(Bull?TEXT("BullBehavior"):TEXT("ToreadorBehavior"));
+    auto* Node=SCS->FindSCSNode(BehaviorName);
+    if (!Node) { Node=SCS->CreateNode(Bull?UBullBehaviorComponent::StaticClass():UToreadorBehaviorComponent::StaticClass(),BehaviorName); SCS->AddNode(Node); }
+    auto* Behavior=Cast<UTownSquareEnemyBehaviorComponent>(Node->ComponentTemplate);
+    Behavior->Animations=Animations; Behavior->OriginalSounds=Sounds; Behavior->SoundAttenuation=Attenuation;
+    auto* Skel=CDO->GetMesh(); Skel->Modify(); Skel->SetSkeletalMesh(Mesh);
+    // Base_Enemy_BP carries an untextured slot override. Use this enemy's mesh
+    // materials so Blueprint instances match skeletal-mesh/animation previews.
+    Skel->EmptyOverrideMaterials();
+    const float Scale=Bull?.292208f:.584416f;
+    const float H=90.f, R=Bull?70.f:60.f;
+    Skel->SetRelativeScale3D(FVector(Scale));
+    Skel->SetRelativeLocation(FVector(0,0,-H-(Mesh->GetBounds().Origin.Z-Mesh->GetBounds().BoxExtent.Z)*Scale));
+    Skel->SetRelativeRotation(FRotator(0,-90,0));
+    Skel->SetAnimInstanceClass(Bull?UBullAnimInstance::StaticClass():UToreadorAnimInstance::StaticClass());
+    Skel->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+    auto* Capsule=CDO->GetCapsuleComponent(); Capsule->Modify(); Capsule->SetCapsuleSize(R,H);
+    Capsule->SetCollisionResponseToChannel(ECC_GameTraceChannel4,ECR_Overlap); Capsule->SetCollisionResponseToChannel(ECC_Pawn,ECR_Overlap);
+    Capsule->CanCharacterStepUpOn=ECB_No;
+    for (bool Sensor:{false,true})
+    {
+        const FName Name(Sensor?TEXT("TownSquareChargeSensor"):TEXT("TownSquareBodyCollision"));
+        auto* BoxNode=SCS->FindSCSNode(Name);
+        if (!BoxNode) { BoxNode=SCS->CreateNode(UBoxComponent::StaticClass(),Name); SCS->AddNode(BoxNode); }
+        auto* Box=Cast<UBoxComponent>(BoxNode->ComponentTemplate);
+        Box->SetBoxExtent(FVector(R+12+(Sensor?12:0),R+12+(Sensor?12:0),H-2));
+        Box->SetCollisionEnabled(ECollisionEnabled::QueryOnly); Box->SetCollisionObjectType(ECC_WorldDynamic);
+        Box->SetCollisionResponseToAllChannels(ECR_Ignore);
+        Box->SetCollisionResponseToChannel(ECC_GameTraceChannel4,Sensor?ECR_Overlap:ECR_Block);
+        if (!Sensor) Box->SetCollisionResponseToChannel(ECC_Pawn,ECR_Block);
+        Box->SetGenerateOverlapEvents(Sensor); Box->CanCharacterStepUpOn=ECB_No;
+        Box->SetWalkableSlopeOverride(FWalkableSlopeOverride(WalkableSlope_Unwalkable,0)); Box->SetCanEverAffectNavigation(false);
+    }
+    // Defaults participate in existing level gem counting; instance overrides remain editable.
+    auto* Handler=Blueprint->GetInheritableComponentHandler(true);
+    UClass* Gem=LoadClass<AActor>(nullptr,TEXT("/Game/SpyroContent/Global_Assets/Global_Level_Items/Gems/Actors/Child_Actors/Gem_Green_BP.Gem_Green_BP_C"));
+    if (!Handler || !Gem) return false;
+    for (UClass* Parent=Blueprint->ParentClass;Parent;Parent=Parent->GetSuperClass())
+    {
+        auto* G=Cast<UBlueprintGeneratedClass>(Parent); if (!G || !G->SimpleConstructionScript) continue;
+        for (auto* N:G->SimpleConstructionScript->GetAllNodes())
+        {
+            if (!N || (!N->ComponentClass->GetName().Contains(TEXT("Damageable_Com")) && !N->ComponentClass->GetName().Contains(TEXT("Drops_Items")))) continue;
+            const FComponentKey Key(N); auto* Template=Handler->GetOverridenComponentTemplate(Key);
+            if (!Template) Template=Handler->CreateOverridenComponentTemplate(Key);
+            if (!Template) return false; Template->Modify();
+            if (auto* HP=FindFProperty<FIntProperty>(Template->GetClass(),TEXT("Hit Points"))) HP->SetPropertyValue_InContainer(Template,1);
+            if (auto* Items=FindFProperty<FArrayProperty>(Template->GetClass(),TEXT("Items_to_Drop")))
+            { auto* Inner=CastField<FObjectPropertyBase>(Items->Inner); if (!Inner) return false; FScriptArrayHelper A(Items,Items->ContainerPtrToValuePtr<void>(Template)); A.EmptyValues(); A.AddValue(); Inner->SetObjectPropertyValue(A.GetRawPtr(0),Gem); }
+        }
+    }
+    FBlueprintEditorUtils::MarkBlueprintAsStructurallyModified(Blueprint); Blueprint->MarkPackageDirty(); return true;
+}
 
 bool USpyroEditorLibrary::ConfigureGnorcThiefCollisionAndAlert(UBlueprint* Blueprint, USoundAttenuation* AlertAttenuation)
 {
