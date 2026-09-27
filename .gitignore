@@ -94,6 +94,10 @@ DerivedDataCache/*
 !/Plugins/SpyroGameplay/Binaries/Win64/UE4Editor-SpyroGameplay.dll
 !/Plugins/SpyroGameplay/Binaries/Win64/UE4Editor-SpyroEditor.dll
 !/Plugins/SpyroGameplay/Binaries/Win64/UE4Editor.modules
+!/Plugins/SpyroClimbing/Binaries/Win64/
+/Plugins/SpyroClimbing/Binaries/Win64/*
+!/Plugins/SpyroClimbing/Binaries/Win64/UE4Editor-SpyroClimbing.dll
+!/Plugins/SpyroClimbing/Binaries/Win64/UE4Editor.modules
 
 # Temp Files
 Config/DefaultEditorPerProjectUserSettings.ini

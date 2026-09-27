@@ -1,0 +1,13 @@
+{
+  "FileVersion": 3,
+  "Version": 12,
+  "VersionName": "0.12.0",
+  "FriendlyName": "Spyro Climbing",
+  "Description": "Blueprint-friendly climbing and transfers on rectangular or tilted, faceted static-mesh walls for UE 4.27.",
+  "Category": "Gameplay",
+  "CanContainContent": false,
+  "EnabledByDefault": true,
+  "Modules": [
+    { "Name": "SpyroClimbing", "Type": "Runtime", "LoadingPhase": "Default" }
+  ]
+}
