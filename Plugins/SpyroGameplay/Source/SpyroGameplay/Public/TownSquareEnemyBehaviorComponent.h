@@ -16,6 +16,15 @@ class UPrimitiveComponent;
 UENUM(BlueprintType)
 enum class ETownSquareEnemyState : uint8 { Idle, Pursuit, Turn, React, Attack, Inverting, Stuck, Dying, Dead, Returning };
 
+UENUM(BlueprintType)
+enum class EBullMovementPattern : uint8
+{
+    FromPlacement UMETA(Hidden),
+    BackAndForth,
+    Loop,
+    ChaseSpyro UMETA(Hidden)
+};
+
 /** Shared implementation exclusively for the Town Square enemies. No navigation or proximity pairing. */
 UCLASS(Abstract, ClassGroup=(Spyro))
 class SPYROGAMEPLAY_API UTownSquareEnemyBehaviorComponent : public UActorComponent
@@ -26,9 +35,6 @@ public:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Town Square|Reference") TArray<UAnimSequence*> Animations;
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Town Square|Reference") TArray<USoundBase*> OriginalSounds;
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Town Square|Reference") USoundAttenuation* SoundAttenuation = nullptr;
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Town Square|Route") TArray<FVector> RoutePoints;
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Town Square|Route", meta=(Units="deg")) float RouteYaw = 0.f;
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Town Square|Territory", meta=(ClampMin="300", Units="cm")) float RoamRadius = 1800.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Town Square|Debug") bool bDrawMovementDebug = false;
     UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category="Town Square|Target") AActor* Pursuer = nullptr;
     /** World conversion independently checked against both decoded original meshes. */
@@ -49,6 +55,9 @@ public:
     UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Town Square|Debug") TArray<int32> SoundCueHistory;
     UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Town Square|Debug") FVector LastStepDelta = FVector::ZeroVector;
     UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Town Square|Debug") FVector RequestedStepDelta = FVector::ZeroVector;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Town Square|Debug") bool bFollowingRunPath = false;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Town Square|Debug", meta=(Units="cm")) float RunPathDistance = 0.f;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Town Square|Debug", meta=(Units="cm")) float RunPathLength = 0.f;
     UFUNCTION(BlueprintPure, Category="Town Square|Territory") FVector GetRoamCenter() const;
     UFUNCTION(BlueprintPure, Category="Town Square|Pair") AActor* GetPartner() const;
     UFUNCTION(BlueprintPure, Category="Town Square|Placement") FString ValidatePlacement() const;
@@ -70,6 +79,10 @@ private:
     void BindContracts();
     void TakeMovementControl();
     void ReconcilePair();
+    void SetPairMovementIgnored(UTownSquareEnemyBehaviorComponent* Other, bool bIgnore);
+    void UpdateBullPatrol();
+    void SetStandaloneBullPatrol();
+    bool CanBullGore(float Cone) const;
     void StepOriginal();
     void StepBull(bool Complete);
     void StepToreador(bool Complete);
@@ -82,7 +95,10 @@ private:
     void DropGemRange(int32 First, int32 Count);
     void HitPlayer(float Range, float Cone);
     bool Face(const FVector& Point, float TurnUnits, float WithinUnits = 256.f);
-    void FollowRoute(float Speed);
+    void FollowRoute(float Speed, bool bBackAndForth = false);
+    void CaptureRunPath(const USplineComponent* Source);
+    void ResetRunPathProgress();
+    void FollowRunPath(float Speed);
     void GroundMove(float Distance, float Direction);
     bool SweepPlayerBody(const FVector& Delta, FHitResult& Hit, bool& Initial) const;
     bool ProjectGroundMove(const FVector& Delta, FVector& GroundDelta);
@@ -104,7 +120,17 @@ private:
     UPROPERTY(Transient) UBoxComponent* ChargeSensor = nullptr;
     UPROPERTY(Transient) TArray<UAudioComponent*> PlayingSounds;
     UPROPERTY(Transient) UTownSquareEnemyBehaviorComponent* Partner = nullptr;
+    // Unattached world-space snapshot: moving or destroying the Toreador cannot move the circuit.
+    UPROPERTY(Transient) USplineComponent* RuntimeRunPath = nullptr;
+    bool bJoiningRunPath = true;
     FTransform RouteOrigin;
+    // A Bull keeps its patrol even if the actor that supplied it is destroyed.
+    FTransform BullPatrolOrigin;
+    bool bBullPatrolInitialized = false;
+    UPROPERTY(Transient) UTownSquareEnemyBehaviorComponent* BullPatrolSource = nullptr;
+    // Runtime route data is never an editable route on the Bull.
+    TArray<FVector> ActiveRoutePoints;
+    float ActiveRouteYaw = 0.f, ActiveRoamRadius = 1800.f;
     FVector MeshRelativeLocation = FVector::ZeroVector;
     FVector PreviousLocation = FVector::ZeroVector;
     float Accumulator = 0.f, PreviousHeading = 0.f, SlideDisplacement = 0.f, DeathVerticalSpeed = 0.f, DeathLift = 0.f;
@@ -129,6 +155,19 @@ UCLASS(ClassGroup=(Spyro), meta=(BlueprintSpawnableComponent))
 class SPYROGAMEPLAY_API UBullBehaviorComponent : public UTownSquareEnemyBehaviorComponent
 {
     GENERATED_BODY()
+public:
+    UBullBehaviorComponent();
+    /** Total length of the standalone straight patrol, centred on placement and aligned with its forward arrow. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Town Square|Patrol", meta=(ClampMin="200", Units="cm")) float PatrolDistance = 1200.f;
+    /** Extra contact impact, played only when a horn hit actually damages Spyro. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Town Square|Gore") USoundBase* GoreImpactSound = nullptr;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Town Square|Gore", meta=(ClampMin="0", ClampMax="2")) float GoreImpactVolume = .65f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Town Square|Gore", meta=(ClampMin=".5", ClampMax="2")) float GoreImpactPitch = 1.05f;
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Town Square|Debug") int32 GoreImpactCount = 0;
+    // Retained only to load previously saved assets. The explicit pair now owns this decision.
+    UPROPERTY() EBullMovementPattern MovementPattern = EBullMovementPattern::FromPlacement;
+    /** An unpaired Bull patrols; a linked Toreador supplies its loop. */
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Town Square|Debug") EBullMovementPattern ActiveMovementPattern = EBullMovementPattern::BackAndForth;
 protected:
     virtual bool IsBull() const override { return true; }
 };
@@ -138,6 +177,14 @@ class SPYROGAMEPLAY_API UToreadorBehaviorComponent : public UTownSquareEnemyBeha
 {
     GENERATED_BODY()
 public:
-    /** Explicit one-to-one pairing. Empty means independent cape combat. */
+    UToreadorBehaviorComponent();
+    // Names are preserved so existing Toreador waypoint placements deserialize unchanged.
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Town Square|Route", meta=(EditCondition="!bUseRunPath", EditConditionHides)) TArray<FVector> RoutePoints;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Town Square|Route", meta=(Units="deg", EditCondition="!bUseRunPath", EditConditionHides)) float RouteYaw = 0.f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Town Square|Territory", meta=(ClampMin="300", Units="cm", EditCondition="!bUseRunPath", EditConditionHides)) float RoamRadius = 1800.f;
+    /** Edit the RunPath spline's points/tangents like an Egg Thief. A closed curve overrides the legacy waypoint route. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Town Square|Route") bool bUseRunPath = false;
+    UFUNCTION(BlueprintPure, Category="Town Square|Route") USplineComponent* GetRunPath() const;
+    /** Supplies this circuit to one Bull. Without a live Bull, idle and slap nearby Spyro. */
     UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category="Town Square|Pair") AActor* LinkedBull = nullptr;
 };

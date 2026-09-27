@@ -28,6 +28,9 @@ public:
     /** Configure only a new Town Square child Blueprint. */
     UFUNCTION(BlueprintCallable, Category="Spyro|Blueprint")
     static bool ConfigureTownSquareEnemy(UBlueprint* Blueprint, bool Bull, USkeletalMesh* Mesh, const TArray<UAnimSequence*>& Animations, const TArray<USoundBase*>& Sounds, USoundAttenuation* Attenuation);
+    /** Adds an editable, closed RunPath without altering the enemy's existing settings or materials. */
+    UFUNCTION(BlueprintCallable, Category="Spyro|Blueprint")
+    static bool AddToreadorRunPath(UBlueprint* Blueprint);
 
     UFUNCTION(BlueprintCallable, Category = "Spyro|Blueprint")
     static bool ConfigureGnorcThiefCollisionAndAlert(UBlueprint* Blueprint, USoundAttenuation* AlertAttenuation);

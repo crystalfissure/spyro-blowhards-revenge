@@ -12,6 +12,7 @@
 #include "Components/BoxComponent.h"
 #include "Components/ActorComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/SplineComponent.h"
 #include "GameFramework/Character.h"
 #include "Engine/Blueprint.h"
 #include "Engine/SCS_Node.h"
@@ -70,6 +71,26 @@ bool USpyroEditorLibrary::PrepareTownSquareChargeTest(AActor* Actor)
     if (!P || !P->Enum) return false;
     const int64 Charging=P->Enum->GetValueByNameString(TEXT("NewEnumerator4")); if (Charging==INDEX_NONE) return false;
     P->SetPropertyValue_InContainer(Player,uint8(Charging)); Player->GetCapsuleComponent()->SetCollisionObjectType(ECC_GameTraceChannel4); return true;
+}
+
+bool USpyroEditorLibrary::AddToreadorRunPath(UBlueprint* Blueprint)
+{
+    if (!Blueprint || !Blueprint->SimpleConstructionScript) return false;
+    auto* SCS=Blueprint->SimpleConstructionScript;
+    auto* BehaviorNode=SCS->FindSCSNode(TEXT("ToreadorBehavior"));
+    auto* Behavior=BehaviorNode?Cast<UToreadorBehaviorComponent>(BehaviorNode->ComponentTemplate):nullptr;
+    if (!Behavior) return false;
+    if (auto* Existing=SCS->FindSCSNode(TEXT("RunPath"))) return Cast<USplineComponent>(Existing->ComponentTemplate)!=nullptr;
+    Blueprint->Modify(); SCS->Modify();
+    auto* Node=SCS->CreateNode(USplineComponent::StaticClass(),TEXT("RunPath")); SCS->AddNode(Node);
+    auto* Spline=CastChecked<USplineComponent>(Node->ComponentTemplate);
+    TArray<FVector> Points;
+    for (const FVector& P:Behavior->RoutePoints) Points.Add(FRotator(0,Behavior->RouteYaw,0).RotateVector(P*Behavior->WorldUnitsPerOriginalUnit));
+    Spline->SetSplinePoints(Points,ESplineCoordinateSpace::Local,false);
+    Spline->SetClosedLoop(true); Spline->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+    Spline->SetGenerateOverlapEvents(false); Spline->SetCanEverAffectNavigation(false);
+    Spline->SetHiddenInGame(true);
+    FBlueprintEditorUtils::MarkBlueprintAsStructurallyModified(Blueprint); Blueprint->MarkPackageDirty(); return true;
 }
 
 bool USpyroEditorLibrary::ConfigureTownSquareEnemy(UBlueprint* Blueprint,bool Bull,USkeletalMesh* Mesh,const TArray<UAnimSequence*>& Animations,const TArray<USoundBase*>& Sounds,USoundAttenuation* Attenuation)
