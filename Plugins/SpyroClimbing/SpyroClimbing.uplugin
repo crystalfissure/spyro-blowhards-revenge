@@ -8,6 +8,6 @@
   "CanContainContent": false,
   "EnabledByDefault": true,
   "Modules": [
-    { "Name": "SpyroClimbing", "Type": "Runtime", "LoadingPhase": "Default" }
+    { "Name": "SpyroClimbing", "Type": "Runtime", "LoadingPhase": "PreDefault" }
   ]
 }
