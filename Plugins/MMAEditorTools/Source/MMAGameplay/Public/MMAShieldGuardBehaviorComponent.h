@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "Engine/EngineTypes.h"
 #include "MMAShieldGuardBehaviorComponent.generated.h"
 
 class ACharacter;
@@ -17,7 +18,9 @@ enum class EMMAShieldGuardState : uint8
     Patrol UMETA(DisplayName = "Patrol"),
     EnGarde UMETA(DisplayName = "En Garde"),
     Attack UMETA(DisplayName = "Attack"),
-    Dead UMETA(DisplayName = "Dead")
+    Dead UMETA(DisplayName = "Dead"),
+    Notice UMETA(DisplayName = "Notice"),
+    Disengage UMETA(DisplayName = "Disengage")
 };
 /** Idle-sentry archetype with intermittent patrols, based on the project's Gnorc Soldier contract. */
 UCLASS(ClassGroup = (MMA), meta = (BlueprintSpawnableComponent))
@@ -51,6 +54,22 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Shield Guard|Animations")
     UAnimSequence* DeathAnimation = nullptr;
+
+    /** Optional source transition clips; null keeps the original five-state guard. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Shield Guard|Animations")
+    UAnimSequence* NoticeAnimation = nullptr;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Shield Guard|Animations")
+    UAnimSequence* DisengageAnimation = nullptr;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Shield Guard|Animations")
+    UAnimSequence* DeathTerminalAnimation = nullptr;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Shield Guard|Animations", meta = (ClampMin = "0.01"))
+    float PatrolPlaybackRate = 1.0f;
+
+    UFUNCTION()
+    void OnDropperReset();
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Shield Guard|Idle", meta = (ClampMin = "0.0"))
     float IdleWaitMinimum = 3.0f;
@@ -139,6 +158,20 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Shield Guard|Death", meta = (ClampMin = "0.0"))
     float DeathPoofPaddingSeconds = 0.25f;
 
+    /** One owner for Shield Pirate death; old shield archetypes retain their legacy path. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Shield Guard|Death")
+    bool bManagedDeath = false;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Shield Guard|Death")
+    float DeathKnockbackHorizontalSpeed = 520.0f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Shield Guard|Death")
+    float DeathKnockbackVerticalSpeed = 380.0f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Shield Guard|Death")
+    float DeathKnockbackGravityScale = 0.4f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Shield Guard|Death")
+    float DeathKnockbackUnstickHeight = 12.0f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Shield Guard|Death")
+    float DeathKnockbackTumbleDegrees = 90.0f;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MMA|Shield Guard|Debug")
     bool bEnableDebugMessages = false;
 
@@ -160,6 +193,17 @@ private:
     bool bPatrolReturningHome = false;
     bool bHasObservedHitPoints = false;
     double LastObservedHitPoints = 0.0;
+    bool bDeathFinished = false;
+    bool bDeathTerminalPlaying = false;
+    FRotator DeathInitialMeshRotation = FRotator::ZeroRotator;
+    float SavedGravityScale = 1.0f;
+    float SavedFallingFriction = 0.0f;
+    float SavedFallingBraking = 0.0f;
+    float SavedAirControl = 0.0f;
+    bool bSavedActorTick = true;
+    bool bSavedWalkingTick = true;
+    bool bSavedOrientToMovement = false;
+    ECollisionResponse SavedPawnResponse = ECR_Overlap;
 
     void ConfigureNativeEnemyContract();
     void ConfigureChargeCollision(UPrimitiveComponent* Primitive);
@@ -179,6 +223,8 @@ private:
     void ApplyAttackHit();
     void ObserveIncomingDamage();
     void ApplyChargeImpactKnockback() const;
+    void BeginManagedDeath();
+    void TickManagedDeath(float DeltaTime);
     bool DealNativeDamageToTarget(AActor* Target, bool& bOutDamageApplied) const;
     void ApplyHitRecoil(AActor* Target) const;
     uint8 ReadInheritedAIState() const;

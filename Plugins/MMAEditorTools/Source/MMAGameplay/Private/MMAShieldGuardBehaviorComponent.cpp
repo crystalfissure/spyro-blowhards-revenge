@@ -2,6 +2,7 @@
 
 #include "AIController.h"
 #include "Animation/AnimSequence.h"
+#include "Animation/AnimSingleNodeInstance.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/BoxComponent.h"
 #include "Components/PrimitiveComponent.h"
@@ -207,6 +208,24 @@ void UMMAShieldGuardBehaviorComponent::BeginPlay()
     ConfigureNativeEnemyContract();
     ConfigureShieldDamageContract();
     ConfigureDefaultDrop();
+    if (bManagedDeath && GetOwner())
+    {
+        TArray<UActorComponent*> Components;
+        GetOwner()->GetComponents(Components);
+        for (UActorComponent* Component : Components)
+        {
+            if (!Component || !Component->GetClass()->GetName().Contains(TEXT("Drops_Items"))) continue;
+            for (TFieldIterator<FMulticastDelegateProperty> It(Component->GetClass()); It; ++It)
+            {
+                if (NormalizeShieldPropertyName(It->GetName()) == TEXT("itemdroppersuccessfullyreset"))
+                {
+                    FScriptDelegate Delegate;
+                    Delegate.BindUFunction(this, GET_FUNCTION_NAME_CHECKED(UMMAShieldGuardBehaviorComponent, OnDropperReset));
+                    It->AddDelegate(Delegate, Component);
+                }
+            }
+        }
+    }
     EnterState(EMMAShieldGuardState::Idle);
 }
 
@@ -238,6 +257,10 @@ void UMMAShieldGuardBehaviorComponent::SetInheritedBool(
 void UMMAShieldGuardBehaviorComponent::ConfigureNativeEnemyContract()
 {
     AActor* Owner = GetOwner();
+    if (bManagedDeath)
+    {
+        SetInheritedBool(Owner, TEXT("Poofs_On_Death"), false);
+    }
     SetInheritedBool(Owner, TEXT("Can_Become_Alert"), false);
     SetInheritedBool(Owner, TEXT("Can_Attack"), false);
     SetInheritedBool(Owner, TEXT("WeaponHitboxActive"), false);
@@ -631,6 +654,8 @@ float UMMAShieldGuardBehaviorComponent::GetStateDuration() const
     UAnimSequence* Animation = nullptr;
     switch (CurrentState)
     {
+    case EMMAShieldGuardState::Notice: Animation = NoticeAnimation; break;
+    case EMMAShieldGuardState::Disengage: Animation = DisengageAnimation; break;
     case EMMAShieldGuardState::Attack: Animation = AttackAnimation; break;
     case EMMAShieldGuardState::Dead: Animation = DeathAnimation; break;
     default: break;
@@ -658,6 +683,8 @@ void UMMAShieldGuardBehaviorComponent::PlayStateAnimation()
         bLoop = true;
         break;
     case EMMAShieldGuardState::Patrol: Animation = PatrolAnimation; bLoop = true; break;
+    case EMMAShieldGuardState::Notice: Animation = NoticeAnimation; break;
+    case EMMAShieldGuardState::Disengage: Animation = DisengageAnimation; break;
     case EMMAShieldGuardState::EnGarde: Animation = EnGardeAnimation; bLoop = true; break;
     case EMMAShieldGuardState::Attack: Animation = AttackAnimation; break;
     case EMMAShieldGuardState::Dead: Animation = DeathAnimation; break;
@@ -665,6 +692,11 @@ void UMMAShieldGuardBehaviorComponent::PlayStateAnimation()
     if (Animation)
     {
         Mesh->PlayAnimation(Animation, bLoop);
+        if (UAnimSingleNodeInstance* Player = Mesh->GetSingleNodeInstance())
+        {
+            Player->SetPlayRate(CurrentState == EMMAShieldGuardState::Patrol
+                ? FMath::Max(PatrolPlaybackRate, 0.01f) : 1.0f);
+        }
     }
 }
 
@@ -687,6 +719,8 @@ void UMMAShieldGuardBehaviorComponent::EnterState(EMMAShieldGuardState NewState)
         SetInheritedBool(GetOwner(), TEXT("WeaponHitboxActive"), false);
     }
     if (NewState == EMMAShieldGuardState::Idle ||
+        NewState == EMMAShieldGuardState::Notice ||
+        NewState == EMMAShieldGuardState::Disengage ||
         NewState == EMMAShieldGuardState::EnGarde ||
         NewState == EMMAShieldGuardState::Attack ||
         NewState == EMMAShieldGuardState::Dead)
@@ -694,6 +728,10 @@ void UMMAShieldGuardBehaviorComponent::EnterState(EMMAShieldGuardState NewState)
         StopMovement();
     }
     PlayStateAnimation();
+    if (NewState == EMMAShieldGuardState::Dead && bManagedDeath)
+    {
+        BeginManagedDeath();
+    }
     ShowDebugMessage(FString::Printf(
         TEXT("Shield guard state: %s"), *UEnum::GetValueAsString(NewState)));
 }
@@ -843,7 +881,10 @@ void UMMAShieldGuardBehaviorComponent::ObserveIncomingDamage()
     {
         // Burn is resisted, so a normal Spyro hit-point decrease on this
         // archetype is the Ram/charge impact that should throw the guard back.
-        ApplyChargeImpactKnockback();
+        if (!(bManagedDeath && HitPoints <= 0.0))
+        {
+            ApplyChargeImpactKnockback();
+        }
     }
     LastObservedHitPoints = HitPoints;
     bHasObservedHitPoints = true;
@@ -897,13 +938,20 @@ void UMMAShieldGuardBehaviorComponent::TickComponent(
     {
         return;
     }
-    if (ReadInheritedAIState() == ShieldDeadAIState)
+    if (CurrentState == EMMAShieldGuardState::Dead || ReadInheritedAIState() == ShieldDeadAIState)
     {
         if (CurrentState != EMMAShieldGuardState::Dead)
         {
             EnterState(EMMAShieldGuardState::Dead);
         }
-        ObserveIncomingDamage();
+        if (bManagedDeath)
+        {
+            TickManagedDeath(DeltaTime);
+        }
+        else
+        {
+            ObserveIncomingDamage();
+        }
         return;
     }
 
@@ -921,7 +969,7 @@ void UMMAShieldGuardBehaviorComponent::TickComponent(
         TargetPawn = FindNearestPlayer(GuardRadius);
         if (TargetPawn.IsValid())
         {
-            EnterState(EMMAShieldGuardState::EnGarde);
+            EnterState(NoticeAnimation ? EMMAShieldGuardState::Notice : EMMAShieldGuardState::EnGarde);
             break;
         }
         IdleWaitRemaining = FMath::Max(0.0f, IdleWaitRemaining - DeltaTime);
@@ -935,7 +983,7 @@ void UMMAShieldGuardBehaviorComponent::TickComponent(
         TargetPawn = FindNearestPlayer(GuardRadius);
         if (TargetPawn.IsValid())
         {
-            EnterState(EMMAShieldGuardState::EnGarde);
+            EnterState(NoticeAnimation ? EMMAShieldGuardState::Notice : EMMAShieldGuardState::EnGarde);
             break;
         }
         if (PatrolPauseRemaining > 0.0f)
@@ -987,7 +1035,7 @@ void UMMAShieldGuardBehaviorComponent::TickComponent(
         if (!HasValidTarget(LoseInterestRadius))
         {
             TargetPawn.Reset();
-            EnterState(EMMAShieldGuardState::Idle);
+            EnterState(DisengageAnimation ? EMMAShieldGuardState::Disengage : EMMAShieldGuardState::Idle);
             break;
         }
         FaceLocation(TargetPawn->GetActorLocation(), DeltaTime);
@@ -1019,13 +1067,146 @@ void UMMAShieldGuardBehaviorComponent::TickComponent(
             else
             {
                 TargetPawn.Reset();
-                EnterState(EMMAShieldGuardState::Idle);
+                EnterState(DisengageAnimation ? EMMAShieldGuardState::Disengage : EMMAShieldGuardState::Idle);
             }
         }
         break;
     }
 
+    case EMMAShieldGuardState::Notice:
+        if (TargetPawn.IsValid())
+        {
+            FaceLocation(TargetPawn->GetActorLocation(), DeltaTime);
+        }
+        if (StateElapsedSeconds >= GetStateDuration())
+        {
+            EnterState(HasValidTarget(LoseInterestRadius)
+                ? EMMAShieldGuardState::EnGarde
+                : (DisengageAnimation ? EMMAShieldGuardState::Disengage : EMMAShieldGuardState::Idle));
+        }
+        break;
+
+    case EMMAShieldGuardState::Disengage:
+        if (StateElapsedSeconds >= GetStateDuration())
+        {
+            EnterState(EMMAShieldGuardState::Idle);
+        }
+        break;
+
     case EMMAShieldGuardState::Dead:
         break;
     }
+}
+
+void UMMAShieldGuardBehaviorComponent::BeginManagedDeath()
+{
+    ACharacter* Character = CharacterOwner.Get();
+    USkeletalMeshComponent* Mesh = MeshComponent.Get();
+    if (!Character || !Mesh) return;
+    // Damage/death delegates remain bound. Only the competing tick writers stop.
+    bSavedActorTick = Character->IsActorTickEnabled();
+    Character->SetActorTickEnabled(false);
+    if (UActorComponent* WalkingAI = Cast<UActorComponent>(FindShieldWalkingAIObject(Character)))
+    {
+        bSavedWalkingTick = WalkingAI->IsComponentTickEnabled();
+        WalkingAI->SetComponentTickEnabled(false);
+    }
+    if (AAIController* Controller = Cast<AAIController>(Character->GetController()))
+    {
+        Controller->StopMovement();
+    }
+    FVector Away = TargetPawn.IsValid()
+        ? Character->GetActorLocation() - TargetPawn->GetActorLocation()
+        : -Character->GetActorForwardVector();
+    Away.Z = 0.0f;
+    if (!Away.Normalize()) Away = -Character->GetActorForwardVector();
+    if (UCapsuleComponent* Capsule = Character->GetCapsuleComponent())
+    {
+        SavedPawnResponse = Capsule->GetCollisionResponseToChannel(ECC_Pawn);
+        Capsule->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+        Capsule->SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
+    }
+    Character->SetActorLocation(Character->GetActorLocation()
+        + FVector(0, 0, FMath::Max(0.0f, DeathKnockbackUnstickHeight)), true);
+    if (UCharacterMovementComponent* Movement = Character->GetCharacterMovement())
+    {
+        SavedGravityScale = Movement->GravityScale;
+        SavedFallingFriction = Movement->FallingLateralFriction;
+        SavedFallingBraking = Movement->BrakingDecelerationFalling;
+        SavedAirControl = Movement->AirControl;
+        bSavedOrientToMovement = Movement->bOrientRotationToMovement;
+        Movement->StopMovementImmediately();
+        Movement->GravityScale = FMath::Max(0.05f, DeathKnockbackGravityScale);
+        Movement->FallingLateralFriction = 0;
+        Movement->BrakingDecelerationFalling = 0;
+        Movement->AirControl = 0;
+        Movement->bOrientRotationToMovement = false;
+        Movement->SetMovementMode(MOVE_Falling);
+    }
+    FVector Velocity = Away * DeathKnockbackHorizontalSpeed;
+    Velocity.Z = DeathKnockbackVerticalSpeed;
+    Character->LaunchCharacter(Velocity, true, true);
+    DeathInitialMeshRotation = Mesh->GetRelativeRotation();
+    bDeathFinished = false;
+    bDeathTerminalPlaying = false;
+}
+
+void UMMAShieldGuardBehaviorComponent::TickManagedDeath(float DeltaTime)
+{
+    if (bDeathFinished || !MeshComponent.IsValid()) return;
+    StateElapsedSeconds += DeltaTime;
+    const float ClipSeconds = GetStateDuration();
+    if (!bDeathTerminalPlaying && DeathTerminalAnimation && StateElapsedSeconds >= ClipSeconds)
+    {
+        MeshComponent->PlayAnimation(DeathTerminalAnimation, false);
+        bDeathTerminalPlaying = true;
+    }
+    const float Alpha = FMath::Clamp(StateElapsedSeconds / FMath::Max(ClipSeconds, 0.1f), 0.0f, 1.0f);
+    MeshComponent->SetRelativeRotation((FRotator(DeathKnockbackTumbleDegrees * Alpha, 0, 0).Quaternion()
+        * DeathInitialMeshRotation.Quaternion()).Rotator());
+    // CharacterMovement owns flight, impacts and landing. Never force Falling or reset velocity here.
+    if (StateElapsedSeconds >= ClipSeconds + DeathPoofPaddingSeconds)
+    {
+        UObject* WalkingAI = FindShieldWalkingAIObject(GetOwner());
+        UFunction* Poof = WalkingAI ? WalkingAI->FindFunction(TEXT("Poof Away Corpse")) : nullptr;
+        if (Poof && Poof->NumParms == 0)
+        {
+            bDeathFinished = true;
+            WalkingAI->ProcessEvent(Poof, nullptr);
+        }
+        else
+        {
+            bDeathFinished = true;
+            UE_LOG(LogTemp, Error, TEXT("MMA Shield Pirate: native Poof Away Corpse contract is unavailable"));
+        }
+    }
+}
+
+void UMMAShieldGuardBehaviorComponent::OnDropperReset()
+{
+    if (!bManagedDeath || CurrentState != EMMAShieldGuardState::Dead) return;
+    if (ACharacter* Character = CharacterOwner.Get())
+    {
+        Character->SetActorTickEnabled(bSavedActorTick);
+        if (UActorComponent* WalkingAI = Cast<UActorComponent>(FindShieldWalkingAIObject(Character)))
+        {
+            WalkingAI->SetComponentTickEnabled(bSavedWalkingTick);
+        }
+        if (UCharacterMovementComponent* Movement = Character->GetCharacterMovement())
+        {
+            Movement->GravityScale = SavedGravityScale;
+            Movement->FallingLateralFriction = SavedFallingFriction;
+            Movement->BrakingDecelerationFalling = SavedFallingBraking;
+            Movement->AirControl = SavedAirControl;
+            Movement->bOrientRotationToMovement = bSavedOrientToMovement;
+        }
+        if (Character->GetCapsuleComponent())
+            Character->GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Pawn, SavedPawnResponse);
+    }
+    if (MeshComponent.IsValid()) MeshComponent->SetRelativeRotation(DeathInitialMeshRotation);
+    TargetPawn.Reset();
+    bHasObservedHitPoints = bDeathFinished = bDeathTerminalPlaying = false;
+    AttackCooldownRemaining = PatrolPauseRemaining = PatrolTargetElapsed = 0.0f;
+    ConfigureNativeEnemyContract();
+    EnterState(EMMAShieldGuardState::Idle);
 }

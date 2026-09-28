@@ -15,6 +15,13 @@ class MMAEDITORTOOLS_API UMMAEditorAnimationLibrary : public UBlueprintFunctionL
     GENERATED_BODY()
 
 public:
+    /** Isolated PIE lab helpers; no asset writes or real save-slot access. */
+    UFUNCTION(BlueprintCallable, Category = "MMA|Validation")
+    static bool PrepareMMAValidationActor(AActor* Actor);
+
+    UFUNCTION(BlueprintCallable, Category = "MMA|Validation")
+    static FString ApplyMMAValidationDamage(AActor* Target, uint8 DamageType, AActor* Instigator);
+
     UFUNCTION(BlueprintCallable, Category = "MMA|Animation")
     static bool CopySkeletonNotifies(UAnimSequence* Source, UAnimSequence* Destination);
 

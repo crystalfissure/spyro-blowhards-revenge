@@ -18,6 +18,12 @@
 #include "Engine/Blueprint.h"
 #include "Engine/SkeletalMesh.h"
 #include "GameFramework/Character.h"
+#include "GameFramework/SaveGame.h"
+#include "GameFramework/PlayerController.h"
+#include "GameFramework/PlayerState.h"
+#include "Engine/World.h"
+#include "Engine/GameInstance.h"
+#include "Kismet/GameplayStatics.h"
 #include "K2Node_CallArrayFunction.h"
 #include "K2Node_CallFunction.h"
 #include "K2Node_FunctionEntry.h"
@@ -36,6 +42,88 @@
 #include "Kismet2/KismetEditorUtilities.h"
 #include "Serialization/JsonSerializer.h"
 #include "Serialization/JsonWriter.h"
+
+bool UMMAEditorAnimationLibrary::PrepareMMAValidationActor(AActor* Actor)
+{
+    if (!Actor || !Actor->GetWorld() || Actor->GetWorld()->WorldType != EWorldType::PIE ||
+        !Actor->GetWorld()->GetMapName().Contains(TEXT("MMA_EnemyLab"))) return false;
+    UGameInstance* Instance = Actor->GetWorld()->GetGameInstance();
+    if (!Instance) return false;
+    if (Actor->GetClass()->GetName() == TEXT("BP_Spyro_C"))
+    {
+        if (APlayerController* Controller = UGameplayStatics::GetPlayerController(Actor, 0))
+        {
+            if (Controller->PlayerState)
+            {
+                Controller->PlayerState->SetIsOnlyASpectator(false);
+                Controller->PlayerState->SetIsSpectator(false);
+            }
+            Controller->Possess(Cast<APawn>(Actor));
+        }
+    }
+    if (FStrProperty* Name = FindFProperty<FStrProperty>(Instance->GetClass(), TEXT("Current_Level_Name")))
+    {
+        const FString Slot(TEXT("MMA_EnemyLab_Automation_Only"));
+        Name->SetPropertyValue_InContainer(Instance, Slot);
+        UClass* SaveClass = LoadClass<USaveGame>(nullptr,
+            TEXT("/Game/SpyroContent/Global_Assets/Global_SaveData/Individual_Level_SaveData.Individual_Level_SaveData_C"));
+        if (!SaveClass) return false;
+        if (!UGameplayStatics::DoesSaveGameExist(Slot, 0))
+            UGameplayStatics::SaveGameToSlot(UGameplayStatics::CreateSaveGameObject(SaveClass), Slot, 0);
+    }
+    TArray<UActorComponent*> Components;
+    Actor->GetComponents(Components);
+    for (UActorComponent* Component : Components)
+    {
+        if (Component->GetClass()->GetName() == TEXT("Drops_Items_C"))
+            if (FBoolProperty* Safe = FindFProperty<FBoolProperty>(Component->GetClass(), TEXT("Safe to Destroy")))
+                Safe->SetPropertyValue_InContainer(Component, true);
+    }
+    return true;
+}
+
+FString UMMAEditorAnimationLibrary::ApplyMMAValidationDamage(AActor* Target, uint8 DamageType, AActor* Instigator)
+{
+    if (!Target || !Target->GetWorld() || Target->GetWorld()->WorldType != EWorldType::PIE ||
+        !Target->GetWorld()->GetMapName().Contains(TEXT("MMA_EnemyLab"))) return TEXT("outside isolated MMA PIE lab");
+    TArray<UActorComponent*> Components;
+    Target->GetComponents(Components);
+    for (UActorComponent* Component : Components)
+    {
+        if (!Component->GetClass()->GetName().Contains(TEXT("Damageable_Com"))) continue;
+        UFunction* Function = Component->FindFunction(TEXT("Deal Damage"));
+        if (!Function) Function = Component->FindFunction(TEXT("Deal_Damage"));
+        if (!Function) return TEXT("damage function missing");
+        TArray<uint8> Parameters;
+        Parameters.SetNumZeroed(Function->ParmsSize);
+        Function->InitializeStruct(Parameters.GetData());
+        for (TFieldIterator<FProperty> It(Function); It; ++It)
+        {
+            FProperty* Property = *It;
+            if (!Property->HasAnyPropertyFlags(CPF_Parm) || Property->HasAnyPropertyFlags(CPF_ReturnParm)) continue;
+            if (FEnumProperty* Enum = CastField<FEnumProperty>(Property))
+                Enum->GetUnderlyingProperty()->SetIntPropertyValue(Enum->ContainerPtrToValuePtr<void>(Parameters.GetData()), static_cast<int64>(DamageType));
+            else if (FByteProperty* Byte = CastField<FByteProperty>(Property))
+                Byte->SetPropertyValue_InContainer(Parameters.GetData(), DamageType);
+            else if (FBoolProperty* Flag = CastField<FBoolProperty>(Property))
+                Flag->SetPropertyValue_InContainer(Parameters.GetData(), false);
+            else if (FObjectPropertyBase* Object = CastField<FObjectPropertyBase>(Property))
+            {
+                if (Instigator && Instigator->IsA(Object->PropertyClass))
+                    Object->SetObjectPropertyValue_InContainer(Parameters.GetData(), Instigator);
+            }
+            else if (FStructProperty* Struct = CastField<FStructProperty>(Property))
+            {
+                if (Struct->Struct == TBaseStructure<FVector>::Get())
+                    *Struct->ContainerPtrToValuePtr<FVector>(Parameters.GetData()) = FVector::ForwardVector;
+            }
+        }
+        Component->ProcessEvent(Function, Parameters.GetData());
+        Function->DestroyStruct(Parameters.GetData());
+        return TEXT("native damage function called");
+    }
+    return TEXT("damage component missing");
+}
 
 bool UMMAEditorAnimationLibrary::CopySkeletonNotifies(
     UAnimSequence* Source,
@@ -934,6 +1022,18 @@ bool UMMAEditorAnimationLibrary::ConfigureMMAShieldGuardSettings(
         SetNumber(TEXT("idle_wait_maximum"), Behavior->IdleWaitMaximum);
         SetNumber(TEXT("patrol_radius"), Behavior->PatrolRadius);
         SetNumber(TEXT("patrol_speed"), Behavior->PatrolSpeed);
+        SetNumber(TEXT("patrol_playback_rate"), Behavior->PatrolPlaybackRate);
+        auto SetClip = [&Settings](const TCHAR* Key, UAnimSequence*& Target)
+        {
+            FString Path;
+            if (Settings->TryGetStringField(Key, Path))
+            {
+                Target = Path.IsEmpty() ? nullptr : LoadObject<UAnimSequence>(nullptr, *Path);
+            }
+        };
+        SetClip(TEXT("notice_animation"), Behavior->NoticeAnimation);
+        SetClip(TEXT("disengage_animation"), Behavior->DisengageAnimation);
+        SetClip(TEXT("death_terminal_animation"), Behavior->DeathTerminalAnimation);
         SetNumber(TEXT("patrol_acceptance_radius"), Behavior->PatrolAcceptanceRadius);
         SetNumber(TEXT("patrol_pause_minimum"), Behavior->PatrolPauseMinimum);
         SetNumber(TEXT("patrol_pause_maximum"), Behavior->PatrolPauseMaximum);
@@ -955,6 +1055,13 @@ bool UMMAEditorAnimationLibrary::ConfigureMMAShieldGuardSettings(
         SetNumber(TEXT("charge_collision_radius_scale"), Behavior->ChargeCollisionRadiusScale);
         SetNumber(TEXT("charge_collision_half_height_scale"), Behavior->ChargeCollisionHalfHeightScale);
         SetNumber(TEXT("death_poof_padding_seconds"), Behavior->DeathPoofPaddingSeconds);
+        SetBool(TEXT("managed_death"), Behavior->bManagedDeath);
+        SetNumber(TEXT("death_knockback_horizontal_speed"), Behavior->DeathKnockbackHorizontalSpeed);
+        SetNumber(TEXT("death_knockback_vertical_speed"), Behavior->DeathKnockbackVerticalSpeed);
+        SetNumber(TEXT("death_knockback_gravity_scale"), Behavior->DeathKnockbackGravityScale);
+        SetNumber(TEXT("death_knockback_unstick_height"), Behavior->DeathKnockbackUnstickHeight);
+        SetNumber(TEXT("death_knockback_tumble_degrees"), Behavior->DeathKnockbackTumbleDegrees);
+
         SetBool(TEXT("immune_to_burn"), Behavior->bImmuneToFlame);
         SetBool(TEXT("immune_to_flame"), Behavior->bImmuneToFlame);
         SetBool(TEXT("debug_messages"), Behavior->bEnableDebugMessages);
