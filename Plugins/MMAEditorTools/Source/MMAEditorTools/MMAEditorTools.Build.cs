@@ -7,7 +7,7 @@ public class MMAEditorTools : ModuleRules
         PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
         PublicDependencyModuleNames.AddRange(new[] { "Core", "CoreUObject", "Engine", "MMAGameplay" });
         PrivateDependencyModuleNames.AddRange(new[] {
-            "UnrealEd", "Kismet", "BlueprintGraph", "Json", "JsonUtilities"
+            "UnrealEd", "Kismet", "BlueprintGraph", "Json", "JsonUtilities", "InputCore"
         });
     }
 }

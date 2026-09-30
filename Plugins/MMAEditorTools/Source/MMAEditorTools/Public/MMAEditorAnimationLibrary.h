@@ -15,6 +15,22 @@ class MMAEDITORTOOLS_API UMMAEditorAnimationLibrary : public UBlueprintFunctionL
     GENERATED_BODY()
 
 public:
+    /** Inspect the current level's real startup graph without changing it. */
+    UFUNCTION(BlueprintCallable, Category = "MMA|Validation")
+    static FString DescribeCurrentLevelBlueprint();
+
+    /** Wire the same Unified Level Setups entry used by Artisans/Blowhard Beach. */
+    UFUNCTION(BlueprintCallable, Category = "MMA|Validation")
+    static bool ConfigureMMAEnemyLabStartup(AActor* PlacedPlayer, UClass* TestAdventure);
+
+    /** Start actual PIE, with the normal project controller, in the isolated lab. */
+    UFUNCTION(BlueprintCallable, Category = "MMA|Validation")
+    static bool StartMMAPlayerValidationSession();
+
+    /** Deliver a key through PlayerController/PlayerInput; never inject damage. */
+    UFUNCTION(BlueprintCallable, Category = "MMA|Validation")
+    static bool SendMMAValidationInput(AActor* Player, FName KeyName, bool bPressed);
+
     /** Isolated PIE lab helpers; no asset writes or real save-slot access. */
     UFUNCTION(BlueprintCallable, Category = "MMA|Validation")
     static bool PrepareMMAValidationActor(AActor* Actor);

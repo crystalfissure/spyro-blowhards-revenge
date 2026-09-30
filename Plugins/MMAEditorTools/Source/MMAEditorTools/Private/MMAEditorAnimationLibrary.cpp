@@ -1,4 +1,9 @@
 #include "MMAEditorAnimationLibrary.h"
+#include "Editor.h"
+#include "Engine/Level.h"
+#include "Engine/LevelScriptBlueprint.h"
+#include "PlayInEditorDataTypes.h"
+#include "InputCoreTypes.h"
 
 #include "MMAChaseLeashComponent.h"
 #include "MMAHedgeTrimmerBehaviorComponent.h"
@@ -26,6 +31,9 @@
 #include "Kismet/GameplayStatics.h"
 #include "K2Node_CallArrayFunction.h"
 #include "K2Node_CallFunction.h"
+#include "K2Node_Event.h"
+#include "K2Node_Literal.h"
+#include "K2Node_Self.h"
 #include "K2Node_FunctionEntry.h"
 #include "K2Node_FunctionResult.h"
 #include "K2Node_IfThenElse.h"
@@ -42,6 +50,93 @@
 #include "Kismet2/KismetEditorUtilities.h"
 #include "Serialization/JsonSerializer.h"
 #include "Serialization/JsonWriter.h"
+
+FString UMMAEditorAnimationLibrary::DescribeCurrentLevelBlueprint()
+{
+    UWorld* World = GEditor ? GEditor->GetEditorWorldContext().World() : nullptr;
+    return DescribeBlueprintGraphs(World && World->PersistentLevel
+        ? World->PersistentLevel->GetLevelScriptBlueprint(true) : nullptr);
+}
+
+bool UMMAEditorAnimationLibrary::ConfigureMMAEnemyLabStartup(AActor* PlacedPlayer, UClass* TestAdventure)
+{
+    UWorld* World = GEditor ? GEditor->GetEditorWorldContext().World() : nullptr;
+    if (!World || !PlacedPlayer || PlacedPlayer->GetWorld() != World || !TestAdventure ||
+        GEditor->PlayWorld || !World->GetMapName().Contains(TEXT("MMA_EnemyLab")) ||
+        !TestAdventure->GetPathName().StartsWith(TEXT("/Game/MuppetMonsterAdventure/Tests/"))) return false;
+    ULevelScriptBlueprint* Blueprint = World->PersistentLevel->GetLevelScriptBlueprint(false);
+    UClass* Library = LoadClass<UObject>(nullptr, TEXT("/Game/SpyroContent/Global_Assets/Spyro_FunctionLibrary.Spyro_FunctionLibrary_C"));
+    UFunction* Setup = Library ? Library->FindFunctionByName(TEXT("Unified Level Setups")) : nullptr;
+    if (!Blueprint || !Setup) return false;
+    UEdGraph* Graph = FBlueprintEditorUtils::FindEventGraph(Blueprint);
+    if (!Graph) return false;
+    // Reuse UE's empty default event, but never overwrite authored startup links.
+    UK2Node_Event* Begin = nullptr;
+    for (UEdGraphNode* Node : Graph->Nodes)
+        if (UK2Node_Event* Event = Cast<UK2Node_Event>(Node))
+            if (Event->EventReference.GetMemberName() == TEXT("ReceiveBeginPlay"))
+            {
+                if (Event->FindPin(UEdGraphSchema_K2::PN_Then)->LinkedTo.Num()) return false;
+                Begin = Event;
+            }
+    Blueprint->Modify();
+    Graph->Modify();
+    if (!Begin)
+    {
+        Begin = NewObject<UK2Node_Event>(Graph);
+        Begin->EventReference.SetExternalMember(TEXT("ReceiveBeginPlay"), AActor::StaticClass());
+        Begin->bOverrideFunction = true;
+        Graph->AddNode(Begin, false, false);
+        Begin->CreateNewGuid(); Begin->PostPlacedNewNode(); Begin->AllocateDefaultPins();
+    }
+    Begin->SetEnabledState(ENodeEnabledState::Enabled, true);
+    UK2Node_CallFunction* Call = NewObject<UK2Node_CallFunction>(Graph);
+    Call->SetFromFunction(Setup);
+    Graph->AddNode(Call, false, false);
+    Call->CreateNewGuid(); Call->PostPlacedNewNode(); Call->AllocateDefaultPins();
+    Call->NodePosX = 300;
+    UK2Node_Literal* Player = NewObject<UK2Node_Literal>(Graph);
+    Player->SetObjectRef(PlacedPlayer);
+    Graph->AddNode(Player, false, false);
+    Player->CreateNewGuid(); Player->PostPlacedNewNode(); Player->AllocateDefaultPins();
+    Player->NodePosY = 200;
+    UK2Node_Self* Self = NewObject<UK2Node_Self>(Graph);
+    Graph->AddNode(Self, false, false);
+    Self->CreateNewGuid(); Self->PostPlacedNewNode(); Self->AllocateDefaultPins();
+    Self->NodePosY = 350;
+    const UEdGraphSchema_K2* Schema = GetDefault<UEdGraphSchema_K2>();
+    if (!Schema->TryCreateConnection(Begin->FindPin(UEdGraphSchema_K2::PN_Then), Call->GetExecPin()) ||
+        !Schema->TryCreateConnection(Player->GetValuePin(), Call->FindPin(TEXT("Player Spawned from This Map"))) ||
+        !Schema->TryCreateConnection(Self->FindPin(UEdGraphSchema_K2::PN_Self), Call->FindPin(TEXT("WorldContextObject")))) return false;
+    Schema->TrySetDefaultValue(*Call->FindPin(TEXT("Current_Level_Name")), TEXT("MMA_EnemyLab_Automation_Only"));
+    Schema->TrySetDefaultObject(*Call->FindPin(TEXT("Current_AdventureInfo")), TestAdventure);
+    Schema->TrySetDefaultValue(*Call->FindPin(TEXT("Homeworld")), TEXT("false"));
+    Schema->TrySetDefaultValue(*Call->FindPin(TEXT("Homeworld Index")), TEXT("0"));
+    Schema->TrySetDefaultValue(*Call->FindPin(TEXT("Level Index")), TEXT("0"));
+    FBlueprintEditorUtils::MarkBlueprintAsStructurallyModified(Blueprint);
+    return CompileBlueprint(Blueprint);
+}
+
+bool UMMAEditorAnimationLibrary::StartMMAPlayerValidationSession()
+{
+    UWorld* World = GEditor ? GEditor->GetEditorWorldContext().World() : nullptr;
+    if (!World || GEditor->PlayWorld || !World->GetMapName().Contains(TEXT("MMA_EnemyLab"))) return false;
+    FRequestPlaySessionParams Params;
+    Params.WorldType = EPlaySessionWorldType::PlayInEditor;
+    GEditor->RequestPlaySession(Params);
+    return true;
+}
+
+bool UMMAEditorAnimationLibrary::SendMMAValidationInput(AActor* Player, FName KeyName, bool bPressed)
+{
+    APawn* Pawn = Cast<APawn>(Player);
+    APlayerController* Controller = Pawn ? Cast<APlayerController>(Pawn->GetController()) : nullptr;
+    if (!Controller || !Player->GetWorld() || Player->GetWorld()->WorldType != EWorldType::PIE ||
+        !Player->GetWorld()->GetMapName().Contains(TEXT("MMA_EnemyLab"))) return false;
+    FKey Key(KeyName);
+    if (!Key.IsValid() || Key.IsFloatAxis() || Key.IsVectorAxis()) return false;
+    return Controller->InputKey(Key, bPressed ? IE_Pressed : IE_Released, bPressed ? 1.0f : 0.0f, Key.IsGamepadKey());
+}
 
 bool UMMAEditorAnimationLibrary::PrepareMMAValidationActor(AActor* Actor)
 {
