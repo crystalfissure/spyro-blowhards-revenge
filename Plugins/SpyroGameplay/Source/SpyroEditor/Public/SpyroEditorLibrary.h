@@ -10,6 +10,7 @@ class USkeletalMesh;
 class AActor;
 class USoundBase;
 class USoundAttenuation;
+class UStaticMesh;
 
 UCLASS()
 class SPYROEDITOR_API USpyroEditorLibrary : public UBlueprintFunctionLibrary
@@ -17,6 +18,11 @@ class SPYROEDITOR_API USpyroEditorLibrary : public UBlueprintFunctionLibrary
     GENERATED_BODY()
 
 public:
+    UFUNCTION(BlueprintCallable, Category="Spyro|Blueprint")
+    static bool ConfigureToasty(UBlueprint* Blueprint, const TArray<USkeletalMesh*>& Meshes, UStaticMesh* BurntCostume, const TArray<UAnimSequence*>& Animations, const TArray<USoundBase*>& Sounds, USoundAttenuation* Attenuation);
+    /** Configure a Sleeping Dog child of Base_Enemy_BP, with all original mesh variants. */
+    UFUNCTION(BlueprintCallable, Category="Spyro|Blueprint")
+    static bool ConfigureSleepingDog(UBlueprint* Blueprint, const TArray<USkeletalMesh*>& Meshes, const TArray<UAnimSequence*>& Animations, const TArray<USoundBase*>& Sounds, USoundAttenuation* Attenuation);
     UFUNCTION(BlueprintCallable, Category="Spyro|Tests")
     static bool MountTownSquareTestContent(const FString& Directory);
     UFUNCTION(BlueprintCallable, Category="Spyro|Tests")

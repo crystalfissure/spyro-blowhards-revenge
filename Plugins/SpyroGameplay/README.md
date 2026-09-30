@@ -12,6 +12,8 @@ The project's other plugins support other project features. In particular, share
 
 The separate [Bull and Toreador guide](TOWN_SQUARE.md) covers Town Square enemy placement, explicit pairing, route settings, reference evidence and validation limits.
 
+The [Sleeping Dog and Toasty guide](TOASTY.md) covers the Toasty assets, staged guard assignments, flame phases, original timing and Unreal adaptation limits.
+
 ## Gnorc Thief
 
 Blueprint: `/Game/OT_Ports/S1/S1_Enemies/Home_00_Artisans/00_Artisans/Gnorc_Thief/Gnorc_Thief_BP`.
