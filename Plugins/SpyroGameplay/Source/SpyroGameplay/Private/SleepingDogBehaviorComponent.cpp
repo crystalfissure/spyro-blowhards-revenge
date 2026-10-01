@@ -1,6 +1,9 @@
 #include "SleepingDogBehaviorComponent.h"
 #include "SleepingDogAnimInstance.h"
 #include "ToastyEncounterCollision.h"
+#include "SleepingDogContact.h"
+#include "SleepingDogReactionColors.h"
+#include "Rendering/SkeletalMeshRenderData.h"
 #include "GameFramework/Controller.h"
 
 #include "Animation/AnimSequence.h"
@@ -164,6 +167,8 @@ void USleepingDogBehaviorComponent::SelectClip(int32 Clip,bool Blend)
     {
         // SetSkeletalMesh can evaluate synchronously. Never sample the old rig's
         // clip with the new rig's bone container during a flame/form transition.
+        Mesh->ClearVertexColorOverride(0);
+        ReactionColorStage=INDEX_NONE;
         Mesh->SetAnimInstanceClass(nullptr);
         CurrentClip=NextClip=Clip; CurrentFrame=Progress=0; NextFrame=DogFrames[Clip]>1?1:0;
         ActiveMesh=NewMesh; Mesh->SetSkeletalMesh(Meshes[NewMesh]); Mesh->EmptyOverrideMaterials();
@@ -172,13 +177,35 @@ void USleepingDogBehaviorComponent::SelectClip(int32 Clip,bool Blend)
     if (Blend && NextClip==Clip) return;
     if (Blend) { CurrentClip=NextClip; CurrentFrame=NextFrame; NextClip=Clip; NextFrame=0; Progress=ProgressPerStep=16; }
     else { CurrentClip=NextClip=Clip; CurrentFrame=0; NextFrame=DogFrames[Clip]>1?1:0; Progress=0; ProgressPerStep=DogFrames[Clip]==1?0:(Clip==6?64:32); EmitFrameSound(); }
+    UpdateContactResponse();
+    UpdateReactionColors();
 }
 bool USleepingDogBehaviorComponent::AdvanceAnimation()
 {
     Progress+=ProgressPerStep; if (Progress<64) return false; Progress&=63; bool Complete=false;
     if (CurrentClip!=NextClip) { CurrentClip=NextClip; CurrentFrame=NextFrame; NextFrame=DogFrames[CurrentClip]>1?1:0; Progress=0; ProgressPerStep=DogFrames[CurrentClip]==1?0:(CurrentClip==6?64:32); }
     else { CurrentFrame=NextFrame; if (++NextFrame>=DogFrames[CurrentClip]) { NextFrame=0; Complete=true; } }
-    EmitFrameSound(); return Complete;
+    EmitFrameSound(); UpdateReactionColors(); return Complete;
+}
+void USleepingDogBehaviorComponent::UpdateReactionColors()
+{
+    if (!Mesh || ActiveMesh!=2 || CurrentClip!=13) return;
+    // Original r_moby patches face colours by CURRENT frame. The reaction
+    // blackens at frames1/2/3, well before its frame9 reattack transition.
+    const int32 Stage=FMath::Clamp(CurrentFrame,0,3);
+    if (ReactionColorStage==Stage) return;
+    const auto* RenderData=Mesh->GetSkeletalMeshRenderData();
+    if (!RenderData || !RenderData->LODRenderData.IsValidIndex(0) ||
+        RenderData->LODRenderData[0].GetNumVertices()!=SleepingDogReactionColors::VertexCount)
+    {
+        if (ReactionColorStage!=-2) UE_LOG(LogTemp,Warning,TEXT("Sleeping Dog reaction colour layout does not match the prepared mesh."));
+        ReactionColorStage=-2;
+        return;
+    }
+    TArray<FColor> Colors;
+    SleepingDogReactionColors::GetColors(Stage,Colors);
+    Mesh->SetVertexColorOverride(0,Colors);
+    ReactionColorStage=Stage;
 }
 void USleepingDogBehaviorComponent::GetPoseInputs(UAnimSequence*& A,UAnimSequence*& B,float& TimeA,float& TimeB,float& Alpha) const
 {
@@ -218,13 +245,30 @@ bool USleepingDogBehaviorComponent::GroundAt(const FVector& Point,FVector& Groun
 {
     return ToastyEncounterCollision::Floor(Character,Pursuer,Point,WorldUnitsPerOriginalUnit,Ground);
 }
+FVector USleepingDogBehaviorComponent::GetContactOrigin() const
+{
+    // Mesh presentation is interpolated; collision uses the authoritative model origin.
+    return Character->GetActorLocation()+Home.TransformVector(MeshOffset);
+}
+void USleepingDogBehaviorComponent::UpdateContactResponse()
+{
+    if (!BodyCollision) return;
+    const bool Solid=SleepingDogContact::Group(CurrentClip,NextClip,CurrentFrame,NextFrame,Progress)==0;
+    const ECollisionResponse Response=Solid?ECR_Block:ECR_Ignore;
+    BodyCollision->SetCollisionResponseToChannel(ECC_Pawn,Response);
+    BodyCollision->SetCollisionResponseToChannel(ECC_GameTraceChannel4,Response);
+    // ChargeSensor remains registered with Damageable and retains flame/charge coverage.
+}
 void USleepingDogBehaviorComponent::UpdateBodyCollision()
 {
     ToastyEncounterCollision::FitBody(Mesh,BodyCollision,ChargeSensor,false);
+    UpdateContactResponse();
     HitPlayer();
 }
 FVector USleepingDogBehaviorComponent::SweepMove(const FVector& Delta,bool PlayerBlocks)
 {
+    const FVector PreviousOrigin=GetContactOrigin();
+    PlayerBlocks=PlayerBlocks && !bDefeated && SleepingDogContact::Group(CurrentClip,NextClip,CurrentFrame,NextFrame,Progress)==0;
     FCollisionQueryParams Q(SCENE_QUERY_STAT(SleepingDogMove),false,Character); SleepingDog::IgnorePlayer(Q,Pursuer,!PlayerBlocks);
     FCollisionQueryParams WorldQ=Q; SleepingDog::IgnorePlayer(WorldQ,Pursuer);
     FHitResult Wall; const FVector Start=Character->GetActorLocation();
@@ -233,7 +277,6 @@ FVector USleepingDogBehaviorComponent::SweepMove(const FVector& Delta,bool Playe
     if (Wall.bBlockingHit && State==ESleepingDogState::Pouncing)
         UE_LOG(LogTemp,Verbose,TEXT("Sleeping Dog airborne sweep: %s / %s"),*GetNameSafe(Wall.GetActor()),*GetNameSafe(Wall.GetComponent()));
     float Fraction=Wall.bBlockingHit?FMath::Max(0.f,Wall.Time-.002f):1.f;
-    float PlayerContactTime=MAX_flt;
     if (PlayerBlocks)
     {
         FCollisionObjectQueryParams O; O.AddObjectTypesToQuery(ECC_Pawn); O.AddObjectTypesToQuery(ECC_GameTraceChannel4);
@@ -244,11 +287,10 @@ FVector USleepingDogBehaviorComponent::SweepMove(const FVector& Delta,bool Playe
             const auto* C=H.GetComponent(); if (!C || C->GetCollisionResponseToChannel(ECC_WorldDynamic)!=ECR_Block) continue;
             if (ToastyEncounterCollision::SeparatingContact(H,BodyCollision,Delta)) continue;
             Fraction=FMath::Min(Fraction,FMath::Max(0.f,H.Time-.002f));
-            if (H.GetActor()==Pursuer) PlayerContactTime=FMath::Min(PlayerContactTime,H.Time);
         }
     }
     bBlocked=Fraction<.99f; Character->SetActorLocation(Start+Delta*Fraction,false,nullptr,ETeleportType::TeleportPhysics);
-    if (PlayerContactTime<=Fraction+.002f) HitPlayer(true);
+    HitPlayer(&PreviousOrigin);
     return Delta*Fraction;
 }
 bool USleepingDogBehaviorComponent::GroundMove(const FVector& Delta)
@@ -266,7 +308,7 @@ bool USleepingDogBehaviorComponent::GroundMove(const FVector& Delta)
 void USleepingDogBehaviorComponent::BeginPounce()
 {
     ToastyEncounterCollision::LiftFromFloor(Character,Pursuer,WorldUnitsPerOriginalUnit);
-    State=ESleepingDogState::Aiming; StateTicks=0; bHitThisAttack=bSlidingOffPlayer=false;
+    State=ESleepingDogState::Aiming; StateTicks=0; bHitThisAttack=false;
     if (IsValid(Pursuer)) PounceTarget=Pursuer->GetActorLocation();
     SelectClip((Health==1?7:0)+2);
 }
@@ -284,16 +326,28 @@ void USleepingDogBehaviorComponent::StepOriginal()
     TakeMovementControl();
     if (!IsValid(Pursuer)) Pursuer=UGameplayStatics::GetPlayerCharacter(this,0);
     if (State==ESleepingDogState::Dead) return;
-    const bool Complete=AdvanceAnimation(); if (Cooldown>0) --Cooldown;
+    const bool Complete=AdvanceAnimation(); UpdateContactResponse(); if (Cooldown>0) --Cooldown;
     const int32 Base=Health==1?7:0;
     if (State==ESleepingDogState::Dying)
     {
-        GroundMove(FRotator(0,Heading+180,0).Vector()*DeathSpeed*WorldUnitsPerOriginalUnit); DeathSpeed=FMath::Max(0.f,DeathSpeed-12);
+        // Original state4 uses MoveMobyWithGravity: z += velocity, then
+        // gravity10 with terminal speed-260. GroundMove rejects a distant floor
+        // and leaves airborne corpses suspended. Resolve the axes separately so
+        // a wall stopping the recoil cannot stop the fall.
+        SweepMove(FRotator(0,Heading+180,0).Vector()*DeathSpeed*WorldUnitsPerOriginalUnit,false);
+        DeathSpeed=FMath::Max(0.f,DeathSpeed-12);
+        float Fall=VerticalSpeed*WorldUnitsPerOriginalUnit;
+        VerticalSpeed=FMath::Max(-260.f,VerticalSpeed-10);
+        const FVector Position=Character->GetActorLocation();
+        FVector Ground;
+        if (Fall<=0 && GroundAt(Position,Ground) && Ground.Z<=Position.Z+2.f)
+            Fall=FMath::Max(Fall,Ground.Z-Position.Z);
+        SweepMove(FVector(0,0,Fall),false);
         if (Complete || StateTicks>60) FinishCorpse(); return;
     }
     if (State==ESleepingDogState::Singed)
     {
-        if (CurrentFrame<2 && IsValid(Pursuer)) PounceTarget=Pursuer->GetActorLocation();
+        if (NextFrame<2 && IsValid(Pursuer)) PounceTarget=Pursuer->GetActorLocation();
         Face(PounceTarget,7,0);
         if (NextFrame>=9) { State=ESleepingDogState::Aiming; StateTicks=0; SelectClip(8,false); }
         return;
@@ -321,9 +375,9 @@ void USleepingDogBehaviorComponent::StepOriginal()
         if (!GroundAt(Character->GetActorLocation(),Ground))
         { Character->SetActorLocation(LastSafeGround,false,nullptr,ETeleportType::TeleportPhysics); State=ESleepingDogState::Landing; StateTicks=0; return; }
         FVector Horizontal=FVector::ZeroVector;
-        if (!bSlidingOffPlayer && Distance(PounceTarget)>150) Horizontal=FRotator(0,Heading,0).Vector()*230*WorldUnitsPerOriginalUnit;
+        if (Distance(PounceTarget)>150) Horizontal=FRotator(0,Heading,0).Vector()*230*WorldUnitsPerOriginalUnit;
         // Late descent can correct toward Spyro by 80 original units; facing remains committed.
-        if (!bSlidingOffPlayer && IsValid(Pursuer))
+        if (IsValid(Pursuer))
         {
             const float D=Distance(Pursuer->GetActorLocation());
             if (D>80 && D<800 && VerticalSpeed<100 && Character->GetActorLocation().Z-Ground.Z>500*WorldUnitsPerOriginalUnit)
@@ -341,26 +395,16 @@ void USleepingDogBehaviorComponent::StepOriginal()
         FVector P=Character->GetActorLocation(); P.Z+=VerticalSpeed*WorldUnitsPerOriginalUnit; VerticalSpeed=FMath::Max(-600.f,VerticalSpeed-50);
         GroundAt(P,Ground);
         const float VerticalDelta=FMath::Max(P.Z,Ground.Z)-Character->GetActorLocation().Z;
-        const FVector VerticalMove=SweepMove(FVector(0,0,VerticalDelta),true);
+        SweepMove(FVector(0,0,VerticalDelta),false);
         if (Character->GetActorLocation().Z<=Ground.Z+1.f && VerticalSpeed<=0)
         {
             LastSafeGround=Character->GetActorLocation();
             State=ESleepingDogState::Landing; StateTicks=0; PlaySound(0);
             if (NextFrame<13) { CurrentFrame=13; NextFrame=14; Progress=0; }
+            HitPlayer();
         }
         else
         {
-            // A stationary or invincible player can hold the dog above the
-            // floor. Slide off the contact instead of tunnelling down or hanging.
-            if (VerticalDelta<0 && VerticalMove.Z>VerticalDelta+1.f && IsValid(Pursuer))
-            {
-                // Commit to the escape: resuming the forward pounce on the next
-                // step would undo this slide and trap the dog over Spyro.
-                bSlidingOffPlayer=true;
-                FVector Away=(Character->GetActorLocation()-Pursuer->GetActorLocation()).GetSafeNormal2D();
-                if (Away.IsNearlyZero()) Away=FRotator(0,Heading,0).Vector();
-                SweepMove(Away*100*WorldUnitsPerOriginalUnit,true);
-            }
             if (NextFrame==13) { CurrentFrame=8; NextFrame=9; Progress=0; }
             HitPlayer();
         }
@@ -368,6 +412,8 @@ void USleepingDogBehaviorComponent::StepOriginal()
     }
     if (State==ESleepingDogState::Landing)
     {
+        // Original state2 includes grounded frames13..18, which can still squash.
+        HitPlayer();
         if (NextFrame>=24 || Complete || StateTicks>50) { State=ESleepingDogState::Returning; StateTicks=0; SelectClip(Base+1); }
         return;
     }
@@ -392,16 +438,23 @@ void USleepingDogBehaviorComponent::TickComponent(float DeltaTime,ELevelTick Tic
     Mesh->SetWorldLocation(FMath::Lerp(PreviousLocation,Character->GetActorLocation(),Alpha)+Home.TransformVector(MeshOffset));
     Mesh->SetWorldRotation(FRotator(0,PreviousHeading+FMath::FindDeltaAngleDegrees(PreviousHeading,Heading)*Alpha-90,0));
 }
-void USleepingDogBehaviorComponent::HitPlayer(bool SweptContact)
+void USleepingDogBehaviorComponent::HitPlayer(const FVector* PreviousOrigin)
 {
     // Pose-finalization can still run while the behavior's simulation is paused.
     // Apply the same pause/authority checks to animation-driven contact damage.
     if (!Character || !Character->HasAuthority() || bDefeated || bHitThisAttack ||
-        !IsValid(Pursuer) || State!=ESleepingDogState::Pouncing ||
+        !IsValid(Pursuer) || (State!=ESleepingDogState::Pouncing && State!=ESleepingDogState::Landing) ||
+        SleepingDogContact::Group(CurrentClip,NextClip,CurrentFrame,NextFrame,Progress)!=1 ||
         SleepingDog::Bool(Damageable,TEXT("Frozen")) ||
         SleepingDog::Bool(Damageable,TEXT("Paralyzed_by_Fear")) ||
         SleepingDog::Bool(Dropper,TEXT("Reset_in_Progress"))) return;
-    if (!SweptContact && !ToastyEncounterCollision::TouchesPlayer(BodyCollision,Pursuer)) return;
+    auto* Player=Cast<ACharacter>(Pursuer); if (!Player) return;
+    const float DogUnits=WorldUnitsPerOriginalUnit*Character->GetActorScale3D().GetAbs().GetMax();
+    const float PlayerRadius=356.f*WorldUnitsPerOriginalUnit*Player->GetActorScale3D().GetAbs().GetMax();
+    // Source Spyro position is a sphere center above his feet, not a tall capsule.
+    const FVector PlayerCenter=Feet(Player)+FVector(0,0,PlayerRadius);
+    const FVector Origin=GetContactOrigin();
+    if (!SleepingDogContact::CrushSweep(PlayerCenter-(PreviousOrigin?*PreviousOrigin:Origin),PlayerCenter-Origin,DogUnits,PlayerRadius)) return;
     FHitResult Wall; FCollisionQueryParams Q(SCENE_QUERY_STAT(SleepingDogAttack),false,Character); SleepingDog::IgnorePlayer(Q,Pursuer);
     if (GetWorld()->LineTraceSingleByChannel(Wall,Character->GetActorLocation(),Pursuer->GetActorLocation(),ECC_Visibility,Q)) return;
     UFunction* F=Pursuer->FindFunction(TEXT("Deal Damage to Player")); if (!F) return;
@@ -421,8 +474,9 @@ void USleepingDogBehaviorComponent::HitPlayer(bool SweptContact)
         if (auto* P=CastField<FStructProperty>(*It)) if (P->Struct==TBaseStructure<FVector>::Get()) *static_cast<FVector*>(V)=(Pursuer->GetActorLocation()-Character->GetActorLocation()).GetSafeNormal2D();
         if (auto* P=CastField<FObjectPropertyBase>(*It)) P->SetObjectPropertyValue(V,Character);
     }
-    bHitThisAttack=true; Pursuer->ProcessEvent(F,Params.GetStructMemory());
-    if (SleepingDog::Number(D,TEXT("Hit Points"))<Before) ++AcceptedPlayerHits;
+    Pursuer->ProcessEvent(F,Params.GetStructMemory());
+    // A rejected/invincible contact must not consume the later landing hit.
+    if (SleepingDog::Number(D,TEXT("Hit Points"))<Before) { bHitThisAttack=true; ++AcceptedPlayerHits; }
 }
 void USleepingDogBehaviorComponent::OnChargeSensorOverlap(UPrimitiveComponent* Component,AActor* Other,UPrimitiveComponent* OtherComponent,int32 BodyIndex,bool bSweep,const FHitResult& Hit)
 {
@@ -441,7 +495,7 @@ void USleepingDogBehaviorComponent::OnAcceptedDamage()
 }
 void USleepingDogBehaviorComponent::Defeat()
 {
-    bDefeated=true; State=ESleepingDogState::Dying; StateTicks=0; DeathSpeed=230; bHitThisAttack=true;
+    bDefeated=true; State=ESleepingDogState::Dying; StateTicks=0; DeathSpeed=230; VerticalSpeed=20; bHitThisAttack=true;
     DropGemRange(0,1); const bool Suppressed=SleepingDog::Bool(Dropper,TEXT("Cannot_Drop_Items")); SleepingDog::SetBool(Dropper,TEXT("Cannot_Drop_Items"),true);
     if (auto* P=CastField<FMulticastDelegateProperty>(SleepingDog::Property(Damageable,TEXT("Damage Was Successfully Dealt"))))
         if (auto* D=P->GetMulticastDelegate(P->ContainerPtrToValuePtr<void>(Damageable))) D->ProcessMulticastDelegate<UObject>(nullptr);
@@ -458,7 +512,7 @@ void USleepingDogBehaviorComponent::FinishCorpse()
 void USleepingDogBehaviorComponent::OnDropperReset()
 {
     StopSounds(); SoundCueHistory.Reset(); ReleasedGemIndices.Reset(); GemsSpawned=0; Health=2;
-    State=ESleepingDogState::Sleeping; StateTicks=0; Cooldown=70; bDefeated=bHitThisAttack=bCorpseFinished=bBlocked=bSlidingOffPlayer=false;
+    State=ESleepingDogState::Sleeping; StateTicks=0; Cooldown=70; bDefeated=bHitThisAttack=bCorpseFinished=bBlocked=false;
     Accumulator=VerticalSpeed=DeathSpeed=0; AcceptedPlayerHits=PounceCount=0;
     Character->SetActorTransform(Home,false,nullptr,ETeleportType::TeleportPhysics); PreviousLocation=LastSafeGround=Home.GetLocation(); Heading=PreviousHeading=Home.Rotator().Yaw;
     Character->SetActorHiddenInGame(false); Character->SetActorEnableCollision(true);

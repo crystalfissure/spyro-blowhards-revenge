@@ -177,14 +177,73 @@ void UToastyBehaviorComponent::UpdateBodyCollision()
 {
     ToastyEncounterCollision::FitBody(Mesh,BodyCollision,ChargeSensor,ActiveMesh!=3);
 }
+bool UToastyBehaviorComponent::FindTerrainObstacle(const FVector& Start,const FVector& Delta,FHitResult& Obstacle) const
+{
+    const auto* Capsule=Character->GetCapsuleComponent();
+    const auto Shape=FCollisionShape::MakeCapsule(Capsule->GetScaledCapsuleRadius(),Capsule->GetScaledCapsuleHalfHeight()-1);
+    FCollisionQueryParams Query(SCENE_QUERY_STAT(ToastyTerrain),false,Character); Toasty::IgnorePlayer(Query,Pursuer);
+    TArray<FHitResult> Hits;
+    GetWorld()->SweepMultiByChannel(Hits,Start,Start+Delta,FQuat::Identity,ECC_WorldStatic,Shape,Query);
+    bool Blocked=false;
+    for (const auto& Hit:Hits)
+    {
+        if (!Hit.bBlockingHit) continue;
+        // A capsule already touching/inside a wall must be allowed to move out.
+        // Never discard an initial contact that the requested move deepens.
+        if (Hit.bStartPenetrating && Hit.GetComponent())
+        {
+            FMTDResult Before,After;
+            const bool OverlapBefore=Hit.GetComponent()->ComputePenetration(Before,Shape,Start,FQuat::Identity);
+            const bool OverlapAfter=Hit.GetComponent()->ComputePenetration(After,Shape,Start+Delta,FQuat::Identity);
+            if (FVector::DotProduct(Delta,Hit.Normal)>=-KINDA_SMALL_NUMBER &&
+                (!OverlapAfter || (OverlapBefore && After.Distance<Before.Distance-KINDA_SMALL_NUMBER))) continue;
+        }
+        if (!Blocked || Hit.Time<Obstacle.Time) Obstacle=Hit;
+        Blocked=true;
+    }
+    return Blocked;
+}
+void UToastyBehaviorComponent::RecoverTerrainPenetration()
+{
+    // A saved placement or moving obstacle may leave the capsule inside a
+    // wall. Resolve only a shallow lateral capsule overlap.
+    // Commit only a supported, completely clear endpoint; no route teleport.
+    const auto* Capsule=Character->GetCapsuleComponent();
+    const auto Shape=FCollisionShape::MakeCapsule(Capsule->GetScaledCapsuleRadius(),Capsule->GetScaledCapsuleHalfHeight()-1);
+    FCollisionQueryParams Query(SCENE_QUERY_STAT(ToastyRecoverTerrain),false,Character); Toasty::IgnorePlayer(Query,Pursuer);
+    const FVector Start=Character->GetActorLocation();
+    FVector Candidate=Start;
+    for (int32 Iteration=0;Iteration<4;++Iteration)
+    {
+        TArray<FOverlapResult> Hits;
+        GetWorld()->OverlapMultiByChannel(Hits,Candidate,FQuat::Identity,ECC_WorldStatic,Shape,Query);
+        FVector Correction=FVector::ZeroVector;
+        for (const auto& Hit:Hits)
+        {
+            if (!Hit.bBlockingHit || !Hit.GetComponent()) continue;
+            FMTDResult Contact;
+            if (!Hit.GetComponent()->ComputePenetration(Contact,Shape,Candidate,FQuat::Identity) || FMath::Abs(Contact.Direction.Z)>.5f) continue;
+            const FVector Horizontal=Contact.Direction.GetSafeNormal2D();
+            Correction+=Horizontal*(Contact.Distance+2.f)/FMath::Max(.5f,FVector::DotProduct(Horizontal,Contact.Direction));
+        }
+        if (Correction.IsNearlyZero()) break;
+        Candidate+=Correction;
+        if (FVector::Dist2D(Start,Candidate)>Capsule->GetScaledCapsuleRadius()*.5f) return;
+    }
+    if (Candidate.Equals(Start)) return;
+    FVector Ground;
+    if (!GroundAt(Candidate,Ground) || FMath::Abs(Ground.Z-Start.Z)>600*WorldUnitsPerOriginalUnit ||
+        GetWorld()->OverlapBlockingTestByChannel(Ground,FQuat::Identity,ECC_WorldStatic,Shape,Query)) return;
+    FHitResult Obstacle;
+    if (FindTerrainObstacle(Start,Ground-Start,Obstacle)) return;
+    Character->SetActorLocation(Ground,false,nullptr,ETeleportType::TeleportPhysics);
+    LastSafeGround=Ground;
+}
 FVector UToastyBehaviorComponent::SweepMove(const FVector& Delta,bool PlayerBlocks)
 {
     FCollisionQueryParams Q(SCENE_QUERY_STAT(ToastyMove),false,Character); Toasty::IgnorePlayer(Q,Pursuer,!PlayerBlocks);
-    FCollisionQueryParams WorldQ=Q; Toasty::IgnorePlayer(WorldQ,Pursuer);
     FHitResult Wall; const FVector Start=Character->GetActorLocation();
-    auto* Capsule=Character->GetCapsuleComponent();
-    GetWorld()->SweepSingleByChannel(Wall,Start,Start+Delta,FQuat::Identity,ECC_WorldStatic,FCollisionShape::MakeCapsule(Capsule->GetScaledCapsuleRadius(),Capsule->GetScaledCapsuleHalfHeight()-1),WorldQ);
-    float Fraction=Wall.bBlockingHit?FMath::Max(0.f,Wall.Time-.002f):1.f;
+    float Fraction=FindTerrainObstacle(Start,Delta,Wall)?FMath::Max(0.f,Wall.Time-.002f):1.f;
     if (PlayerBlocks)
     {
         FCollisionObjectQueryParams O; O.AddObjectTypesToQuery(ECC_Pawn); O.AddObjectTypesToQuery(ECC_GameTraceChannel4);
@@ -201,6 +260,7 @@ FVector UToastyBehaviorComponent::SweepMove(const FVector& Delta,bool PlayerBloc
 }
 bool UToastyBehaviorComponent::GroundMove(const FVector& Delta)
 {
+    RecoverTerrainPenetration();
     ToastyEncounterCollision::LiftFromFloor(Character,Pursuer,WorldUnitsPerOriginalUnit);
     FVector Move;
     if (!ProjectGroundMove(Delta,Move)) { bBlocked=true; return false; }
@@ -211,31 +271,45 @@ bool UToastyBehaviorComponent::ProjectGroundMove(const FVector& Delta,FVector& M
 {
     FVector Ground; const FVector Start=Character->GetActorLocation();
     if (!GroundAt(Start+Delta,Ground) || FMath::Abs(Ground.Z-Start.Z)>600*WorldUnitsPerOriginalUnit) return false;
-    // Footprint probes reject unsupported landings/ledges, rather than balancing the root over a void.
-    const float R=Character->GetCapsuleComponent()->GetScaledCapsuleRadius()*.7f;
+    // GroundAt already settles the entire capsule. These additional ledge
+    // checks are rays: fitting another full capsule at each edge doubled up
+    // the footprint and prevented even movement away from nearby walls.
+    const auto* Capsule=Character->GetCapsuleComponent();
+    const float R=Capsule->GetScaledCapsuleRadius()*.7f;
+    FCollisionQueryParams Query(SCENE_QUERY_STAT(ToastyFootprint),false,Character); Toasty::IgnorePlayer(Query,Pursuer);
+    FCollisionObjectQueryParams Types; Types.AddObjectTypesToQuery(ECC_WorldStatic); Types.AddObjectTypesToQuery(ECC_WorldDynamic);
+    const float MaxStep=600*WorldUnitsPerOriginalUnit;
     for (const FVector& Offset:{FVector(R,0,0),FVector(-R,0,0),FVector(0,R,0),FVector(0,-R,0)})
-    { FVector Edge; if (!GroundAt(Start+Delta+Offset,Edge) || FMath::Abs(Edge.Z-Ground.Z)>600*WorldUnitsPerOriginalUnit) return false; }
+    {
+        const FVector Edge=Ground+Offset-FVector(0,0,Capsule->GetScaledCapsuleHalfHeight());
+        TArray<FHitResult> Hits;
+        GetWorld()->LineTraceMultiByObjectType(Hits,Edge+FVector(0,0,MaxStep),Edge-FVector(0,0,MaxStep),Types,Query);
+        bool Supported=false;
+        for (const auto& Hit:Hits)
+        {
+            const auto* Surface=Hit.GetComponent();
+            if (Surface && !Cast<APawn>(Hit.GetActor()) && Hit.ImpactNormal.Z>=.65f &&
+                Surface->GetCollisionResponseToChannel(Capsule->GetCollisionObjectType())==ECR_Block)
+            { Supported=true; break; }
+        }
+        if (!Supported) return false;
+    }
     Move=Delta; Move.Z=Ground.Z-Start.Z;
     return true;
 }
-FVector UToastyBehaviorComponent::FindGuardDirection(const FVector& Preferred,const FVector& Center) const
+FVector UToastyBehaviorComponent::FindGroundDirection(const FVector& Preferred,float Step,const FVector* Center) const
 {
-    const float Step=(180+Stage*20)*WorldUnitsPerOriginalUnit;
     const FVector Start=Character->GetActorLocation();
-    auto* Capsule=Character->GetCapsuleComponent();
-    FCollisionQueryParams Query(SCENE_QUERY_STAT(ToastyGuardSteering),false,Character); Toasty::IgnorePlayer(Query,Pursuer);
-    // Probe short paths before turning. Keep the selected detour for a while so
-    // a wall does not make successive simulation steps flip direction in place.
+    // Probe short supported paths before turning. The caller keeps a detour
+    // briefly so each step does not turn straight back into the same wall.
     for (float Angle:{0.f,45.f,-45.f,90.f,-90.f,135.f,-135.f,180.f})
     {
         const FVector Direction=Preferred.RotateAngleAxis(Angle*OrbitDirection,FVector::UpVector);
-        if (FVector::Dist2D(Start+Direction*Step*2,Center)>GuardAreaRadius) continue;
+        if (Center && FVector::Dist2D(Start+Direction*Step*2,*Center)>GuardAreaRadius) continue;
         FVector Move;
         if (!ProjectGroundMove(Direction*Step*2,Move)) continue;
         FHitResult Wall;
-        GetWorld()->SweepSingleByChannel(Wall,Start,Start+Move,FQuat::Identity,ECC_WorldStatic,
-            FCollisionShape::MakeCapsule(Capsule->GetScaledCapsuleRadius(),Capsule->GetScaledCapsuleHalfHeight()-1),Query);
-        if (!Wall.bBlockingHit) return Direction;
+        if (!FindTerrainObstacle(Start,Move,Wall)) return Direction;
     }
     return FVector::ZeroVector;
 }
@@ -396,7 +470,7 @@ void UToastyBehaviorComponent::LeaveCostume()
 }
 void UToastyBehaviorComponent::BeginRetreat()
 {
-    State=EToastyState::Retreat; StateTicks=0; SelectClip(Health==1?8:1);
+    State=EToastyState::Retreat; StateTicks=0; AvoidTicks=0; AvoidDirection=FVector::ZeroVector; SelectClip(Health==1?8:1);
 }
 void UToastyBehaviorComponent::StepOriginal()
 {
@@ -433,8 +507,21 @@ void UToastyBehaviorComponent::StepOriginal()
         const FVector Destination=StagePosition(Stage+1);
         if (Distance(Destination)<600)
         { Stage=FMath::Min(Stage+1,2); bEngaged=false; AvoidTicks=0; State=HasLivingGuards()?EToastyState::Guarded:EToastyState::Idle; StateTicks=0; SelectClip(Base); return; }
-        if (Face(Destination,9,20)) GroundMove(FRotator(0,Heading,0).Vector()*200*WorldUnitsPerOriginalUnit);
-        return; // A blocked authored route stays blocked; never teleport through production geometry.
+        RecoverTerrainPenetration();
+        ToastyEncounterCollision::LiftFromFloor(Character,Pursuer,WorldUnitsPerOriginalUnit);
+        const float Step=200*WorldUnitsPerOriginalUnit;
+        const FVector Preferred=(Destination-Character->GetActorLocation()).GetSafeNormal2D();
+        FVector Direction=Preferred;
+        if (AvoidTicks>0) { --AvoidTicks; Direction=AvoidDirection; }
+        else
+        {
+            Direction=FindGroundDirection(Preferred,Step);
+            if (!Direction.IsNearlyZero() && !Direction.Equals(Preferred,.01f)) { AvoidDirection=Direction; AvoidTicks=20; }
+        }
+        if (!Direction.IsNearlyZero() && Face(Character->GetActorLocation()+Direction*1000,9,20))
+            if (!GroundMove(FRotator(0,Heading,0).Vector()*Step))
+            { AvoidDirection=FindGroundDirection(Preferred,Step); AvoidTicks=AvoidDirection.IsNearlyZero()?0:20; }
+        return; // Unsupported or enclosed routes still stop rather than teleporting.
     }
     if (State==EToastyState::Attack)
     {
@@ -464,11 +551,12 @@ void UToastyBehaviorComponent::StepOriginal()
             // escape point. The outer band turns fleeing into an inward orbit.
             if (Radius>GuardAreaRadius*.65f)
                 Direction=(FVector(-Radial.Y,Radial.X,0)*OrbitDirection-Radial*.65f).GetSafeNormal2D();
+            RecoverTerrainPenetration();
             ToastyEncounterCollision::LiftFromFloor(Character,Pursuer,WorldUnitsPerOriginalUnit);
             if (AvoidTicks>0) { --AvoidTicks; Direction=AvoidDirection; }
             else
             {
-                const FVector Safe=FindGuardDirection(Direction,Center);
+                const FVector Safe=FindGroundDirection(Direction,(180+Stage*20)*WorldUnitsPerOriginalUnit,&Center);
                 if (!Safe.IsNearlyZero() && !Safe.Equals(Direction,.01f)) { AvoidDirection=Safe; AvoidTicks=20; Direction=Safe; }
             }
             SelectClip(Base+1);
@@ -478,9 +566,9 @@ void UToastyBehaviorComponent::StepOriginal()
                 const FVector Move=FRotator(0,Heading,0).Vector()*Step;
                 if (FVector::Dist2D(Character->GetActorLocation()+Move,Center)<=GuardAreaRadius)
                 {
-                    if (!GroundMove(Move)) { AvoidDirection=FindGuardDirection(Direction,Center); AvoidTicks=20; }
+                    if (!GroundMove(Move)) { AvoidDirection=FindGroundDirection(Direction,(180+Stage*20)*WorldUnitsPerOriginalUnit,&Center); AvoidTicks=20; }
                 }
-                else { AvoidDirection=FindGuardDirection(-Radial,Center); AvoidTicks=20; }
+                else { AvoidDirection=FindGroundDirection(-Radial,(180+Stage*20)*WorldUnitsPerOriginalUnit,&Center); AvoidTicks=20; }
             }
         }
         return;

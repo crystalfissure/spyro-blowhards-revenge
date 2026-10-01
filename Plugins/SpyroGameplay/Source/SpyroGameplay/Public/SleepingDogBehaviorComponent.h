@@ -65,7 +65,10 @@ private:
     bool GroundAt(const FVector& Point, FVector& Ground) const;
     FVector SweepMove(const FVector& Delta, bool PlayerBlocks);
     bool GroundMove(const FVector& Delta);
-    void HitPlayer(bool SweptContact = false);
+    FVector GetContactOrigin() const;
+    void UpdateContactResponse();
+    void UpdateReactionColors();
+    void HitPlayer(const FVector* PreviousOrigin = nullptr);
     void Defeat();
     void FinishCorpse();
     void DropGemRange(int32 First, int32 Count);
@@ -82,7 +85,8 @@ private:
     float Heading = 0, PreviousHeading = 0, Accumulator = 0, VerticalSpeed = 0, DeathSpeed = 0;
     int32 NextClip = 0, NextFrame = 1, Progress = 0, ProgressPerStep = 32;
     int32 Cooldown = 70, StateTicks = 0, ActiveMesh = -1;
-    bool bFirstTick = true, bHitThisAttack = false, bCorpseFinished = false, bSlidingOffPlayer = false;
+    int32 ReactionColorStage = INDEX_NONE;
+    bool bFirstTick = true, bHitThisAttack = false, bCorpseFinished = false;
     TSet<int32> ReleasedGemIndices;
     FDelegateHandle BoneTransformsHandle;
 };

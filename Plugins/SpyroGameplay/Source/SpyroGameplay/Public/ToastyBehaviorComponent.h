@@ -86,7 +86,9 @@ private:
     FVector SweepMove(const FVector& Delta, bool PlayerBlocks);
     bool GroundMove(const FVector& Delta);
     bool ProjectGroundMove(const FVector& Delta, FVector& Move) const;
-    FVector FindGuardDirection(const FVector& Preferred, const FVector& Center) const;
+    bool FindTerrainObstacle(const FVector& Start, const FVector& Delta, FHitResult& Obstacle) const;
+    void RecoverTerrainPenetration();
+    FVector FindGroundDirection(const FVector& Preferred, float Step, const FVector* Center = nullptr) const;
     void HitPlayer();
     void PublishDefeat();
     void FinishCorpse();
