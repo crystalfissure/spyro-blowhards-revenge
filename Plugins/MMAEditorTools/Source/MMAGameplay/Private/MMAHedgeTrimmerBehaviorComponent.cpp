@@ -1,5 +1,6 @@
 #include "MMAHedgeTrimmerBehaviorComponent.h"
 #include "MMADeathLaunch.h"
+#include "MMAMeleeContact.h"
 
 #include "AIController.h"
 #include "Animation/AnimSingleNodeInstance.h"
@@ -1069,6 +1070,11 @@ void UMMAHedgeTrimmerBehaviorComponent::ApplyAttackHit()
         return;
     }
 
+    if (!MMAMeleeContact::HasClearContact(Owner, Target))
+    {
+        ShowDebugMessage(TEXT("Hedge_Trimmer attack MISS (height or obstruction)"), FColor::Yellow);
+        return;
+    }
     bool bDamageApplied = false;
     if (!DealNativeDamageToTarget(Target, bDamageApplied))
     {

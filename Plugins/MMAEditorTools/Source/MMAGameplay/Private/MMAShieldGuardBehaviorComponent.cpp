@@ -1,4 +1,5 @@
 #include "MMAShieldGuardBehaviorComponent.h"
+#include "MMAMeleeContact.h"
 
 #include "AIController.h"
 #include "Animation/AnimSequence.h"
@@ -910,6 +911,7 @@ void UMMAShieldGuardBehaviorComponent::ApplyAttackHit()
     {
         return;
     }
+    if (!MMAMeleeContact::HasClearContact(Owner, Target)) return;
     bool bDamageApplied = false;
     if (DealNativeDamageToTarget(Target, bDamageApplied) && bDamageApplied)
     {

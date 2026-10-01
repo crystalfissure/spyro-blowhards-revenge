@@ -162,6 +162,10 @@ void USleepingDogBehaviorComponent::SelectClip(int32 Clip,bool Blend)
     const int32 NewMesh=DogMesh(Clip);
     if (NewMesh!=ActiveMesh)
     {
+        // SetSkeletalMesh can evaluate synchronously. Never sample the old rig's
+        // clip with the new rig's bone container during a flame/form transition.
+        Mesh->SetAnimInstanceClass(nullptr);
+        CurrentClip=NextClip=Clip; CurrentFrame=Progress=0; NextFrame=DogFrames[Clip]>1?1:0;
         ActiveMesh=NewMesh; Mesh->SetSkeletalMesh(Meshes[NewMesh]); Mesh->EmptyOverrideMaterials();
         Mesh->SetAnimInstanceClass(USleepingDogAnimInstance::StaticClass()); Blend=false;
     }
@@ -390,7 +394,13 @@ void USleepingDogBehaviorComponent::TickComponent(float DeltaTime,ELevelTick Tic
 }
 void USleepingDogBehaviorComponent::HitPlayer(bool SweptContact)
 {
-    if (bHitThisAttack || !IsValid(Pursuer) || State!=ESleepingDogState::Pouncing) return;
+    // Pose-finalization can still run while the behavior's simulation is paused.
+    // Apply the same pause/authority checks to animation-driven contact damage.
+    if (!Character || !Character->HasAuthority() || bDefeated || bHitThisAttack ||
+        !IsValid(Pursuer) || State!=ESleepingDogState::Pouncing ||
+        SleepingDog::Bool(Damageable,TEXT("Frozen")) ||
+        SleepingDog::Bool(Damageable,TEXT("Paralyzed_by_Fear")) ||
+        SleepingDog::Bool(Dropper,TEXT("Reset_in_Progress"))) return;
     if (!SweptContact && !ToastyEncounterCollision::TouchesPlayer(BodyCollision,Pursuer)) return;
     FHitResult Wall; FCollisionQueryParams Q(SCENE_QUERY_STAT(SleepingDogAttack),false,Character); SleepingDog::IgnorePlayer(Q,Pursuer);
     if (GetWorld()->LineTraceSingleByChannel(Wall,Character->GetActorLocation(),Pursuer->GetActorLocation(),ECC_Visibility,Q)) return;
@@ -399,7 +409,15 @@ void USleepingDogBehaviorComponent::HitPlayer(bool SweptContact)
     for (TFieldIterator<FProperty> It(F);It && It->HasAnyPropertyFlags(CPF_Parm);++It)
     {
         void* V=It->ContainerPtrToValuePtr<void>(Params.GetStructMemory());
-        if (auto* P=CastField<FByteProperty>(*It)) P->SetPropertyValue(V,1);
+        if (auto* P=CastField<FByteProperty>(*It))
+        {
+            // Crush selects Spyro's existing squash/recovery/death reaction.
+            // Resolve the saved enum entry: its suffix is not its numeric value.
+            const int64 CrushDamage = P->Enum
+                ? P->Enum->GetValueByNameString(TEXT("Damage_Types::NewEnumerator2")) : INDEX_NONE;
+            if (CrushDamage < 0 || CrushDamage > MAX_uint8) return;
+            P->SetPropertyValue(V, static_cast<uint8>(CrushDamage));
+        }
         if (auto* P=CastField<FStructProperty>(*It)) if (P->Struct==TBaseStructure<FVector>::Get()) *static_cast<FVector*>(V)=(Pursuer->GetActorLocation()-Character->GetActorLocation()).GetSafeNormal2D();
         if (auto* P=CastField<FObjectPropertyBase>(*It)) P->SetObjectPropertyValue(V,Character);
     }

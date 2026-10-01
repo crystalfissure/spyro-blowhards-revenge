@@ -9,6 +9,8 @@ Both derive from the project's `Base_Enemy_BP`. Their behavior and animation cla
 
 ## Placement
 
+The 1 October 2026 correction guards Toreador's reaction completion by its actual reaction clip. A Bull arriving on the preceding idle/attack clip's completion update no longer skips the reaction. Focused native checks cover that transition and normal reaction completion; route authoring defaults and movement speeds are unchanged.
+
 Place either Blueprint with its capsule resting on blocking ground (root approximately 92 cm above a horizontal floor at default scale). They work independently. To create a pair, select the Toreador's **ToreadorBehavior** component and explicitly assign **Town Square > Pair > Linked Bull** to the placed Bull. Leave it empty for standalone cape combat. There is no nearest-enemy pairing. Each Bull accepts one Toreador; `Pair Conflict` and `Validate Placement` expose invalid assignments. Destroying a partner clears its reciprocal runtime link. Defeating one changes the surviving member's behavior without deleting the authored assignment, so checkpoint reset can restore the pair.
 
 The Toreador's explicit link controls the Bull's movement; no separate movement selector is needed:

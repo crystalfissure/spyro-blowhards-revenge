@@ -510,7 +510,8 @@ void UTownSquareEnemyBehaviorComponent::StepToreador(bool Complete)
     {
         if (!Paired) { State=ETownSquareEnemyState::Idle; SelectClip(0); return; }
         HeadingDegrees=FMath::FixedTurn(HeadingDegrees,Partner->HeadingDegrees,30*360.f/256.f);
-        if (Complete) { State=ETownSquareEnemyState::Pursuit; SelectClip(1); StateTicks=0; }
+        // Complete may belong to the idle/attack clip that just triggered React.
+        if (Complete && CurrentClip==5) { State=ETownSquareEnemyState::Pursuit; SelectClip(1); StateTicks=0; }
         return;
     }
     if (State==ETownSquareEnemyState::Pursuit)

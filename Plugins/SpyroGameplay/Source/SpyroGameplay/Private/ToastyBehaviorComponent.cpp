@@ -121,9 +121,14 @@ void UToastyBehaviorComponent::SelectClip(int32 Clip,bool Blend)
     const int32 NewMesh=ToastyMesh(Clip);
     if (NewMesh!=ActiveMesh)
     {
+        // Clear the old proxy and publish the new clip before synchronous pose
+        // initialization; costume/sheep rigs use different bone containers.
+        Mesh->SetAnimInstanceClass(nullptr);
+        CurrentClip=NextClip=Clip; CurrentFrame=Progress=0; NextFrame=ToastyFrames[Clip]>1?1:0;
         ActiveMesh=NewMesh; Mesh->SetSkeletalMesh(Meshes[NewMesh]);
         const float Scale=NewMesh==3?.292208f:.584416f; Mesh->SetRelativeScale3D(FVector(Scale));
-        MeshOffset.Z=-Character->GetCapsuleComponent()->GetScaledCapsuleHalfHeight()-(Meshes[NewMesh]->GetBounds().Origin.Z-Meshes[NewMesh]->GetBounds().BoxExtent.Z)*Scale; Mesh->EmptyOverrideMaterials();
+        // MeshOffset is local; Home.TransformVector applies actor scale later.
+        MeshOffset.Z=-Character->GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight()-(Meshes[NewMesh]->GetBounds().Origin.Z-Meshes[NewMesh]->GetBounds().BoxExtent.Z)*Scale; Mesh->EmptyOverrideMaterials();
         Mesh->SetAnimInstanceClass(UToastyAnimInstance::StaticClass()); Blend=false;
     }
     if (Blend && NextClip==Clip) return;
