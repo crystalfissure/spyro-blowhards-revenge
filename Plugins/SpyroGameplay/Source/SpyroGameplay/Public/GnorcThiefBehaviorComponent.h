@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "SpyroEnemyEvents.h"
 #include "GnorcThiefBehaviorComponent.generated.h"
 class ACharacter;
 class USkeletalMesh;
@@ -22,6 +23,8 @@ class SPYROGAMEPLAY_API UGnorcThiefBehaviorComponent : public UActorComponent
     GENERATED_BODY()
 public:
     UGnorcThiefBehaviorComponent();
+    /** Optional feedback, dispatched after native updates; Detail is clip/stage/recovery/node. */
+    UPROPERTY(BlueprintAssignable, Category="Spyro|Enemy Events") FSpyroEnemySignalEvent OnEnemySignal;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Thief|Animation") UAnimSequence* IdleAnimation = nullptr;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Thief|Animation") UAnimSequence* AlertAnimation = nullptr;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Thief|Animation") UAnimSequence* RunAnimation = nullptr;
@@ -72,6 +75,13 @@ public:
     /** Draw the fitted route, body, requested/achieved movement and obstruction reason during play. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Thief|Debug") bool bDrawMovementDebug = false;
     UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Thief|Debug") UAudioComponent* VoiceAudio = nullptr;
+    /** Reject invalid data without altering the last accepted route. Route origin stays at spawn. */
+    UFUNCTION(BlueprintCallable, Category="Thief|Route") bool SetRouteConfiguration(const TArray<FVector>& NewRoutePoints, float NewWorldUnitsPerOriginalUnit, FString& Error);
+    UFUNCTION(BlueprintCallable, Category="Thief|Route") bool SetRoutePoints(const TArray<FVector>& NewRoutePoints, FString& Error);
+    /** Empty string means that the placed actor's required configuration is usable. */
+    UFUNCTION(BlueprintPure, Category="Thief|Validation") FString ValidateConfiguration() const;
+    UFUNCTION(CallInEditor, Category="Thief|Validation") void ValidateInEditor();
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Thief|Validation") FString LastRouteError;
     UAnimSequence* AnimationForClip(int32 Clip) const;
     void GetPoseInputs(UAnimSequence*& A, UAnimSequence*& B, float& TimeA, float& TimeB, float& Alpha) const;
     virtual void BeginPlay() override;
@@ -83,10 +93,16 @@ public:
     virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
 #endif
 private:
+    FSpyroEnemyEventQueue PendingEnemyEvents;
     UFUNCTION() void OnAcceptedDamage();
     UFUNCTION() void OnDropperReset();
     UFUNCTION() void OnChargeSensorOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
     void BindContracts();
+    bool RefreshRouteConfiguration();
+    void AcceptRouteConfiguration(bool bNotify);
+    TArray<FVector> AcceptedRoutePoints;
+    float AcceptedWorldUnits = 0.f;
+    bool bHasAcceptedRoute = false;
     void TakeMovementControl();
     void EnterState(EGnorcThiefState NewState);
     void SelectClip(int32 Clip, bool bBlend);

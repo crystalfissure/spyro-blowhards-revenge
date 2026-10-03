@@ -1,4 +1,5 @@
 #include "TownSquareEnemyBehaviorComponent.h"
+#include "SpyroMeleeContact.h"
 #include "TownSquareEnemyAnimInstance.h"
 #include "GameFramework/Controller.h"
 
@@ -396,7 +397,7 @@ void UTownSquareEnemyBehaviorComponent::FollowRunPath(float Speed)
     }
     CurrentRouteNode=(FMath::FloorToInt(RuntimeRunPath->SplineCurves.ReparamTable.Eval(RunPathDistance,0.f))+1)%RuntimeRunPath->GetNumberOfSplinePoints();
     if (!bPlayerBlocked && RequestedStepDelta.Size2D()>.1f && LastStepDelta.Size2D()<.5f) ++BlockedTicks; else BlockedTicks=0;
-    if (BlockedTicks>=12) { RouteDirection=-RouteDirection; BlockedTicks=0; ++RecoveryCount; }
+    if (BlockedTicks>=12) { RouteDirection=-RouteDirection; BlockedTicks=0; ++RecoveryCount; PendingEnemyEvents.Add(ESpyroEnemySignal::RecoveryStarted, RecoveryCount); }
 }
 void UTownSquareEnemyBehaviorComponent::FollowRoute(float Speed, bool bBackAndForth)
 {
@@ -424,7 +425,7 @@ void UTownSquareEnemyBehaviorComponent::FollowRoute(float Speed, bool bBackAndFo
     // through the initial half-turn bends it away from its authored line.
     if (Face(RoutePosition(CurrentRouteNode),30,bBackAndForth ? 1.f : 128.f)) GroundMove(Speed,HeadingDegrees);
     if (!bPlayerBlocked && RequestedStepDelta.Size2D()>0.1f && LastStepDelta.Size2D()<0.5f) ++BlockedTicks; else BlockedTicks=0;
-    if (BlockedTicks>=12) { RouteDirection=-RouteDirection; CurrentRouteNode=LastReachedRouteNode; BlockedTicks=0; ++RecoveryCount; }
+    if (BlockedTicks>=12) { RouteDirection=-RouteDirection; CurrentRouteNode=LastReachedRouteNode; BlockedTicks=0; ++RecoveryCount; PendingEnemyEvents.Add(ESpyroEnemySignal::RecoveryStarted, RecoveryCount); }
 }
 bool UTownSquareEnemyBehaviorComponent::CanBullGore(float Cone) const
 {
@@ -474,7 +475,7 @@ void UTownSquareEnemyBehaviorComponent::StepBull(bool Complete)
         if (!CanBullGore(60)) return false;
         SlideDisplacement=0; BlockedTicks=0;
         if (Cooldown==0)
-        { State=ETownSquareEnemyState::Attack; SelectClip(8); bHitThisAttack=false; StateTicks=0; }
+        { State=ETownSquareEnemyState::Attack; SelectClip(8); bHitThisAttack=false; StateTicks=0; PendingEnemyEvents.Add(ESpyroEnemySignal::AttackCommitted, 8); }
         else
         { State=ETownSquareEnemyState::Idle; SelectClip(0); Face(Pursuer->GetActorLocation(),6); }
         return true;
@@ -532,7 +533,7 @@ void UTownSquareEnemyBehaviorComponent::StepToreador(bool Complete)
     if (IsValid(Pursuer) && OriginalDistanceTo(Pursuer->GetActorLocation())<8192) Face(Pursuer->GetActorLocation(),10);
     if (!Paired && Cooldown==0 && IsValid(Pursuer) && OriginalDistanceTo(Pursuer->GetActorLocation())<2048 &&
         FMath::Abs(FloorPosition(Pursuer).Z-FloorPosition(Character).Z)<800*WorldUnitsPerOriginalUnit)
-    { State=ETownSquareEnemyState::Attack; SelectClip(8); bHitThisAttack=false; }
+    { State=ETownSquareEnemyState::Attack; SelectClip(8); bHitThisAttack=false; PendingEnemyEvents.Add(ESpyroEnemySignal::AttackCommitted, 8); }
 }
 void UTownSquareEnemyBehaviorComponent::StepOriginal()
 {
@@ -553,7 +554,7 @@ void UTownSquareEnemyBehaviorComponent::TickComponent(float DeltaTime,ELevelTick
     if (bFirstTick) { BindContracts(); bFirstTick=false; }
     ReconcilePair(); UpdateBullPatrol(); TakeMovementControl();
     if (!IsValid(Pursuer)) Pursuer=UGameplayStatics::GetPlayerPawn(this,0);
-    if (TownSquare::Bool(Damageable,TEXT("Frozen")) || TownSquare::Bool(Damageable,TEXT("Paralyzed_by_Fear")) || TownSquare::Bool(Dropper,TEXT("Reset_in_Progress"))) return;
+    if (TownSquare::Bool(Damageable,TEXT("Frozen")) || TownSquare::Bool(Damageable,TEXT("Paralyzed_by_Fear")) || TownSquare::Bool(Dropper,TEXT("Reset_in_Progress"))) { PendingEnemyEvents.Flush(this, OnEnemySignal); return; }
     Accumulator+=FMath::Max(0.f,DeltaTime); int32 Steps=0;
     while (Accumulator+KINDA_SMALL_NUMBER>=TownSquareStep && Steps++<30) { Accumulator=FMath::Max(0.f,Accumulator-TownSquareStep); StepOriginal(); }
     Accumulator=FMath::Min(Accumulator,TownSquareStep);
@@ -561,6 +562,7 @@ void UTownSquareEnemyBehaviorComponent::TickComponent(float DeltaTime,ELevelTick
     Mesh->SetWorldLocation(FMath::Lerp(PreviousLocation,Character->GetActorLocation(),Alpha)+Character->GetActorTransform().TransformVector(MeshRelativeLocation)+FVector(0,0,DeathLift));
     Mesh->SetWorldRotation(FRotator(0,PreviousHeading+FMath::FindDeltaAngleDegrees(PreviousHeading,HeadingDegrees)*Alpha+MeshForwardYaw,0));
     DrawMovementDebug();
+    PendingEnemyEvents.Flush(this, OnEnemySignal);
 }
 void UTownSquareEnemyBehaviorComponent::OnChargeSensorOverlap(UPrimitiveComponent* Component,AActor* Other,UPrimitiveComponent* OtherComponent,int32 BodyIndex,bool bSweep,const FHitResult& Hit)
 {
@@ -607,6 +609,7 @@ void UTownSquareEnemyBehaviorComponent::FinishCorpse()
 }
 void UTownSquareEnemyBehaviorComponent::OnDropperReset()
 {
+    PendingEnemyEvents.Reset();
     StopSounds(); SoundCueHistory.Reset(); ReleasedGemIndices.Reset(); GemsSpawned=0;
     bDefeated=bHitThisAttack=bCorpseFinished=false; State=ETownSquareEnemyState::Idle;
     Accumulator=SlideDisplacement=DeathLift=DeathVerticalSpeed=0; CurrentRouteNode=LastReachedRouteNode=StateTicks=Cooldown=BlockedTicks=RecoveryCount=0; RouteDirection=1;
@@ -617,9 +620,11 @@ void UTownSquareEnemyBehaviorComponent::OnDropperReset()
     HeadingDegrees=PreviousHeading=RouteOrigin.Rotator().Yaw; PreviousLocation=Character->GetActorLocation();
     BodyCollision->SetCollisionEnabled(ECollisionEnabled::QueryOnly); ChargeSensor->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
     TownSquare::SetNumber(Damageable,TEXT("Hit Points"),1); TakeMovementControl(); SelectClip(0,false); ReconcilePair();
+    PendingEnemyEvents.Add(ESpyroEnemySignal::ResetCompleted);
 }
 void UTownSquareEnemyBehaviorComponent::EndPlay(const EEndPlayReason::Type Reason)
 {
+    PendingEnemyEvents.Reset();
     SetPairMovementIgnored(Partner,false);
     if (IsValid(Partner) && Partner->Partner==this) Partner->Partner=nullptr;
     StopSounds();
@@ -672,9 +677,7 @@ void UTownSquareEnemyBehaviorComponent::HitPlayer(float Range,float Cone)
     // into hurt state before the narrower inherited ram sensor receives him.
     if (auto* PlayerState=CastField<FByteProperty>(TownSquare::Property(Pursuer,TEXT("Player_State"))))
         if (PlayerState->Enum && PlayerState->GetPropertyValue_InContainer(Pursuer)==PlayerState->Enum->GetValueByNameString(TEXT("NewEnumerator4"))) return;
-    FHitResult Wall; FCollisionQueryParams Query(SCENE_QUERY_STAT(TownSquareAttack),false,Character); Query.AddIgnoredActor(Pursuer);
-    if (IsValid(Partner)) Query.AddIgnoredActor(Partner->GetOwner());
-    if (GetWorld()->LineTraceSingleByChannel(Wall,Character->GetActorLocation(),Pursuer->GetActorLocation(),ECC_Visibility,Query)) return;
+    if (!SpyroMeleeContact::HasClearContact(Character, Pursuer, IsValid(Partner) ? Partner->GetOwner() : nullptr)) return;
     UFunction* F=Pursuer->FindFunction(TEXT("Deal Damage to Player"));
     if (!F) return;
     FStructOnScope Params(F);

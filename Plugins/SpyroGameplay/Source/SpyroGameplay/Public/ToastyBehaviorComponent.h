@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "SpyroEnemyEvents.h"
 #include "ToastyBehaviorComponent.generated.h"
 class ACharacter;
 class UAnimSequence;
@@ -31,6 +32,8 @@ class SPYROGAMEPLAY_API UToastyBehaviorComponent : public UActorComponent
     GENERATED_BODY()
 public:
     UToastyBehaviorComponent();
+    /** Optional feedback, dispatched after native updates; Detail is clip/stage/recovery/node. */
+    UPROPERTY(BlueprintAssignable, Category="Spyro|Enemy Events") FSpyroEnemySignalEvent OnEnemySignal;
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Toasty|Reference") TArray<UAnimSequence*> Animations;
     /** Costume, taunt, costume collapse, and sheep geometry, in that order. */
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Toasty|Reference") TArray<USkeletalMesh*> Meshes;
@@ -66,6 +69,7 @@ public:
     virtual void EndPlay(const EEndPlayReason::Type Reason) override;
     virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* TickFunction) override;
 private:
+    FSpyroEnemyEventQueue PendingEnemyEvents;
     UFUNCTION() void OnAcceptedDamage();
     UFUNCTION() void OnDropperReset();
     UFUNCTION() void OnChargeSensorOverlap(UPrimitiveComponent* Component, AActor* Other, UPrimitiveComponent* OtherComponent, int32 BodyIndex, bool bSweep, const FHitResult& Hit);
@@ -111,6 +115,8 @@ private:
     int32 Cooldown = 0, StateTicks = 0, ActiveMesh = -1;
     int32 TauntLoops = 2;
     FRandomStream Random;
+    int32 ObservedGuardStage = INDEX_NONE;
+    bool bObservedLivingGuards = false;
     bool bFirstTick = true, bHitThisAttack = false, bCorpseFinished = false;
     TSet<int32> ReleasedGemIndices;
     FDelegateHandle BoneTransformsHandle;

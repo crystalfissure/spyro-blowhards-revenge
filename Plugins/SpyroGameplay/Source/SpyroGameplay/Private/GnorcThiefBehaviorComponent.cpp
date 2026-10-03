@@ -1,5 +1,6 @@
 #include "GnorcThiefBehaviorComponent.h"
 #include "GnorcThiefAnimInstance.h"
+#include "GnorcThiefRouteValidation.h"
 #include "GameFramework/Controller.h"
 
 #include "Animation/AnimSequence.h"
@@ -194,6 +195,98 @@ FVector UGnorcThiefBehaviorComponent::ConstrainRoamMove(const FVector& Start, co
     return Delta * FMath::Clamp(ExitTime, 0.f, 1.f);
 }
 
+FString UGnorcThiefBehaviorComponent::ValidateConfiguration() const
+{
+    TArray<FString> Errors;
+    const FString RouteError = GnorcThiefRouteValidation::Error(RoutePoints, WorldUnitsPerOriginalUnit);
+    if (!RouteError.IsEmpty()) Errors.Add(RouteError);
+    const ACharacter* OwnerCharacter = Cast<ACharacter>(GetOwner());
+    if (!OwnerCharacter) Errors.Add(TEXT("Owner must be a Character."));
+    if (!OwnerCharacter || !OwnerCharacter->GetMesh() || !OwnerCharacter->GetMesh()->SkeletalMesh)
+        Errors.Add(TEXT("Character needs its main skeletal mesh."));
+    if (!FinalMesh || !IdleAnimation || !AlertAnimation || !RunAnimation ||
+        !AlternateRunAnimation || !HitAnimation || !FinalAnimation)
+        Errors.Add(TEXT("Assign the final mesh and all six reference animations."));
+    UBoxComponent* Body = nullptr;
+    UBoxComponent* Sensor = nullptr;
+    bool HasDamage = false, HasAI = false, HasDropper = false;
+    if (GetOwner()) for (UActorComponent* C : GetOwner()->GetComponents())
+    {
+        HasDamage |= C->GetClass()->GetName() == TEXT("Damageable_Com_C");
+        HasAI |= C->GetClass()->GetName() == TEXT("Walking_AI_Character_C");
+        HasDropper |= C->GetClass()->GetName() == TEXT("Drops_Items_C");
+        if (C->GetFName() == TEXT("ThiefBodyCollision")) Body = Cast<UBoxComponent>(C);
+        if (C->GetFName() == TEXT("ThiefChargeSensor")) Sensor = Cast<UBoxComponent>(C);
+    }
+    if (!HasDamage || !HasAI || !HasDropper)
+        Errors.Add(TEXT("Required Damageable_Com, Walking_AI_Character or Drops_Items component is missing."));
+    if (!Body) Errors.Add(TEXT("ThiefBodyCollision must exist and be a BoxComponent."));
+    else if (Body->GetUnscaledBoxExtent().ContainsNaN() || Body->GetUnscaledBoxExtent().GetMin() <= 0.f ||
+        Body->GetCollisionObjectType() != ECC_WorldDynamic ||
+        Body->GetCollisionResponseToChannel(ECC_Pawn) != ECR_Block ||
+        Body->GetCollisionResponseToChannel(ECC_GameTraceChannel4) != ECR_Block)
+        Errors.Add(TEXT("ThiefBodyCollision needs positive finite extents, WorldDynamic type, and Pawn/charge blocking."));
+    if (!Sensor) Errors.Add(TEXT("ThiefChargeSensor must exist and be a BoxComponent."));
+    else if (Sensor->GetUnscaledBoxExtent().ContainsNaN() || Sensor->GetUnscaledBoxExtent().GetMin() <= 0.f ||
+        Sensor->GetCollisionObjectType() != ECC_WorldDynamic || !Sensor->GetGenerateOverlapEvents() ||
+        Sensor->GetCollisionResponseToChannel(ECC_GameTraceChannel4) != ECR_Overlap)
+        Errors.Add(TEXT("ThiefChargeSensor needs positive finite extents, WorldDynamic type and charge overlap events."));
+    return FString::Join(Errors, TEXT("\n"));
+}
+void UGnorcThiefBehaviorComponent::ValidateInEditor()
+{
+    const FString Errors = ValidateConfiguration();
+    if (Errors.IsEmpty()) { UE_LOG(LogTemp, Display, TEXT("Gnorc Thief %s configuration is valid."), *GetNameSafe(GetOwner())); }
+    else { UE_LOG(LogTemp, Warning, TEXT("Gnorc Thief %s: %s"), *GetNameSafe(GetOwner()), *Errors); }
+}
+bool UGnorcThiefBehaviorComponent::SetRouteConfiguration(const TArray<FVector>& NewRoutePoints, float NewUnits, FString& Error)
+{
+    Error = GnorcThiefRouteValidation::Error(NewRoutePoints, NewUnits);
+    if (!Error.IsEmpty()) { LastRouteError = Error; return false; }
+    const bool Changed = RoutePoints != NewRoutePoints || WorldUnitsPerOriginalUnit != NewUnits;
+    RoutePoints = NewRoutePoints;
+    WorldUnitsPerOriginalUnit = NewUnits;
+    LastRouteError.Empty();
+    if (Changed || !bHasAcceptedRoute) AcceptRouteConfiguration(HasBegunPlay() && IsValid(Character));
+    UpdateRoamPreview();
+    return true;
+}
+bool UGnorcThiefBehaviorComponent::SetRoutePoints(const TArray<FVector>& NewRoutePoints, FString& Error)
+{
+    return SetRouteConfiguration(NewRoutePoints, WorldUnitsPerOriginalUnit, Error);
+}
+void UGnorcThiefBehaviorComponent::AcceptRouteConfiguration(bool bNotify)
+{
+    AcceptedRoutePoints = RoutePoints;
+    AcceptedWorldUnits = WorldUnitsPerOriginalUnit;
+    bHasAcceptedRoute = true;
+    CurrentRouteNode = LastReachedRouteNode = 0;
+    BlockedTicks = BlockedLegTicks = RecoveryRetryTicks = 0;
+    BlockedLegFrom = BlockedLegTo = INDEX_NONE;
+    bRecoveryAwaitingDeparture = false;
+    if (IsValid(Character)) RouteFitScale = CalculateRouteFit();
+    if (bNotify) PendingEnemyEvents.Add(ESpyroEnemySignal::RouteChanged, CurrentRouteNode);
+}
+bool UGnorcThiefBehaviorComponent::RefreshRouteConfiguration()
+{
+    const FString Error = GnorcThiefRouteValidation::Error(RoutePoints, WorldUnitsPerOriginalUnit);
+    if (!Error.IsEmpty())
+    {
+        if (LastRouteError != Error)
+            UE_LOG(LogTemp, Warning, TEXT("Gnorc Thief %s rejected route edit: %s"), *GetNameSafe(GetOwner()), *Error);
+        LastRouteError = Error;
+        if (!bHasAcceptedRoute) return false;
+        RoutePoints = AcceptedRoutePoints;
+        WorldUnitsPerOriginalUnit = AcceptedWorldUnits;
+    }
+    else if (!bHasAcceptedRoute || RoutePoints != AcceptedRoutePoints || WorldUnitsPerOriginalUnit != AcceptedWorldUnits)
+    {
+        LastRouteError.Empty();
+        AcceptRouteConfiguration(HasBegunPlay() && IsValid(Character));
+    }
+    return true;
+}
+
 void UGnorcThiefBehaviorComponent::BeginPlay()
 {
     Super::BeginPlay();
@@ -212,15 +305,14 @@ void UGnorcThiefBehaviorComponent::BeginPlay()
         if (C->GetFName() == TEXT("ThiefBodyCollision")) BodyCollision = Cast<UBoxComponent>(C);
         if (C->GetFName() == TEXT("ThiefChargeSensor")) ChargeSensor = Cast<UBoxComponent>(C);
     }
-    if (!Damageable || !WalkingAI || !Dropper || !MainMesh || !FinalMesh || !IdleAnimation ||
-        !AlertAnimation || !RunAnimation || !AlternateRunAnimation || !HitAnimation || !FinalAnimation ||
-        RoutePoints.Num() < 2 || WorldUnitsPerOriginalUnit <= 0.f)
+    const FString ConfigurationError = ValidateConfiguration();
+    if (!ConfigurationError.IsEmpty())
     {
-        UE_LOG(LogTemp, Error, TEXT("Gnorc Thief %s has incomplete fidelity configuration."), *GetOwner()->GetName());
+        UE_LOG(LogTemp, Error, TEXT("Gnorc Thief %s cannot start: %s"), *GetOwner()->GetName(), *ConfigurationError);
         SetComponentTickEnabled(false); return;
     }
     RouteOrigin = FTransform(FRotator(0, Character->GetActorRotation().Yaw, 0), Character->GetActorLocation());
-    RouteFitScale = CalculateRouteFit();
+    AcceptRouteConfiguration(false);
     HeadingDegrees = Character->GetActorRotation().Yaw;
     Mesh->AddTickPrerequisiteComponent(this);
     BindContracts();
@@ -356,6 +448,7 @@ FVector UGnorcThiefBehaviorComponent::FloorPosition(AActor* Actor) const
 }
 FVector UGnorcThiefBehaviorComponent::RoutePosition(int32 Index) const
 {
+    if (!RoutePoints.IsValidIndex(Index)) return RouteOrigin.GetLocation();
     FVector Point = RoutePoints[Index] * WorldUnitsPerOriginalUnit;
     const float Fit = CalculateRouteFit();
     Point.X *= Fit; Point.Y *= Fit;
@@ -371,6 +464,7 @@ float UGnorcThiefBehaviorComponent::CalculateRouteFit() const
 }
 float UGnorcThiefBehaviorComponent::ArrivalDistance(int32 Index) const
 {
+    if (RoutePoints.Num() < 2 || !RoutePoints.IsValidIndex(Index)) return 0.f;
     if (RouteFitScale >= 1.f) return 1024.f;
     const int32 Previous = (Index + RoutePoints.Num() - 1) % RoutePoints.Num();
     const int32 Next = (Index + 1) % RoutePoints.Num();
@@ -380,6 +474,7 @@ float UGnorcThiefBehaviorComponent::ArrivalDistance(int32 Index) const
 }
 float UGnorcThiefBehaviorComponent::OriginalDistanceTo(const FVector& Position) const
 {
+    if (!FMath::IsFinite(WorldUnitsPerOriginalUnit) || WorldUnitsPerOriginalUnit <= 0.f) return MAX_flt;
     return OctDistance2D(Position - Character->GetActorLocation()) / WorldUnitsPerOriginalUnit;
 }
 void UGnorcThiefBehaviorComponent::FaceSpyro()
@@ -390,6 +485,7 @@ void UGnorcThiefBehaviorComponent::FaceSpyro()
 }
 bool UGnorcThiefBehaviorComponent::FollowRoute()
 {
+    if (!RefreshRouteConfiguration()) return false;
     CurrentRouteNode = FMath::Clamp(CurrentRouteNode, 0, RoutePoints.Num() - 1);
     if (OriginalDistanceTo(RoutePosition(CurrentRouteNode)) < ArrivalDistance(CurrentRouteNode))
     {
@@ -633,6 +729,7 @@ void UGnorcThiefBehaviorComponent::UpdateBlockedRoute()
     CurrentRouteNode = ReturnNode;
     BlockedTicks = 0;
     ++RecoveryCount;
+    PendingEnemyEvents.Add(ESpyroEnemySignal::RecoveryStarted, RecoveryCount);
 }
 void UGnorcThiefBehaviorComponent::ClearMovementDiagnostics()
 {
@@ -747,12 +844,14 @@ void UGnorcThiefBehaviorComponent::StepOriginal()
 void UGnorcThiefBehaviorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* TickFunction)
 {
     Super::TickComponent(DeltaTime, TickType, TickFunction);
-    if (!Character || !WalkingAI || !Mesh || !GetOwner()->HasAuthority()) return;
+    if (!IsValid(Character) || !IsValid(WalkingAI) || !IsValid(Mesh) ||
+        !IsValid(BodyCollision) || !IsValid(ChargeSensor) || !IsValid(Damageable) ||
+        !IsValid(Dropper) || !GetOwner()->HasAuthority() || !RefreshRouteConfiguration()) return;
     if (bFirstTick) { BindContracts(); bFirstTick = false; }
     if (!IsValid(Pursuer)) Pursuer = Cast<ACharacter>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
     TakeMovementControl();
     if (GnorcThief::Bool(Damageable, TEXT("Frozen")) || GnorcThief::Bool(Damageable, TEXT("Paralyzed_by_Fear")) ||
-        GnorcThief::Bool(Dropper, TEXT("Reset_in_Progress"))) return;
+        GnorcThief::Bool(Dropper, TEXT("Reset_in_Progress"))) { PendingEnemyEvents.Flush(this, OnEnemySignal); return; }
     Accumulator += FMath::Max(DeltaTime, 0.f);
     // Bounded catch-up prevents a long stall from teleporting the enemy across the level.
     int32 Steps = 0;
@@ -760,6 +859,7 @@ void UGnorcThiefBehaviorComponent::TickComponent(float DeltaTime, ELevelTick Tic
     { Accumulator = FMath::Max(0.f, Accumulator - OriginalStep); StepOriginal(); }
     Accumulator = FMath::Min(Accumulator, OriginalStep);
     DrawMovementDebug();
+    PendingEnemyEvents.Flush(this, OnEnemySignal);
 }
 
 void UGnorcThiefBehaviorComponent::BindContracts()
@@ -785,6 +885,7 @@ void UGnorcThiefBehaviorComponent::FinishCorpse()
 
 void UGnorcThiefBehaviorComponent::EndPlay(const EEndPlayReason::Type Reason)
 {
+    PendingEnemyEvents.Reset();
     StopSounds();
     if (ChargeSensor) ChargeSensor->OnComponentBeginOverlap.RemoveDynamic(this, &UGnorcThiefBehaviorComponent::OnChargeSensorOverlap);
     GnorcThief::Bind(Damageable, TEXT("Call Deal_Damage"), this, GET_FUNCTION_NAME_CHECKED(UGnorcThiefBehaviorComponent, OnAcceptedDamage), true);
@@ -807,6 +908,8 @@ void UGnorcThiefBehaviorComponent::OnChargeSensorOverlap(UPrimitiveComponent* Ov
 
 void UGnorcThiefBehaviorComponent::OnDropperReset()
 {
+    PendingEnemyEvents.Reset();
+    RefreshRouteConfiguration();
     bCorpseFinished = false;
     StopSounds();
     SoundCueHistory.Reset();
@@ -838,6 +941,7 @@ void UGnorcThiefBehaviorComponent::OnDropperReset()
     if (Mesh && MainMesh) Mesh->SetSkeletalMesh(MainMesh);
     TakeMovementControl();
     EnterState(EGnorcThiefState::Idle);
+    PendingEnemyEvents.Add(ESpyroEnemySignal::ResetCompleted);
 }
 
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "SpyroEnemyEvents.h"
 #include "TownSquareEnemyBehaviorComponent.generated.h"
 class ACharacter;
 class UAnimSequence;
@@ -32,6 +33,8 @@ class SPYROGAMEPLAY_API UTownSquareEnemyBehaviorComponent : public UActorCompone
     GENERATED_BODY()
 public:
     UTownSquareEnemyBehaviorComponent();
+    /** Optional feedback, dispatched after native updates; Detail is clip/stage/recovery/node. */
+    UPROPERTY(BlueprintAssignable, Category="Spyro|Enemy Events") FSpyroEnemySignalEvent OnEnemySignal;
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Town Square|Reference") TArray<UAnimSequence*> Animations;
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Town Square|Reference") TArray<USoundBase*> OriginalSounds;
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Town Square|Reference") USoundAttenuation* SoundAttenuation = nullptr;
@@ -73,6 +76,7 @@ public:
 protected:
     virtual bool IsBull() const { return false; }
 private:
+    FSpyroEnemyEventQueue PendingEnemyEvents;
     UFUNCTION() void OnAcceptedDamage();
     UFUNCTION() void OnDropperReset();
     UFUNCTION() void OnChargeSensorOverlap(UPrimitiveComponent* Component, AActor* Other, UPrimitiveComponent* OtherComponent, int32 BodyIndex, bool bSweep, const FHitResult& Hit);

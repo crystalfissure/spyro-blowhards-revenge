@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "SpyroEnemyEvents.h"
 #include "SleepingDogBehaviorComponent.generated.h"
 class ACharacter;
 class UAnimSequence;
@@ -22,6 +23,8 @@ class SPYROGAMEPLAY_API USleepingDogBehaviorComponent : public UActorComponent
     GENERATED_BODY()
 public:
     USleepingDogBehaviorComponent();
+    /** Optional feedback, dispatched after native updates; Detail is clip/stage/recovery/node. */
+    UPROPERTY(BlueprintAssignable, Category="Spyro|Enemy Events") FSpyroEnemySignalEvent OnEnemySignal;
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Sleeping Dog|Reference") TArray<UAnimSequence*> Animations;
     /** Base, scorched and first-flame reaction geometry, in that order. */
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Sleeping Dog|Reference") TArray<USkeletalMesh*> Meshes;
@@ -48,6 +51,7 @@ public:
     virtual void EndPlay(const EEndPlayReason::Type Reason) override;
     virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* TickFunction) override;
 private:
+    FSpyroEnemyEventQueue PendingEnemyEvents;
     UFUNCTION() void OnAcceptedDamage();
     UFUNCTION() void OnDropperReset();
     UFUNCTION() void OnChargeSensorOverlap(UPrimitiveComponent* Component, AActor* Other, UPrimitiveComponent* OtherComponent, int32 BodyIndex, bool bSweep, const FHitResult& Hit);

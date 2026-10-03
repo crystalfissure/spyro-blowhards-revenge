@@ -41,3 +41,27 @@ Death cleanup hides the final mesh and retains the existing cleanup sound and ch
 The UE4.27 editor modules build successfully, and the thief plus four other Blueprints using this plugin compile. Sixteen live collision scenarios passed at 60 FPS, with focused repeats at 20 and 30 FPS. Coverage includes standing/walking Spyro, initial overlap, repeated interception, close walls, 20-degree slopes, travelling rolls and 300/900/1,200 cm boundaries. The Artisans chase reached every route node during 45 seconds of play, stayed contained and preserved the starting center. The saved instance was reloaded to verify its overrides.
 
 The lifecycle checks cover alert/facing, all eight original sound cue events, charge/flame hits, final slide, death cleanup and early/late checkpoint reset. These are scripted PIE checks with the actual Spyro and thief Blueprints; a manual gameplay review is still useful. Packaging and other platforms were not tested in this revision.
+
+## Safe live route edits and optional Blueprint signals (3 October 2026)
+
+Use `SetRoutePoints` to replace a thief route, or `SetRouteConfiguration` when changing both the route and its unit scale. Check the returned success flag and Error string. A route needs at least two finite, usable coordinates and a finite positive unit scale; repeated points remain allowed. Rejection leaves the current route unchanged. An accepted live replacement restarts route progress at node 0 without teleporting the thief or restarting its health, combat state, animation or spawn-relative origin.
+
+Existing direct Blueprint writes remain supported. The next native update checks them and restores the last accepted configuration if they are invalid. `LastRouteError` records the latest rejection until a successful explicit setter or changed valid configuration clears it. Before play, `ValidateConfiguration` returns configuration errors, including missing required meshes, animations, shared components and body/sensor setup; `ValidateInEditor` prints them in the Output Log. Invalid initial configuration prevents this adapter from starting. Runtime route safety does not make an obstructed route navigable.
+
+The Thief, Town Square, Sleeping Dog and Toasty behavior components expose the optional Blueprint-assignable `OnEnemySignal` dispatcher. Bind it from the owning Blueprint or encounter script, then switch on `Signal`; `Behavior` identifies the component and `Detail` has the meanings below. No listener is required for normal gameplay.
+
+| Signal | Components | Detail |
+| --- | --- | --- |
+| AttackCommitted | Town Square, Sleeping Dog, Toasty | Native attack clip index |
+| StageChanged | Toasty | Newly entered stage (0-based) |
+| GuardsReleased | Toasty | Stage whose observed living guards have all been defeated |
+| RecoveryStarted | Thief, Town Square | Recovery attempt count |
+| RecoveryStarted | Toasty | Current stage when a supported detour is chosen |
+| RouteChanged | Thief | Restarted route node (0) |
+| ResetCompleted | All four | Reset stage for Toasty (0); otherwise 0 |
+
+These notifications support Blueprint sound, VFX, camera, UI and encounter responses. Native code continues to own movement, pose evaluation, attack windows, damage and reset state. AttackCommitted is a wind-up/pounce transition, not proof of a landed hit: do not apply additional damage from it. RecoveryStarted does not guarantee successful escape. GuardsReleased observes a true-to-false living-guard transition within a stage; a stage that starts without living guards does not emit it. ResetCompleted means this native adapter reset has completed; the shared dropper's broader reset guard may still be active.
+
+Dispatch occurs at the end of an authoritative component update, including paused reset/fear updates. A reset or destroyed owner cancels the remaining queued notices from the old lifecycle; newly queued callback notices wait for a subsequent update. Multiple listeners on the currently broadcasting notice still follow Unreal's multicast behavior. These are local notifications, not replicated network events. They do not replay history when a listener binds late or when component ticking is disabled. Reuse the existing shared damage/dropper contracts for hit and death notifications.
+
+Validation for this patch: 59 native route/contact/event cases pass, including actual saved enemy Blueprints, physical wall filtering, bad live writes and Blueprint-compatible delegate reset/destruction. Existing Dog contact/color, Dog death and Toasty terrain suites also pass. Final editor/game compilation and fresh class checks are recorded in the external workshop handoff. These automated checks do not replace a controller playthrough or prove packaged launch behavior.

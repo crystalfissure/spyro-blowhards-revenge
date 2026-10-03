@@ -366,7 +366,7 @@ void USleepingDogBehaviorComponent::StepOriginal()
         // 80080B68: vertical speed = 300 + floor(distance * 35 / 1024).
         VerticalSpeed=300+FMath::FloorToFloat(Distance(IsValid(Pursuer)?Pursuer->GetActorLocation():PounceTarget)*35.f/1024.f);
         if (NextClip!=Base+2) SelectClip(Base+2);
-        if (Face(PounceTarget,10,4)) { State=ESleepingDogState::Pouncing; StateTicks=0; bHitThisAttack=false; ++PounceCount; PlaySound(1); }
+        if (Face(PounceTarget,10,4)) { State=ESleepingDogState::Pouncing; StateTicks=0; bHitThisAttack=false; ++PounceCount; PlaySound(1); PendingEnemyEvents.Add(ESpyroEnemySignal::AttackCommitted, Base+2); }
         return;
     }
     if (State==ESleepingDogState::Pouncing)
@@ -431,12 +431,13 @@ void USleepingDogBehaviorComponent::StepOriginal()
 void USleepingDogBehaviorComponent::TickComponent(float DeltaTime,ELevelTick TickType,FActorComponentTickFunction* TickFunction)
 {
     Super::TickComponent(DeltaTime,TickType,TickFunction); if (!Character || !Character->HasAuthority()) return;
-    if (SleepingDog::Bool(Damageable,TEXT("Frozen")) || SleepingDog::Bool(Damageable,TEXT("Paralyzed_by_Fear")) || SleepingDog::Bool(Dropper,TEXT("Reset_in_Progress"))) return;
+    if (SleepingDog::Bool(Damageable,TEXT("Frozen")) || SleepingDog::Bool(Damageable,TEXT("Paralyzed_by_Fear")) || SleepingDog::Bool(Dropper,TEXT("Reset_in_Progress"))) { PendingEnemyEvents.Flush(this, OnEnemySignal); return; }
     Accumulator+=FMath::Max(0.f,DeltaTime); int32 Steps=0;
     while (Accumulator+KINDA_SMALL_NUMBER>=DogStep && Steps++<30) { Accumulator=FMath::Max(0.f,Accumulator-DogStep); StepOriginal(); }
     Accumulator=FMath::Min(Accumulator,DogStep); const float Alpha=Accumulator/DogStep;
     Mesh->SetWorldLocation(FMath::Lerp(PreviousLocation,Character->GetActorLocation(),Alpha)+Home.TransformVector(MeshOffset));
     Mesh->SetWorldRotation(FRotator(0,PreviousHeading+FMath::FindDeltaAngleDegrees(PreviousHeading,Heading)*Alpha-90,0));
+    PendingEnemyEvents.Flush(this, OnEnemySignal);
 }
 void USleepingDogBehaviorComponent::HitPlayer(const FVector* PreviousOrigin)
 {
@@ -511,6 +512,7 @@ void USleepingDogBehaviorComponent::FinishCorpse()
 }
 void USleepingDogBehaviorComponent::OnDropperReset()
 {
+    PendingEnemyEvents.Reset();
     StopSounds(); SoundCueHistory.Reset(); ReleasedGemIndices.Reset(); GemsSpawned=0; Health=2;
     State=ESleepingDogState::Sleeping; StateTicks=0; Cooldown=70; bDefeated=bHitThisAttack=bCorpseFinished=bBlocked=false;
     Accumulator=VerticalSpeed=DeathSpeed=0; AcceptedPlayerHits=PounceCount=0;
@@ -519,9 +521,11 @@ void USleepingDogBehaviorComponent::OnDropperReset()
     BodyCollision->SetCollisionEnabled(ECollisionEnabled::QueryOnly); ChargeSensor->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
     ToastyEncounterCollision::Configure(Character,BodyCollision,ChargeSensor);
     SleepingDog::SetNumber(Damageable,TEXT("Hit Points"),2); TakeMovementControl(); SelectClip(0,false);
+    PendingEnemyEvents.Add(ESpyroEnemySignal::ResetCompleted);
 }
 void USleepingDogBehaviorComponent::EndPlay(const EEndPlayReason::Type Reason)
 {
+    PendingEnemyEvents.Reset();
     StopSounds();
     if (Mesh) Mesh->UnregisterOnBoneTransformsFinalizedDelegate(BoneTransformsHandle);
     if (ChargeSensor) ChargeSensor->OnComponentBeginOverlap.RemoveDynamic(this,&USleepingDogBehaviorComponent::OnChargeSensorOverlap);

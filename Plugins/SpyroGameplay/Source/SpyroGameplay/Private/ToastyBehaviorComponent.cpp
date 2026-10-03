@@ -1,4 +1,5 @@
 #include "ToastyBehaviorComponent.h"
+#include "SpyroMeleeContact.h"
 #include "ToastyEncounterCollision.h"
 #include "ToastyAnimInstance.h"
 #include "GameFramework/Controller.h"
@@ -327,6 +328,7 @@ void UToastyBehaviorComponent::FinishCorpse()
 }
 void UToastyBehaviorComponent::EndPlay(const EEndPlayReason::Type Reason)
 {
+    PendingEnemyEvents.Reset();
     StopSounds();
     if (Mesh) Mesh->UnregisterOnBoneTransformsFinalizedDelegate(BoneTransformsHandle);
     if (ChargeSensor) ChargeSensor->OnComponentBeginOverlap.RemoveDynamic(this,&UToastyBehaviorComponent::OnChargeSensorOverlap);
@@ -474,6 +476,11 @@ void UToastyBehaviorComponent::BeginRetreat()
 }
 void UToastyBehaviorComponent::StepOriginal()
 {
+    const bool LivingGuards = HasLivingGuards();
+    if (ObservedGuardStage == Stage && bObservedLivingGuards && !LivingGuards)
+        PendingEnemyEvents.Add(ESpyroEnemySignal::GuardsReleased, Stage);
+    ObservedGuardStage = Stage;
+    bObservedLivingGuards = LivingGuards;
     PreviousLocation=Character->GetActorLocation(); PreviousHeading=Heading; ++SimulationTicks; ++StateTicks;
     if (bFirstTick)
     {
@@ -506,7 +513,7 @@ void UToastyBehaviorComponent::StepOriginal()
     {
         const FVector Destination=StagePosition(Stage+1);
         if (Distance(Destination)<600)
-        { Stage=FMath::Min(Stage+1,2); bEngaged=false; AvoidTicks=0; State=HasLivingGuards()?EToastyState::Guarded:EToastyState::Idle; StateTicks=0; SelectClip(Base); return; }
+        { Stage=FMath::Min(Stage+1,2); PendingEnemyEvents.Add(ESpyroEnemySignal::StageChanged, Stage); bEngaged=false; AvoidTicks=0; State=HasLivingGuards()?EToastyState::Guarded:EToastyState::Idle; StateTicks=0; SelectClip(Base); return; }
         RecoverTerrainPenetration();
         ToastyEncounterCollision::LiftFromFloor(Character,Pursuer,WorldUnitsPerOriginalUnit);
         const float Step=200*WorldUnitsPerOriginalUnit;
@@ -516,7 +523,7 @@ void UToastyBehaviorComponent::StepOriginal()
         else
         {
             Direction=FindGroundDirection(Preferred,Step);
-            if (!Direction.IsNearlyZero() && !Direction.Equals(Preferred,.01f)) { AvoidDirection=Direction; AvoidTicks=20; }
+            if (!Direction.IsNearlyZero() && !Direction.Equals(Preferred,.01f)) { AvoidDirection=Direction; AvoidTicks=20; PendingEnemyEvents.Add(ESpyroEnemySignal::RecoveryStarted, Stage); }
         }
         if (!Direction.IsNearlyZero() && Face(Character->GetActorLocation()+Direction*1000,9,20))
             if (!GroundMove(FRotator(0,Heading,0).Vector()*Step))
@@ -557,7 +564,7 @@ void UToastyBehaviorComponent::StepOriginal()
             else
             {
                 const FVector Safe=FindGroundDirection(Direction,(180+Stage*20)*WorldUnitsPerOriginalUnit,&Center);
-                if (!Safe.IsNearlyZero() && !Safe.Equals(Direction,.01f)) { AvoidDirection=Safe; AvoidTicks=20; Direction=Safe; }
+                if (!Safe.IsNearlyZero() && !Safe.Equals(Direction,.01f)) { AvoidDirection=Safe; AvoidTicks=20; Direction=Safe; PendingEnemyEvents.Add(ESpyroEnemySignal::RecoveryStarted, Stage); }
             }
             SelectClip(Base+1);
             if (Face(Character->GetActorLocation()+Direction*1000,10,24))
@@ -585,26 +592,26 @@ void UToastyBehaviorComponent::StepOriginal()
     {
         FHitResult Wall; FCollisionQueryParams Q(SCENE_QUERY_STAT(ToastySight),false,Character); Toasty::IgnorePlayer(Q,Pursuer);
         if (!GetWorld()->LineTraceSingleByChannel(Wall,Character->GetActorLocation(),Pursuer->GetActorLocation(),ECC_Visibility,Q))
-        { State=EToastyState::Attack; StateTicks=0; Cooldown=90; bHitThisAttack=false; SelectClip(Base+3); }
+        { State=EToastyState::Attack; StateTicks=0; Cooldown=90; bHitThisAttack=false; SelectClip(Base+3); PendingEnemyEvents.Add(ESpyroEnemySignal::AttackCommitted, Base+3); }
     }
 }
 void UToastyBehaviorComponent::TickComponent(float DeltaTime,ELevelTick TickType,FActorComponentTickFunction* TickFunction)
 {
     Super::TickComponent(DeltaTime,TickType,TickFunction); if (!Character || !Character->HasAuthority()) return;
-    if (Toasty::Bool(Damageable,TEXT("Frozen")) || Toasty::Bool(Damageable,TEXT("Paralyzed_by_Fear")) || Toasty::Bool(Dropper,TEXT("Reset_in_Progress"))) return;
+    if (Toasty::Bool(Damageable,TEXT("Frozen")) || Toasty::Bool(Damageable,TEXT("Paralyzed_by_Fear")) || Toasty::Bool(Dropper,TEXT("Reset_in_Progress"))) { PendingEnemyEvents.Flush(this, OnEnemySignal); return; }
     Accumulator+=FMath::Max(0.f,DeltaTime); int32 Steps=0;
     while (Accumulator+KINDA_SMALL_NUMBER>=ToastyStep && Steps++<30) { Accumulator=FMath::Max(0.f,Accumulator-ToastyStep); StepOriginal(); }
     Accumulator=FMath::Min(Accumulator,ToastyStep); const float Alpha=Accumulator/ToastyStep;
     Mesh->SetWorldLocation(FMath::Lerp(PreviousLocation,Character->GetActorLocation(),Alpha)+Home.TransformVector(MeshOffset));
     Mesh->SetWorldRotation(FRotator(0,PreviousHeading+FMath::FindDeltaAngleDegrees(PreviousHeading,Heading)*Alpha-90,0));
+    PendingEnemyEvents.Flush(this, OnEnemySignal);
 }
 void UToastyBehaviorComponent::HitPlayer()
 {
     if (bHitThisAttack || !IsValid(Pursuer)) return;
     const FVector Offset=Feet(Pursuer)-Feet(Character);
     if (ToastyDistance(Offset)>(Health==1?2400:3000)*WorldUnitsPerOriginalUnit || FMath::Abs(Offset.Z)>120 || FMath::Abs(FMath::FindDeltaAngleDegrees(Heading,Offset.Rotation().Yaw))>65) return;
-    FHitResult Wall; FCollisionQueryParams Q(SCENE_QUERY_STAT(ToastyAttack),false,Character); Toasty::IgnorePlayer(Q,Pursuer);
-    if (GetWorld()->LineTraceSingleByChannel(Wall,Character->GetActorLocation(),Pursuer->GetActorLocation(),ECC_Visibility,Q)) return;
+    if (!SpyroMeleeContact::HasClearContact(Character, Pursuer)) return;
     UFunction* F=Pursuer->FindFunction(TEXT("Deal Damage to Player")); if (!F) return;
     FStructOnScope Params(F); UObject* D=Toasty::ObjectValue(Pursuer,TEXT("Damageable")); const int32 Before=Toasty::Number(D,TEXT("Hit Points"));
     for (TFieldIterator<FProperty> It(F);It && It->HasAnyPropertyFlags(CPF_Parm);++It)
@@ -636,6 +643,8 @@ void UToastyBehaviorComponent::PublishDefeat()
 }
 void UToastyBehaviorComponent::OnDropperReset()
 {
+    PendingEnemyEvents.Reset();
+    ObservedGuardStage=INDEX_NONE; bObservedLivingGuards=false;
     // The shared Blueprint removes array elements while iterating forwards.
     // With staged rewards this can leave a live middle gem behind. Finish its
     // own reset contract before allowing the same reward indices to drop again.
@@ -661,4 +670,5 @@ void UToastyBehaviorComponent::OnDropperReset()
     BodyCollision->SetCollisionEnabled(ECollisionEnabled::QueryOnly); ChargeSensor->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
     ToastyEncounterCollision::Configure(Character,BodyCollision,ChargeSensor);
     Toasty::SetNumber(Damageable,TEXT("Hit Points"),3); TakeMovementControl(); SelectClip(0,false);
+    PendingEnemyEvents.Add(ESpyroEnemySignal::ResetCompleted, Stage);
 }
