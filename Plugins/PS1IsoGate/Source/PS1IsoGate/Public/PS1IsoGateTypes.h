@@ -3,6 +3,14 @@
 #include "CoreMinimal.h"
 #include "PS1IsoGateTypes.generated.h"
 
+UENUM(BlueprintType)
+enum class EPS1IsoGame : uint8
+{
+    Spyro1 UMETA(DisplayName="Spyro 1"),
+    Spyro2 UMETA(DisplayName="Spyro 2"),
+    Spyro3 UMETA(DisplayName="Spyro 3")
+};
+
 USTRUCT(BlueprintType)
 struct PS1ISOGATE_API FPS1IsoVerificationResult
 {
@@ -15,13 +23,7 @@ struct PS1ISOGATE_API FPS1IsoVerificationResult
     bool bAllowedExtension = false;
 
     UPROPERTY(BlueprintReadOnly, Category="PS1 ISO Gate")
-    bool bHashMatches = false;
-
-    UPROPERTY(BlueprintReadOnly, Category="PS1 ISO Gate")
     bool bCanPlay = false;
-
-    UPROPERTY(BlueprintReadOnly, Category="PS1 ISO Gate")
-    FString ActualSha256;
 
     UPROPERTY(BlueprintReadOnly, Category="PS1 ISO Gate")
     FString BootExecutable;

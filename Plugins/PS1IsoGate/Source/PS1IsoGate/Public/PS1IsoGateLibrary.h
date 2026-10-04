@@ -11,18 +11,14 @@ class PS1ISOGATE_API UPS1IsoGateLibrary : public UBlueprintFunctionLibrary
     GENERATED_BODY()
 
 public:
+    /** Verifies the selected game's regional executable and required files using built-in rules. */
     UFUNCTION(BlueprintCallable, Category="PS1 ISO Gate")
-    static FPS1IsoVerificationResult VerifyConfiguredPS1DiscImage();
-
-    UFUNCTION(BlueprintCallable, Category="PS1 ISO Gate")
-    static FPS1IsoVerificationResult VerifyPS1DiscImage(const FString& DiscImagePath, const FString& ExpectedSha256, const TArray<FString>& AllowedExtensions, const FString& ExpectedBootExecutable, const TArray<FString>& RequiredDiscFiles);
-
-    UFUNCTION(BlueprintCallable, Category="PS1 ISO Gate")
-    static FPS1IsoVerificationResult VerifyPS1DiscImageWithConfiguredRules(const FString& DiscImagePath);
+    static FPS1IsoVerificationResult VerifyPS1DiscImage(EPS1IsoGame Game, const FString& DiscImagePath);
 
     UFUNCTION(BlueprintCallable, Category="PS1 ISO Gate")
     static bool ChoosePS1DiscImage(FString& SelectedDiscImagePath);
 
+    /** Opens the disc image picker and verifies the selected game using built-in rules. */
     UFUNCTION(BlueprintCallable, Category="PS1 ISO Gate")
-    static FPS1IsoVerificationResult ChooseAndVerifyConfiguredPS1DiscImage(FString& SelectedDiscImagePath);
+    static FPS1IsoVerificationResult ChooseAndVerifyConfiguredPS1DiscImage(EPS1IsoGame Game, FString& SelectedDiscImagePath);
 };

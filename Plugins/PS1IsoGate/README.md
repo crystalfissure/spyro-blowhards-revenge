@@ -1,83 +1,51 @@
 # PS1 Ownership Gate
 
-Drop-in Unreal Engine 4.27 runtime plugin for checking that the player has a local, legally owned NTSC PS1 Spyro disc image before enabling access to your Unreal game.
+Unreal Engine 4.27 runtime plugin that verifies a player-selected Spyro PS1 disc image before your game enables play. All verification rules are compiled into the plugin; no configuration file is needed.
 
-## What it does
+## Supported games and regions
 
-- Checks that the configured disc image exists.
-- Accepts configured extensions: `iso`, `bin`, and `cue` by default.
-- For `.cue` files, resolves the referenced `.bin` file and checks that data.
-- Scans the disc image for the expected NTSC Spyro markers, including `SYSTEM.CNF`, boot executable `SCUS_942.28`, and the expected disc files.
-- Streams the image in chunks, so normal marker verification does not load the whole PS1 image into memory.
-- Optionally streams SHA-256 and compares it to the expected hash when `ExpectedSha256` is set.
-- Exposes Blueprint-callable functions:
-  - `Verify Configured PS1 Disc Image`
-  - `Verify PS1 Disc Image`
-  - `Verify PS1 Disc Image With Configured Rules`
-  - `Choose PS1 Disc Image`
-  - `Choose And Verify Configured PS1 Disc Image`
+The Blueprint enum **PS1 Iso Game** (C++: `EPS1IsoGame`) has exactly three values: **Spyro 1**, **Spyro 2**, and **Spyro 3**.
 
-## Install
+| Game | NTSC-U executable | PAL executable | NTSC-J executable |
+| --- | --- | --- | --- |
+| Spyro 1 | SCUS_942.28 | SCES_014.38 | SCPS_100.85 |
+| Spyro 2 | SCUS_944.25 | SCES_021.04 | SCPS_101.28 |
+| Spyro 3 | SCUS_944.67 | SCES_028.35 | Not listed in the supplied reference |
 
-1. Copy the `PS1IsoGate` folder into your Unreal project's `Plugins` folder.
-2. Restart Unreal.
-3. Enable `PS1 Ownership Gate` in the Plugins window.
-4. Add settings to your project's `Config/DefaultGame.ini` using `ConfigExample.ini` as a starting point.
+The complete regional file and folder lists are hard-coded from `Info/PS1IsoGate/PS1IsoGate Info.txt`. The executable selects the regional list. Japanese Spyro 1 does not require S0, and Japanese Spyro 2 does not require KART. Spyro 3 NTSC-U requires 3MN_BLNK.DAT; PAL requires SPYRO3.TRD.
 
-## Configure
+## Blueprint nodes
 
-Add this to `Config/DefaultGame.ini`.
+- **Verify PS1 Disc Image**: inputs **Game** and **Disc Image Path**; returns **PS1 Iso Verification Result**.
+- **Choose And Verify Configured PS1 Disc Image**: input **Game**; opens the Windows picker and returns **Selected Disc Image Path** and the verification result. Its existing name is retained, but its rules are built in.
+- **Choose PS1 Disc Image**: opens the picker and returns the selected path without verification.
 
-`DiscImagePath` is only needed if you want a fixed default path for testing. For the player-facing flow, let the user choose a file in your menu and leave `DiscImagePath` blank.
+Use **bCanPlay** to enable play. **Message** explains failures. **BootExecutable** reports the executable read from SYSTEM.CNF, and **MissingFiles** reports missing or invalid required entries.
 
-```ini
-[/Script/PS1IsoGate.PS1IsoGateSettings]
-DiscImagePath=
-ExpectedSha256=
-+AllowedExtensions=iso
-+AllowedExtensions=bin
-+AllowedExtensions=cue
-ExpectedBootExecutable=SCUS_942.28
-+RequiredDiscFiles=SYSTEM.CNF
-+RequiredDiscFiles=SCUS_942.28
-+RequiredDiscFiles=WAD.WAD
-+RequiredDiscFiles=S0
-+RequiredDiscFiles=SOURCE
-+RequiredDiscFiles=PETEXA0.STR
-+RequiredDiscFiles=PETEXA1.STR
-+RequiredDiscFiles=PETEXA2.STR
-+RequiredDiscFiles=PETEXA3.STR
-+RequiredDiscFiles=PETEXA4.STR
-+RequiredDiscFiles=PETEXA5.STR
-```
+## Verification and speed
 
-`ExpectedSha256` can stay blank if you only want to verify the disc markers. If you want to require one exact dump, get the SHA-256 on Windows:
+Accepts ISO, BIN, and CUE extensions, ignoring case. It reads ISO 9660 directory metadata, checks the selected game's executable alternatives first, then reads SYSTEM.CNF to confirm the boot target and checks that region's remaining entries. Files and folders must have the correct directory entry type and an extent within the image.
 
-```powershell
-Get-FileHash "C:\Games\PS1\SpyroTheDragon.bin" -Algorithm SHA256
-```
+The reader supports cooked 2048-byte sectors, raw Mode 1 and Mode 2/XA 2352-byte sectors, and Mode 2 2336-byte sectors. For CUE, it resolves the first supported binary data track and honors INDEX 01, including pregaps stored in the file.
 
-## Blueprint flow
+Only directory metadata and the small SYSTEM.CNF file are read. No whole-image scan, file hash calculation, or game asset loading is performed. Root metadata and SYSTEM.CNF reads are bounded.
 
-Recommended player-facing flow:
+## Install and use
 
-- Add a `Choose File` button to your menu.
-- On click, call `Choose And Verify Configured PS1 Disc Image`.
-- Save the returned `SelectedDiscImagePath` in your own SaveGame/settings if verification succeeds.
-- If `bCanPlay` is true, enable access to your Unreal game.
-- If false, show `Message` and keep access disabled.
+1. Copy PS1IsoGate into your project's Plugins folder, enable **PS1 Ownership Gate**, and rebuild with Unreal 4.27.
+2. Add **Choose And Verify Configured PS1 Disc Image** to your menu and select the required **Game**.
+3. Enable your Play button only when **bCanPlay** is true; otherwise show **Message**.
+4. Save **Selected Disc Image Path** in your own SaveGame if desired.
+5. On the next launch, call **Verify PS1 Disc Image** with the same **Game** and the saved path.
 
-If you saved a player-selected path, call `Verify PS1 Disc Image With Configured Rules` on the next launch to re-check that saved file without opening the picker again.
+## Updating older Blueprints
 
-For a fixed test path, set `DiscImagePath` and call `Verify Configured PS1 Disc Image`.
+Restart Unreal after rebuilding. Refresh or recreate existing verification nodes to expose **Game** and remove obsolete pins. Refresh result-break nodes after removing the old hash fields.
 
-The image check expects these NTSC disc markers inside the `.iso`, `.bin`, or `.cue` target:
+**Verify Configured PS1 Disc Image**, **Verify PS1 Disc Image With Configured Rules**, the PS1IsoGateSettings class, and ConfigExample.ini have been removed. Replace those old verification nodes with **Verify PS1 Disc Image** and pass the path explicitly. Old PS1IsoGate settings in DefaultGame.ini are unused and can be removed.
 
-- `SYSTEM.CNF`
-- `SCUS_942.28`
-- `WAD.WAD`
-- `S0`
-- `SOURCE`
-- `PETEXA0.STR` through `PETEXA5.STR`
+## Validation
 
-The plugin does not provide game files, BIOS files, or an emulator. It does not launch, mount, or emulate the PS1 game. It only verifies that the configured disc image is present so your Unreal game can decide whether to unlock play.
+Development/editor builds include **PS1IsoGate.Regions**, **PS1IsoGate.Formats**, and **PS1IsoGate.Failures** automation tests. The fixtures contain synthetic directory records and text, with no game data. Tests cover the eight regional lists, wrong-game rejection, each required entry, sector layouts, CUE handling, boot-target mismatch, malformed metadata, and truncated images.
+
+This plugin verifies disc structure. It does not mount or emulate the disc or supply game files.

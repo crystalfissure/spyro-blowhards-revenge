@@ -3,7 +3,6 @@
 #include "HAL/PlatformFilemanager.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
-#include "PS1IsoGateSettings.h"
 
 #if PLATFORM_WINDOWS
 #include "Windows/AllowWindowsPlatformTypes.h"
@@ -13,198 +12,68 @@
 
 namespace
 {
-    constexpr int32 MarkerScanChunkSize = 1024 * 1024;
+    constexpr int32 LogicalSectorSize = 2048;
+    constexpr uint32 MaxRootDirectorySize = 1024 * 1024;
+    constexpr uint32 MaxSystemCnfSize = 64 * 1024;
 
-    FString NormalizeSha256(const FString& Hash)
+    struct FRequiredDiscEntry
     {
-        FString Normalized = Hash.TrimStartAndEnd().ToLower();
-        Normalized.ReplaceInline(TEXT(" "), TEXT(""));
-        return Normalized;
-    }
-
-    bool IsHexSha256(const FString& Hash)
-    {
-        if (Hash.Len() != 64)
-        {
-            return false;
-        }
-
-        for (const TCHAR Character : Hash)
-        {
-            const bool bIsHex =
-                (Character >= TCHAR('0') && Character <= TCHAR('9')) ||
-                (Character >= TCHAR('a') && Character <= TCHAR('f'));
-            if (!bIsHex)
-            {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    FORCEINLINE uint32 RotateRight(uint32 Value, uint32 Bits)
-    {
-        return (Value >> Bits) | (Value << (32 - Bits));
-    }
-
-    class FSha256Context
-    {
-    public:
-        void Update(const uint8* Data, uint64 Size)
-        {
-            BitLength += Size * 8ULL;
-
-            uint64 Offset = 0;
-            if (BufferSize > 0)
-            {
-                const uint64 BytesToCopy = FMath::Min<uint64>(64 - BufferSize, Size);
-                FMemory::Memcpy(Buffer + BufferSize, Data, BytesToCopy);
-                BufferSize += BytesToCopy;
-                Offset += BytesToCopy;
-
-                if (BufferSize == 64)
-                {
-                    Transform(Buffer);
-                    BufferSize = 0;
-                }
-            }
-
-            while (Offset + 64 <= Size)
-            {
-                Transform(Data + Offset);
-                Offset += 64;
-            }
-
-            if (Offset < Size)
-            {
-                BufferSize = Size - Offset;
-                FMemory::Memcpy(Buffer, Data + Offset, BufferSize);
-            }
-        }
-
-        FString Final()
-        {
-            Buffer[BufferSize++] = 0x80;
-
-            if (BufferSize > 56)
-            {
-                while (BufferSize < 64)
-                {
-                    Buffer[BufferSize++] = 0;
-                }
-                Transform(Buffer);
-                BufferSize = 0;
-            }
-
-            while (BufferSize < 56)
-            {
-                Buffer[BufferSize++] = 0;
-            }
-
-            for (int32 Shift = 56; Shift >= 0; Shift -= 8)
-            {
-                Buffer[BufferSize++] = static_cast<uint8>((BitLength >> Shift) & 0xff);
-            }
-            Transform(Buffer);
-
-            FString Hash;
-            Hash.Reserve(64);
-            for (uint32 Word : H)
-            {
-                Hash += FString::Printf(TEXT("%08x"), Word);
-            }
-            return Hash;
-        }
-
-    private:
-        void Transform(const uint8* Block)
-        {
-            static const uint32 K[64] =
-            {
-                0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5,
-                0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
-                0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3,
-                0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
-                0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc,
-                0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
-                0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7,
-                0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
-                0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13,
-                0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
-                0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3,
-                0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
-                0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5,
-                0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
-                0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208,
-                0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
-            };
-
-            uint32 W[64] = {};
-            for (int32 Index = 0; Index < 16; ++Index)
-            {
-                const int32 ByteIndex = Index * 4;
-                W[Index] =
-                    (static_cast<uint32>(Block[ByteIndex]) << 24) |
-                    (static_cast<uint32>(Block[ByteIndex + 1]) << 16) |
-                    (static_cast<uint32>(Block[ByteIndex + 2]) << 8) |
-                    static_cast<uint32>(Block[ByteIndex + 3]);
-            }
-
-            for (int32 Index = 16; Index < 64; ++Index)
-            {
-                const uint32 S0 = RotateRight(W[Index - 15], 7) ^ RotateRight(W[Index - 15], 18) ^ (W[Index - 15] >> 3);
-                const uint32 S1 = RotateRight(W[Index - 2], 17) ^ RotateRight(W[Index - 2], 19) ^ (W[Index - 2] >> 10);
-                W[Index] = W[Index - 16] + S0 + W[Index - 7] + S1;
-            }
-
-            uint32 A = H[0];
-            uint32 B = H[1];
-            uint32 C = H[2];
-            uint32 D = H[3];
-            uint32 E = H[4];
-            uint32 F = H[5];
-            uint32 G = H[6];
-            uint32 I = H[7];
-
-            for (int32 Index = 0; Index < 64; ++Index)
-            {
-                const uint32 S1 = RotateRight(E, 6) ^ RotateRight(E, 11) ^ RotateRight(E, 25);
-                const uint32 Ch = (E & F) ^ ((~E) & G);
-                const uint32 Temp1 = I + S1 + Ch + K[Index] + W[Index];
-                const uint32 S0 = RotateRight(A, 2) ^ RotateRight(A, 13) ^ RotateRight(A, 22);
-                const uint32 Maj = (A & B) ^ (A & C) ^ (B & C);
-                const uint32 Temp2 = S0 + Maj;
-
-                I = G;
-                G = F;
-                F = E;
-                E = D + Temp1;
-                D = C;
-                C = B;
-                B = A;
-                A = Temp1 + Temp2;
-            }
-
-            H[0] += A;
-            H[1] += B;
-            H[2] += C;
-            H[3] += D;
-            H[4] += E;
-            H[5] += F;
-            H[6] += G;
-            H[7] += I;
-        }
-
-        uint32 H[8] =
-        {
-            0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a,
-            0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19
-        };
-        uint8 Buffer[64] = {};
-        uint64 BufferSize = 0;
-        uint64 BitLength = 0;
+        const TCHAR* Name;
+        bool bDirectory = false;
     };
+
+    struct FDiscVariant
+    {
+        EPS1IsoGame Game;
+        const TCHAR* BootExecutable;
+        TArray<FRequiredDiscEntry> RequiredEntries;
+    };
+
+    // Root directory listings from Info/PS1IsoGate/PS1IsoGate Info.txt.
+    // Each executable selects its own regional rules; files from different regions are never combined.
+    const FDiscVariant DiscVariants[] =
+    {
+        { EPS1IsoGame::Spyro1, TEXT("SCUS_942.28"), {
+            { TEXT("S0"), true }, { TEXT("SOURCE"), true },
+            { TEXT("PETEXA0.STR") }, { TEXT("PETEXA1.STR") }, { TEXT("PETEXA2.STR") },
+            { TEXT("PETEXA3.STR") }, { TEXT("PETEXA4.STR") }, { TEXT("PETEXA5.STR") },
+            { TEXT("SYSTEM.CNF") }, { TEXT("WAD.WAD") } } },
+        { EPS1IsoGame::Spyro1, TEXT("SCES_014.38"), {
+            { TEXT("S0"), true }, { TEXT("SOURCE"), true },
+            { TEXT("MUSIC1.STR") }, { TEXT("MUSIC2.STR") }, { TEXT("MUSIC3.STR") },
+            { TEXT("MUSIC4.STR") }, { TEXT("MUSIC5.STR") }, { TEXT("MUSIC6.STR") },
+            { TEXT("SYSTEM.CNF") }, { TEXT("WAD.WAD") } } },
+        { EPS1IsoGame::Spyro1, TEXT("SCPS_100.85"), {
+            { TEXT("SOURCE"), true },
+            { TEXT("MUSIC1.STR") }, { TEXT("MUSIC2.STR") }, { TEXT("MUSIC3.STR") },
+            { TEXT("MUSIC4.STR") }, { TEXT("MUSIC5.STR") }, { TEXT("MUSIC6.STR") },
+            { TEXT("SYSTEM.CNF") }, { TEXT("WAD.WAD") } } },
+        { EPS1IsoGame::Spyro2, TEXT("SCUS_944.25"), {
+            { TEXT("KART"), true }, { TEXT("SPEECH.STR") }, { TEXT("SPYRO2.TRD") },
+            { TEXT("SYSTEM.CNF") }, { TEXT("WAD.WAD") } } },
+        { EPS1IsoGame::Spyro2, TEXT("SCES_021.04"), {
+            { TEXT("KART"), true }, { TEXT("SPEECH.STR") }, { TEXT("SPYRO2.TRD") },
+            { TEXT("SYSTEM.CNF") }, { TEXT("WAD.WAD") } } },
+        { EPS1IsoGame::Spyro2, TEXT("SCPS_101.28"), {
+            { TEXT("SPEECH.STR") }, { TEXT("SPYRO2.TRD") },
+            { TEXT("SYSTEM.CNF") }, { TEXT("WAD.WAD") } } },
+        { EPS1IsoGame::Spyro3, TEXT("SCUS_944.67"), {
+            { TEXT("CRASHBSH"), true }, { TEXT("3MN_BLNK.DAT") }, { TEXT("SPEECH.STR") },
+            { TEXT("SYSTEM.CNF") }, { TEXT("WAD.WAD") } } },
+        { EPS1IsoGame::Spyro3, TEXT("SCES_028.35"), {
+            { TEXT("CRASHBSH"), true }, { TEXT("SPEECH.STR") }, { TEXT("SPYRO3.TRD") },
+            { TEXT("SYSTEM.CNF") }, { TEXT("WAD.WAD") } } }
+    };
+
+    bool IsSupportedGame(EPS1IsoGame Game)
+    {
+        return Game == EPS1IsoGame::Spyro1 || Game == EPS1IsoGame::Spyro2 || Game == EPS1IsoGame::Spyro3;
+    }
+
+    FString GetGameName(EPS1IsoGame Game)
+    {
+        return FString::Printf(TEXT("Spyro %d"), static_cast<int32>(Game) + 1);
+    }
 
     FString ExpandPath(const FString& Path)
     {
@@ -213,378 +82,457 @@ namespace
         return FPaths::ConvertRelativePathToFull(ExpandedPath);
     }
 
-    FString ResolveCueDataFile(const FString& CuePath)
+    struct FDiscDataSource
+    {
+        FString Path;
+        int64 FirstSector = 0;
+        int32 SectorSize = 0;
+    };
+
+    bool ResolveCueDataFile(const FString& CuePath, FDiscDataSource& OutSource)
     {
         FString CueText;
         if (!FFileHelper::LoadFileToString(CueText, *CuePath))
         {
-            return FString();
+            return false;
         }
 
+        FString DataFile;
+        bool bBinaryFile = false;
+        bool bDataTrack = false;
         TArray<FString> Lines;
         CueText.ParseIntoArrayLines(Lines, true);
-
-        for (FString Line : Lines)
+        for (const FString& UntrimmedLine : Lines)
         {
-            Line = Line.TrimStartAndEnd();
-            if (!Line.StartsWith(TEXT("FILE"), ESearchCase::IgnoreCase))
+            const FString Line = UntrimmedLine.TrimStartAndEnd();
+            TArray<FString> Tokens;
+            Line.ParseIntoArrayWS(Tokens);
+            if (Tokens.Num() == 0)
             {
                 continue;
             }
 
-            FString DataFile;
-            int32 FirstQuote = INDEX_NONE;
-            int32 SecondQuote = INDEX_NONE;
-            if (Line.FindChar(TCHAR('"'), FirstQuote) && Line.FindLastChar(TCHAR('"'), SecondQuote) && SecondQuote > FirstQuote)
+            if (Tokens[0].Equals(TEXT("FILE"), ESearchCase::IgnoreCase))
             {
-                DataFile = Line.Mid(FirstQuote + 1, SecondQuote - FirstQuote - 1);
-            }
-            else
-            {
-                FString Remainder = Line.RightChop(4).TrimStartAndEnd();
-                int32 SpaceIndex = INDEX_NONE;
-                if (Remainder.FindChar(TCHAR(' '), SpaceIndex))
+                if (bDataTrack)
                 {
-                    DataFile = Remainder.Left(SpaceIndex).TrimStartAndEnd();
+                    return false; // The previous data track had no INDEX 01.
+                }
+                bBinaryFile = Tokens.Last().Equals(TEXT("BINARY"), ESearchCase::IgnoreCase);
+                int32 FirstQuote = INDEX_NONE;
+                int32 LastQuote = INDEX_NONE;
+                if (Line.FindChar(TCHAR('"'), FirstQuote) && Line.FindLastChar(TCHAR('"'), LastQuote) && LastQuote > FirstQuote)
+                {
+                    DataFile = Line.Mid(FirstQuote + 1, LastQuote - FirstQuote - 1);
                 }
                 else
                 {
-                    DataFile = Remainder;
+                    DataFile = Tokens.Num() == 3 ? Tokens[1] : FString();
                 }
             }
-
-            if (!DataFile.IsEmpty())
+            else if (Tokens[0].Equals(TEXT("TRACK"), ESearchCase::IgnoreCase) && Tokens.Num() == 3)
             {
+                if (bDataTrack)
+                {
+                    return false;
+                }
+                const FString Mode = Tokens[2].ToUpper();
+                bDataTrack = Mode.StartsWith(TEXT("MODE1/")) || Mode.StartsWith(TEXT("MODE2/"));
+                if (bDataTrack)
+                {
+                    OutSource.SectorSize = Mode == TEXT("MODE1/2048") ? 2048 :
+                        (Mode == TEXT("MODE1/2352") || Mode == TEXT("MODE2/2352")) ? 2352 :
+                        Mode == TEXT("MODE2/2336") ? 2336 : 0;
+                    if (!bBinaryFile || DataFile.IsEmpty() || OutSource.SectorSize == 0)
+                    {
+                        return false;
+                    }
+                }
+            }
+            else if (bDataTrack && Tokens[0].Equals(TEXT("INDEX"), ESearchCase::IgnoreCase) &&
+                Tokens.Num() == 3 && Tokens[1] == TEXT("01"))
+            {
+                TArray<FString> TimeParts;
+                Tokens[2].ParseIntoArray(TimeParts, TEXT(":"), false);
+                if (TimeParts.Num() != 3)
+                {
+                    return false;
+                }
+                for (const FString& Part : TimeParts)
+                {
+                    if (Part.IsEmpty() || Part.Len() > 3)
+                    {
+                        return false;
+                    }
+                    for (TCHAR Character : Part)
+                    {
+                        if (Character < TCHAR('0') || Character > TCHAR('9'))
+                        {
+                            return false;
+                        }
+                    }
+                }
+                const int32 Minutes = FCString::Atoi(*TimeParts[0]);
+                const int32 Seconds = FCString::Atoi(*TimeParts[1]);
+                const int32 Frames = FCString::Atoi(*TimeParts[2]);
+                if (Seconds >= 60 || Frames >= 75)
+                {
+                    return false;
+                }
+                OutSource.FirstSector = (Minutes * 60 + Seconds) * 75 + Frames;
                 FPaths::NormalizeFilename(DataFile);
-                return FPaths::IsRelative(DataFile)
+                OutSource.Path = FPaths::IsRelative(DataFile)
                     ? FPaths::ConvertRelativePathToFull(FPaths::GetPath(CuePath), DataFile)
                     : DataFile;
-            }
-        }
-
-        return FString();
-    }
-
-    uint8 ToUpperByte(uint8 Value)
-    {
-        return Value >= 'a' && Value <= 'z' ? Value - 32 : Value;
-    }
-
-    TArray<uint8> ToUpperAsciiBytes(const FString& Text)
-    {
-        TArray<uint8> Bytes;
-        const FTCHARToUTF8 Utf8(*Text.ToUpper());
-        Bytes.Append(reinterpret_cast<const uint8*>(Utf8.Get()), Utf8.Length());
-        return Bytes;
-    }
-
-    bool ContainsNeedle(const TArray<uint8>& Haystack, const TArray<uint8>& Needle)
-    {
-        if (Needle.Num() == 0 || Haystack.Num() < Needle.Num())
-        {
-            return false;
-        }
-
-        for (int32 Index = 0; Index <= Haystack.Num() - Needle.Num(); ++Index)
-        {
-            bool bMatches = true;
-            for (int32 NeedleIndex = 0; NeedleIndex < Needle.Num(); ++NeedleIndex)
-            {
-                if (ToUpperByte(Haystack[Index + NeedleIndex]) != Needle[NeedleIndex])
-                {
-                    bMatches = false;
-                    break;
-                }
-            }
-
-            if (bMatches)
-            {
                 return true;
             }
         }
-
         return false;
     }
 
-    bool ScanFileForMarkers(const FString& FilePath, const TArray<FString>& Markers, TArray<FString>& MissingMarkers, FString& OutError)
+    uint32 ReadLittleEndian32(const uint8* Bytes)
     {
-        TArray<TArray<uint8>> Needles;
-        TArray<FString> NeedleLabels;
-        int32 MaxNeedleSize = 0;
-        for (const FString& Marker : Markers)
+        return static_cast<uint32>(Bytes[0]) | (static_cast<uint32>(Bytes[1]) << 8) |
+            (static_cast<uint32>(Bytes[2]) << 16) | (static_cast<uint32>(Bytes[3]) << 24);
+    }
+
+    struct FDiscEntry
+    {
+        uint32 Block = 0;
+        uint32 Size = 0;
+        bool bDirectory = false;
+    };
+
+    struct FDiscLayout
+    {
+        int32 SectorSize;
+        int32 DataOffset;
+    };
+
+    class FDiscDirectoryReader
+    {
+    public:
+        FDiscDirectoryReader(IFileHandle& InFile, const FDiscDataSource& InSource)
+            : File(InFile), FirstSector(InSource.FirstSector), FileSize(InFile.Size())
         {
-            TArray<uint8> Needle = ToUpperAsciiBytes(Marker);
-            if (Needle.Num() > 0)
-            {
-                MaxNeedleSize = FMath::Max(MaxNeedleSize, Needle.Num());
-                NeedleLabels.Add(Marker);
-                Needles.Add(Needle);
-            }
         }
 
-        TArray<bool> Found;
-        Found.Init(false, Needles.Num());
-
-        IPlatformFile& PlatformFile = FPlatformFileManager::Get().GetPlatformFile();
-        TUniquePtr<IFileHandle> FileHandle(PlatformFile.OpenRead(*FilePath));
-        if (!FileHandle)
+        bool ReadRootDirectory(int32 SectorSizeHint, TMap<FString, FDiscEntry>& OutEntries, FString& OutError)
         {
-            OutError = FString::Printf(TEXT("Could not read disc image data: %s"), *FilePath);
-            return false;
-        }
-
-        TArray<uint8> Chunk;
-        TArray<uint8> Window;
-        TArray<uint8> Tail;
-        Chunk.SetNumUninitialized(MarkerScanChunkSize);
-
-        while (true)
-        {
-            const int64 CurrentOffset = FileHandle->Tell();
-            const int64 FileSize = FileHandle->Size();
-            if (CurrentOffset >= FileSize)
+            // Cooked ISO, raw Mode 1, raw Mode 2/XA, and Mode 2 without sync/header.
+            const FDiscLayout Layouts[] = { { 2048, 0 }, { 2352, 16 }, { 2352, 24 }, { 2336, 8 } };
+            uint8 Sector[LogicalSectorSize];
+            bool bFoundPrimaryVolume = false;
+            for (const FDiscLayout& Candidate : Layouts)
             {
-                break;
-            }
-
-            const int32 BytesToRead = static_cast<int32>(FMath::Min<int64>(MarkerScanChunkSize, FileSize - CurrentOffset));
-            if (!FileHandle->Read(Chunk.GetData(), BytesToRead))
-            {
-                OutError = FString::Printf(TEXT("Could not continue reading disc image data: %s"), *FilePath);
-                return false;
-            }
-
-            Window.Reset(Tail.Num() + BytesToRead);
-            Window.Append(Tail);
-            Window.Append(Chunk.GetData(), BytesToRead);
-
-            for (int32 Index = 0; Index < Needles.Num(); ++Index)
-            {
-                if (!Found[Index] && ContainsNeedle(Window, Needles[Index]))
+                if (SectorSizeHint != 0 && Candidate.SectorSize != SectorSizeHint)
                 {
-                    Found[Index] = true;
+                    continue;
                 }
-            }
-
-            bool bAllFound = true;
-            for (bool bFound : Found)
-            {
-                if (!bFound)
+                Layout = Candidate;
+                for (uint32 Block = 16; Block < 48; ++Block)
                 {
-                    bAllFound = false;
+                    if (!ReadBlock(Block, Sector, 7) || FMemory::Memcmp(Sector + 1, "CD001", 5) != 0 || Sector[6] != 1)
+                    {
+                        break;
+                    }
+                    if (Sector[0] == 255)
+                    {
+                        break;
+                    }
+                    if (Sector[0] == 1)
+                    {
+                        bFoundPrimaryVolume = ReadBlock(Block, Sector, LogicalSectorSize);
+                        break;
+                    }
+                }
+                if (bFoundPrimaryVolume)
+                {
                     break;
                 }
             }
-            if (bAllFound)
+            if (!bFoundPrimaryVolume || Sector[128] != 0 || Sector[129] != 8 ||
+                Sector[156] < 34 || (Sector[181] & 2) == 0)
             {
-                return true;
-            }
-
-            const int32 TailSize = FMath::Min(FMath::Max(MaxNeedleSize - 1, 0), Window.Num());
-            Tail.Reset(TailSize);
-            if (TailSize > 0)
-            {
-                Tail.Append(Window.GetData() + Window.Num() - TailSize, TailSize);
-            }
-        }
-
-        for (int32 Index = 0; Index < Found.Num(); ++Index)
-        {
-            if (!Found[Index])
-            {
-                MissingMarkers.Add(NeedleLabels[Index]);
-            }
-        }
-
-        return true;
-    }
-
-    bool HashFileSha256(const FString& FilePath, FString& OutHash, FString& OutError)
-    {
-        IPlatformFile& PlatformFile = FPlatformFileManager::Get().GetPlatformFile();
-        TUniquePtr<IFileHandle> FileHandle(PlatformFile.OpenRead(*FilePath));
-        if (!FileHandle)
-        {
-            OutError = FString::Printf(TEXT("Could not read disc image data: %s"), *FilePath);
-            return false;
-        }
-
-        FSha256Context Sha256;
-        TArray<uint8> Chunk;
-        Chunk.SetNumUninitialized(MarkerScanChunkSize);
-
-        while (true)
-        {
-            const int64 CurrentOffset = FileHandle->Tell();
-            const int64 FileSize = FileHandle->Size();
-            if (CurrentOffset >= FileSize)
-            {
-                break;
-            }
-
-            const int32 BytesToRead = static_cast<int32>(FMath::Min<int64>(MarkerScanChunkSize, FileSize - CurrentOffset));
-            if (!FileHandle->Read(Chunk.GetData(), BytesToRead))
-            {
-                OutError = FString::Printf(TEXT("Could not continue hashing disc image data: %s"), *FilePath);
+                OutError = TEXT("Disc image does not contain a supported ISO 9660 data track.");
                 return false;
             }
 
-            Sha256.Update(Chunk.GetData(), BytesToRead);
+            const uint64 RootBlock = static_cast<uint64>(ReadLittleEndian32(Sector + 158)) + Sector[157];
+            const uint32 RootSize = ReadLittleEndian32(Sector + 166);
+            if (RootBlock > MAX_uint32 || RootSize == 0 || RootSize > MaxRootDirectorySize ||
+                !IsExtentInImage(static_cast<uint32>(RootBlock), RootSize))
+            {
+                OutError = TEXT("Disc image has an invalid root directory.");
+                return false;
+            }
+
+            for (uint32 Offset = 0; Offset < RootSize; Offset += LogicalSectorSize)
+            {
+                const int32 BytesToRead = static_cast<int32>(FMath::Min<uint32>(LogicalSectorSize, RootSize - Offset));
+                if (!ReadBlock(static_cast<uint32>(RootBlock) + Offset / LogicalSectorSize, Sector, BytesToRead))
+                {
+                    OutError = TEXT("Could not read the disc image root directory.");
+                    return false;
+                }
+                for (int32 Position = 0; Position < BytesToRead && Sector[Position] != 0;)
+                {
+                    const uint8* Record = Sector + Position;
+                    const int32 RecordSize = Record[0];
+                    if (RecordSize < 34 || RecordSize > BytesToRead - Position ||
+                        Record[32] == 0 || 33 + Record[32] > RecordSize)
+                    {
+                        OutError = TEXT("Disc image contains a malformed directory entry.");
+                        return false;
+                    }
+                    if (!(Record[32] == 1 && Record[33] <= 1))
+                    {
+                        FString Name;
+                        for (int32 Index = 0; Index < Record[32] && Record[33 + Index] != ';'; ++Index)
+                        {
+                            Name.AppendChar(static_cast<TCHAR>(Record[33 + Index]));
+                        }
+                        const uint64 EntryBlock = static_cast<uint64>(ReadLittleEndian32(Record + 2)) + Record[1];
+                        if (EntryBlock > MAX_uint32)
+                        {
+                            OutError = TEXT("Disc image contains an invalid file location.");
+                            return false;
+                        }
+                        FDiscEntry Entry;
+                        Entry.Block = static_cast<uint32>(EntryBlock);
+                        Entry.Size = ReadLittleEndian32(Record + 10);
+                        Entry.bDirectory = (Record[25] & 2) != 0;
+                        OutEntries.Add(Name.ToUpper(), Entry);
+                    }
+                    Position += RecordSize;
+                }
+            }
+            return true;
         }
 
-        OutHash = Sha256.Final();
-        return true;
+        bool IsExtentInImage(uint32 Block, uint32 Size) const
+        {
+            if (Size == 0)
+            {
+                return false;
+            }
+            const int64 LastBlock = static_cast<int64>(Block) + (static_cast<int64>(Size) - 1) / LogicalSectorSize;
+            const int64 End = (FirstSector + LastBlock) * Layout.SectorSize + Layout.DataOffset +
+                (static_cast<int64>(Size) - 1) % LogicalSectorSize + 1;
+            return End <= FileSize;
+        }
+
+        bool ReadSystemCnf(const FDiscEntry& Entry, FString& OutText)
+        {
+            if (Entry.bDirectory || Entry.Size == 0 || Entry.Size > MaxSystemCnfSize || !IsExtentInImage(Entry.Block, Entry.Size))
+            {
+                return false;
+            }
+            uint8 Sector[LogicalSectorSize];
+            OutText.Reserve(Entry.Size);
+            for (uint32 Offset = 0; Offset < Entry.Size; Offset += LogicalSectorSize)
+            {
+                const int32 BytesToRead = static_cast<int32>(FMath::Min<uint32>(LogicalSectorSize, Entry.Size - Offset));
+                if (!ReadBlock(Entry.Block + Offset / LogicalSectorSize, Sector, BytesToRead))
+                {
+                    return false;
+                }
+                for (int32 Index = 0; Index < BytesToRead; ++Index)
+                {
+                    OutText.AppendChar(static_cast<TCHAR>(Sector[Index]));
+                }
+            }
+            return true;
+        }
+
+    private:
+        bool ReadBlock(uint32 Block, uint8* OutBytes, int32 Size)
+        {
+            const int64 Offset = (FirstSector + static_cast<int64>(Block)) * Layout.SectorSize + Layout.DataOffset;
+            return Offset >= 0 && Offset <= FileSize - Size && File.Seek(Offset) && File.Read(OutBytes, Size);
+        }
+
+        IFileHandle& File;
+        int64 FirstSector;
+        int64 FileSize;
+        FDiscLayout Layout = { 2048, 0 };
+    };
+
+    FString GetBootExecutable(const FString& SystemCnf)
+    {
+        TArray<FString> Lines;
+        SystemCnf.ParseIntoArrayLines(Lines, true);
+        for (const FString& Line : Lines)
+        {
+            FString Key;
+            FString Value;
+            if (Line.Split(TEXT("="), &Key, &Value) && Key.TrimStartAndEnd().Equals(TEXT("BOOT"), ESearchCase::IgnoreCase))
+            {
+                Value = Value.TrimStartAndEnd().ToUpper();
+                if (!Value.StartsWith(TEXT("CDROM:")))
+                {
+                    return FString();
+                }
+                Value = Value.RightChop(6);
+                Value.ReplaceInline(TEXT("\\"), TEXT("/"));
+                while (Value.StartsWith(TEXT("/")))
+                {
+                    Value = Value.RightChop(1);
+                }
+                int32 VersionIndex = INDEX_NONE;
+                if (Value.FindChar(TCHAR(';'), VersionIndex))
+                {
+                    Value = Value.Left(VersionIndex);
+                }
+                return Value.TrimStartAndEnd();
+            }
+        }
+        return FString();
     }
 
     bool OpenWindowsDiscImageDialog(FString& SelectedDiscImagePath)
     {
+        SelectedDiscImagePath.Reset();
 #if PLATFORM_WINDOWS
         TCHAR FileName[MAX_PATH] = {};
-
         OPENFILENAME OpenFileName = {};
         OpenFileName.lStructSize = sizeof(OPENFILENAME);
-        OpenFileName.hwndOwner = nullptr;
         OpenFileName.lpstrFile = FileName;
         OpenFileName.nMaxFile = MAX_PATH;
         OpenFileName.lpstrFilter = TEXT("PS1 Disc Images\0*.iso;*.bin;*.cue\0ISO Files\0*.iso\0BIN Files\0*.bin\0CUE Files\0*.cue\0All Files\0*.*\0");
         OpenFileName.nFilterIndex = 1;
         OpenFileName.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_NOCHANGEDIR;
         OpenFileName.lpstrTitle = TEXT("Choose your PS1 disc image");
-
         if (!GetOpenFileName(&OpenFileName))
         {
             return false;
         }
-
         SelectedDiscImagePath = FString(FileName);
         FPaths::NormalizeFilename(SelectedDiscImagePath);
         return true;
 #else
-        SelectedDiscImagePath.Reset();
         return false;
 #endif
     }
 }
 
-FPS1IsoVerificationResult UPS1IsoGateLibrary::VerifyConfiguredPS1DiscImage()
-{
-    const UPS1IsoGateSettings* Settings = GetDefault<UPS1IsoGateSettings>();
-    return VerifyPS1DiscImage(Settings->DiscImagePath, Settings->ExpectedSha256, Settings->AllowedExtensions, Settings->ExpectedBootExecutable, Settings->RequiredDiscFiles);
-}
-
-FPS1IsoVerificationResult UPS1IsoGateLibrary::VerifyPS1DiscImage(const FString& DiscImagePath, const FString& ExpectedSha256, const TArray<FString>& AllowedExtensions, const FString& ExpectedBootExecutable, const TArray<FString>& RequiredDiscFiles)
+FPS1IsoVerificationResult UPS1IsoGateLibrary::VerifyPS1DiscImage(EPS1IsoGame Game, const FString& DiscImagePath)
 {
     FPS1IsoVerificationResult Result;
-
+    if (!IsSupportedGame(Game))
+    {
+        Result.Message = TEXT("An unsupported PS1 game was selected.");
+        return Result;
+    }
     if (DiscImagePath.TrimStartAndEnd().IsEmpty())
     {
-        Result.Message = TEXT("No disc image path is configured.");
+        Result.Message = TEXT("No disc image path was supplied.");
         return Result;
     }
 
     const FString FullDiscImagePath = ExpandPath(DiscImagePath);
     IPlatformFile& PlatformFile = FPlatformFileManager::Get().GetPlatformFile();
-
     Result.bExists = PlatformFile.FileExists(*FullDiscImagePath);
     if (!Result.bExists)
     {
         Result.Message = FString::Printf(TEXT("Disc image was not found: %s"), *FullDiscImagePath);
         return Result;
     }
-
     const FString Extension = FPaths::GetExtension(FullDiscImagePath, false).ToLower();
-    for (const FString& AllowedExtension : AllowedExtensions)
-    {
-        if (Extension == AllowedExtension.ToLower())
-        {
-            Result.bAllowedExtension = true;
-            break;
-        }
-    }
-
+    Result.bAllowedExtension = Extension == TEXT("iso") || Extension == TEXT("bin") || Extension == TEXT("cue");
     if (!Result.bAllowedExtension)
     {
         Result.Message = FString::Printf(TEXT("Disc image extension '.%s' is not allowed."), *Extension);
         return Result;
     }
 
-    FString DataPath = FullDiscImagePath;
-    if (Extension == TEXT("cue"))
+    FDiscDataSource Source;
+    Source.Path = FullDiscImagePath;
+    if (Extension == TEXT("cue") && !ResolveCueDataFile(FullDiscImagePath, Source))
     {
-        DataPath = ResolveCueDataFile(FullDiscImagePath);
-        if (DataPath.IsEmpty() || !PlatformFile.FileExists(*DataPath))
-        {
-            Result.Message = TEXT("CUE file did not point to a readable BIN file.");
-            return Result;
-        }
+        Result.Message = TEXT("CUE file did not describe a supported binary data track with INDEX 01.");
+        return Result;
     }
-
-    const FString NormalizedExpectedHash = NormalizeSha256(ExpectedSha256);
-    if (!NormalizedExpectedHash.IsEmpty() && !NormalizedExpectedHash.StartsWith(TEXT("replace_with")))
+    TUniquePtr<IFileHandle> FileHandle(PlatformFile.OpenRead(*Source.Path));
+    if (!FileHandle)
     {
-        if (!IsHexSha256(NormalizedExpectedHash))
-        {
-            Result.Message = TEXT("Expected SHA-256 must be blank or a 64-character hexadecimal value.");
-            return Result;
-        }
-
-        FString HashError;
-        if (!HashFileSha256(DataPath, Result.ActualSha256, HashError))
-        {
-            Result.Message = HashError;
-            return Result;
-        }
-
-        Result.bHashMatches = NormalizeSha256(Result.ActualSha256) == NormalizedExpectedHash;
-        if (!Result.bHashMatches)
-        {
-            Result.Message = TEXT("Disc image was found, but its SHA-256 does not match the configured value.");
-            return Result;
-        }
-    }
-    else
-    {
-        Result.bHashMatches = true;
-    }
-
-    Result.BootExecutable = ExpectedBootExecutable.TrimStartAndEnd().ToUpper();
-
-    TArray<FString> MarkersToFind;
-    MarkersToFind.Add(TEXT("BOOT"));
-    MarkersToFind.Add(Result.BootExecutable);
-    for (const FString& RequiredDiscFile : RequiredDiscFiles)
-    {
-        MarkersToFind.Add(RequiredDiscFile);
-    }
-
-    FString ScanError;
-    if (!ScanFileForMarkers(DataPath, MarkersToFind, Result.MissingFiles, ScanError))
-    {
-        Result.Message = ScanError;
+        Result.Message = FString::Printf(TEXT("Could not read disc image data: %s"), *Source.Path);
         return Result;
     }
 
-    if (Result.MissingFiles.Contains(TEXT("BOOT")) || Result.MissingFiles.Contains(Result.BootExecutable))
+    FDiscDirectoryReader Reader(*FileHandle, Source);
+    TMap<FString, FDiscEntry> Entries;
+    if (!Reader.ReadRootDirectory(Source.SectorSize, Entries, Result.Message))
     {
-        Result.Message = FString::Printf(TEXT("Disc image does not contain the expected PS1 boot executable '%s'."), *Result.BootExecutable);
         return Result;
     }
 
+    // Test only this game's executable alternatives before checking any other required files.
+    TArray<const FDiscVariant*> MatchingVariants;
+    TArray<FString> ExpectedExecutables;
+    for (const FDiscVariant& Variant : DiscVariants)
+    {
+        if (Variant.Game != Game)
+        {
+            continue;
+        }
+        ExpectedExecutables.Add(Variant.BootExecutable);
+        const FDiscEntry* Executable = Entries.Find(Variant.BootExecutable);
+        if (Executable && !Executable->bDirectory && Reader.IsExtentInImage(Executable->Block, Executable->Size))
+        {
+            MatchingVariants.Add(&Variant);
+        }
+    }
+    if (MatchingVariants.Num() == 0)
+    {
+        Result.MissingFiles.Add(FString::Join(ExpectedExecutables, TEXT(" OR ")));
+        Result.Message = FString::Printf(TEXT("Disc image does not contain a supported %s executable (%s)."),
+            *GetGameName(Game), *Result.MissingFiles[0]);
+        return Result;
+    }
+
+    const FDiscEntry* SystemCnf = Entries.Find(TEXT("SYSTEM.CNF"));
+    FString SystemCnfText;
+    if (!SystemCnf || !Reader.ReadSystemCnf(*SystemCnf, SystemCnfText))
+    {
+        Result.MissingFiles.Add(TEXT("SYSTEM.CNF"));
+        Result.Message = TEXT("Disc image is missing a readable SYSTEM.CNF file.");
+        return Result;
+    }
+    Result.BootExecutable = GetBootExecutable(SystemCnfText);
+    const FDiscVariant* SelectedVariant = nullptr;
+    for (const FDiscVariant* Variant : MatchingVariants)
+    {
+        if (Result.BootExecutable == Variant->BootExecutable)
+        {
+            SelectedVariant = Variant;
+            break;
+        }
+    }
+    if (!SelectedVariant)
+    {
+        Result.Message = FString::Printf(TEXT("SYSTEM.CNF does not boot a supported %s executable."), *GetGameName(Game));
+        return Result;
+    }
+
+    for (const FRequiredDiscEntry& Required : SelectedVariant->RequiredEntries)
+    {
+        const FDiscEntry* Entry = Entries.Find(Required.Name);
+        if (!Entry || Entry->bDirectory != Required.bDirectory || !Reader.IsExtentInImage(Entry->Block, Entry->Size))
+        {
+            Result.MissingFiles.Add(Required.Name);
+        }
+    }
     if (Result.MissingFiles.Num() > 0)
     {
-        Result.Message = FString::Printf(TEXT("Disc image is missing %d expected marker(s)."), Result.MissingFiles.Num());
+        Result.Message = FString::Printf(TEXT("Disc image is missing %d required file(s) or folder(s): %s."),
+            Result.MissingFiles.Num(), *FString::Join(Result.MissingFiles, TEXT(", ")));
         return Result;
     }
 
     Result.bCanPlay = true;
-    Result.Message = TEXT("PS1 disc image verified. Access is enabled.");
+    Result.Message = FString::Printf(TEXT("%s disc image verified. Access is enabled."), *GetGameName(Game));
     return Result;
-}
-
-FPS1IsoVerificationResult UPS1IsoGateLibrary::VerifyPS1DiscImageWithConfiguredRules(const FString& DiscImagePath)
-{
-    const UPS1IsoGateSettings* Settings = GetDefault<UPS1IsoGateSettings>();
-    return VerifyPS1DiscImage(DiscImagePath, Settings->ExpectedSha256, Settings->AllowedExtensions, Settings->ExpectedBootExecutable, Settings->RequiredDiscFiles);
 }
 
 bool UPS1IsoGateLibrary::ChoosePS1DiscImage(FString& SelectedDiscImagePath)
@@ -592,16 +540,19 @@ bool UPS1IsoGateLibrary::ChoosePS1DiscImage(FString& SelectedDiscImagePath)
     return OpenWindowsDiscImageDialog(SelectedDiscImagePath);
 }
 
-FPS1IsoVerificationResult UPS1IsoGateLibrary::ChooseAndVerifyConfiguredPS1DiscImage(FString& SelectedDiscImagePath)
+FPS1IsoVerificationResult UPS1IsoGateLibrary::ChooseAndVerifyConfiguredPS1DiscImage(EPS1IsoGame Game, FString& SelectedDiscImagePath)
 {
     FPS1IsoVerificationResult Result;
-
+    if (!IsSupportedGame(Game))
+    {
+        SelectedDiscImagePath.Reset();
+        Result.Message = TEXT("An unsupported PS1 game was selected.");
+        return Result;
+    }
     if (!ChoosePS1DiscImage(SelectedDiscImagePath))
     {
         Result.Message = TEXT("No PS1 disc image was selected.");
         return Result;
     }
-
-    const UPS1IsoGateSettings* Settings = GetDefault<UPS1IsoGateSettings>();
-    return VerifyPS1DiscImage(SelectedDiscImagePath, Settings->ExpectedSha256, Settings->AllowedExtensions, Settings->ExpectedBootExecutable, Settings->RequiredDiscFiles);
+    return VerifyPS1DiscImage(Game, SelectedDiscImagePath);
 }

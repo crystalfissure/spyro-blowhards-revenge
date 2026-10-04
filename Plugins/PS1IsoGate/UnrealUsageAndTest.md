@@ -1,84 +1,31 @@
-# PS1 Ownership Gate: Unreal Setup and Test
+# PS1 Ownership Gate: Unreal setup and testing
 
-## 1. Install the plugin
+## Setup
 
-Copy the `PS1IsoGate` folder into your Unreal project:
+Enable **PS1 Ownership Gate** in Unreal 4.27 and rebuild the plugin. No PS1IsoGate configuration is needed.
 
-```text
-YourProject/
-  Plugins/
-    PS1IsoGate/
-      PS1IsoGate.uplugin
-```
+On your menu's Choose File button, call **Choose And Verify Configured PS1 Disc Image** and set **Game** to **Spyro 1**, **Spyro 2**, or **Spyro 3**. Break the returned result and enable Play only if **bCanPlay** is true. Show **Message** on failure.
 
-Restart Unreal, then enable `PS1 Ownership Gate` in the Plugins window.
+To recheck a saved selection without opening the picker, call **Verify PS1 Disc Image** with **Game** and **Disc Image Path**. Use the same game selection that your menu requires.
 
-If your project uses C++, regenerate project files and compile. If it is Blueprint-only, Unreal may ask to rebuild the plugin on startup.
+## Migration
 
-## 2. Configure the disc image
+After rebuilding, restart Unreal and refresh or recreate old nodes. Both verification nodes now take **Game**. **Verify PS1 Disc Image** takes only **Game** and **Disc Image Path**.
 
-Add this to your project's `Config/DefaultGame.ini`:
+Replace **Verify Configured PS1 Disc Image** and **Verify PS1 Disc Image With Configured Rules** with **Verify PS1 Disc Image**. Refresh **Break PS1 Iso Verification Result** nodes to remove the deleted hash outputs. Remove obsolete PS1IsoGateSettings entries from DefaultGame.ini if present.
 
-```ini
-[/Script/PS1IsoGate.PS1IsoGateSettings]
-DiscImagePath=
-ExpectedSha256=
-+AllowedExtensions=iso
-+AllowedExtensions=bin
-+AllowedExtensions=cue
-ExpectedBootExecutable=SCUS_942.28
-+RequiredDiscFiles=SYSTEM.CNF
-+RequiredDiscFiles=SCUS_942.28
-+RequiredDiscFiles=WAD.WAD
-+RequiredDiscFiles=S0
-+RequiredDiscFiles=SOURCE
-+RequiredDiscFiles=PETEXA0.STR
-+RequiredDiscFiles=PETEXA1.STR
-+RequiredDiscFiles=PETEXA2.STR
-+RequiredDiscFiles=PETEXA3.STR
-+RequiredDiscFiles=PETEXA4.STR
-+RequiredDiscFiles=PETEXA5.STR
-```
+## Automated checks
 
-Use `.cue`, `.bin`, or `.iso`. For `.cue`, the plugin reads the referenced `.bin` file.
+In Unreal's Session Frontend, run the tests under **PS1IsoGate**:
 
-`DiscImagePath` can stay blank for the real player flow. The player will pick the file from your menu.
+- **Regions**: all eight supplied regional variants, wrong selected games, and removal of each required file or folder.
+- **Formats**: all regions with cooked ISO, raw Mode 1/2352, Mode 2/2352, and Mode 2/2336 data; quoted CUE paths, stored pregaps, and selection of the data track after an audio file.
+- **Failures**: missing paths, unsupported game/extension, mismatched boot target, forged filename bytes, malformed or oversized root directories, truncated extents, and invalid CUE sheets.
 
-## 3. Blueprint menu flow
+Synthetic fixtures are created under Saved/PS1IsoGateTests and cleaned up after each test.
 
-In your main menu widget:
+## Manual checks
 
-1. Add a `Choose File` button.
-2. On click, call `Choose And Verify Configured PS1 Disc Image`.
-3. Store the returned `SelectedDiscImagePath` in your own SaveGame/settings if verification succeeds.
-4. Break the returned `PS1 Iso Verification Result`.
-5. If `bCanPlay` is true:
-   - Enable your Play button.
-   - Show a short verified/access granted message if desired.
-6. If `bCanPlay` is false:
-   - Disable your Play button.
-   - Show `Message` to explain what failed.
+Use your own images to verify Spyro 1 and 2 NTSC-U/PAL/NTSC-J and Spyro 3 NTSC-U/PAL. Confirm that selecting another game fails immediately at the executable check. Try both direct images and their CUE sheets.
 
-On the Play button click, open your game's first level as normal. Do not launch an emulator.
-
-## 4. Quick test cases
-
-Test these before shipping:
-
-- Empty `DiscImagePath`: should fail with a missing path message.
-- Wrong path: should fail with a file-not-found message.
-- `.cue` pointing at a missing `.bin`: should fail with a CUE/BIN message.
-- Wrong game image: should fail because the expected markers are missing.
-- Correct NTSC Spyro image: should return `bCanPlay = true`.
-
-## 5. Optional exact dump lock
-
-Leave `ExpectedSha256` blank to accept any image that matches the expected disc markers.
-
-Set `ExpectedSha256` only if you want to require one exact dump:
-
-```powershell
-Get-FileHash "C:\Games\PS1\SpyroTheDragon.bin" -Algorithm SHA256
-```
-
-Paste the hash into `ExpectedSha256`.
+Cancel the Windows picker, choose an unsupported extension, and select a CUE whose binary data file is missing. Play must stay disabled, and Message must explain the failure. Test the picker in a packaged build as well as the editor.
