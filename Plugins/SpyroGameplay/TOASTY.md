@@ -56,3 +56,13 @@ Native flame checks passed from four directions for each enemy. Those fixtures u
 Toasty's final scythe damage check now uses the same physical obstruction policy as Town Square enemies: solid WorldStatic/WorldDynamic/PhysicsBody/Destructible surfaces block contact even when they ignore Visibility, while overlap triggers and camera/Visibility-only geometry do not. Contact requires overlapping body-height intervals and ignores the combatants and their child actors. Existing attack distance, cone, height limits, animation windows and rejected-hit consumption policy remain in force. Awareness checks keep their existing rules.
 
 The Sleeping Dog and Toasty components expose optional `OnEnemySignal` Blueprint feedback. Dogs report pounce commitment and native reset completion. Toasty additionally reports stage changes, observed last-guard defeat and chosen recovery detours. See [README.md](README.md) for exact Detail values and dispatch/lifecycle rules. No saved Blueprint rewiring is required. The Dog's source-derived pounce contact windows, first-flame color timing and airborne death handling remain unchanged.
+
+## Dog physical wall contact (11 October 2026)
+
+The Dog's final pounce damage check filters physical WorldStatic, WorldDynamic,
+PhysicsBody and Destructible surfaces by whether they block a combatant's body
+channel. Visibility-only/camera-only objects and overlap-only triggers do not
+obstruct damage. The original source-derived CrushSweep volume, active animation
+frames, actor-origin sight segment and accepted-hit policy are retained. This
+does not impose the grounded melee helper's capsule-height-overlap restriction
+on airborne pounces. Ordinary awareness still uses its existing Visibility rule.

@@ -61,6 +61,8 @@ public:
     UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Town Square|Debug") bool bFollowingRunPath = false;
     UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Town Square|Debug", meta=(Units="cm")) float RunPathDistance = 0.f;
     UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Town Square|Debug", meta=(Units="cm")) float RunPathLength = 0.f;
+    /** No clear sampled spline join is available; waits and retries without teleporting. */
+    UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly, Category="Town Square|Debug") bool bRunPathJoinBlocked = false;
     UFUNCTION(BlueprintPure, Category="Town Square|Territory") FVector GetRoamCenter() const;
     UFUNCTION(BlueprintPure, Category="Town Square|Pair") AActor* GetPartner() const;
     UFUNCTION(BlueprintPure, Category="Town Square|Placement") FString ValidatePlacement() const;
@@ -103,6 +105,7 @@ private:
     void CaptureRunPath(const USplineComponent* Source);
     void ResetRunPathProgress();
     void FollowRunPath(float Speed);
+    bool FindClearRunPathJoin(float& Distance) const;
     void GroundMove(float Distance, float Direction);
     bool SweepPlayerBody(const FVector& Delta, FHitResult& Hit, bool& Initial) const;
     bool ProjectGroundMove(const FVector& Delta, FVector& GroundDelta);
@@ -127,6 +130,7 @@ private:
     // Unattached world-space snapshot: moving or destroying the Toreador cannot move the circuit.
     UPROPERTY(Transient) USplineComponent* RuntimeRunPath = nullptr;
     bool bJoiningRunPath = true;
+    int32 RunPathJoinRetryTicks = 0;
     FTransform RouteOrigin;
     // A Bull keeps its patrol even if the actor that supplied it is destroyed.
     FTransform BullPatrolOrigin;
@@ -152,6 +156,7 @@ private:
 #if WITH_EDITORONLY_DATA
     UPROPERTY(Transient) USphereComponent* RoamPreview = nullptr;
     UPROPERTY(Transient) USplineComponent* RoutePreview = nullptr;
+    UPROPERTY(Transient) UBoxComponent* PatrolClearancePreview = nullptr;
 #endif
 };
 
@@ -161,7 +166,9 @@ class SPYROGAMEPLAY_API UBullBehaviorComponent : public UTownSquareEnemyBehavior
     GENERATED_BODY()
 public:
     UBullBehaviorComponent();
-    /** Total length of the standalone straight patrol, centred on placement and aligned with its forward arrow. */
+    /** Unobstructed forward travel during the original 100,92,...,4 braking sequence. */
+    UFUNCTION(BlueprintPure, Category="Town Square|Patrol") float GetPatrolBrakingDistance() const;
+    /** Nominal standalone endpoint spacing. Arrival tolerance, route fitting and ~99cm braking at default conversion affect actual travel. Orange preview includes conservative braking/body clearance, not a hard movement boundary. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Town Square|Patrol", meta=(ClampMin="200", Units="cm")) float PatrolDistance = 1200.f;
     /** Extra contact impact, played only when a horn hit actually damages Spyro. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Town Square|Gore") USoundBase* GoreImpactSound = nullptr;

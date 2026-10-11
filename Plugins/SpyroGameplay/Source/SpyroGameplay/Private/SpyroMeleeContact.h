@@ -33,24 +33,17 @@ inline void IgnoreCombatant(FCollisionQueryParams& Query, const AActor* Actor)
     Query.AddIgnoredActors(Children);
 }
 
-/** Final contact permission, independent of awareness/range/cone tuning. */
-inline bool HasClearContact(const AActor* Attacker, const AActor* Target, const AActor* IgnoredPartner = nullptr)
+/** Physical obstruction only; the caller owns the attack's contact geometry. */
+inline bool HasClearSegment(const AActor* Attacker, const AActor* Target,
+    const FVector& Start, const FVector& End, const AActor* IgnoredPartner = nullptr)
 {
     if (!IsValid(Attacker) || !IsValid(Target) || Attacker->IsHidden() || Target->IsHidden() ||
-        !Attacker->GetWorld() || Attacker->GetWorld() != Target->GetWorld()) return false;
-
-    FVector Start, End;
-    float AttackerHalfHeight, TargetHalfHeight;
+        !Attacker->GetWorld() || Attacker->GetWorld() != Target->GetWorld() ||
+        Start.ContainsNaN() || End.ContainsNaN()) return false;
+    FVector Center; float HalfHeight;
     ECollisionChannel AttackerType, TargetType;
-    BodySpan(Attacker, Start, AttackerHalfHeight, AttackerType);
-    BodySpan(Target, End, TargetHalfHeight, TargetType);
-    const float Bottom = FMath::Max(Start.Z - AttackerHalfHeight, End.Z - TargetHalfHeight);
-    const float Top = FMath::Min(Start.Z + AttackerHalfHeight, End.Z + TargetHalfHeight);
-    if (Top <= Bottom + KINDA_SMALL_NUMBER) return false;
-
-    // Trace inside the common body-height interval, so different capsule heights
-    // or a modest jump/step do not aim into the floor or reject valid contact.
-    Start.Z = End.Z = (Bottom + Top) * .5f;
+    BodySpan(Attacker, Center, HalfHeight, AttackerType);
+    BodySpan(Target, Center, HalfHeight, TargetType);
     FCollisionQueryParams Query(SCENE_QUERY_STAT(SpyroMeleeContact), false, Attacker);
     IgnoreCombatant(Query, Attacker);
     IgnoreCombatant(Query, Target);
@@ -71,5 +64,26 @@ inline bool HasClearContact(const AActor* Attacker, const AActor* Target, const 
             Surface->GetCollisionResponseToChannel(TargetType) == ECR_Block)) return false;
     }
     return true;
+}
+
+/** Final contact permission, independent of awareness/range/cone tuning. */
+inline bool HasClearContact(const AActor* Attacker, const AActor* Target, const AActor* IgnoredPartner = nullptr)
+{
+    if (!IsValid(Attacker) || !IsValid(Target) || Attacker->IsHidden() || Target->IsHidden() ||
+        !Attacker->GetWorld() || Attacker->GetWorld() != Target->GetWorld()) return false;
+
+    FVector Start, End;
+    float AttackerHalfHeight, TargetHalfHeight;
+    ECollisionChannel AttackerType, TargetType;
+    BodySpan(Attacker, Start, AttackerHalfHeight, AttackerType);
+    BodySpan(Target, End, TargetHalfHeight, TargetType);
+    const float Bottom = FMath::Max(Start.Z - AttackerHalfHeight, End.Z - TargetHalfHeight);
+    const float Top = FMath::Min(Start.Z + AttackerHalfHeight, End.Z + TargetHalfHeight);
+    if (Top <= Bottom + KINDA_SMALL_NUMBER) return false;
+
+    // Trace inside the common body-height interval, so different capsule heights
+    // or a modest jump/step do not aim into the floor or reject valid contact.
+    Start.Z = End.Z = (Bottom + Top) * .5f;
+    return HasClearSegment(Attacker, Target, Start, End, IgnoredPartner);
 }
 }
