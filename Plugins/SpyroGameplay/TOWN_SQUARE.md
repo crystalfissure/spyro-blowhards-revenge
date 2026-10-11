@@ -85,3 +85,24 @@ The WindowsNoEditor cook succeeds with zero errors and 80 warnings, producing al
 The final Bull/Toreador damage check uses physical obstruction rather than the Visibility channel. A WorldStatic, WorldDynamic, PhysicsBody or Destructible surface blocks contact if it blocks either combatant's body object channel. Overlap-only triggers and camera/Visibility-only geometry do not block melee. The trace uses a shared body-height interval, rejects vertically separated bodies, and ignores the two combatants, their child actors and the existing explicitly linked partner. Range, cone, charge priority, attack frames and one-attempt-per-attack policy are retained. Attack awareness/wind-up checks retain their existing rules; this change protects final damage permission.
 
 `OnEnemySignal` exposes attack commitment, recovery attempt and completed native reset notifications to Blueprints. See the signal table and callback rules in [README.md](README.md). It is suitable for optional encounter/presentation reactions; it does not replace native damage or motion.
+
+## Blocked joins and standalone patrol clearance (11 October 2026)
+
+If a spline-mode enemy cannot reach its initial joining point, it now searches a
+bounded set of alternatives with a clear capsule sweep and sampled nearly level
+floor support. The actual approach still uses normal swept movement. If no clear
+candidate is found, Run Path Join Blocked becomes true and the enemy waits,
+retrying every 30 native simulation steps (one unpaused second). Checkpoint reset
+and switching back to waypoint mode clear this diagnostic. This is conservative
+local recovery, not general pathfinding; complex/sloped obstructed joins may wait
+for a better placement or the obstruction to clear. Existing authored waypoint
+behavior and on-circuit direction reversal are preserved.
+
+The selected standalone Bull has an orange editor-only clearance box. It includes
+the nominal endpoints, the original braking travel and conservative body width.
+It has no collision and is hidden in play and for explicitly paired Bulls. It is
+an authoring aid, not an exact trajectory or hard boundary: arrival tolerance,
+route fitting and terrain can shorten travel. Get Patrol Braking Distance exposes
+the original 100,92,...,4-unit braking total (98.766304cm at default conversion).
+PatrolDistance's tooltip now explains its nominal-endpoint meaning. Movement
+speed, braking timing and saved patrol settings are unchanged.

@@ -143,6 +143,7 @@ FString UTownSquareEnemyBehaviorComponent::ValidatePlacement() const
 {
     if (Animations.Num() != 10 || Animations.Contains(nullptr)) return TEXT("Assign all ten reference animations.");
     if (bPairConflict) return TEXT("Linked Bull is already assigned to another Toreador.");
+    if (bRunPathJoinBlocked) return TEXT("Spline join obstructed: waiting for a clear supported approach.");
     if (const auto* T = Cast<UToreadorBehaviorComponent>(this))
     {
         if (T->LinkedBull && !T->LinkedBull->FindComponentByClass<UBullBehaviorComponent>()) return TEXT("LinkedBull must contain BullBehavior.");
@@ -363,6 +364,7 @@ bool UTownSquareEnemyBehaviorComponent::Face(const FVector& Point,float TurnUnit
 void UTownSquareEnemyBehaviorComponent::CaptureRunPath(const USplineComponent* Source)
 {
     RuntimeRunPath=nullptr; bFollowingRunPath=false; RunPathLength=RunPathDistance=0; bLimitRoaming=true;
+    bRunPathJoinBlocked=false; RunPathJoinRetryTicks=0;
     if (!Source || Source->GetNumberOfSplinePoints()<2 || !Source->IsClosedLoop() || Source->GetSplineLength()<1.f) return;
     RuntimeRunPath=NewObject<USplineComponent>(GetOwner(),NAME_None,RF_Transient);
     RuntimeRunPath->SplineCurves=Source->SplineCurves;
@@ -374,13 +376,72 @@ void UTownSquareEnemyBehaviorComponent::CaptureRunPath(const USplineComponent* S
 }
 void UTownSquareEnemyBehaviorComponent::ResetRunPathProgress()
 {
-    bJoiningRunPath=true;
+    bJoiningRunPath=true; bRunPathJoinBlocked=false; RunPathJoinRetryTicks=0; BlockedTicks=0;
     if (RuntimeRunPath)
         RunPathDistance=RuntimeRunPath->GetDistanceAlongSplineAtSplineInputKey(RuntimeRunPath->FindInputKeyClosestToWorldLocation(GetOwner()->GetActorLocation()));
+}
+bool UTownSquareEnemyBehaviorComponent::FindClearRunPathJoin(float& Distance) const
+{
+    if (!IsValid(Character) || !RuntimeRunPath || RunPathLength<1.f) return false;
+    const auto* Capsule=Character->GetCapsuleComponent();
+    const FVector Start=Character->GetActorLocation();
+    const float HalfHeight=Capsule->GetScaledCapsuleHalfHeight();
+    const float Radius=Capsule->GetScaledCapsuleRadius();
+    FCollisionQueryParams Query(SCENE_QUERY_STAT(TownSquareJoin),false,Character);
+    SpyroMeleeContact::IgnoreCombatant(Query,Character);
+    if (IsValid(Partner)) SpyroMeleeContact::IgnoreCombatant(Query,Partner->GetOwner());
+    if (IsValid(Pursuer)) SpyroMeleeContact::IgnoreCombatant(Query,Pursuer);
+    FCollisionObjectQueryParams Types;
+    Types.AddObjectTypesToQuery(ECC_WorldStatic); Types.AddObjectTypesToQuery(ECC_WorldDynamic);
+    Types.AddObjectTypesToQuery(ECC_PhysicsBody); Types.AddObjectTypesToQuery(ECC_Destructible);
+    float Best=MAX_flt; bool Found=false;
+    // Bounded, conservative direct-join search. This is not pathfinding: the
+    // ordinary swept movement remains authoritative and never teleports.
+    for (int32 Candidate=0;Candidate<17;++Candidate)
+    {
+        const float D=Candidate==0?RunPathDistance:RunPathLength*(Candidate-1)/16.f;
+        FVector End=RuntimeRunPath->GetLocationAtDistanceAlongSpline(D,ESplineCoordinateSpace::World);
+        End.Z=Start.Z;
+        const float Length=FVector::Dist2D(Start,End);
+        if (Length>=Best) continue;
+        const int32 Samples=FMath::Max(1,FMath::CeilToInt(Length/FMath::Max(10.f,Radius)));
+        if (Samples>64) continue;
+        TArray<FHitResult> Hits;
+        GetWorld()->SweepMultiByObjectType(Hits,Start,End,FQuat::Identity,Types,
+            FCollisionShape::MakeCapsule(Radius,HalfHeight),Query);
+        bool Clear=true;
+        for (const auto& Hit:Hits) if (const auto* Surface=Hit.GetComponent())
+            if (Surface->GetCollisionResponseToChannel(Capsule->GetCollisionObjectType())==ECR_Block &&
+                Capsule->GetCollisionResponseToChannel(Surface->GetCollisionObjectType())==ECR_Block)
+            { Clear=false; break; }
+        // Only offer alternatives with nearly level support all along the
+        // straight approach. Sloped joins still use the original movement path.
+        for (int32 I=0;Clear && I<=Samples;++I)
+        {
+            const FVector Foot=FMath::Lerp(Start,End,float(I)/Samples)-FVector(0,0,HalfHeight);
+            Hits.Reset();
+            GetWorld()->LineTraceMultiByObjectType(Hits,Foot+FVector(0,0,6),Foot-FVector(0,0,6),Types,Query);
+            bool Supported=false;
+            for (const auto& Hit:Hits) if (const auto* Surface=Hit.GetComponent())
+                if (Surface->GetCollisionResponseToChannel(Capsule->GetCollisionObjectType())==ECR_Block &&
+                    Capsule->GetCollisionResponseToChannel(Surface->GetCollisionObjectType())==ECR_Block &&
+                    Hit.ImpactNormal.Z>.99f) { Supported=true; break; }
+            Clear=Supported;
+        }
+        if (Clear) { Best=Length; Distance=D; Found=true; }
+    }
+    return Found;
 }
 void UTownSquareEnemyBehaviorComponent::FollowRunPath(float Speed)
 {
     if (!RuntimeRunPath || RunPathLength<1.f) return;
+    if (bJoiningRunPath && bRunPathJoinBlocked)
+    {
+        if (--RunPathJoinRetryTicks>0) return;
+        float JoinDistance=RunPathDistance;
+        if (!FindClearRunPathJoin(JoinDistance)) { RunPathJoinRetryTicks=30; return; }
+        RunPathDistance=JoinDistance; bRunPathJoinBlocked=false; BlockedTicks=0;
+    }
     const float Step=Speed*WorldUnitsPerOriginalUnit;
     auto Wrap=[this](float Distance) { const float D=FMath::Fmod(Distance,RunPathLength); return D<0?D+RunPathLength:D; };
     const FVector Start=Character->GetActorLocation();
@@ -397,7 +458,18 @@ void UTownSquareEnemyBehaviorComponent::FollowRunPath(float Speed)
     }
     CurrentRouteNode=(FMath::FloorToInt(RuntimeRunPath->SplineCurves.ReparamTable.Eval(RunPathDistance,0.f))+1)%RuntimeRunPath->GetNumberOfSplinePoints();
     if (!bPlayerBlocked && RequestedStepDelta.Size2D()>.1f && LastStepDelta.Size2D()<.5f) ++BlockedTicks; else BlockedTicks=0;
-    if (BlockedTicks>=12) { RouteDirection=-RouteDirection; BlockedTicks=0; ++RecoveryCount; PendingEnemyEvents.Add(ESpyroEnemySignal::RecoveryStarted, RecoveryCount); }
+    if (BlockedTicks>=12)
+    {
+        BlockedTicks=0;
+        if (bJoiningRunPath)
+        {
+            float JoinDistance=RunPathDistance;
+            if (FindClearRunPathJoin(JoinDistance)) RunPathDistance=JoinDistance;
+            else { bRunPathJoinBlocked=true; RunPathJoinRetryTicks=30; }
+        }
+        else RouteDirection=-RouteDirection;
+        ++RecoveryCount; PendingEnemyEvents.Add(ESpyroEnemySignal::RecoveryStarted, RecoveryCount);
+    }
 }
 void UTownSquareEnemyBehaviorComponent::FollowRoute(float Speed, bool bBackAndForth)
 {
@@ -952,6 +1024,11 @@ void UTownSquareEnemyBehaviorComponent::DropGemRange(int32 First, int32 Count)
     }
 }
 
+float UBullBehaviorComponent::GetPatrolBrakingDistance() const
+{
+    return 676.f*WorldUnitsPerOriginalUnit;
+}
+
 void UTownSquareEnemyBehaviorComponent::OnRegister()
 {
     Super::OnRegister();
@@ -962,6 +1039,7 @@ void UTownSquareEnemyBehaviorComponent::OnUnregister()
 #if WITH_EDITORONLY_DATA
     if (RoamPreview) { RoamPreview->DestroyComponent(); RoamPreview = nullptr; }
     if (RoutePreview) { RoutePreview->DestroyComponent(); RoutePreview = nullptr; }
+    if (PatrolClearancePreview) { PatrolClearancePreview->DestroyComponent(); PatrolClearancePreview = nullptr; }
 #endif
     Super::OnUnregister();
 }
@@ -969,18 +1047,48 @@ void UTownSquareEnemyBehaviorComponent::OnUnregister()
 void UTownSquareEnemyBehaviorComponent::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
 {
     UpdateRoamPreview();
+    if (Cast<UToreadorBehaviorComponent>(this) && GetWorld())
+        for (TActorIterator<AActor> It(GetWorld()); It; ++It)
+            if (auto* Bull=It->FindComponentByClass<UBullBehaviorComponent>()) Bull->UpdateRoamPreview();
     Super::PostEditChangeProperty(PropertyChangedEvent);
 }
 #endif
 void UTownSquareEnemyBehaviorComponent::UpdateRoamPreview()
 {
 #if WITH_EDITORONLY_DATA
-    // The Bull has no spline/waypoint authoring or duplicate Toreador preview.
     const auto* Toreador=Cast<UToreadorBehaviorComponent>(this);
-    if (!Toreador) return;
     AActor* Owner = GetOwner();
     if (!Owner || !Owner->GetRootComponent() || !GetWorld() ||
         (GetWorld()->WorldType != EWorldType::Editor && GetWorld()->WorldType != EWorldType::EditorPreview)) return;
+    if (const auto* Bull=Cast<UBullBehaviorComponent>(this))
+    {
+        if (!PatrolClearancePreview)
+        {
+            PatrolClearancePreview=NewObject<UBoxComponent>(Owner,NAME_None,RF_Transient);
+            PatrolClearancePreview->SetupAttachment(Owner->GetRootComponent());
+            PatrolClearancePreview->SetAbsolute(false,false,true);
+            PatrolClearancePreview->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+            PatrolClearancePreview->SetGenerateOverlapEvents(false);
+            PatrolClearancePreview->SetCanEverAffectNavigation(false);
+            PatrolClearancePreview->SetHiddenInGame(true); PatrolClearancePreview->bIsEditorOnly=true;
+            PatrolClearancePreview->bDrawOnlyIfSelected=true;
+            PatrolClearancePreview->ShapeColor=FColor::Orange;
+            PatrolClearancePreview->RegisterComponent();
+        }
+        float Margin=0.f;
+        if (const auto* C=Cast<ACharacter>(Owner)) Margin=C->GetCapsuleComponent()->GetScaledCapsuleRadius();
+        for (auto* Component:Owner->GetComponents())
+            if (Component->GetFName()==TEXT("TownSquareBodyCollision"))
+                if (const auto* Box=Cast<UBoxComponent>(Component))
+                    Margin=FMath::Max(Margin,Box->GetScaledBoxExtent().Size2D()+FVector::Dist2D(Box->GetComponentLocation(),Owner->GetActorLocation()));
+        const float Half=FMath::Max(200.f,Bull->PatrolDistance)*.5f;
+        PatrolClearancePreview->SetBoxExtent(FVector(Half+Bull->GetPatrolBrakingDistance()+Margin,Margin,4.f),false);
+        PatrolClearancePreview->SetVisibility(TerritoryOwner()==this);
+        return;
+    }
+    if (!Toreador) return;
+    if (IsValid(Toreador->LinkedBull))
+        if (auto* Bull=Toreador->LinkedBull->FindComponentByClass<UBullBehaviorComponent>()) Bull->UpdateRoamPreview();
     if (!RoamPreview)
     {
         RoamPreview = NewObject<USphereComponent>(Owner, NAME_None, RF_Transient);

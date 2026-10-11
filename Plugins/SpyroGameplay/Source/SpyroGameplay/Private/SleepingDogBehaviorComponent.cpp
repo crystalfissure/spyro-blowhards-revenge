@@ -1,4 +1,5 @@
 #include "SleepingDogBehaviorComponent.h"
+#include "SpyroMeleeContact.h"
 #include "SleepingDogAnimInstance.h"
 #include "ToastyEncounterCollision.h"
 #include "SleepingDogContact.h"
@@ -456,8 +457,9 @@ void USleepingDogBehaviorComponent::HitPlayer(const FVector* PreviousOrigin)
     const FVector PlayerCenter=Feet(Player)+FVector(0,0,PlayerRadius);
     const FVector Origin=GetContactOrigin();
     if (!SleepingDogContact::CrushSweep(PlayerCenter-(PreviousOrigin?*PreviousOrigin:Origin),PlayerCenter-Origin,DogUnits,PlayerRadius)) return;
-    FHitResult Wall; FCollisionQueryParams Q(SCENE_QUERY_STAT(SleepingDogAttack),false,Character); SleepingDog::IgnorePlayer(Q,Pursuer);
-    if (GetWorld()->LineTraceSingleByChannel(Wall,Character->GetActorLocation(),Pursuer->GetActorLocation(),ECC_Visibility,Q)) return;
+    // CrushSweep owns the pounce volume and height eligibility. Preserve its
+    // shape and original sight segment; filter physical walls independently.
+    if (!SpyroMeleeContact::HasClearSegment(Character,Pursuer,Character->GetActorLocation(),Pursuer->GetActorLocation())) return;
     UFunction* F=Pursuer->FindFunction(TEXT("Deal Damage to Player")); if (!F) return;
     FStructOnScope Params(F); UObject* D=SleepingDog::ObjectValue(Pursuer,TEXT("Damageable")); const int32 Before=SleepingDog::Number(D,TEXT("Hit Points"));
     for (TFieldIterator<FProperty> It(F);It && It->HasAnyPropertyFlags(CPF_Parm);++It)
