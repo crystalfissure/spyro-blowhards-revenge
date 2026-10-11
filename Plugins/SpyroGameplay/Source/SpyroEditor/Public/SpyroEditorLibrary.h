@@ -19,6 +19,10 @@ class SPYROEDITOR_API USpyroEditorLibrary : public UBlueprintFunctionLibrary
 
 public:
     UFUNCTION(BlueprintCallable, Category="Spyro|Blueprint")
+    static bool ConfigureSnowGnorc(UBlueprint* Blueprint, USkeletalMesh* Mesh, const TArray<UAnimSequence*>& Animations, const TArray<USoundBase*>& Sounds, USoundAttenuation* Attenuation);
+    UFUNCTION(BlueprintCallable, Category="Spyro|Editor")
+    static bool ConfigureGiantPansy(UBlueprint* Blueprint, const TArray<USkeletalMesh*>& Meshes, const TArray<UAnimSequence*>& Animations, const TArray<USoundBase*>& Sounds, USoundAttenuation* Attenuation);
+    UFUNCTION(BlueprintCallable, Category="Spyro|Blueprint")
     static bool ConfigureToasty(UBlueprint* Blueprint, const TArray<USkeletalMesh*>& Meshes, UStaticMesh* BurntCostume, const TArray<UAnimSequence*>& Animations, const TArray<USoundBase*>& Sounds, USoundAttenuation* Attenuation);
     /** Configure a Sleeping Dog child of Base_Enemy_BP, with all original mesh variants. */
     UFUNCTION(BlueprintCallable, Category="Spyro|Blueprint")

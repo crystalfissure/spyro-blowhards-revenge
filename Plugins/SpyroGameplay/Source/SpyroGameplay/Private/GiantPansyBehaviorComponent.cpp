@@ -1,0 +1,503 @@
+#include "GiantPansyBehaviorComponent.h"
+#include "SpyroMeleeContact.h"
+#include "GiantPansyAnimInstance.h"
+#include "ToastyEncounterCollision.h"
+#include "GameFramework/Controller.h"
+#include "GameFramework/PlayerController.h"
+#include "Camera/PlayerCameraManager.h"
+
+#include "Animation/AnimSequence.h"
+#include "Components/AudioComponent.h"
+#include "Components/BoxComponent.h"
+#include "Components/SphereComponent.h"
+#include "Components/SplineComponent.h"
+#include "Components/CapsuleComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "Sound/SoundBase.h"
+#include "Sound/SoundAttenuation.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "Components/StaticMeshComponent.h"
+#include "Particles/ParticleSystem.h"
+#include "Particles/ParticleSystemComponent.h"
+#include "Engine/SkeletalMesh.h"
+#include "Engine/World.h"
+#include "EngineUtils.h"
+#include "DrawDebugHelpers.h"
+#include "GameFramework/Character.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "UObject/StructOnScope.h"
+#include "UObject/UnrealType.h"
+#include "UObject/ConstructorHelpers.h"
+
+namespace GiantPansy
+{
+void IgnorePlayer(FCollisionQueryParams& Query, AActor* Player, bool IncludePlayer = true)
+{
+    if (!IsValid(Player)) return;
+    if (IncludePlayer) Query.AddIgnoredActor(Player);
+    // Sparx is a child actor with a blocking capsule, not a component of Spyro.
+    TArray<AActor*> Children;
+    Player->GetAllChildActors(Children, true);
+    Query.AddIgnoredActors(Children);
+}
+FString Key(FString Name)
+{
+    Name = Name.ToLower();
+    Name.ReplaceInline(TEXT(" "), TEXT(""));
+    Name.ReplaceInline(TEXT("_"), TEXT(""));
+    Name.ReplaceInline(TEXT("'"), TEXT(""));
+    return Name;
+}
+FProperty* Property(UObject* Object, const TCHAR* Name)
+{
+    if (Object) for (TFieldIterator<FProperty> It(Object->GetClass()); It; ++It)
+        if (Key(It->GetName()) == Key(Name)) return *It;
+    return nullptr;
+}
+bool Bool(UObject* Object, const TCHAR* Name)
+{
+    auto* P = CastField<FBoolProperty>(Property(Object, Name));
+    return P && P->GetPropertyValue_InContainer(Object);
+}
+void SetBool(UObject* Object, const TCHAR* Name, bool Value)
+{
+    if (auto* P = CastField<FBoolProperty>(Property(Object, Name))) P->SetPropertyValue_InContainer(Object, Value);
+}
+int32 Number(UObject* Object, const TCHAR* Name)
+{
+    auto* P = CastField<FNumericProperty>(Property(Object, Name));
+    if (!P) return 0;
+    const void* V = P->ContainerPtrToValuePtr<void>(Object);
+    return P->IsInteger() ? int32(P->GetSignedIntPropertyValue(V)) : int32(P->GetFloatingPointPropertyValue(V));
+}
+void SetNumber(UObject* Object, const TCHAR* Name, double Value)
+{
+    if (auto* P = CastField<FNumericProperty>(Property(Object, Name)))
+    {
+        void* V = P->ContainerPtrToValuePtr<void>(Object);
+        if (P->IsInteger()) P->SetIntPropertyValue(V, int64(Value));
+        else P->SetFloatingPointPropertyValue(V, Value);
+    }
+}
+UObject* ObjectValue(UObject* Object, const TCHAR* Name)
+{
+    auto* P = CastField<FObjectPropertyBase>(Property(Object, Name));
+    return P ? P->GetObjectPropertyValue_InContainer(Object) : nullptr;
+}
+void Call(UObject* Object, const TCHAR* Name)
+{
+    if (Object) if (UFunction* F = Object->FindFunction(Name))
+    {
+        FStructOnScope Params(F);
+        Object->ProcessEvent(F, Params.GetStructMemory());
+    }
+}
+void Bind(UObject* Source, const TCHAR* Name, UObject* Target, FName Function, bool bRemove = false)
+{
+    if (auto* P = CastField<FMulticastDelegateProperty>(Property(Source, Name)))
+    {
+        FScriptDelegate Delegate;
+        Delegate.BindUFunction(Target, Function);
+        P->RemoveDelegate(Delegate, Source);
+        if (!bRemove) P->AddDelegate(Delegate, Source);
+    }
+}
+}
+
+
+
+namespace
+{
+constexpr float PansyStep=1.f/30.f;
+const int32 PansyFrames[]={34,15,46,9,9,8,13};
+const int32 PansyRates[]={11,16,16,16,16,16,16};
+float PansyDistance(const FVector& V) { return FMath::Max(FMath::Abs(V.X),FMath::Abs(V.Y))+.375f*FMath::Min(FMath::Abs(V.X),FMath::Abs(V.Y)); }
+}
+UGiantPansyBehaviorComponent::UGiantPansyBehaviorComponent()
+{
+    PrimaryComponentTick.bCanEverTick=true; PrimaryComponentTick.TickGroup=TG_PrePhysics;
+    static ConstructorHelpers::FObjectFinder<UParticleSystem> Smoke(TEXT("/Game/SpyroContent/Global_Assets/Global_Particles/P_DustCloud.P_DustCloud"));
+    DeathSmoke=Smoke.Object;
+}
+void UGiantPansyBehaviorComponent::BeginPlay()
+{
+    Super::BeginPlay(); Character=Cast<ACharacter>(GetOwner());
+    if (!Character) { SetComponentTickEnabled(false); return; }
+    Mesh=Character->GetMesh();
+    for (auto* C:Character->GetComponents())
+    {
+        if (C->GetClass()->GetName()==TEXT("Damageable_Com_C")) Damageable=C;
+        if (C->GetClass()->GetName()==TEXT("Walking_AI_Character_C")) WalkingAI=C;
+        if (C->GetClass()->GetName()==TEXT("Drops_Items_C")) Dropper=C;
+        if (C->GetFName()==TEXT("GiantPansyBodyCollision")) BodyCollision=Cast<UBoxComponent>(C);
+        if (C->GetFName()==TEXT("GiantPansyChargeSensor")) ChargeSensor=Cast<UBoxComponent>(C);
+        if (C->GetFName()==TEXT("Attack_Radius")) if (auto* A=Cast<UPrimitiveComponent>(C))
+        { A->SetGenerateOverlapEvents(false); A->SetCollisionEnabled(ECollisionEnabled::NoCollision); }
+    }
+    if (!Mesh || !Damageable || !WalkingAI || !Dropper || !BodyCollision || !ChargeSensor ||
+        Animations.Num()!=7 || Meshes.Num()!=2 || Meshes.Contains(nullptr) || Animations.Contains(nullptr) || OriginalSounds.Num()!=2 || OriginalSounds.Contains(nullptr))
+    { UE_LOG(LogTemp,Error,TEXT("Giant Pansy %s has incomplete contracts/assets."),*Character->GetName()); SetComponentTickEnabled(false); return; }
+    Home=Character->GetActorTransform(); Heading=PreviousHeading=Home.Rotator().Yaw;
+    PreviousLocation=Home.GetLocation(); MeshOffset=Mesh->GetRelativeLocation();
+    Mesh->AddTickPrerequisiteComponent(this);
+    Mesh->VisibilityBasedAnimTickOption=EVisibilityBasedAnimTickOption::AlwaysTickPoseAndRefreshBones;
+    Mesh->bEnableUpdateRateOptimizations=false;
+    ToastyEncounterCollision::Configure(Character,BodyCollision,ChargeSensor);
+    BoneTransformsHandle=Mesh->RegisterOnBoneTransformsFinalizedDelegate(FOnBoneTransformsFinalizedMultiCast::FDelegate::CreateUObject(this,&UGiantPansyBehaviorComponent::UpdateBodyCollision));
+    GiantPansy::Bind(Damageable,TEXT("Call Deal_Damage"),WalkingAI,TEXT("On Damaged"),true);
+    GiantPansy::Bind(Damageable,TEXT("Call Deal_Damage"),this,GET_FUNCTION_NAME_CHECKED(UGiantPansyBehaviorComponent,OnAcceptedDamage));
+    GiantPansy::Bind(Dropper,TEXT("Item Dropper Successfully Reset"),this,GET_FUNCTION_NAME_CHECKED(UGiantPansyBehaviorComponent,OnDropperReset));
+    ChargeSensor->OnComponentBeginOverlap.AddUniqueDynamic(this,&UGiantPansyBehaviorComponent::OnChargeSensorOverlap);
+    GiantPansy::SetNumber(Damageable,TEXT("Hit Points"),1);
+    GiantPansy::SetBool(WalkingAI,TEXT("Poofs_On_Death"),false);
+    GiantPansy::SetNumber(WalkingAI,TEXT("Death Launch Upwards Force"),0);
+    GiantPansy::SetNumber(WalkingAI,TEXT("Death Launch Forwards Force"),0);
+    GiantPansy::SetNumber(Character,TEXT("Corpse Poof Delay"),100000.f);
+    TakeMovementControl(); State=bRoaming?EGiantPansyState::RoamingIdle:EGiantPansyState::Idle; SelectClip(bRoaming?2:0,false);
+    CurrentFrame=FMath::RandRange(0,9); NextFrame=CurrentFrame+1;
+    ToastyEncounterCollision::LiftFromFloor(Character,Pursuer,WorldUnitsPerOriginalUnit);
+    Home=Character->GetActorTransform(); PreviousLocation=Home.GetLocation();
+}
+void UGiantPansyBehaviorComponent::TakeMovementControl()
+{
+    Character->SetActorTickEnabled(false); WalkingAI->SetComponentTickEnabled(false);
+    if (auto* C=Character->GetController()) C->StopMovement();
+    auto* M=Character->GetCharacterMovement(); M->DisableMovement(); M->SetComponentTickEnabled(false); M->bEnablePhysicsInteraction=false;
+    Character->ConsumeMovementInputVector();
+    if (Mesh->GetAnimClass()!=UGiantPansyAnimInstance::StaticClass()) Mesh->SetAnimInstanceClass(UGiantPansyAnimInstance::StaticClass());
+}
+
+void UGiantPansyBehaviorComponent::SelectClip(int32 Clip,bool Blend)
+{
+    Clip=FMath::Clamp(Clip,0,6);
+    if (Blend && NextClip==Clip) return;
+    const int32 Rig=Clip<2?0:1;
+    if (Meshes.IsValidIndex(Rig) && Mesh->SkeletalMesh!=Meshes[Rig]) { Mesh->SetSkeletalMesh(Meshes[Rig]); Mesh->EmptyOverrideMaterials(); Mesh->SetAnimInstanceClass(UGiantPansyAnimInstance::StaticClass()); Blend=false; }
+    if (Blend) { CurrentClip=NextClip; CurrentFrame=NextFrame; NextClip=Clip; NextFrame=0; Progress=ProgressPerStep=16; }
+    else { CurrentClip=NextClip=Clip; CurrentFrame=Progress=0; NextFrame=PansyFrames[Clip]>1?1:0; ProgressPerStep=PansyRates[Clip]; EmitFrameSound(); }
+}
+bool UGiantPansyBehaviorComponent::AdvanceAnimation()
+{
+    Progress+=ProgressPerStep; if (Progress<64) return false; Progress&=63; bool Complete=false;
+    if (CurrentClip!=NextClip) { CurrentClip=NextClip; CurrentFrame=NextFrame; NextFrame=PansyFrames[CurrentClip]>1?1:0; Progress=0; ProgressPerStep=PansyRates[CurrentClip]; }
+    else { CurrentFrame=NextFrame; if (++NextFrame>=PansyFrames[CurrentClip]) { NextFrame=0; Complete=true; } }
+    EmitFrameSound(); return Complete;
+}
+void UGiantPansyBehaviorComponent::GetPoseInputs(UAnimSequence*& A,UAnimSequence*& B,float& TimeA,float& TimeB,float& Alpha) const
+{
+    A=Animations.IsValidIndex(CurrentClip)?Animations[CurrentClip]:nullptr; B=Animations.IsValidIndex(NextClip)?Animations[NextClip]:nullptr;
+    TimeA=A?A->GetPlayLength()*CurrentFrame/FMath::Max(1,PansyFrames[CurrentClip]-1):0;
+    TimeB=B?B->GetPlayLength()*NextFrame/FMath::Max(1,PansyFrames[NextClip]-1):0;
+    Alpha=FMath::Clamp((Progress+Accumulator/PansyStep*ProgressPerStep)/64.f,0.f,1.f);
+}
+void UGiantPansyBehaviorComponent::PlaySound(int32 Slot)
+{
+    if (SoundCueHistory.Num()>=256) SoundCueHistory.RemoveAt(0); SoundCueHistory.Add(Slot);
+    PlayingSounds.RemoveAll([](UAudioComponent* A){return !IsValid(A)||!A->IsPlaying();});
+    if (OriginalSounds.IsValidIndex(Slot) && OriginalSounds[Slot])
+        if (auto* A=UGameplayStatics::SpawnSoundAttached(OriginalSounds[Slot],Character->GetRootComponent(),NAME_None,FVector::ZeroVector,EAttachLocation::KeepRelativeOffset,true,1,1,0,SoundAttenuation)) PlayingSounds.Add(A);
+}
+
+void UGiantPansyBehaviorComponent::EmitFrameSound()
+{
+    if ((CurrentClip==1 || CurrentClip==3) && (CurrentFrame==2 || CurrentFrame==7)) PlaySound(0);
+    if (CurrentClip==4 && CurrentFrame==1) PlaySound(1);
+}
+void UGiantPansyBehaviorComponent::StopSounds() { for (auto* A:PlayingSounds) if (IsValid(A)) A->Stop(); PlayingSounds.Reset(); }
+FVector UGiantPansyBehaviorComponent::Feet(AActor* Actor) const
+{
+    FVector P=Actor->GetActorLocation(); if (auto* C=Cast<ACharacter>(Actor)) P.Z-=C->GetCapsuleComponent()->GetScaledCapsuleHalfHeight(); return P;
+}
+
+float UGiantPansyBehaviorComponent::Distance() const { return IsValid(Pursuer)?((PansyDistance(Feet(Pursuer)-Feet(Character))<13000*WorldUnitsPerOriginalUnit)?FVector::Dist(Feet(Pursuer),Feet(Character)):PansyDistance(Feet(Pursuer)-Feet(Character)))/WorldUnitsPerOriginalUnit:MAX_flt; }
+bool UGiantPansyBehaviorComponent::ComparableHeight() const { return IsValid(Pursuer) && FMath::Abs(Feet(Pursuer).Z-Feet(Character).Z)<1500*WorldUnitsPerOriginalUnit; }
+void UGiantPansyBehaviorComponent::Face(float TurnUnits,float DeadZoneUnits)
+{
+    if (!IsValid(Pursuer)) return;
+    const float Desired=FMath::RoundToFloat((Pursuer->GetActorLocation()-Character->GetActorLocation()).Rotation().Yaw*256.f/360.f)*360.f/256.f;
+    const float Error=FMath::FindDeltaAngleDegrees(Heading,Desired);
+    if (FMath::Abs(Error)<=DeadZoneUnits*360.f/256.f) return;
+    Heading=FMath::UnwindDegrees(Heading+FMath::Clamp(Error,-TurnUnits*360.f/256.f,TurnUnits*360.f/256.f));
+}
+void UGiantPansyBehaviorComponent::UpdateBodyCollision()
+{
+    if (!Character || !BodyCollision || !ChargeSensor) return;
+    if (!bDefeated && Mesh && Mesh->SkeletalMesh)
+    {
+        // The dump's two vertex rigs use different pose origins. Anchor the
+        // lower body to the terrain; exclude the flower/stem vertices 0..20.
+        const auto& Ref=Mesh->SkeletalMesh->GetRefSkeleton();
+        const auto& Pose=Mesh->GetComponentSpaceTransforms();
+        float Bottom=MAX_flt;
+        for (int32 I=0;I<Ref.GetNum();++I)
+        {
+            const FString Name=Ref.GetBoneName(I).ToString(); const int32 At=Name.Find(TEXT("joint"));
+            if (At!=INDEX_NONE && FCString::Atoi(*Name.Mid(At+5))>=21 && Pose.IsValidIndex(I))
+                Bottom=FMath::Min(Bottom,Pose[I].GetTranslation().Z);
+        }
+        if (Bottom<MAX_flt)
+        {
+            FVector Location=Mesh->GetComponentLocation();
+            Location.Z=Feet(Character).Z-Bottom*Mesh->GetComponentScale().Z;
+            Mesh->SetWorldLocation(Location);
+        }
+    }
+    // Keep the flower outside the blocking body, as in the original capsule.
+    for (auto* Box:{BodyCollision,ChargeSensor})
+    {
+        Box->SetWorldScale3D(FVector::OneVector);
+        Box->SetBoxExtent(FVector(320,320,592)*WorldUnitsPerOriginalUnit+(Box==ChargeSensor?FVector(1):FVector::ZeroVector),false);
+        Box->SetWorldLocationAndRotation(Feet(Character)+FVector(0,0,528*WorldUnitsPerOriginalUnit),FRotator(0,Heading,0));
+    }
+    HitPlayer();
+}
+bool UGiantPansyBehaviorComponent::PlayerLooking(float Tolerance) const
+{
+    if (!IsValid(Pursuer)) return false;
+    const float Angle=(Character->GetActorLocation()-Pursuer->GetActorLocation()).Rotation().Yaw;
+    if (FMath::Abs(FMath::FindDeltaAngleDegrees(Pursuer->GetActorRotation().Yaw,Angle))>=Tolerance*360.f/256.f) return false;
+    if (Tolerance==38)
+        if (auto* Pawn=Cast<APawn>(Pursuer))
+            if (auto* PC=Cast<APlayerController>(Pawn->GetController()))
+                if (PC->PlayerCameraManager)
+                {
+                    const auto* Camera=PC->PlayerCameraManager;
+                    const float CameraAngle=(Feet(Character)-Camera->GetCameraLocation()).Rotation().Yaw;
+                    if (FMath::Abs(FMath::FindDeltaAngleDegrees(Camera->GetCameraRotation().Yaw,CameraAngle))>=35*360.f/256.f) return false;
+                }
+    return true;
+}
+void UGiantPansyBehaviorComponent::Attack()
+{
+    PreviousState=State==EGiantPansyState::Chasing?EGiantPansyState::Revealing:State;
+    Cooldown=160; bHitThisAttack=false; ++PunchCount;
+    State=bRoaming?EGiantPansyState::RoamingAttack:EGiantPansyState::Attacking;
+    SelectClip(bRoaming?3:1); PendingEnemyEvents.Add(ESpyroEnemySignal::AttackCommitted,bRoaming?3:1);
+}
+bool UGiantPansyBehaviorComponent::Walk(float Speed,bool Returning)
+{
+    const FVector Start=Character->GetActorLocation(),Delta=FRotator(0,Heading,0).Vector()*Speed*WorldUnitsPerOriginalUnit;
+    FCollisionQueryParams Q(SCENE_QUERY_STAT(GiantPansyWalk),false,Character); GiantPansy::IgnorePlayer(Q,Pursuer);
+    FHitResult Wall,Floor; auto* Capsule=Character->GetCapsuleComponent();
+    GetWorld()->SweepSingleByChannel(Wall,Start,Start+Delta,FQuat::Identity,ECC_WorldStatic,FCollisionShape::MakeCapsule(Capsule->GetScaledCapsuleRadius(),Capsule->GetScaledCapsuleHalfHeight()-1),Q);
+    if (Wall.bBlockingHit) return false;
+    const FVector End=Start+Delta,Foot=End-FVector(0,0,Capsule->GetScaledCapsuleHalfHeight());
+    GetWorld()->LineTraceSingleByChannel(Floor,Foot+FVector(0,0,768*WorldUnitsPerOriginalUnit),Foot-FVector(0,0,768*WorldUnitsPerOriginalUnit),ECC_WorldStatic,Q);
+    if (!Floor.bBlockingHit || Floor.ImpactNormal.Z<.7f) return false;
+    Character->SetActorLocation(FVector(End.X,End.Y,Floor.ImpactPoint.Z+Capsule->GetScaledCapsuleHalfHeight()+1),false,nullptr,ETeleportType::TeleportPhysics); return true;
+}
+void UGiantPansyBehaviorComponent::StepOriginal()
+{
+    PreviousLocation=Character->GetActorLocation(); PreviousHeading=Heading; ++SimulationTicks;
+    if (bFirstTick) { ToastyEncounterCollision::Configure(Character,BodyCollision,ChargeSensor); GiantPansy::Bind(Damageable,TEXT("Call Deal_Damage"),WalkingAI,TEXT("On Damaged"),true); bFirstTick=false; }
+    TakeMovementControl(); if (!IsValid(Pursuer)) Pursuer=UGameplayStatics::GetPlayerCharacter(this,0);
+    if (State==EGiantPansyState::Dead) return;
+    const bool Complete=AdvanceAnimation();
+    if (State==EGiantPansyState::Dying)
+    {
+        FHitResult Hit; FCollisionQueryParams Q(SCENE_QUERY_STAT(GiantPansyDeath),false,Character); GiantPansy::IgnorePlayer(Q,Pursuer);
+        auto* Capsule=Character->GetCapsuleComponent(); const FVector Start=Character->GetActorLocation(),Delta=(DeathDirection*DeathSpeed+FVector(0,0,DeathVertical))*WorldUnitsPerOriginalUnit;
+        GetWorld()->SweepSingleByChannel(Hit,Start,Start+Delta,FQuat::Identity,ECC_WorldStatic,FCollisionShape::MakeCapsule(Capsule->GetScaledCapsuleRadius(),Capsule->GetScaledCapsuleHalfHeight()-1),Q);
+        Character->SetActorLocation(Start+Delta*(Hit.bBlockingHit?FMath::Max(0.f,Hit.Time-.002f):1.f),false,nullptr,ETeleportType::TeleportPhysics);
+        DeathSpeed=FMath::Max(0.f,DeathSpeed-12); DeathVertical=FMath::Max(-260.f,DeathVertical-16);
+        if (Complete && CurrentClip==4) FinishCorpse(); return;
+    }
+    if (Distance()>3072) bChaseAttacked=false;
+    switch(State)
+    {
+    case EGiantPansyState::Idle:
+    case EGiantPansyState::RoamingIdle:
+        Cooldown=FMath::Max(0,Cooldown-4);
+        if (bRoaming && Cooldown==0 && Distance()<8192 && PlayerLooking(38))
+        { State=EGiantPansyState::Revealing; SelectClip(6); }
+        else { Face(7,5); if (Cooldown==0 && Distance()<1800) Attack(); }
+        break;
+    case EGiantPansyState::Attacking:
+    case EGiantPansyState::RoamingAttack:
+        Face(7,5); HitPlayer();
+        if (Complete && (CurrentClip==1 || CurrentClip==3)) { State=PreviousState; SelectClip(State==EGiantPansyState::Idle?0:State==EGiantPansyState::RoamingIdle?2:6); }
+        break;
+    case EGiantPansyState::Revealing:
+        if (CurrentClip==6 && CurrentFrame>=3) { State=EGiantPansyState::Chasing; SelectClip(5); }
+        break;
+    case EGiantPansyState::Chasing:
+        if (bChaseAttacked) { State=EGiantPansyState::Returning; break; }
+        ChaseHeading=IsValid(Pursuer)?(Pursuer->GetActorLocation()-Character->GetActorLocation()).Rotation().Yaw:Heading;
+        { const float Error=FMath::FindDeltaAngleDegrees(Heading,ChaseHeading); if (FMath::Abs(Error)>30*360.f/256.f) Heading=FMath::UnwindDegrees(Heading+FMath::Clamp(Error,-4*360.f/256.f,4*360.f/256.f));
+          else if (!Walk(100,false)) State=EGiantPansyState::Returning; }
+        if (PansyDistance(Character->GetActorLocation()-Home.GetLocation())>10240*WorldUnitsPerOriginalUnit) State=EGiantPansyState::Returning;
+        if (!PlayerLooking(49)) { if (AwayTicks==0) AwayTicks=40; else { AwayTicks=FMath::Max(0,AwayTicks-4); if (AwayTicks==0) State=EGiantPansyState::Returning; } } else AwayTicks=0;
+        if (State==EGiantPansyState::Chasing && Distance()<1200 && IsValid(Pursuer) && FMath::Abs(FMath::FindDeltaAngleDegrees(Heading,(Pursuer->GetActorLocation()-Character->GetActorLocation()).Rotation().Yaw))<90) { bChaseAttacked=true; Attack(); }
+        break;
+    case EGiantPansyState::Returning:
+        { const FVector Delta=Home.GetLocation()-Character->GetActorLocation(); const float Error=FMath::FindDeltaAngleDegrees(Heading,Delta.Rotation().Yaw);
+          if (PansyDistance(Delta)<128*WorldUnitsPerOriginalUnit) { State=EGiantPansyState::RoamingIdle; SelectClip(2); }
+          else { SelectClip(5); if (FMath::Abs(Error)>20*360.f/256.f) Heading=FMath::UnwindDegrees(Heading+FMath::Clamp(Error,-4*360.f/256.f,4*360.f/256.f)); else Walk(90,true); } }
+        break;
+    default: break;
+    }
+}
+void UGiantPansyBehaviorComponent::TickComponent(float DeltaTime,ELevelTick TickType,FActorComponentTickFunction* TickFunction)
+{
+    Super::TickComponent(DeltaTime,TickType,TickFunction); if (!Character || !Character->HasAuthority()) return;
+    if (UGameplayStatics::IsGamePaused(this) || GiantPansy::Bool(Damageable,TEXT("Frozen")) || GiantPansy::Bool(Damageable,TEXT("Paralyzed_by_Fear")) || GiantPansy::Bool(Dropper,TEXT("Reset_in_Progress"))) { PendingEnemyEvents.Flush(this, OnEnemySignal); return; }
+    Accumulator+=FMath::Max(0.f,DeltaTime); int32 Steps=0;
+    while (Accumulator+KINDA_SMALL_NUMBER>=PansyStep && Steps++<30) { Accumulator=FMath::Max(0.f,Accumulator-PansyStep); StepOriginal(); }
+    Accumulator=FMath::Min(Accumulator,PansyStep); const float Alpha=Accumulator/PansyStep;
+    Mesh->SetWorldLocation(FMath::Lerp(PreviousLocation,Character->GetActorLocation(),Alpha)+Home.TransformVector(MeshOffset));
+    Mesh->SetWorldRotation(FRotator(0,PreviousHeading+FMath::FindDeltaAngleDegrees(PreviousHeading,Heading)*Alpha-90,0));
+    PendingEnemyEvents.Flush(this, OnEnemySignal);
+}
+
+void UGiantPansyBehaviorComponent::HitPlayer()
+{
+    if (!Character || !Character->HasAuthority() || bDefeated || bHitThisAttack || (State!=EGiantPansyState::Attacking && State!=EGiantPansyState::RoamingAttack) || !IsValid(Pursuer) ||
+        UGameplayStatics::IsGamePaused(this) || GiantPansy::Bool(Damageable,TEXT("Frozen")) || GiantPansy::Bool(Damageable,TEXT("Paralyzed_by_Fear")) || GiantPansy::Bool(Dropper,TEXT("Reset_in_Progress"))) return;
+    // Collision selects NEXT frame whenever interpolation progress is nonzero.
+    const int32 Clip=Progress>0?NextClip:CurrentClip,Frame=Progress>0?NextFrame:CurrentFrame;
+    if ((Clip!=1 && Clip!=3) || Frame<4) return;
+    const auto* Player=Cast<ACharacter>(Pursuer); if (!Player) return;
+    // Original group 0 has two radius-400 spheres bound to vertices 0 and 1.
+    const float Radius=400*WorldUnitsPerOriginalUnit+Player->GetCapsuleComponent()->GetScaledCapsuleRadius();
+    bool Contact=false;
+    for (const FName Bone:{FName(TEXT("Skeleton_joint0")),FName(TEXT("Skeleton_joint1"))})
+        if (Mesh->GetBoneIndex(Bone)!=INDEX_NONE) {
+            const FVector Point=Mesh->GetBoneLocation(Bone),Centre=Pursuer->GetActorLocation();
+            const float Half=Player->GetCapsuleComponent()->GetScaledCapsuleHalfHeight()-Player->GetCapsuleComponent()->GetScaledCapsuleRadius();
+            const FVector Closest(Centre.X,Centre.Y,FMath::Clamp(Point.Z,Centre.Z-Half,Centre.Z+Half));
+            Contact |= FVector::DistSquared(Point,Closest)<Radius*Radius;
+        }
+    if (!Contact || !SpyroMeleeContact::HasClearContact(Character,Pursuer)) return;
+    UFunction* F=Pursuer->FindFunction(TEXT("Deal Damage to Player")); if (!F) return;
+    FStructOnScope Params(F); UObject* D=GiantPansy::ObjectValue(Pursuer,TEXT("Damageable")); const int32 Before=GiantPansy::Number(D,TEXT("Hit Points"));
+    for (TFieldIterator<FProperty> It(F);It && It->HasAnyPropertyFlags(CPF_Parm);++It)
+    {
+        void* V=It->ContainerPtrToValuePtr<void>(Params.GetStructMemory());
+        if (auto* P=CastField<FByteProperty>(*It))
+        {
+            P->SetPropertyValue(V,1); // Damage_Types: Normal Damage.
+        }
+        if (auto* P=CastField<FStructProperty>(*It)) if (P->Struct==TBaseStructure<FVector>::Get()) *static_cast<FVector*>(V)=(Pursuer->GetActorLocation()-Character->GetActorLocation()).GetSafeNormal2D();
+        if (auto* P=CastField<FObjectPropertyBase>(*It)) P->SetObjectPropertyValue(V,Character);
+    }
+    Pursuer->ProcessEvent(F,Params.GetStructMemory());
+    if (GiantPansy::Number(D,TEXT("Hit Points"))<Before) { bHitThisAttack=true; ++AcceptedPlayerHits; }
+}
+void UGiantPansyBehaviorComponent::OnChargeSensorOverlap(UPrimitiveComponent* Component,AActor* Other,UPrimitiveComponent* OtherComponent,int32 BodyIndex,bool bSweep,const FHitResult& Hit)
+{
+    if (!bDefeated && Other && Other!=Character && OtherComponent && OtherComponent->GetCollisionObjectType()==ECC_GameTraceChannel4)
+    { auto* Capsule=Character->GetCapsuleComponent(); Capsule->OnComponentBeginOverlap.Broadcast(Capsule,Other,OtherComponent,BodyIndex,bSweep,Hit); }
+}
+
+void UGiantPansyBehaviorComponent::OnAcceptedDamage()
+{
+    if (!Character->HasAuthority() || bDefeated || GiantPansy::Bool(Damageable,TEXT("Invincible")) || GiantPansy::Bool(Damageable,TEXT("Frozen")) || GiantPansy::Bool(Dropper,TEXT("Reset_in_Progress"))) return;
+    if (GiantPansy::Number(Damageable,TEXT("Deal Damage - Damage Type"))!=2) return;
+    GiantPansy::SetNumber(Damageable,TEXT("Hit Points"),0); Defeat();
+}
+void UGiantPansyBehaviorComponent::Defeat()
+{
+    bDefeated=true; State=EGiantPansyState::Dying; DeathSpeed=400; DeathVertical=170; bHitThisAttack=true;
+    const float PlayerHeading=IsValid(Pursuer)?Pursuer->GetActorRotation().Yaw:Heading+180;
+    const float Away=IsValid(Pursuer)?(Character->GetActorLocation()-Pursuer->GetActorLocation()).Rotation().Yaw:PlayerHeading;
+    // func_80038178: clamp away direction to 32 units, then blend by 64/256.
+    DeathDirection=FRotator(0,PlayerHeading+.25f*FMath::Clamp(FMath::FindDeltaAngleDegrees(PlayerHeading,Away),-45.f,45.f),0).Vector();
+    DropGemRange(0,1); const bool Suppressed=GiantPansy::Bool(Dropper,TEXT("Cannot_Drop_Items")); GiantPansy::SetBool(Dropper,TEXT("Cannot_Drop_Items"),true);
+    if (auto* P=CastField<FMulticastDelegateProperty>(GiantPansy::Property(Damageable,TEXT("Damage Was Successfully Dealt"))))
+        if (auto* D=P->GetMulticastDelegate(P->ContainerPtrToValuePtr<void>(Damageable))) D->ProcessMulticastDelegate<UObject>(nullptr);
+    GiantPansy::SetBool(Dropper,TEXT("Cannot_Drop_Items"),Suppressed); TakeMovementControl(); SelectClip(4,false);
+    BodyCollision->SetCollisionEnabled(ECollisionEnabled::NoCollision); ChargeSensor->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+}
+void UGiantPansyBehaviorComponent::FinishCorpse()
+{
+    if (bCorpseFinished) return; bCorpseFinished=true; State=EGiantPansyState::Dead; StopSounds();
+    if (DeathSmoke)
+        DeathSmokeInstance=UGameplayStatics::SpawnEmitterAtLocation(GetWorld(),DeathSmoke,
+            Feet(Character)+FVector(0,0,60),FRotator::ZeroRotator,FVector(.5f),true);
+    Character->SetActorHiddenInGame(true); Character->SetActorEnableCollision(false);
+    if (auto* P=CastField<FMulticastDelegateProperty>(GiantPansy::Property(WalkingAI,TEXT("Corpse Poofed"))))
+        if (auto* D=P->GetMulticastDelegate(P->ContainerPtrToValuePtr<void>(WalkingAI))) D->ProcessMulticastDelegate<UObject>(nullptr);
+}
+
+void UGiantPansyBehaviorComponent::OnDropperReset()
+{
+    if (IsValid(DeathSmokeInstance)) DeathSmokeInstance->DestroyComponent();
+    DeathSmokeInstance=nullptr;
+    PendingEnemyEvents.Reset(); StopSounds(); SoundCueHistory.Reset(); ReleasedGemIndices.Reset(); GemsSpawned=0;
+    State=bRoaming?EGiantPansyState::RoamingIdle:EGiantPansyState::Idle; Cooldown=AwayTicks=HeadingTicks=0; bChaseAttacked=false; bDefeated=bHitThisAttack=bCorpseFinished=false;
+    Accumulator=DeathSpeed=0; AcceptedPlayerHits=PunchCount=0;
+    Character->SetActorTransform(Home,false,nullptr,ETeleportType::TeleportPhysics); PreviousLocation=Home.GetLocation(); Heading=PreviousHeading=Home.Rotator().Yaw;
+    Character->SetActorHiddenInGame(false); Character->SetActorEnableCollision(true);
+    BodyCollision->SetCollisionEnabled(ECollisionEnabled::QueryOnly); ChargeSensor->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+    ToastyEncounterCollision::Configure(Character,BodyCollision,ChargeSensor);
+    GiantPansy::SetNumber(Damageable,TEXT("Hit Points"),1); TakeMovementControl(); State=bRoaming?EGiantPansyState::RoamingIdle:EGiantPansyState::Idle; SelectClip(bRoaming?2:0,false);
+    PendingEnemyEvents.Add(ESpyroEnemySignal::ResetCompleted);
+}
+void UGiantPansyBehaviorComponent::EndPlay(const EEndPlayReason::Type Reason)
+{
+    PendingEnemyEvents.Reset();
+    StopSounds();
+    if (Mesh) Mesh->UnregisterOnBoneTransformsFinalizedDelegate(BoneTransformsHandle);
+    if (ChargeSensor) ChargeSensor->OnComponentBeginOverlap.RemoveDynamic(this,&UGiantPansyBehaviorComponent::OnChargeSensorOverlap);
+    GiantPansy::Bind(Damageable,TEXT("Call Deal_Damage"),this,GET_FUNCTION_NAME_CHECKED(UGiantPansyBehaviorComponent,OnAcceptedDamage),true);
+    GiantPansy::Bind(Dropper,TEXT("Item Dropper Successfully Reset"),this,GET_FUNCTION_NAME_CHECKED(UGiantPansyBehaviorComponent,OnDropperReset),true);
+    Super::EndPlay(Reason);
+}
+void UGiantPansyBehaviorComponent::DropGemRange(int32 First, int32 Count)
+{
+    if (GiantPansy::Bool(Dropper, TEXT("Cannot_Drop_Items"))) return;
+    GiantPansy::Call(Dropper, TEXT("Remove Gems We Perma Collected"));
+    GiantPansy::Call(Dropper, TEXT("Find All Items I Have But Shouldn't Drop"));
+    auto* ItemsProperty = CastField<FArrayProperty>(GiantPansy::Property(Dropper, TEXT("Items_to_Drop")));
+    auto* PendingProperty = CastField<FArrayProperty>(GiantPansy::Property(Dropper, TEXT("Items_I_Have_But_Shouldnt_Drop")));
+    auto* SpawnedProperty = CastField<FArrayProperty>(GiantPansy::Property(Dropper, TEXT("Items_I_Dropped")));
+    if (!ItemsProperty || !PendingProperty || !SpawnedProperty) return;
+    auto* ItemClass = CastField<FObjectPropertyBase>(ItemsProperty->Inner);
+    auto* PendingBool = CastField<FBoolProperty>(PendingProperty->Inner);
+    auto* SpawnedObject = CastField<FObjectPropertyBase>(SpawnedProperty->Inner);
+    if (!ItemClass || !PendingBool || !SpawnedObject) return;
+    FScriptArrayHelper Items(ItemsProperty, ItemsProperty->ContainerPtrToValuePtr<void>(Dropper));
+    FScriptArrayHelper Pending(PendingProperty, PendingProperty->ContainerPtrToValuePtr<void>(Dropper));
+    for (int32 Index = First; Index < First + Count; ++Index)
+    {
+        if (!Items.IsValidIndex(Index) || ReleasedGemIndices.Contains(Index)) continue;
+        if (Pending.IsValidIndex(Index) && PendingBool->GetPropertyValue(Pending.GetRawPtr(Index))) continue;
+        UClass* GemClass = Cast<UClass>(ItemClass->GetObjectPropertyValue(Items.GetRawPtr(Index)));
+        if (!GemClass) continue; // Permanently collected entries retain their indices and become null.
+        FActorSpawnParameters Spawn;
+        Spawn.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+        const FVector Location = GetOwner()->GetActorLocation() + FVector(0, 0, GiantPansy::Number(Dropper, TEXT("Item_Spawn_Height_Offset")));
+        AActor* Gem = GetWorld()->SpawnActor<AActor>(GemClass, Location, GetOwner()->GetActorRotation(), Spawn);
+        if (!Gem) continue;
+        UFunction* Initialize = Gem->FindFunction(TEXT("Gem_Spawn_Process"));
+        if (!Initialize) { Gem->Destroy(); continue; }
+        FStructOnScope Params(Initialize);
+        for (TFieldIterator<FProperty> It(Initialize); It && It->HasAnyPropertyFlags(CPF_Parm); ++It)
+        {
+            const FString Name = GiantPansy::Key(It->GetName());
+            void* Value = It->ContainerPtrToValuePtr<void>(Params.GetStructMemory());
+            if (auto* P = CastField<FObjectPropertyBase>(*It))
+            {
+                if (Name == TEXT("playerwhospawnedme")) P->SetObjectPropertyValue(Value, GiantPansy::ObjectValue(Damageable, TEXT("Deal Damage - Person Who Dealt the Damage")));
+                if (Name == TEXT("objectispawnedfrom")) P->SetObjectPropertyValue(Value, GetOwner());
+            }
+            else if (auto* StringParam = CastField<FStrProperty>(*It))
+            {
+                if (Name == TEXT("nameofobjectwhospawnedme")) StringParam->SetPropertyValue(Value, GetOwner()->GetName());
+            }
+            else if (auto* IndexParam = CastField<FIntProperty>(*It))
+            {
+                if (Name == TEXT("spawnindex")) IndexParam->SetPropertyValue(Value, Index);
+            }
+        }
+        // Register with the original dropper so checkpoint resets clean up emitted gems.
+        FScriptArrayHelper Spawned(SpawnedProperty, SpawnedProperty->ContainerPtrToValuePtr<void>(Dropper));
+        SpawnedObject->SetObjectPropertyValue(Spawned.GetRawPtr(Spawned.AddValue()), Gem);
+        ReleasedGemIndices.Add(Index);
+        ++GemsSpawned;
+        if (UStaticMeshComponent* GemMesh = Gem->FindComponentByClass<UStaticMeshComponent>())
+            if (GemMesh->IsSimulatingPhysics()) GemMesh->AddImpulse(FVector((Index % 3 - 1) * 100.f, 0, 550), NAME_None, true);
+        Gem->ProcessEvent(Initialize, Params.GetStructMemory());
+    }
+}
+

@@ -14,6 +14,8 @@ The separate [Bull and Toreador guide](TOWN_SQUARE.md) covers Town Square enemy 
 
 The [Sleeping Dog and Toasty guide](TOASTY.md) covers the Toasty assets, staged guard assignments, flame phases, original timing and Unreal adaptation limits.
 
+The [Giant Pansy guide](GIANT_PANSY.md) covers stationary and roaming variants, flower contact, original timing, rewards, and checkpoint reset.
+
 ## Gnorc Thief
 
 Blueprint: `/Game/OT_Ports/S1/S1_Enemies/Home_00_Artisans/00_Artisans/Gnorc_Thief/Gnorc_Thief_BP`.
@@ -41,6 +43,10 @@ Death cleanup hides the final mesh and retains the existing cleanup sound and ch
 The UE4.27 editor modules build successfully, and the thief plus four other Blueprints using this plugin compile. Sixteen live collision scenarios passed at 60 FPS, with focused repeats at 20 and 30 FPS. Coverage includes standing/walking Spyro, initial overlap, repeated interception, close walls, 20-degree slopes, travelling rolls and 300/900/1,200 cm boundaries. The Artisans chase reached every route node during 45 seconds of play, stayed contained and preserved the starting center. The saved instance was reloaded to verify its overrides.
 
 The lifecycle checks cover alert/facing, all eight original sound cue events, charge/flame hits, final slide, death cleanup and early/late checkpoint reset. These are scripted PIE checks with the actual Spyro and thief Blueprints; a manual gameplay review is still useful. Packaging and other platforms were not tested in this revision.
+
+## Ice Cavern Snow Gnorc (11 October 2026)
+
+The new `Snow_Gnorc_BP` uses the original class 198 guard/punch behavior, ten animations, eleven sound samples, charge resistance and one green gem. See [SNOW_GNORC.md](SNOW_GNORC.md) for placement, source details, Unreal adaptations and validation.
 
 ## Safe live route edits and optional Blueprint signals (3 October 2026)
 
